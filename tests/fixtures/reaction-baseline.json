@@ -1,0 +1,233 @@
+{
+  "hydrogenation": {
+    "reactants": [
+      "ethene",
+      "hydrogen"
+    ],
+    "productSmiles": "CC",
+    "byproducts": [],
+    "mechanism": "Hydrogenation"
+  },
+  "bromination": {
+    "reactants": [
+      "ethene",
+      "bromine"
+    ],
+    "productSmiles": "BrCCBr",
+    "byproducts": [],
+    "mechanism": "Bromination"
+  },
+  "hydration": {
+    "reactants": [
+      "ethene",
+      "water"
+    ],
+    "productSmiles": "CCO",
+    "byproducts": [],
+    "mechanism": "Hydration"
+  },
+  "esterification": {
+    "reactants": [
+      "ethanoic-acid",
+      "ethanol"
+    ],
+    "productSmiles": "CC(=O)OCC",
+    "byproducts": [
+      {
+        "name": "Water",
+        "smiles": "O"
+      }
+    ],
+    "mechanism": "Esterification"
+  },
+  "ester-hydrolysis": {
+    "reactants": [
+      "ethyl-ethanoate",
+      "water"
+    ],
+    "productSmiles": "CC(=O)O",
+    "byproducts": [
+      {
+        "name": "Ethanol",
+        "smiles": "CCO"
+      }
+    ],
+    "mechanism": "Ester hydrolysis"
+  },
+  "oxidation-2-propanol": {
+    "reactants": [
+      "2-propanol",
+      "sodium-hypochlorite"
+    ],
+    "productSmiles": "CC(C)=O",
+    "byproducts": [
+      {
+        "name": "Sodium chloride",
+        "smiles": "[Na+].[Cl-]",
+        "formula": "NaCl"
+      },
+      {
+        "name": "Water",
+        "smiles": "O"
+      }
+    ],
+    "mechanism": "Alcohol oxidation"
+  },
+  "reduction-acetone": {
+    "reactants": [
+      "acetone",
+      "hydrogen"
+    ],
+    "productSmiles": "CC(C)O",
+    "byproducts": [],
+    "mechanism": "Carbonyl hydrogenation"
+  },
+  "sn2-bromomethane": {
+    "reactants": [
+      "bromomethane",
+      "hydroxide"
+    ],
+    "productSmiles": "CO",
+    "byproducts": [
+      {
+        "name": "Bromide ion",
+        "smiles": "[Br-]",
+        "formula": "Br\u207b"
+      }
+    ],
+    "mechanism": "SN2"
+  },
+  "sn2-chloromethane": {
+    "reactants": [
+      "chloromethane",
+      "hydroxide"
+    ],
+    "productSmiles": "CO",
+    "byproducts": [
+      {
+        "name": "Chloride ion",
+        "smiles": "[Cl-]",
+        "formula": "Cl\u207b"
+      }
+    ],
+    "mechanism": "SN2"
+  },
+  "sn2-bromoethane": {
+    "reactants": [
+      "bromoethane",
+      "hydroxide"
+    ],
+    "productSmiles": "CCO",
+    "byproducts": [
+      {
+        "name": "Bromide ion",
+        "smiles": "[Br-]",
+        "formula": "Br\u207b"
+      }
+    ],
+    "mechanism": "SN2"
+  },
+  "e2-bromoethane": {
+    "reactants": [
+      "bromoethane",
+      "hydroxide"
+    ],
+    "productSmiles": "C=C",
+    "byproducts": [
+      {
+        "name": "Water",
+        "smiles": "O"
+      },
+      {
+        "name": "Bromide ion",
+        "smiles": "[Br-]",
+        "formula": "Br\u207b"
+      }
+    ],
+    "mechanism": "E2"
+  },
+  "e2-2-bromopropane": {
+    "reactants": [
+      "2-bromopropane",
+      "hydroxide"
+    ],
+    "productSmiles": "C=CC",
+    "byproducts": [
+      {
+        "name": "Water",
+        "smiles": "O"
+      },
+      {
+        "name": "Bromide ion",
+        "smiles": "[Br-]",
+        "formula": "Br\u207b"
+      }
+    ],
+    "mechanism": "E2"
+  },
+  "e2-tert-butyl-chloride": {
+    "reactants": [
+      "tert-butyl-chloride",
+      "hydroxide"
+    ],
+    "productSmiles": "C=C(C)C",
+    "byproducts": [
+      {
+        "name": "Water",
+        "smiles": "O"
+      },
+      {
+        "name": "Chloride ion",
+        "smiles": "[Cl-]",
+        "formula": "Cl\u207b"
+      }
+    ],
+    "mechanism": "E2"
+  },
+  "sn1-tert-butyl-chloride": {
+    "reactants": [
+      "tert-butyl-chloride",
+      "water"
+    ],
+    "productSmiles": "CC(C)(C)O",
+    "byproducts": [
+      {
+        "name": "Hydrogen chloride",
+        "smiles": "Cl"
+      }
+    ],
+    "mechanism": "SN1"
+  },
+  "e1-tert-butyl-chloride": {
+    "reactants": [
+      "tert-butyl-chloride",
+      "water"
+    ],
+    "productSmiles": "C=C(C)C",
+    "byproducts": [
+      {
+        "name": "Hydrogen chloride",
+        "smiles": "Cl"
+      }
+    ],
+    "mechanism": "E1"
+  },
+  "hydrogenation-propene": {
+    "reactants": [
+      "propene",
+      "hydrogen"
+    ],
+    "productSmiles": "CCC",
+    "byproducts": [],
+    "mechanism": "Hydrogenation"
+  },
+  "bromination-propene": {
+    "reactants": [
+      "propene",
+      "bromine"
+    ],
+    "productSmiles": "CC(Br)CBr",
+    "byproducts": [],
+    "mechanism": "Bromination"
+  }
+}

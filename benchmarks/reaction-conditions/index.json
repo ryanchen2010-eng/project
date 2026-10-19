@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "publicationRule": "Append a reviewed version file and digest; never replace a published version or its parent expectations. Compare versions explicitly.",
+  "versions": {
+    "1.0.0": {
+      "file": "1.0.0.json",
+      "sha256": "35ce7ce6f3c3967a06fc354c8bc9fc8319a2247f3b3ac0c7cd246ec75ed8ca1e",
+      "status": "draft-evidence-backlog"
+    }
+  }
+}

@@ -32,7 +32,7 @@ COMPOUNDS = [
     ("Propene", "C=CC", "C3H6", "3d", "hydrogen", {"Hydrogenation"}),
     ("1-Bromopropane", "CCCBr", "C3H7Br", "3d", "hydroxide", {"SN2", "E2"}),
     ("2-Chloro-2-methylpropane", "CC(C)(C)Cl", "C4H9Cl", "3d", "water", {"SN1", "E1"}),
-    ("2-Bromobutane", "CCC(C)Br", "C4H9Br", "3d", "hydroxide", "none"),
+    ("2-Bromobutane", "CCC(C)Br", "C4H9Br", "3d", "hydroxide", {"SN2", "E2"}),
     ("1-Bromo-2-methylpropane", "CC(C)CBr", "C4H9Br", "3d", "hydroxide", {"SN2", "E2"}),
     ("Sodium hydroxide", "[Na+].[OH-]", "HNaO", "2d-only", "bromomethane", {"SN2"}),
     ("Potassium hydroxide", "[K+].[OH-]", "HKO", "2d-only", "bromomethane", {"SN2"}),
@@ -103,7 +103,11 @@ class CrossPageCompoundTests(unittest.TestCase):
                 if outcome == "none":
                     continue
                 for reaction in matched["reactions"]:
-                    product = run_curated_reaction(reaction["id"], reference, partner)
+                    conditions=None
+                    if reaction.get("secondaryOxidationModel"):
+                        with self.assertRaises(ChemistryError):run_curated_reaction(reaction["id"],reference,partner)
+                        conditions={"solvent":"aqueous-protic","temperature":"ambient","catalyst":"none","oxidationStage":"first","secondaryOxidationProfile":"naocl-acetic-ketone-v1"}
+                    product = run_curated_reaction(reaction["id"], reference, partner,conditions)
                     self.assertTrue(product["balanced"])
                     self.assertEqual(product["product"]["representation"], "3d")
                 if name in {"Sodium hydroxide", "Potassium hydroxide"}:

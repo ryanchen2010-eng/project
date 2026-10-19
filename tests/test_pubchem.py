@@ -66,6 +66,33 @@ class PubChemSearchTests(unittest.TestCase):
         self.assertTrue(platinum[0]["multiPart"])
         self.assertTrue(sodium[0]["hasFormalCharge"])
         self.assertFalse(platinum[0]["hasFormalCharge"])
+        self.assertTrue(sodium[0]["ionicAssembly"])
+        self.assertFalse(platinum[0]["ionicAssembly"])
+
+    def test_search_flags_only_separate_oppositely_charged_ionic_fragments(self):
+        cases = [
+            (5234, "Sodium chloride", "NaCl", "[Na+].[Cl-]", True),
+            (14798, "Sodium hydroxide", "HNaO", "[Na+].[OH-]", True),
+            (4873, "Potassium chloride", "ClK", "[K+].[Cl-]", True),
+            (5284359, "Calcium chloride", "CaCl2", "[Ca+2].[Cl-].[Cl-]", True),
+            (5460033, "Cisplatin", "Cl2H6N2Pt", "N.N.Cl[Pt]Cl", False),
+            (750, "Glycine", "C2H5NO2", "[NH3+]CC(=O)[O-]", False),
+            (5360545, "Sodium ion", "Na", "[Na+]", False),
+            (999001, "Neutral mixture", "C2H8O2", "CCO.O", False),
+            # Formal charges within a net-neutral fragment are not counterions.
+            (999002, "Zwitterion with water", "C2H7NO3", "[NH3+]CC(=O)[O-].O", False),
+        ]
+        for cid, name, formula, smiles, expected in cases:
+            with self.subTest(name=name):
+                record = {"CID": cid, "Title": name, "MolecularFormula": formula, "SMILES": smiles}
+
+                def response(path):
+                    return {"IdentifierList": {"CID": [cid]}} if "/cids/" in path else {"PropertyTable": {"Properties": [record]}}
+
+                with patch("server.pubchem_service._request_json", side_effect=response):
+                    result = search_pubchem(name)["results"]
+                self.assertEqual(len(result), 1)
+                self.assertIs(result[0]["ionicAssembly"], expected)
 
     def test_formula_search_uses_element_counts_for_salts(self):
         record = {"CID": 14798, "Title": "Sodium hydroxide", "MolecularFormula": "HNaO", "MolecularWeight": "39.997", "SMILES": "[OH-].[Na+]"}
@@ -74,7 +101,9 @@ class PubChemSearchTests(unittest.TestCase):
             return {"IdentifierList": {"CID": [14798]}} if "/fastformula/" in path else {"PropertyTable": {"Properties": [record]}}
 
         with patch("server.pubchem_service._request_json", side_effect=response):
-            self.assertEqual(search_pubchem("NaOH")["results"][0]["cid"], 14798)
+            result = search_pubchem("NaOH")["results"][0]
+        self.assertEqual(result["cid"], 14798)
+        self.assertTrue(result["ionicAssembly"])
 
     def test_name_search_prefers_exact_title_over_related_synonym(self):
         related = {"CID": 5702198, "Title": "azane;dichloroplatinum", "MolecularFormula": "Cl2H6N2Pt", "SMILES": "N.N.Cl[Pt]Cl"}

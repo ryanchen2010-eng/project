@@ -1,12 +1,19 @@
 import './styles.css';
-import { findMolecules, moleculeFromPubChem, molecules, normalizeQuery, type Molecule, type PubChemMatch } from './molecules';
+import './bond-measurements.css';
+import './solution-calculator.css';
+import { explorerSamples, findMolecules, isIonicCompound, moleculeFromPubChem, normalizeQuery, type Molecule, type PubChemMatch } from './molecules';
+import { renderMoleculeInformation } from './explorer-description';
+import { BondMeasurements, type MeasurementAtom, type MeasurementViewer } from './bond-measurements';
+import { SolutionCalculatorPanel } from './solution-calculator-panel';
+import { solutionCompoundFromMolecule } from './solution-compound';
+import { CALCULATOR_TRANSFER_KEY, calculatorCompoundFromMolecule, encodeCalculatorTransfer } from './calculator-compound';
 
-type Viewer = {
+type Viewer = MeasurementViewer & {
   removeAllModels: () => void;
   removeAllSurfaces: () => void;
   removeAllLabels: () => void;
   removeAllShapes: () => void;
-  addModel: (data: string, format: string) => unknown;
+  addModel: (data: string, format: string) => { selectedAtoms: (selection: Record<string, never>) => MeasurementAtom[] };
   setStyle: (selection: Record<string, never>, style: Record<string, unknown>) => void;
   zoomTo: () => void;
   render: () => void;
@@ -44,6 +51,7 @@ app.innerHTML = `
         <a class="builder-link is-current" href="/explore.html" aria-current="page">Explore molecules</a>
         <a class="builder-link" href="/builder.html">Build a molecule →</a>
         <a class="builder-link" href="/reaction-lab.html">Reaction Lab →</a>
+        <a class="builder-link" href="/calculators.html">Calculators →</a>
       </nav>
     </header>
 
@@ -59,8 +67,8 @@ app.innerHTML = `
             <input id="molecule-search" type="search" placeholder="Water, caffeine, H₂O…" autocomplete="off" />
             <button type="submit">Search</button>
           </div>
-          <p id="search-status" role="status">${molecules.length} featured compounds. Search PubChem for more.</p>
-          <details class="search-help"><summary>Search tips</summary><p>Use a full name or correctly capitalized formula. If structures share a formula, brackets show their atom connections. Searches go to PubChem. Some compounds have a 2D view only.</p></details>
+          <p id="search-status" role="status">${explorerSamples.length} sample molecules. Search PubChem for more.</p>
+          <details class="search-help"><summary>Search tips</summary><p>Use a full name or correctly capitalized formula. Brackets distinguish structures with the same formula. Searches use PubChem. Ionic compounds show information only; some other compounds have a 2D view.</p></details>
         </form>
         <div id="molecule-list" class="molecule-list"></div>
       </aside>
@@ -74,6 +82,7 @@ app.innerHTML = `
           <div id="formula" class="formula" aria-label="Molecular formula"></div>
         </div>
 
+        <p id="ionic-notice" class="ionic-notice" role="status" hidden></p>
         <div class="viewer-stage">
           <div id="molecule-viewer" aria-label="Interactive 3D molecule viewer"></div>
           <div id="molecule-fallback" class="molecule-fallback" hidden>
@@ -85,17 +94,20 @@ app.innerHTML = `
           </div>
           <div id="viewer-hint" class="viewer-hint">Drag to rotate · scroll to zoom · right-drag to move</div>
         </div>
+        <div id="explorer-measurements" hidden></div>
 
         <div class="details">
-          <p id="description" class="description"></p>
-          <p id="everyday" class="fact-everyday"></p>
+          <section id="molecule-information" class="molecule-information" aria-labelledby="molecule-information-heading"></section>
+          <details id="explorer-solution-calculator"></details>
+          <div class="explorer-transfer" aria-label="Use this compound in Calculators">
+            <button type="button" id="open-in-calculators">Open in Calculators →</button>
+            <span id="calculator-transfer-status" role="status"></span>
+          </div>
           <div class="explorer-transfer" aria-label="Use this compound in Reaction Lab">
             <span>Use in Reaction Lab</span>
             <button type="button" data-reaction-slot="0">Use as molecule 1</button>
             <button type="button" data-reaction-slot="1">Use as molecule 2</button>
           </div>
-          <dl id="quick-facts" class="fact-grid quick-facts"></dl>
-          <details class="more-properties"><summary>More properties and source</summary><dl id="fact-grid" class="fact-grid"></dl></details>
         </div>
       </section>
     </section>
@@ -109,10 +121,9 @@ const searchStatus = mustElement<HTMLParagraphElement>('#search-status');
 const moleculeTitle = mustElement<HTMLHeadingElement>('#molecule-title');
 const category = mustElement<HTMLParagraphElement>('#category');
 const formula = mustElement<HTMLDivElement>('#formula');
-const description = mustElement<HTMLParagraphElement>('#description');
-const everyday = mustElement<HTMLParagraphElement>('#everyday');
-const quickFacts = mustElement<HTMLDListElement>('#quick-facts');
-const factGrid = mustElement<HTMLDListElement>('#fact-grid');
+const moleculeInformation = mustElement<HTMLElement>('#molecule-information');
+const viewerStage = mustElement<HTMLDivElement>('.viewer-stage');
+const ionicNotice = mustElement<HTMLParagraphElement>('#ionic-notice');
 const viewerStatus = mustElement<HTMLDivElement>('#viewer-status');
 const fallbackView = mustElement<HTMLDivElement>('#molecule-fallback');
 const fallbackImage = mustElement<HTMLImageElement>('#molecule-fallback-image');
@@ -121,7 +132,7 @@ const transferButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-
 const EXPLORER_TRANSFER_KEY = 'molecule-playground.explorer-reactant.v1';
 
 const buttons = new Map<string, HTMLButtonElement>();
-let displayedMolecules: Molecule[] = [...molecules];
+let displayedMolecules: Molecule[] = [...explorerSamples];
 let searchRevision = 0;
 
 function renderMoleculeCards(items: Molecule[], emptyMessage = 'No molecule found. Try a full name or correctly capitalized formula.') {
@@ -168,15 +179,16 @@ function renderMoleculeCards(items: Molecule[], emptyMessage = 'No molecule foun
   }
 }
 
-renderMoleculeCards(molecules);
+renderMoleculeCards(explorerSamples);
 
 const viewerHost = mustElement<HTMLDivElement>('#molecule-viewer');
 const viewerFactory = window.$3Dmol;
-if (!viewerFactory) throw new Error('3Dmol.js did not load. Check the network connection.');
-const viewer = viewerFactory.createViewer(viewerHost, {
+const viewer = viewerFactory?.createViewer(viewerHost, {
   backgroundColor: '#f5f3ee',
   antialias: true,
 });
+const measurements = new BondMeasurements(mustElement<HTMLElement>('#explorer-measurements'), viewer);
+const solutionCalculator = new SolutionCalculatorPanel(mustElement<HTMLDetailsElement>('#explorer-solution-calculator'));
 
 let activeMoleculeId = '';
 let activeMolecule: Molecule | null = null;
@@ -186,6 +198,7 @@ let depictionUrl: string | null = null;
 
 async function showMolecule(molecule: Molecule) {
   activeMolecule = molecule;
+  solutionCalculator.setCompound(solutionCompoundFromMolecule(molecule));
   if (activeMoleculeId === molecule.id && modelReady) {
     for (const [id, button] of buttons) {
       button.classList.toggle('is-active', id === molecule.id);
@@ -197,6 +210,7 @@ async function showMolecule(molecule: Molecule) {
   activeMoleculeId = molecule.id;
   modelReady = false;
   const sequence = ++loadSequence;
+  measurements.reset();
 
   for (const [id, button] of buttons) {
     const selected = id === molecule.id;
@@ -208,39 +222,12 @@ async function showMolecule(molecule: Molecule) {
   category.textContent = molecule.category;
   moleculeTitle.textContent = molecule.name;
   formula.textContent = molecule.formula;
-  description.textContent = molecule.description;
-  const facts = [
-    ['Molar mass', molecule.properties.mass],
-    ['Geometry', molecule.properties.geometry],
-    ['Polarity', molecule.properties.polarity],
-    ['Bond types', molecule.properties.bonds],
-    ['Melting point', molecule.properties.melting],
-    ['Boiling / phase behaviour', molecule.properties.boiling],
-  ].map(([label, value]) => {
-    const wrapper = document.createElement('div');
-    const term = document.createElement('dt');
-    const detail = document.createElement('dd');
-    term.textContent = label;
-    detail.textContent = value;
-    wrapper.append(term, detail);
-    return wrapper;
-  });
-  quickFacts.replaceChildren(...facts.slice(0, 3));
-  factGrid.replaceChildren(...facts.slice(3));
-  everyday.textContent = `Everyday life: ${molecule.properties.everyday}`;
-  const source = document.createElement('a');
-  source.href = `https://pubchem.ncbi.nlm.nih.gov/compound/${molecule.cid}`;
-  source.target = '_blank';
-  source.rel = 'noopener noreferrer';
-  source.textContent = `PubChem · CID ${molecule.cid}`;
-  const sourceWrapper = document.createElement('div');
-  const sourceTerm = document.createElement('dt');
-  const sourceDetail = document.createElement('dd');
-  sourceTerm.textContent = 'Structure source';
-  sourceDetail.append(source);
-  sourceWrapper.append(sourceTerm, sourceDetail);
-  sourceWrapper.className = 'fact-source';
-  factGrid.append(sourceWrapper);
+  renderMoleculeInformation(moleculeInformation, molecule);
+
+  const ionic = isIonicCompound(molecule);
+  viewerStage.hidden = ionic;
+  ionicNotice.hidden = !ionic;
+  ionicNotice.textContent = ionic ? 'Ionic compound — no 3D diagram in this viewer. Information is shown below.' : '';
 
   viewerStatus.textContent = `Loading ${molecule.name}…`;
   viewerStatus.classList.remove('is-hidden', 'is-error');
@@ -251,8 +238,26 @@ async function showMolecule(molecule: Molecule) {
   viewerHint.textContent = 'Drag to rotate · scroll to zoom · right-drag to move';
 
   try {
-    viewer.removeAllModels();
-    viewer.render();
+    if (ionic) {
+      // This information-only path must not depend on a working WebGL viewer.
+      try {
+        viewer?.removeAllModels();
+        viewer?.removeAllSurfaces();
+        viewer?.removeAllLabels();
+        viewer?.removeAllShapes();
+      } catch {
+        // Hidden viewer cleanup cannot trigger a diagram request for an ionic record.
+      }
+      modelReady = true;
+      viewerStatus.textContent = '';
+      return;
+    }
+    viewer?.removeAllModels();
+    viewer?.removeAllSurfaces();
+    viewer?.removeAllLabels();
+    viewer?.removeAllShapes();
+    viewer?.render();
+    if (!viewer) throw new Error('3Dmol.js did not load. Check the network connection.');
     const response = await fetch(molecule.structureFile);
     if (!response.ok) throw new Error('A 3D structure is not available for this compound.');
     const structure = await response.text();
@@ -262,9 +267,10 @@ async function showMolecule(molecule: Molecule) {
     viewer.removeAllSurfaces();
     viewer.removeAllLabels();
     viewer.removeAllShapes();
-    viewer.addModel(structure, 'sdf');
+    const model = viewer.addModel(structure, 'sdf');
     viewer.setStyle({}, { stick: { colorscheme: 'Jmol', radius: 0.1 }, sphere: { scale: 0.25 } });
     viewer.zoomTo();
+    measurements.setAtoms(model.selectedAtoms({}));
     viewer.render();
     modelReady = true;
 
@@ -276,6 +282,7 @@ async function showMolecule(molecule: Molecule) {
     }
   } catch (error) {
     if (sequence !== loadSequence) return;
+    measurements.reset();
     if (molecule.origin === 'pubchem') {
       try {
         const response = await fetch(`/api/pubchem/depiction?cid=${molecule.cid}`);
@@ -323,6 +330,17 @@ transferButtons.forEach((button) => button.addEventListener('click', () => {
   }
 }));
 
+function openInCalculators() {
+  const status = mustElement<HTMLElement>('#calculator-transfer-status');
+  if (!activeMolecule) { status.textContent = 'Select a compound first.'; return; }
+  try {
+    const compound = calculatorCompoundFromMolecule(activeMolecule, isIonicCompound(activeMolecule));
+    sessionStorage.setItem(CALCULATOR_TRANSFER_KEY, encodeCalculatorTransfer(compound));
+    window.location.assign('/calculators.html#moles');
+  } catch { status.textContent = 'Browser storage is unavailable. Open Calculators and select the compound manually.'; }
+}
+mustElement<HTMLButtonElement>('#open-in-calculators').addEventListener('click', openInCalculators);
+
 moleculeList.addEventListener('click', (event) => {
   const target = (event.target as HTMLElement).closest<HTMLButtonElement>(
     '[data-molecule-id]',
@@ -338,8 +356,8 @@ searchForm.addEventListener('submit', async (event) => {
   const query = searchInput.value.trim();
   const requestRevision = ++searchRevision;
   if (!query) {
-    renderMoleculeCards(molecules);
-    searchStatus.textContent = `${molecules.length} featured compounds. Search PubChem for more.`;
+    renderMoleculeCards(explorerSamples);
+    searchStatus.textContent = `${explorerSamples.length} sample molecules. Search PubChem for more.`;
     return;
   }
   const local = findMolecules(query);
@@ -363,7 +381,7 @@ searchForm.addEventListener('submit', async (event) => {
     if (requestRevision !== searchRevision) return;
     renderMoleculeCards(local);
     searchStatus.textContent = local.length
-      ? 'PubChem is unavailable; showing matching featured molecules only.'
+      ? 'PubChem is unavailable; showing saved matching compounds.'
       : error instanceof Error ? error.message : 'PubChem is unavailable. Try again later.';
   }
 });
@@ -371,9 +389,9 @@ searchForm.addEventListener('submit', async (event) => {
 searchInput.addEventListener('input', () => {
   searchRevision += 1;
   if (!searchInput.value.trim()) {
-    renderMoleculeCards(molecules);
-    searchStatus.textContent = `${molecules.length} featured compounds. Search PubChem for more.`;
+    renderMoleculeCards(explorerSamples);
+    searchStatus.textContent = `${explorerSamples.length} sample molecules. Search PubChem for more.`;
   }
 });
 
-await showMolecule(molecules[0]);
+await showMolecule(explorerSamples[0]);

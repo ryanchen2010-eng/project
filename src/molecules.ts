@@ -11,6 +11,7 @@ export type Molecule = {
   aliases: string[];
   structureForm?: string;
   origin?: 'pubchem';
+  ionicAssembly?: boolean;
   properties: {
     mass: string;
     geometry: string;
@@ -31,6 +32,7 @@ export type PubChemMatch = {
   structure: string;
   multiPart?: boolean;
   hasFormalCharge?: boolean;
+  ionicAssembly?: boolean;
 };
 
 // The original six retain reviewed teaching notes and bundled 3D files.
@@ -51,10 +53,10 @@ const reviewedMolecules: Molecule[] = [
       mass: '18.015 g/mol',
       geometry: 'Bent',
       polarity: 'Polar',
-      bonds: 'Polar covalent O–H bonds',
+      bonds: 'Polar covalent O–H',
       melting: '0 °C',
       boiling: '100 °C at 1 atm',
-      everyday: 'Used every day for drinking, cooking, cleaning, and supporting life.',
+      everyday: 'Drinking; cooking; cleaning',
     },
   },
   {
@@ -71,11 +73,10 @@ const reviewedMolecules: Molecule[] = [
       mass: '16.043 g/mol',
       geometry: 'Tetrahedral',
       polarity: 'Nonpolar',
-      bonds: 'Covalent C–H single bonds',
+      bonds: 'C–H single bonds',
       melting: '−182.6 °C',
       boiling: '−161.5 °C at 1 atm',
-      everyday:
-        'The main component of natural gas used for heating, cooking, and electricity generation.',
+      everyday: 'Natural gas; heating; cooking',
     },
   },
   {
@@ -92,11 +93,10 @@ const reviewedMolecules: Molecule[] = [
       mass: '44.01 g/mol',
       geometry: 'Linear',
       polarity: 'Nonpolar overall',
-      bonds: 'Two polar covalent C=O double bonds',
+      bonds: 'Two polar C=O double bonds',
       melting: '−56.6 °C at 5.18 bar',
       boiling: 'Sublimes at −78.5 °C at 1 atm',
-      everyday:
-        'Found in exhaled breath, carbonated drinks, fire extinguishers, and dry ice.',
+      everyday: 'Carbonated drinks; dry ice; extinguishers',
     },
   },
   {
@@ -111,12 +111,12 @@ const reviewedMolecules: Molecule[] = [
     aliases: ['ethanol', 'c2h6o', 'alcohol'],
     properties: {
       mass: '46.07 g/mol',
-      geometry: 'Tetrahedral at carbon; bent at oxygen',
+      geometry: 'C: tetrahedral; O: bent',
       polarity: 'Polar',
-      bonds: 'Covalent C–C, C–H, C–O, and O–H bonds',
+      bonds: 'C–C; C–H; C–O; O–H single bonds',
       melting: '−114.1 °C',
       boiling: '78.4 °C at 1 atm',
-      everyday: 'Present in hand sanitizers, solvents, fuels, and alcoholic beverages.',
+      everyday: 'Sanitizers; solvents; fuels; beverages',
     },
   },
   {
@@ -131,12 +131,12 @@ const reviewedMolecules: Molecule[] = [
     aliases: ['glucose', 'c6h12o6', 'sugar'],
     properties: {
       mass: '180.16 g/mol',
-      geometry: 'Tetrahedral carbon centers; bent oxygen centers in the cyclic form',
+      geometry: 'C: tetrahedral; O: bent (ring form)',
       polarity: 'Polar',
-      bonds: 'Covalent C–C, C–H, C–O, and O–H bonds',
+      bonds: 'C–C; C–H; C–O; O–H single bonds',
       melting: '146 °C (decomposes)',
-      boiling: 'No normal boiling point; decomposes',
-      everyday: 'A sugar in foods and blood that cells use as a major energy source.',
+      boiling: 'Decomposes; no normal boiling point',
+      everyday: 'Food sugar; cellular energy',
     },
   },
   {
@@ -151,12 +151,12 @@ const reviewedMolecules: Molecule[] = [
     aliases: ['caffeine', 'c8h10n4o2', 'coffee', 'tea'],
     properties: {
       mass: '194.19 g/mol',
-      geometry: 'Mostly planar fused-ring structure',
+      geometry: 'Mostly planar fused rings',
       polarity: 'Polar',
-      bonds: 'Covalent C–C, C–N, C=O, and C–H bonds',
+      bonds: 'C–C; C–N; C=O; C–H',
       melting: '235–238 °C',
-      boiling: 'No normal boiling point listed; can sublime',
-      everyday: 'A stimulant in coffee, tea, energy drinks, chocolate, and some medicines.',
+      boiling: 'Can sublime; boiling point not reviewed',
+      everyday: 'Coffee; tea; energy drinks; medicines',
     },
   },
 ];
@@ -184,17 +184,25 @@ export const molecules: Molecule[] = sharedCatalog.map((identity) => {
     structureForm: identity.smiles,
     structureFile: reviewed?.structureFile ?? `/api/pubchem/structure?cid=${identity.cid}`,
     origin: reviewed ? undefined : 'pubchem',
+    ionicAssembly: identity.category === 'Ionic compound',
     properties: reviewed?.properties ?? {
       mass: additionalMasses[identity.id] ?? 'Not reviewed',
-      geometry: identity.category === 'Ionic compound' ? 'Ionic lattice; no single-molecule geometry' : 'See 3D structure; explanation not reviewed',
+      geometry: identity.category === 'Ionic compound' ? 'Ionic lattice' : 'Not reviewed',
       polarity: identity.category === 'Ionic compound' ? 'Ionic' : 'Not reviewed',
-      bonds: identity.category === 'Ionic compound' ? 'Ionic interactions; see 2D ion depiction' : 'See the structure; explanation not reviewed',
+      bonds: identity.category === 'Ionic compound' ? 'Ionic' : 'Not reviewed',
       melting: 'Not reviewed',
       boiling: 'Not reviewed',
-      everyday: identity.description,
+      everyday: 'Not reviewed',
     },
   };
 });
+
+/** Ionic records remain searchable and shared with Reaction Lab, but are not sample models. */
+export function isIonicCompound(molecule: Pick<Molecule, 'category' | 'ionicAssembly'>): boolean {
+  return molecule.category === 'Ionic compound' || molecule.ionicAssembly === true;
+}
+
+export const explorerSamples = molecules.filter((molecule) => !isIonicCompound(molecule));
 
 /** Treat ordinary digits and displayed chemical subscripts as equivalent. */
 export function normalizeQuery(value: string): string {
@@ -234,27 +242,29 @@ export function findMolecules(query: string): Molecule[] {
 /** Preserve curated teaching notes when a PubChem hit is one of our examples. */
 export function moleculeFromPubChem(record: PubChemMatch): Molecule {
   const featured = molecules.find((molecule) => molecule.cid === record.cid);
-  if (featured) return { ...featured, structureForm: record.structure };
+  if (featured) return { ...featured, structureForm: record.structure, ionicAssembly: featured.ionicAssembly || record.ionicAssembly === true };
+  const ionic = record.ionicAssembly === true;
   return {
     id: `pubchem-${record.cid}`,
     name: record.name,
     formula: record.formula,
-    category: record.multiPart ? 'Multi-part PubChem record'
+    category: ionic ? 'Ionic compound' : record.multiPart ? 'Multi-part PubChem record'
       : record.hasFormalCharge ? 'Charged PubChem structure' : 'PubChem structure',
-    description: 'This compound was found by name or formula in PubChem. A 3D view is shown only when coordinates are available; otherwise you will see its 2D depiction. Its everyday-life explanation has not been curated for this project yet.',
+    description: 'PubChem record; properties not reviewed.',
     structureFile: `/api/pubchem/structure?cid=${record.cid}`,
     cid: record.cid,
     aliases: record.iupacName ? [record.iupacName] : [],
     structureForm: record.structure,
     origin: 'pubchem',
+    ionicAssembly: ionic,
     properties: {
       mass: record.molecularWeight ? `${record.molecularWeight} g/mol` : 'Not available',
-      geometry: 'Not reviewed',
-      polarity: 'Not reviewed',
-      bonds: 'See the structure; explanation not reviewed',
+      geometry: ionic ? 'Ionic lattice' : 'Not reviewed',
+      polarity: ionic ? 'Ionic' : 'Not reviewed',
+      bonds: ionic ? 'Ionic' : 'Not reviewed',
       melting: 'Not reviewed',
       boiling: 'Not reviewed',
-      everyday: 'No curated everyday-life note yet.',
+      everyday: 'Not reviewed',
     },
   };
 }

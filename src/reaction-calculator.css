@@ -1,0 +1,38 @@
+.reaction-calculator { margin: 14px 0; border: 1px solid #cadbcf; border-radius: 12px; background: #fcfff9; }
+.reaction-calculator[hidden] { display: none; }
+.reaction-calculator > summary { padding: 13px 15px; color: #315c4b; cursor: pointer; font-size: .84rem; font-weight: 800; }
+.reaction-calculator summary:focus-visible { outline: 3px solid #89b6a0; outline-offset: 2px; }
+.reaction-calculator .calculator-body { padding: 0 15px 15px; }
+.reaction-calculator .calculator-modes { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.reaction-calculator .calculator-modes button { padding: 8px 10px; border: 1px solid #cdd8ce; border-radius: 9px; color: #315c4b; background: #fff; font-size: .73rem; font-weight: 750; cursor: pointer; }
+.reaction-calculator .calculator-modes button[aria-pressed="true"] { border-color: #315c4b; color: #fff; background: #315c4b; }
+.reaction-calculator .calculator-caption, .reaction-calculator .calculator-notes p, .reaction-calculator .calculator-assumptions p { margin: 0 0 10px; color: #63766a; font-size: .72rem; line-height: 1.5; }
+.reaction-calculator .calculator-notes:empty { display: none; }
+.reaction-calculator .calculator-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 12px; margin: 12px 0; }
+.reaction-calculator .calculator-field { min-width: 0; }
+.reaction-calculator .calculator-field label { display: block; margin-bottom: 6px; color: #314d3e; font-size: .74rem; font-weight: 750; overflow-wrap: anywhere; }
+.reaction-calculator .calculator-quantity { display: flex; gap: 5px; }
+.reaction-calculator .calculator-quantity input { min-width: 0; width: 100%; padding: 10px; border: 1px solid #cdd8ce; border-radius: 8px; color: #1d3027; background: #fff; }
+.reaction-calculator .calculator-quantity select { flex: 0 0 70px; min-width: 0; padding: 8px; border: 1px solid #cdd8ce; border-radius: 8px; color: #315c4b; background: #fff; }
+.reaction-calculator .calculator-quantity input:focus-visible, .reaction-calculator .calculator-quantity select:focus-visible { outline: 3px solid #89b6a0; outline-offset: 2px; }
+.reaction-calculator .calculator-field small { display: block; margin-top: 5px; color: #63766a; font-size: .65rem; }
+.reaction-calculator .calculator-submit { padding: 9px 14px; border: 1px solid #315c4b; border-radius: 9px; color: #fff; background: #315c4b; font-size: .76rem; font-weight: 750; cursor: pointer; }
+.reaction-calculator .calculator-error { margin: 9px 0 0; color: #a43830; font-size: .76rem; line-height: 1.5; }
+.reaction-calculator .calculator-output { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 13px; }
+.reaction-calculator .calculator-error[hidden], .reaction-calculator .calculator-output[hidden] { display: none; }
+.reaction-calculator .calculator-fact { min-width: 0; padding: 10px; border: 1px solid #d8e3d6; border-radius: 9px; background: #f0f6ec; }
+.reaction-calculator .calculator-fact span { display: block; margin-bottom: 4px; color: #63766a; font-size: .68rem; }
+.reaction-calculator .calculator-fact strong { color: #284a39; font-size: .83rem; overflow-wrap: anywhere; }
+.reaction-calculator .calculator-output > .calculator-caption { grid-column: 1 / -1; margin: 0; }
+.reaction-calculator .calculator-assumptions { margin-top: 13px; color: #63766a; font-size: .72rem; }
+.reaction-calculator .calculator-assumptions summary { width: fit-content; margin-bottom: 6px; color: #315c4b; font-weight: 750; cursor: pointer; }
+.reaction-calculator .calculator-assumptions a { color: #315c4b; }
+.reaction-amounts-controls { min-width: 0; }
+.reaction-amounts-controls label { display: block; margin-bottom: 6px; color: #314d3e; font-size: .8rem; font-weight: 750; }
+.reaction-amounts-controls select { width: 100%; min-width: 0; padding: 11px; border: 1px solid #cdd8ce; border-radius: 9px; color: #315c4b; background: #fff; }
+.reaction-amounts-controls select:focus-visible, .reaction-amounts-retry:focus-visible { outline: 3px solid #89b6a0; outline-offset: 2px; }
+.reaction-amounts-status, .reaction-amounts-caption, .reaction-amounts-context { margin: 10px 0; color: #63766a; font-size: .78rem; line-height: 1.5; overflow-wrap: anywhere; }
+.reaction-amounts-status[role="alert"] { color: #a43830; }
+.reaction-amounts-retry { padding: 9px 14px; border: 1px solid #315c4b; border-radius: 9px; color: #315c4b; background: #fff; font-size: .76rem; font-weight: 750; cursor: pointer; }
+.reaction-amounts-retry[hidden], .reaction-amounts-context[hidden] { display: none; }
+@media (max-width: 420px) { .reaction-calculator .calculator-output { grid-template-columns: 1fr; } }

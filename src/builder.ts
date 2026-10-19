@@ -5,10 +5,12 @@ import { Editor } from 'ketcher-react';
 import { StandaloneStructServiceProvider } from 'ketcher-standalone';
 import 'ketcher-react/dist/index.css';
 import './builder.css';
+import './bond-measurements.css';
+import { BondMeasurements, type MeasurementAtom, type MeasurementViewer } from './bond-measurements';
 
-type Viewer = {
+type Viewer = MeasurementViewer & {
   removeAllModels: () => void;
-  addModel: (data: string, format: string) => unknown;
+  addModel: (data: string, format: string) => { selectedAtoms: (selection: Record<string, never>) => MeasurementAtom[] };
   setStyle: (selection: Record<string, never>, style: Record<string, unknown>) => void;
   zoomTo: () => void;
   resize: () => void;
@@ -44,6 +46,7 @@ app.innerHTML = `
         <a href="/explore.html">Explore molecules</a>
         <a class="is-current" href="/builder.html" aria-current="page">Build a molecule</a>
         <a href="/reaction-lab.html">Reaction Lab</a>
+        <a href="/calculators.html">Calculators</a>
       </nav>
     </header>
     <section class="builder-workspace" aria-label="Molecule builder">
@@ -72,6 +75,7 @@ app.innerHTML = `
           <p id="viewer-placeholder" class="viewer-placeholder">Draw a molecule to preview it.</p>
         </div>
         <p class="preview-hint">Drag to rotate · scroll to zoom</p>
+        <div id="builder-measurements" hidden></div>
         <div class="builder-facts">
           <div><span>Formula</span><strong id="builder-formula">—</strong></div>
           <div><span>Molar mass</span><strong id="builder-mass">—</strong></div>
@@ -119,6 +123,7 @@ const DRAFT_KEY = 'molecule-playground.builder-draft.v1';
 const viewerFactory = (window as unknown as { $3Dmol?: { createViewer: (element: HTMLElement, options: Record<string, unknown>) => Viewer } }).$3Dmol;
 if (!viewerFactory) throw new Error('3Dmol.js did not load.');
 const viewer = viewerFactory.createViewer(viewerHost, { backgroundColor: '#f5f3ee', antialias: true });
+const measurements = new BondMeasurements(required<HTMLElement>('#builder-measurements'), viewer);
 
 let ketcher: Ketcher | null = null;
 let generating = false;
@@ -145,6 +150,7 @@ function resetResult() {
   editRevision += 1;
   lastResult = null;
   transferButtons.forEach((button) => { button.disabled = true; });
+  measurements.reset();
   viewer.removeAllModels();
   viewer.render();
   placeholder.textContent = 'Draw a molecule to preview it.';
@@ -164,6 +170,7 @@ function resetResult() {
 function displayResult(result: ChemistryResult) {
   lastResult = result;
   transferButtons.forEach((button) => { button.disabled = false; });
+  measurements.reset();
   viewer.removeAllModels();
   viewer.render();
   formula.textContent = result.formula;
@@ -181,10 +188,11 @@ function displayResult(result: ChemistryResult) {
     setStatus(`Drawing checked. ${result.reason}`);
     return;
   }
-  viewer.addModel(result.molfile, 'mol');
+  const model = viewer.addModel(result.molfile, 'mol');
   viewer.setStyle({}, { stick: { colorscheme: 'Jmol', radius: 0.1 }, sphere: { scale: 0.3 } });
   viewer.zoomTo();
   viewer.resize();
+  measurements.setAtoms(model.selectedAtoms({}));
   viewer.render();
   placeholder.hidden = true;
   ruleCheck.textContent = 'Passed';
@@ -198,6 +206,7 @@ async function generate3D() {
   const revision = editRevision;
   generating = true;
   generateButton.disabled = true;
+  measurements.reset();
   setStatus('Checking the drawing and calculating a 3D shape…');
   try {
     const molfile = await ketcher.getMolfile('v2000');
@@ -215,6 +224,7 @@ async function generate3D() {
     displayResult(payload);
   } catch (error) {
     if (revision === editRevision) {
+      measurements.reset();
       const message = error instanceof SyntaxError || error instanceof TypeError
         ? 'The local chemistry service is unavailable. Run start-local.command again.'
         : error instanceof Error ? error.message : 'Could not generate a 3D model.';
@@ -277,7 +287,10 @@ createRoot(editorHost).render(React.createElement(Editor, {
       setStatus('Drawing editor ready. Add atoms or load the ethanol example.');
     }
   },
-  errorHandler: (message: string) => setStatus(message, true),
+  errorHandler: (message: string) => {
+    measurements.reset();
+    setStatus(message, true);
+  },
 }));
 
 new ResizeObserver(() => {

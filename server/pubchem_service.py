@@ -92,16 +92,25 @@ def _formula_counts(formula: str) -> dict[str, int] | None:
     return counts if end == len(formula) and counts else None
 
 
+def _is_ionic_assembly(molecule: Chem.Mol) -> bool:
+    """Identify separate cation/anion fragments, not charge-separated molecules.
+
+    Net fragment charges distinguish salts from connected zwitterions and from
+    neutral metal-containing records whose SMILES has disconnected components.
+    A single ion by itself is not an ionic assembly either.
+    """
+    fragment_charges = [sum(molecule.GetAtomWithIdx(index).GetFormalCharge() for index in fragment)
+                        for fragment in Chem.GetMolFrags(molecule)]
+    return any(charge > 0 for charge in fragment_charges) and any(charge < 0 for charge in fragment_charges)
+
+
 def _include_formula_result(molecule: Chem.Mol) -> bool:
     """Keep salts and metal compounds, but omit disconnected neutral mixtures."""
-    fragments = Chem.GetMolFrags(molecule, asMols=True)
-    if len(fragments) == 1:
+    if len(Chem.GetMolFrags(molecule)) == 1:
         return True
-    fragment_charges = [sum(atom.GetFormalCharge() for atom in fragment.GetAtoms()) for fragment in fragments]
-    ionic_assembly = any(charge > 0 for charge in fragment_charges) and any(charge < 0 for charge in fragment_charges)
     has_metal = any(atom.GetSymbol() not in {"H", "B", "C", "N", "O", "F", "Si", "P", "S", "Cl", "Se", "Br", "I"}
                     for atom in molecule.GetAtoms())
-    return ionic_assembly or has_metal
+    return _is_ionic_assembly(molecule) or has_metal
 
 
 def search_pubchem(query: str) -> dict[str, object]:
@@ -171,6 +180,7 @@ def search_pubchem(query: str) -> dict[str, object]:
             "structure": canonical,
             "multiPart": len(Chem.GetMolFrags(molecule)) > 1,
             "hasFormalCharge": any(atom.GetFormalCharge() for atom in molecule.GetAtoms()),
+            "ionicAssembly": _is_ionic_assembly(molecule),
         })
         if len(results) >= MAX_RESULTS:
             break

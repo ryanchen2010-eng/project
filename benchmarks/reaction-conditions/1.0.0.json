@@ -1,0 +1,1342 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "status": "draft-evidence-backlog",
+  "created": "2026-10-16",
+  "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+  "parentCaseDigests": {
+    "A001": "1f868b7aa73e9676a91c2d3cd1a609beb735042087803758c7e456add286ab78",
+    "A002": "8947b800b6eb852d1a3c7b0b1016641e07b8af588b1161038cb297431a96253e",
+    "A003": "27226842097a903e3540efa0dbbd765ce314a0f452058b9b735c2d7d62cef25a",
+    "A004": "bf0f9412a9739267bc21eee5ac6e44cc1fcbb2a20f6c0e5a1acc503b3f96a988",
+    "A005": "8d5f7428f8c2365d110be42fcb3a636210d584a9a41ff51395bb75654dc329fd",
+    "A006": "24874093ccafbd5796d44a9fd1e0e3afc276d3347ed6d4f7e5f73fbee6da6da7",
+    "A007": "51ddad1bd9a50d643f265ec7759fbfcb2bc171bc261f58128f7bc1188f04ebaf",
+    "A008": "d1586704b8965bdf8d1d11214bfa29feb8fc14edcf58e072bc8c046bfe939bd4",
+    "A009": "2acf5f57946796e7773d8e28432a495e805407c149b567d32d966e88279527ad",
+    "A010": "2e91643d6dd1441f116b10cbecaad29036dbb37ad15af73c39731621d55d42c4",
+    "A011": "3501fbb6bd547bc3c4dfccdac2b3640b46b725f7ed8224baf026beffc2d6e1d6",
+    "A012": "a53bb7e4df26272b7fdb07c2931b3e95a08ef04a86cef9eea4681d966f8d24c2",
+    "A013": "8d6beee7c01b1536c52b75b34d9b839a106207bbf715dcb5b08bedceec4430ca",
+    "A014": "77d9472ed608d7e3a045d413746addba01fad0bdc491721c72947f0538fb572c",
+    "A015": "1be983996c2cfc53870511ab0c0de8b811dfc7fda94a26d862406986fd428600",
+    "A016": "8f9a9abbe80a6066aa45a9750cbf37d3c6a5a8f79a10931251d97bcc3ee3c727",
+    "A017": "087e73577425775cc4f1f5a0f4014524fa005a439c87a1b67fad560cbfb2d3e4",
+    "A018": "4651bec75a32316ae9615d1499e325f37dcb655427fb40eba674bdc8e69a1d05",
+    "A019": "45f856d7e4e0dd5304e8f1b58995008817c6ca698ce34f143b7bf1cf41feb6ff",
+    "A020": "f1ebf8460d59fcd5f4ca1fdb4047d14ba800b0bfaa41706f790b607bcbceaad1",
+    "A021": "25250d8371b550554b1b23d4de146d632d7fb0f1ad73e9b5cd3e3bec544fe726",
+    "A022": "183850953aa0addebba64e6a10279904c9a4a0791cfea4f4db69d916076889ec",
+    "A023": "63c085de20ccdcedcfed5c1822b0b034dc79ccfaad36e5dcac46c2f8f91efc7c",
+    "A024": "0c1f1e268dbc4003662ce6b6bd02011c13395c6d80f5290bae9e722f633ab9cf",
+    "A025": "799e283b0b9645230cfc9d94f6d6b65840a5bf209a0240addb4b0a00d0b95729",
+    "A026": "7e5aafb2189bb926bd895601c0413d651c2ef643ec62df65652f94f200cb7283",
+    "A027": "07acdc3495e52a3008276af3cdd445570a5b03b17ef3c4385e8bb60c8ea25c8a",
+    "A028": "c7b9d3f13b2538b77752e948c8ed5a5859182dfeedf21be975445d9053f2fcf3",
+    "A029": "02ec7c793392d3f5ae90e7625cf0ad03ae9fb84df17c2f6d1644cccb3641ff06",
+    "A030": "a849ee2d55e3cf9f1ac63dd5a2ca16ff7179c3f6288cbd0a85b2d090a68b03ac",
+    "A031": "ab3467a18f0ccc3fd99c20292d2c75e4925aa024efc8a786e4948ddd30ea12a5",
+    "A032": "70e711f55e2193969bfc8f0096718f0aad2c43b54845915292664d00d811cd76",
+    "A033": "802ecfbc4fbb3afa2466de77f16a1069a8793f73aa2904498bc7aa5fe2acebb4",
+    "A034": "6c2e51742ed8c1b4ef70adc9ed63cd51d2b3839656bb8b47397834c59bde9cba",
+    "A035": "9ac6b537af3f30006eee3d9efae50da5ec10ba85e50af98b9699e79da86c739c",
+    "A036": "c51cf8144954063cd6dd34372eea529fbe4b1d26c2dbe1d38890c6fad168c371",
+    "A037": "d4910292ea76cda090551936b3cf713d771e545325cf7e4aee4d5be8dc2cf838",
+    "A038": "5ad3b1a3d8b49e8307b28bf4bda9f27743451c15e383f8a09b820dce8a30cb6b",
+    "A039": "959443b33a17f0d0dc0460579038c7782290546175f039f1fa9514db765f41ec",
+    "A040": "86a30621661ca0a9c79db7f3afe8d0ac9383529dda0cbc2ee378c2bf2c91e339",
+    "A041": "b2da09b74bef58eeb5c5b2e4a7af94609569e77cbb34b830515c4d4c34ac62ce",
+    "A042": "ce607ffe3945ce5426d55a0a179c3775ea63c05c0641158713bcee1b28fc8f32",
+    "A043": "3748bd30f61f170a3fe9f9cf7eb30291c32e600e8709196a48c2e6b998fb628b",
+    "A044": "4d17b773362628dfd9d5dd35b73a9785bed5740dc3fea1a1a537e119ea6e73bf",
+    "A045": "25f135bda01636aaecf5328c24763cf2b984a67507e6ae14d2ca328012ab87ef",
+    "A046": "ec8f54718c402940616253aff3a1f0b45507a75a67728fcf076ef30d231291da",
+    "A047": "7c2935e05a1839e918266953631f997fe3c6075a64f6ca1f90bec70f277cafcd",
+    "A048": "312549cacaec35398dae7347ac00cb418d53c5af0b1d12e520bcaaae766a22a7",
+    "A049": "fa0f579088caef7bcff7e9e2c54e629b1bc9b357a23c258c3bd6e37fbd550873",
+    "A050": "a32cd18b73a01ba73de1fe38ff5ec3d2fac7490738bb68366342cf4e93391fd1",
+    "A051": "b67d529f41a631f98d4836ce256bdad8b023a94f2368acf23dcb4d07ae33da22",
+    "A052": "6c8a9115cddc962bd45894fbced296aa6c8216863b4f96d0a35edd1f04f29946",
+    "A053": "b0e7d40ca76284d739fd807888dc46b94f0cd892f050437284478c8a755026f7",
+    "A054": "88d182eac3f7108d45cf57db7e2837e75afeb0163c8226f4bd25c7f7d9a31366",
+    "A055": "3c73715f282c6dc5dd673e53e1a32cc054ca88a32326e6a2a5bd5320cbfd7939",
+    "A056": "8ffb7edaa6f45333a79eabbe550c10fdb56908d116a362c50e70aa70719ca0e8",
+    "A057": "f223b69da0beaa662e9502dde4205882ebea8222e8513b1f15934f8ca28f19f6",
+    "A058": "3b2cbad1c7531439076c7be6fe99a566df93fa3569212fdc3e366878b27dea85",
+    "A059": "cb37b33c8b0dfbb70c38255a03bde7d110dc11ed00cb645626b1277c4089c989",
+    "A060": "32d2cf3f8cf93e66e3d5ea14b0cd3eb1ec9e666563ef603bc05973279bebf912",
+    "A061": "34001b2c3069341fa9129bee6e082aa93fe7cedcc330b745ca06b038db115063",
+    "A062": "bad49a10a38bd2af2785cbc1f417377febf1db0eb4006f8fdf99712818aed132",
+    "A063": "8e4f84638857c321d08e16cdc3d6d7c8dedd1a4d558b8d47422a76d832e8a28e",
+    "A064": "65914bdba579daf2b725552c392329386b339b48fd7ad173b2fbed582dba83d6",
+    "A065": "a1c44f811f29a8829af54f24c06f2642a9846fcf6c9c77ff26fdfb4aaba993ba",
+    "A066": "7c22a1824ff9fc0f7f3e601af30dbb796b9fac6206d3c8bab1ce58291d7033f7",
+    "A067": "f373b02197fb8e44891d20861b44276ce259528d5088a7daf755ef6124495312",
+    "A068": "f9ef2cbf73c6946cc51d11a741a0c463b5f4daca1bfb142df60e22dac79cab97",
+    "A069": "64232d039808fd065dc814c180fae433138f064864963827962771d788cb2b15",
+    "A070": "6c92c1c139717a363f4b8994c590bbb27aed583cd92c67895ab6ac03e1342d73",
+    "A071": "8dca0d20d5294d88bd51cbca832c9671844aba3466bfbbdeeab3436387474f52",
+    "A072": "b003db77d49d9db5a246dca0fb966d7b27bc312b0c08ea391d81c1283a4ff234",
+    "A073": "8ef93676faaee943d27f347c78787d2529f97186aa7bcc3ae5d38cb861f28a15",
+    "A074": "926cef39d81faa80672fce73ca0fad3367401c064af7a0550c78945487200c60",
+    "A075": "1b79b57a5d77e7048604678f4992cdf4e3139942a20dc4377d08dcf791db78cd",
+    "A076": "587bdde53ffaac86bba0513b054215e8fb41d10a37f53226a5788033020d579f",
+    "A077": "b4cb55198939b1908cf31dd81b487fd7fe94ce39917ead47b64df93c8e168c53",
+    "A078": "1da19b209c5eb73cfe1b1e0269719547296a6b45cf3a105111e0cae09e19d6b2",
+    "A079": "45fce4d12b422881bdb22d95a8e1af0484da64041ae8fd4d3d809cdd56ae1f02",
+    "A080": "6e3be1447cd90eaa5a6666bd7ede3ce6d391dfe254282d906a62215a8ee0e019",
+    "A081": "4785dd1771fc897b5286c3ce5d05fee1f8ed8cee3c2075dfd5753e23454eac71",
+    "A082": "ebe54e414f66f5293464fbe95cc7f216212ede702b8eecb37fb035c1514b6fc5",
+    "A083": "ae2c7ab9e93b0849ebe78289c2976c43f729506e523eb3ee67949f28a533e1d9",
+    "A084": "897fd9e01828d60a0bcea4e57f4c06cb01c9c7e277881ab54177578a4c10e426",
+    "A085": "da7751b382e9ede1ade0da27621ed4d2398b9682654a0397ca19b5f11c04a6ed",
+    "A086": "3215ab986a7aca764c4276c10248ee40eb56815a442b802ef00c7ab2c6182844",
+    "A087": "a36365d39f4d9d1ba941947b7c9c3c8122ea19a67a48e978a05f1aff66904a01",
+    "A088": "edbfbf1a75593d02c15ce74510a09a7cd03be6fda6175bf43469686a6524844e",
+    "A089": "6c84022485e80ba03fa30ae3c9d7872e4209402822b84f2c570bf653e43eb632",
+    "A090": "7f374e75b84b02cc02c028a1336abda578fa164f5b9a58f0af626259c2b00be6",
+    "A091": "050e60ead34bc49d8c444488bed4669955c822f8914ba0c93a1287a7c731d4b8",
+    "A092": "b5a7bd9445e96d2315bc314dafcee2664914f37ed8ce2d7f58fb39e01e6500e6",
+    "A093": "e72c6a03a7c6ef0b613f49a65625cd3c2210539a52249329f434481e6abc8da5",
+    "A094": "26b99f04c04437b2232e112ada1b927b4d91bb7565d7274f0d79ee7b182216db",
+    "A095": "90090d04d68c7f463d8cad47f479ba01e3882f02b60831d9318dabdfc4ccb3f4",
+    "A096": "dc3d7bebd23a1cc9a2e6fd2e9de11f3b6802f349d75d5e3f7118fbd738c75b25",
+    "A097": "d5a79e90c24a83bc91af555f171d34fd9f02223f9e979529dee024b89f6eef3a",
+    "A098": "3ec5f348281709bb0a13f6112e2e655a35d9e17a72528218d8a297c76bf1d010",
+    "A099": "c005514b2ca478e0a67f46bc47489bb79d16c8dccf4dc13f9058162253243bfc",
+    "A100": "019a78a8ab8e1537d09a900f413833e43bcb6f2e856752cca567dc953b5930c3",
+    "A101": "d40a86cb2acc2df825be4c4325630ba02a890b912dcc0e19a127f6ed99e94c6f",
+    "A102": "457d442035fb48038bc61de262095feed3b4dbd039bb8a4ade42620906a2d985",
+    "A103": "c80fc533a8cebdf382c3c43202cef769af83da79f69e66862aaac6cf745e75a2",
+    "A104": "0229a7be454c4dc5897572af5b6cbe7b9f6710198731194770337dca2f0b1359",
+    "A105": "85ce2b99d6abde61b550341056e343c4a863459c5db46f8230b201b999e74bd0",
+    "A106": "964b6dce291746387473cea039a219e6642aa3be84b6e8198157db0c733632ff",
+    "A107": "8cecee6fa3659c5935a529a0407854d210527deb5a7c10b9b00cf40d6151f966",
+    "A108": "278644296dcfa867c832590da56805766bba5621e8e16e7e4edae7c906e93076",
+    "A109": "a46cd3e120a75ce88968c2cd68bd9ff7bbe145ec32e011250b870a0889884792",
+    "A110": "a5656c23e4acb64f985657c1e72d2135a779089ab6a20176ce1e083c42200172",
+    "A111": "cac29c0f55fa8959ec0028dabfe69ecbb95a1aaefbad1e00f6051c7d1fc9e57f",
+    "A112": "18160c04cdea5e5cc514ac673e44a52591c67aca37beefe8ea9074927af5b93e",
+    "A113": "7c35cc8ef15a584fb329edca582a01187619927f1e6fe306072a27586a1ff70c",
+    "A114": "564c2d8bdb8ec3060cc75ce328d9aca912c8f5b986775492e02b12731cc2785a",
+    "A115": "e1587e9a03b46064d0bcfb86cbf2bb994e7b78feb2dd2a151c6ee312d01bc3c4",
+    "A116": "5505f34d6b547ec0c6fa97206104dd35e1f8af664525796c9161928c7e980d54",
+    "A117": "66adcec9315bc6f6441e4e4cc3ea90f861d037556ab8699e9a20394580628529",
+    "A118": "c88d5b929108d7003cd820228634a87364c20b55e95b3d076eb7dc4966784fce",
+    "A119": "4a13b9f187b1f6da4e6192b3dc6060b9c844ce3e56f221f3d9baf9a1eb4b5d83",
+    "A120": "d399f2a8e9cd7ad679ec0ec1dd21c98c3b6a5551c90ec3ebe2353c2792e370c9",
+    "A121": "5c1266b6872bf3babbaff4bf65afd49de206ca17eb80065844204fa1086b457c",
+    "A122": "4e0abb0edccb78295d450e66e57df0e1b6f7a3228a0bca30cc55ec5ae3a1cdd6",
+    "A123": "4aa23ea206518a6a2438392142dd4dbe81015c3263126b61dfd5de97791261d3",
+    "A124": "616f4d430ef7fcb7334cc3286738b1a0630a9684eec32190f8ac8b480bfa5444",
+    "A125": "8d27afcc25184ba5b7f3d2e227c1697221aafdd3c00844e2de5235e9c0e5ffdb",
+    "A126": "60dd4888c518cf8fd0dc422d90fed7aaabe9b9f2fc8cecf08a6da97af721b626",
+    "A127": "8abd769593f0ebfa78e841791a0d317f0871084be528e8d7326e8690615ecdd5",
+    "A128": "97f6f4668e7d0a565cda68e903987384f75baa17238053a67bbaf0aeb313f4f9",
+    "A129": "06ce66f35016f13a0d8cacf0df17cac8189fd16342537d347ec4a0bc23d28de2",
+    "A130": "23471c6f9dee3042dee983e64cec22fb07a89aff8937066684e50f680896da28",
+    "A131": "41c85805249b0fad9da30579560fa5c5089bfcbcfa71fa704b5c5c1bd901fdac",
+    "A132": "5bef7ae8cdf5db9570a56d1ee0bad6dc36ebeed298286ea27e1726eba50af8c1",
+    "A133": "e6e1877a65374657f545c903004d85a0132edc133d19ce1da12e36c331d7ebaf",
+    "A134": "ed7c907d3778afc544542d2f7e3232ed0789c43c99819645535842a4fa33c2f5",
+    "A135": "b779531f6b2eda40dfab4086e636439aef91b0c110591080ecd326b418a1697b",
+    "A136": "8de961e70ad0cbcadf55f054d356bcc887aed5bcbb5e1707e60e052e32c43995",
+    "A137": "1bb031ea68dc931b22fb6aea1d2cc8607bfc0bbfa88608c515ec55801a0d25b4",
+    "A138": "04cb630bef79969b4f0115397a2b8d4584544803edc07661c0d86c1f80c61b66",
+    "A139": "638ec006550cd19020557a3a28d738b8a2257dac69a221927d90d7e6c10de034",
+    "A140": "594387ba70db3cec00c58d72709775096096631dc6be9e9c4d6a55527b401634",
+    "A141": "091e330ba1de1cee1aab2e565d9bd7a955106721a27e2a77d69c5ad1eefa3063",
+    "A142": "aee8f009d4fc13994958ea7940d4edaf559d06520fd15bcdefe7134380a91576",
+    "A143": "6a34a5ba0104421d9d695c23eb235f56c730ed82e53b6f5143802ece23848ab0",
+    "A144": "95d3a35e133657ac7c8b90542956fcf1a338bb5675e5cc4b76a04ee672deaa2c",
+    "A145": "9cb5c93ce4755b2125b8703b55b7dec80c603bc974cf9ddb79c64c25c93c2f24",
+    "A146": "611a48e37c4c64afafdf7c07602556d7514225f07f681ae905641fa1d5739d26",
+    "A147": "fd15be245194111e29977c0fe177b849378b658e7a4ce356c6877a025c8a81bd",
+    "A148": "7258511f54acea74f9a3ab38b53e3e8e9c505cff2f671f923229e4201116238f",
+    "A149": "41123dc0c62c10d05cfe92ae247de86fd0cc15162066564373ed5c424aebbe36",
+    "A150": "4a2b99ff8f0a42ae14da00b02cafb36886f20f90adac48faa36cc1654eff2e7f",
+    "A151": "60ba0fa56359be3ab73535b59de39b61fc7c9e5a032d1a21eea872af66b4774d",
+    "A152": "b637c0ecf751381c96b2a83c07320e6647cff79bb3474be531670b69d1b85d03",
+    "A153": "0578c8a8f03e16204631f44aabf02bde756f9e81b1d7fd7205d44d7b7ee9370d",
+    "A154": "661b010c977da8507e499930222d9efa9ebc640b094d6329516fa871bb7f3664",
+    "A155": "c5bc0f6d7d638104583b19fe0b0178edc2579fbea7c354eec504b2ec1c65338d",
+    "A156": "b29f36619b8c1767ca43256c7a97ec8bfab66d7968d0c6d00ee5f24642019538",
+    "A157": "608e3dae5254096eba6f8e4dde04bc54496fa2de1a40fe97a1283a4c9ef982e7",
+    "A158": "8bc65d4f093319e0a84f339b03723a5dfaeb17d5b7d66feab176ecb6c433f0fd",
+    "A159": "3b8497d490b806819be9baf34a59e18699492d815d2cceb5d385210f1f37f26d",
+    "A160": "adc564cc3fb3c2b584d2265383b156568389922e72fb501a5e66ceee3c09861b",
+    "A161": "adca8074d6f5230648cb21118e5de152cf795d4bf7b5100c5b22f44b31172e31",
+    "A162": "55ebecce22a71f3eb1de27d762408c279e4891bc0a5265923231a0337f5c333a",
+    "A163": "a66a1e2042c1b84cc4bd1a4acb661f2bb73f9a9d0fb642c09131e82589901d06",
+    "A164": "5a2036c6f887fee84090a61debc313daa334df1a8b374154498cbd7de1e503c2",
+    "A165": "6c440728da4175548af307237b85b3af590eb60f05f9f2e34c2ae093277b972a",
+    "A166": "9607393a3275f1406929cae1a27674df90e4905db4fde0b9df8dd0088646ed31",
+    "A167": "3455d40661bcc85a5fdf3398ed07aad801f4ea9a17eedc6eea26325747866596",
+    "A168": "a65f57fca6b84fec1e354c81f1803a311db9e6d8982eade7d3cc55af7e8e0e22",
+    "A169": "e0e56fd71b32c674a8d7d9b11b7def71ec7abbdea00f593a1a830c1b4fa59652",
+    "A170": "c14468f0495e1e3f074e823d1a632a74b2d122c1260f15fceb57d854ed36a34a",
+    "A171": "28011b0fb9977ae0b1aa14de9de6b8869771fb50a840471b266c3e5335de26fb",
+    "A172": "7a1b6fa01a04a9590e2ef5d54c3451dd70f9e4d705df9ba75e611bd91c125c7e",
+    "A173": "11208ff636f25b4e81634bc9081ec9511419335119ef9a370a8095c49dbdaa66",
+    "A174": "c92056e57f4123c7b0bca200a2ae974bf30c5bb5d26c739bb2e239e191196868",
+    "A175": "2e16359354bf76f6e407bcb6f36b2b22bba0bc5168cb1f6b6df42e5cb2f65613",
+    "A176": "800e43ff38b9af220892e46d6f2aaf165e09df3587f5c8bd161146c026083079",
+    "A177": "d1477860abf57434f848a3708d5cebd9338034a7a35fff89eafc2d6ef0f3daf6",
+    "A178": "7b00e0b0962b38212a52bbbd628dab7c3aa73c213708230d475147677af099fd",
+    "A179": "04ec866be6bc80a8c48f69fee5ac6ba18d1aff8f5700b0f75bfa474628ca9f19",
+    "A180": "dd3e28572f18e22c1c4c2d5b8de48e31f36685ce00e3421fe25376787484ddb0",
+    "A181": "86e30d0bc0ca32f76591b944e3ed3ae8ebc81d805f32f8d14ef56e453933e187",
+    "A182": "c25a6ef14abad482b7ee9334e2fca4252c511b511eea8e4817905721c9d02a81",
+    "A183": "f8fdfe2269134ef8c4b8f8e6ce1661bef5c294a76a7a01d94bdf4fe5876c0e3e",
+    "A184": "fbbda5471a5bdc9843af3f11f34584b73969a8e57d1e01980e858adea22099b3",
+    "A185": "4d310f1d59a1b017454b04a32178fa834ea45a73b9fc8c4f4f29cf0d4ba64e3c",
+    "A186": "b7c2f1fd28eee7650b5daf2d129bb1ff500a6aba83a8a7e624d78524f085e76a",
+    "A187": "5e63996dcf8f8ad6852ff0c728ef3179dd818b1738ac914e19e2bfb8a8ef39e1",
+    "A188": "772e73ee3eb2001c76042ab553d63363d13659eaec7cce1d55edc409255e0370",
+    "A189": "668af8a7d7443bd0a651bbf88879c5220fc0ef76f94eed4ffbb97917a07976cd",
+    "A190": "2fa39a8d78ba7e3170137339e0e8e911f88d172676eb506aed5f471120154820",
+    "A191": "c94573010e0df29b6f6b87751c255506f884b3e503304e6f944be0ad6946a3ff",
+    "A192": "323666bc08befa5e8834828fd3d6a9d40f4791225717249adce8a8b6c4234679",
+    "A193": "6dcad665ab8272af3c79710f7879b25f9befc1994a0c5dfc8027d673121d79f4",
+    "A194": "8eb7baf79faffb2e79764e6207d7ea3579a4162e26e43ce1aaa9a45bc4b29b8e",
+    "A195": "afaab8784b90fceef379bb34ce09b88a0e68bbe96367fb499a69728aa9fab323",
+    "A196": "e8d8f4046ebcac789020652da6760d4f1afd6c3e50ff08ef224a3ceefcdcc05a",
+    "A197": "82aa56e606e4dd2adcb0e6bd0048898995b562c26129fe85a7eb3d8d6514a16c",
+    "A198": "0732368144394043f17be937bfa7c8ebe1a5d1287afaee9b37fa3c801c4ded66",
+    "A199": "422385d9df77a4d86edf6faef5e3db213c4ae6079ed56aaa3ca4141f22c2f115",
+    "A200": "59c9c4a18363ebfd1e67a84c11ab474b37b1e6560d6181ce42a7db07a8dda5b8",
+    "A201": "e4b4f91860db144c09de2e7b675372cd39e15aa151164c04f2ba9bef88285019",
+    "A202": "c40ba96f6b2c8fea23b52a1c490de5e6553983622f811b9f954dfd8455f9b1f8",
+    "A203": "7da2d2048b2a188396fac27d3564297fc9996228139423347d43b6830fe4984d",
+    "A204": "a906f14a8c41a71a06f11e5426215dc58223994df253cc48a8f1e69e6893a722",
+    "A205": "306fc1fec943e2e0b4d75a1d2f1edb6f12b49b799762ce6cda2c02d26bde32ac",
+    "A206": "f6a7615c4ed2bce91be123ff0c809b4ac0ee05dd6c0af2f4a15e462887092c7d",
+    "A207": "43ae3384a246a372398f0c8cdd2e17dcf8b30fb96cb8e380dc9daac7ad04e253",
+    "A208": "c5152f2afbdcde1a2e013e5bbca1dcd3c9e4684a4d277de642a074c2d020fe00",
+    "A209": "48b30fa3e164388ae64e27a96f24137651eb79a90b127fcd7b9d2e75dd945576",
+    "A210": "fe11a0f274efa59f3682f843bfc7c7a7857fbc196875e8861bebeafe510ff46e",
+    "A211": "462be62fa9ae423b9e737ed19c6b05053d2418376a35ad2a5d12ed0e9c9febab",
+    "A212": "8f75b229b909f2fce3bbb3b221a139f986be129d545c63d466f292d4c1fd0a20",
+    "A213": "b3f61497891ab2897dc1564d1f552518607d9d2f228a703354e2279379ad14b8",
+    "A214": "57d652b7f30ed2b31dbff49374ad2c05687cafdd6c395e24f3e46ba42293983f",
+    "A215": "6bd3c3d02a1f7cd9a912da110a4307239e6ce05d583946cc40d88992854e12b7",
+    "A216": "39bbdaa5cd53818da0896eec8820da2298c67b3d6c0b0ebde99a2d011854882f",
+    "A217": "3950ee48d454048b52273e2231b0120fe3c2f728e081f1565b7759441af63d7f",
+    "A218": "7ddd14a3c7a50e6c3f1ee1524cce575dbd6732d8f5e2a32578c12dbc4a573d53",
+    "A219": "c00e6056aa979557e813b267df6148bb211da3c39458d7faa567736fa258aa27",
+    "A220": "99bd91afd760fb654288e30019349b4a89126b4da0628250a24395cbf15e5318",
+    "A221": "223e98f76829eef6290179a1c7fa1db276d022324b3bd1d6034461e83ec7fa9a",
+    "A222": "305f1a83fb5db0c9437fe2505378d04fa5e1b0ab22dbf90557c277725543fc0b",
+    "A223": "f963e6692c6cd2bdb139ec0aee02b2f0c31be78220e7b5dad03b06f12a0b1b83",
+    "A224": "f16efdea512ef98ffbe61c89a08c978d7e6f189df9cbf6d32ce394f669e51a97",
+    "A225": "c2c8b31a90452a37d6436e0330330d55efccd0a9e8eaab38aa4ca0e23c5896d4",
+    "A226": "cd6698d22d05c024e431c9957613a2f85b4c67ddefef1504e064baa151742a27",
+    "A227": "c81aef51ca6d10e79e0777043b7e0a6bd4a55e24488fe646dfc7db04e2c8f6fa",
+    "A228": "d70dec496aae9d2038719d5ceb5d689948786f81222c39f38f696be1de14344b",
+    "A229": "a0cb6a0961d251772f20f68206ff5bb8c6dc15f71fab6a2c20329ff80e599c03",
+    "A230": "396cccdd5fccdf2a554c40e49883f9f099b701f916fb437175baf5522950c625",
+    "A231": "14d8c84931fa136d81c543159aaced3754869b0d12806e17d9ee95258701079d",
+    "A232": "35cf35f9276565c3a4134a4ed79d4de042f1d8b742dbb4eb4036971ac7b5fe10",
+    "A233": "0da4daedcd123854f07a6e1af105658cf020e6a99b61a73e00f7081b0e7eb211",
+    "A234": "6c4b5de7779f8b34b5d7136b0b37e3fb9c4a48df24dc466950e419ef4489096d",
+    "A235": "80406b03362194d057e0a9cc77b983f351998c3edbf55c343b9dd93f4c1de3eb",
+    "A236": "2e0dee6edc70efbf7c5a195b62c6116cb70bd61c2a9201ebd4d89ca108dc9da0",
+    "A237": "40b7abb3fb54bec748a1b3ed24bd2a32d3980391dec64627026d4f807e2cc548",
+    "A238": "bae5471040e7f05d23f85778471a084833abd2a1c21fdbb5c45ddf9c72888ab2",
+    "A239": "78a5415abf05109a4cf54d2c3bde1dd16044beb08e156bed69cf32aaf7baa09f",
+    "A240": "55bcacbb763c6eb357a776a4ce7c83cf59cc20fad29cac981a972c65a41bffd6",
+    "A241": "b521fcd4dd5bcaa59a89466d9b608e0c0c392472448bc802d8a688a7fc1c6a48",
+    "A242": "dee776b84cc25001172d07a593c8b77fc87f138d02f24c5811f839b11ce088d7",
+    "A243": "9b129af81793e85bfb61fee67bf97c2eeb7c1bb0e4437687274fea4ec49aed6f",
+    "A244": "367919194a40107c3b75f6ee961ca9f3e64a1f79db95558172f29aa6747d409e",
+    "A245": "4f040f2aef7730a0504d1d239658c2768cb72524816e588d72dacba7ff28ba8a",
+    "A246": "3eeeefc4465ceaaccaff98fe11608c064cd914a767afd3246e6abbc6cbd4f9a8",
+    "A247": "b7634d3896338c2a4e7a381b53571a90e17487dfd53a2dd86ded44aaf7ec8021",
+    "A248": "8bafa4de9ee4f8486fa1f48960e3b967a70d3a9dfb0bb37400871979dfecdc00",
+    "A249": "0c278273aed878bb7335c0a4595a0f5e7c0c3b6375d1050d9fac24161707ea07",
+    "A250": "c85bd5480bc2cdb7410d3b27b059839e81764dfab4bbb7367102117d81e25891",
+    "A251": "5aea3311650d8230dda996c20f3cfa40d0a2f61493c5f61fcd51696b91e561c2",
+    "A252": "444f71e68d141bc9f90ee10194c60ca45692e7fc5d8824a1b31fc001178be582",
+    "A253": "70eca2a39d99b1ce637a29d7ec202bb15737bfc1b8ac31665a810efd9e50520b",
+    "A254": "beb40d1d55bdd365811e6ba255fad0fd4b7e1cfc5cdc67bb7959776aeb698955",
+    "A255": "fd1ce8704337eb3bc068095d53999fe9e2dbc5b1c57c6ba5bb212caa5d7fb4b4",
+    "A256": "6889addbdc2be759dd8097c321899b4cfdb9392efde61be8357d4ad9bdf1580b",
+    "A257": "394e134754d43d136ad9ab6a8f0f0e84b776a8c629f0edd89bd0a2b1b57502cd",
+    "A258": "2660bd073ebf6f22328c97118c647b0822f6eaa0011b938647fbeb2b58143c62",
+    "A259": "734c7023c4d899cb2184f7bcc12fad21d41f6705ebd5ff3e14cbc295369ef9f3",
+    "A260": "327be89506408c26db01f522484512f82212703cc9b4a5400cfc2a47f0d87097",
+    "A261": "648f0c5b35bca3952d058cca35b1b0bf42347ca075f5b004d43c9f7804d5b43b",
+    "A262": "aedcc6b4eebbdde2e144d7599217682ac8f79e1162b4baacea8f223daafec1e4",
+    "A263": "bd1faed5671c26b7d8a4005b61ffa1ea84811ccda096a8a479b907537ae24cae",
+    "A264": "23784ed3bb61f6df9d99ffb4237f1c7e05c2c96aac3fbb7a747773158d2b3cfd",
+    "A265": "32c9049cb6b112b5675d5a44a0eb2071689418c934b614a7d7be33e5dc834e62",
+    "A266": "ac2e46e8ad2746ec82d0cc27d4ea6a276a03d5711ce68b2a3dc9b0f233236324",
+    "A267": "8b20a88a68d3e38c458a0051474f0aaed22b7893f5ad43118657aba7969208be",
+    "A268": "370095883704e9f81743359bb4afe398a024d6dcd3ce4a2410effdc0baf67fa2",
+    "A269": "8e70b7ae5e315b20a6edaf8c93539d4c837080ed6c34815271641a8c1848a62e",
+    "A270": "67abafe5e4a66d408374c02de70cf4db60ea3abd2926164a03b9f4d0c3044cdc",
+    "A271": "f8fd8b777276bc39e91f714e3e38df8d33d351edc6d9ac9a69f35bbf132b2ca1",
+    "A272": "73c8b8c25ebc593444463ac7a58d7286b5a2755746d6a733b2d2956973e431d5",
+    "A273": "01232648aa8e5f8dc9d01fe4245ff6e1174516b3ef358b14fca63c1e05354a04",
+    "A274": "9dfb7aebc402d4a4f75aeefbce3f09ed0824c13d8773e635ba8162c47e6ba331",
+    "A275": "1ff8d30c3e663899dba0a6746c1a36f128dd3d420c7a05e1ca0f8abd0ea885f2",
+    "A276": "a387258e7373224bd3360277208e32f71ef488d15f09838a0ab1d321ec6bdef7",
+    "A277": "1a95794ca15b148dd37df0b0f40a2d36d4149d14e0ebd7e8b863d795526b3ae3",
+    "A278": "8a11430e10e740fca95e51f3624d3a7f9a551c2576d47698c87c64ec0e32b953",
+    "A279": "ae611d395e5f9471c5f32f1b15d1ff687f0b17635c4c896a1b13a98415c4f43d",
+    "A280": "ed11ce1b4e1121e9d23692bc02145f5474b7d95313ded1f18f6029858da0149f",
+    "A281": "2b94b4552509be381d7564b3ff625be14c008a757f55ce609fdeb9317652902b",
+    "A282": "6841bc856de602e6cc6626ad5c5215061fd97b0ab7d8e21083e9701b4b81a5f1",
+    "A283": "0208dbfa788e38b4b05e498e44fbde3a1812b2d732a0bbf7265d16e82a8e2dd3",
+    "A284": "55389a323e7167e56304773b2b81c1ee9334baf7ceb64cb146a28b49faaf58b7",
+    "A285": "e52bba4253ce55f3763f0428a83a8246b14d4a6071e65ccbba66b65edb142d10",
+    "A286": "df6ddd5b6ab29ff4c4caaadee1a397ca1abfbff671862d0efca421d0cb9458ec",
+    "A287": "a5be40b0dc3adefe4665158b8ae0b60c350636681dc2d76c1d63fb5de792e26a",
+    "A288": "87d60f79915ed6af1d212019b5dc2b5a36ecffb096e1c5c8e716bb56d2e9cfdc",
+    "A289": "1f642ecb3f1d9911012022be4d80b94084b48ffa2ef5b1c0da8b75cedd1477b5",
+    "A290": "d8ec45b259f26bee65a6ba140a61f6bfa8b5548e201ff22623308e788107df42",
+    "A291": "77adb2fbb64422436fac1979da82fdb1e4ed0850bca83bee891269ad5392cbe6",
+    "A292": "922777a36889482fa1ab7cc32b84f3f01fea3116bc2275fb44de3ecf7ce53920",
+    "A293": "dad920a1292b2024d3efcd801a6630dfd479aa3c8650a97d84ee2fc44c96a54b",
+    "A294": "0179bb259d99454d98d445a2ffc1e434f1029ca36c7109d6b649bef5ecb57403",
+    "A295": "737c40b6a2c8760bb08eedcd7628df9eeead9dfd462f4388014762c17e135fe7",
+    "A296": "8aaa6ff749e84b239ff22ed457d8e20728fe53091d84d87eb8003622bcc0da6a",
+    "A297": "eaa14ac95be2f3dc0c29c9bee4d522c2adbd5ebcaefc362fafb2ef5af5e76ed5",
+    "A298": "699f4c7ae8e103c758c164e49b93f0b3480f96ec6a680c23848436ca2aaf3798",
+    "A299": "d0dbc979c236a1cff5340302d8984730066583794955a98bb00576b6d89779ea",
+    "A300": "003f550345afdc6b986eaab0e6cea7fc65dd75e0dad38ba0dc72d7f365fe97f7",
+    "A301": "5b5037f91757768d1f395d854c8e9518a3ba98c0f448f0d8dd9d684d4d2ad11a",
+    "A302": "9362ff3ef4cca2433fbbeccbb22b36b318cfd5baae67702250fe6af726b67ea4",
+    "A303": "6429552f673385ec2efefbb93ef1704bffd927cd2134ad4ae932c6eaae9d57f2",
+    "A304": "931d088a759fa7c98e6162e72fb91342a603b5e8b87d5cc02435672e2a41baa9",
+    "A305": "5fd8c578a9eb29807c9978565279aaa957284d981c629069e090b23dc6686540",
+    "A306": "fd26724bcf3f17741fa709deae752ddad89fde7cfa876c2189afbd138afed045",
+    "A307": "1a6c05805cdcdbbb9b94f0bbe102823530c383b84385e3ed731f4b51a0b35c31",
+    "A308": "d70054c43888cc61e9eea709a1a7de7f9ec9030c49da7778e1ca5d39257a848b",
+    "A309": "83ca96669461825178da0c23731f23e4fa31ea2f0ced54f3d597ad1de382af48",
+    "A310": "199d13d9cf17e07ef2e108b3dd5bb1265cce7d25676a51afadb9892e398061ea",
+    "A311": "3a04e5abdbc01fe0e0fff9a9cc73a639ca3b867e27435efb245d05a180d3ba71",
+    "A312": "97e6ea3d2fa499d4c2cffd554e887e4539161283f367a698890aca6dc85f38b3",
+    "A313": "813d3ff9c9d88ffc323aad23beacee13e91104258ec761972ff29a960131b16c",
+    "A314": "ea0d632d9c0570d3953e0d6016473e4ee8f54cdf8a9491f5aa2d662d2b26c3a4",
+    "A315": "0ced9d9d4001ffcb12e1e9a3c02611f7ad541db229e9886c79f217a3e07c5bd7",
+    "A316": "7292c74deeb7618e7b2b165f1c42294de48c6f06a335f345a1614c88d3897a71",
+    "A317": "12b3735605f46af1e84ab11c862e8a143b0b34ccdd633af1eb42cf851fe80092",
+    "A318": "a014f96bef3ba47f3c81415a0a194cb2263f92b91a7cca7d2aeac04dab518c76",
+    "A319": "dce9bfa41b9887b43bed16114f9dacee14231e25f681ba8aa2abff55200a4a84",
+    "A320": "0fb4ef463fdf732a6f3cf5ac1df78fc20673dfbefe76b70ce7cd0e5671e83d9b",
+    "A321": "dddab0669e58962fb537cbf84069ed162a36854482b3b8b713d9ed8350e229ec",
+    "A322": "cd203e5c2d0340b9ca9ad5fd7cd1223b0519bbfa05701b6b7f3dc615e473eb57",
+    "A323": "7c8d3e92ec3cf4e8905b0b32818c3521fc25563354e2f844dc2b7c53448f7a0f",
+    "A324": "b5187896ab8076fe7f4d43bb5544715c0b481c2e72e803bffadcc20ee279dde8",
+    "A325": "d8a4c54bbe7be37baf6cd8db6de34374b00cbc78f7f63d204c1c3d63626f13b1",
+    "A326": "416865148e1a3f52caac40094087a21d2ab85b73f89727b7210a5ebad115bb21",
+    "A327": "af449df510ea4dc0989fec49cfe54d6dbd86f8a5e9a7807473db78c560f128ca",
+    "A328": "19edc4ba24b77d3959028e49267559740aa91df9aa160234c0f873632aad949d",
+    "A329": "2451b9acda7304148791317e4db74f480dbaf69813af6cf48bcb7dba9b75c24c",
+    "A330": "e638f563b658c60c7bc76b1881cd95a579f4dc3c175d75554fef1e905a5d7cb6",
+    "A331": "1882700ede3af425b7de77aa03fcf027d31a50229f61955c522c9d9093454c5c",
+    "A332": "46b32d97945e5b2ce000d321ba76aa809effc0f8a0391f2f07e09e42af279a9a",
+    "A333": "7f022f5f83fc16708bbbb114d3dc52b083405295e3596422ab606250e6a00880",
+    "A334": "5d09f33f0d488aeaa5a82e6b792582d6eb1be5cf560bcb7d2ff3fc631918e34c",
+    "A335": "8ef4885aa8ec387549ca013adadb254a9c201bd43cda87e35dcd5361ae1d9e2f",
+    "A336": "9e93a6d89b0ab3497f51bf426cb173e2b4e720c97f3acbf3671e9a4ba7fa1083",
+    "A337": "2717c682e4eaef0903d089ec2672986a7c7066412b1d049af0552214ac291cd8",
+    "A338": "a8a2443a806253b43475e3613edd9f69ffdb676f20680073866de0faaba455a8",
+    "A339": "f87d91139a80231cba6d71cd4fe03f0039ea75a7c4914f4e5d1e8b61f800d677",
+    "A340": "f2eb3b38f286776a9d1adef0e735debf367bbae07b072f8cbca746f99e2929ad",
+    "A341": "bf31c5c4515afa687623e286f357035aea10569ea1cc9726698b031c23565657",
+    "A342": "7d064a5240f8a94bb7ca887ba7124e0b3476ce6db9d6d0639323d61b10427c16",
+    "A343": "99ae6e40ebdc76d4416336f5243017de51de815a625f0ff902dd299f971706d8",
+    "A344": "6d19edc7f01f5b1cc35e05e6f5939920e1dd70237d30d01a915c9b57b02079fe",
+    "A345": "d8784da2d5b9297666755ab75d74227dc6a90e4eaea470a59062cd680809f1fd",
+    "A346": "345fb316e0c0b442f59d4d177b9aa49f06ae3f1c83820b006fe9b03d066d4549",
+    "A347": "8641fd007d7b9b76a6e393a51751765f527edc2edaf4b55d70f07c299b0d237e"
+  },
+  "scope": "58 zero-score-review rows; all 347 parent identities retained; 289 outside initial profile review.",
+  "profiles": {
+    "x2-draft": {
+      "status": "evidence-gap",
+      "assertionScope": "bounded net structure, not laboratory readiness",
+      "conditions": {
+        "solvent": "dry",
+        "temperature": "ambient"
+      },
+      "rationale": "Historical dry-medium diagnostic only; named solvent, halogen/stage-specific evidence, initiation and capture scope remain unreviewed.",
+      "dimensions": {
+        "reagentIdentity": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "formulation": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "amountBasis": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "medium": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "catalyst": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "temperature": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "initiation": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "release": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "competingChemistry": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "siteScope": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        }
+      },
+      "evidence": [],
+      "approval": null
+    },
+    "hx-draft": {
+      "status": "evidence-gap",
+      "assertionScope": "bounded net structure, not laboratory readiness",
+      "conditions": {
+        "solvent": "dry",
+        "temperature": "ambient"
+      },
+      "rationale": "Historical ionic HX diagnostic only; exact formulation, temperature scope and competing chemistry remain unreviewed.",
+      "dimensions": {
+        "reagentIdentity": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "formulation": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "amountBasis": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "medium": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "catalyst": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "temperature": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "initiation": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "release": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "competingChemistry": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "siteScope": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        }
+      },
+      "evidence": [],
+      "approval": null
+    },
+    "diol-draft": {
+      "status": "evidence-gap",
+      "assertionScope": "bounded net structure, not laboratory readiness",
+      "conditions": {
+        "workup": "aqueous-release"
+      },
+      "rationale": "Historical release diagnostic only. Productive NMO/Os evidence must not be borrowed for the current H2O2/Os model. NMO case A255 retains its reagent identity.",
+      "dimensions": {
+        "reagentIdentity": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "formulation": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "amountBasis": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "medium": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "catalyst": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "temperature": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "initiation": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "release": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "competingChemistry": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        },
+        "siteScope": {
+          "state": "unknown",
+          "value": null,
+          "rationale": "Requires independent, case-applicable review before admission."
+        }
+      },
+      "evidence": [],
+      "approval": null
+    }
+  },
+  "cases": [
+    {
+      "id": "A242",
+      "profile": "diol-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A243",
+      "profile": "diol-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A244",
+      "profile": "diol-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A245",
+      "profile": "diol-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A246",
+      "profile": "diol-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A247",
+      "profile": "diol-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A248",
+      "profile": "diol-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A249",
+      "profile": "diol-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A250",
+      "profile": "diol-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A251",
+      "profile": "diol-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A252",
+      "profile": "diol-draft",
+      "status": "control",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A255",
+      "profile": "diol-draft",
+      "status": "unsupported-engine-model",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A278",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A279",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A280",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A281",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A282",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A283",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A284",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A285",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A286",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A287",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A288",
+      "profile": "x2-draft",
+      "status": "control",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A289",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A290",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A291",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A292",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A293",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A294",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A295",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A296",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A297",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A298",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A299",
+      "profile": "x2-draft",
+      "status": "control",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A300",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A301",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A302",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A303",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A304",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A305",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A306",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A307",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A308",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A309",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A310",
+      "profile": "hx-draft",
+      "status": "control",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A311",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A312",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A313",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A314",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A315",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A316",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A317",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A318",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A319",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A320",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A321",
+      "profile": "hx-draft",
+      "status": "control",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A322",
+      "profile": "x2-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    },
+    {
+      "id": "A323",
+      "profile": "hx-draft",
+      "status": "evidence-gap",
+      "applicability": {
+        "status": "evidence-gap",
+        "rationale": "No independent case-specific profile approval; a generated product or test pass cannot supply this approval."
+      },
+      "oracle": {
+        "status": "unreviewed",
+        "origin": "frozen-parent-not-newly-approved"
+      }
+    }
+  ],
+  "historicalDiagnostics": {
+    "Alkyne halogenation": {
+      "positiveDenominator": 21,
+      "frozenStrictFull": 0,
+      "diagnosticGeneration": 12,
+      "oldScorerDiagnosticFull": 6
+    },
+    "Alkyne hydrohalogenation": {
+      "positiveDenominator": 21,
+      "frozenStrictFull": 0,
+      "diagnosticGeneration": 11,
+      "oldScorerDiagnosticFull": 11
+    },
+    "Alkene dihydroxylation": {
+      "positiveDenominator": 11,
+      "frozenStrictFull": 0,
+      "diagnosticGeneration": 10,
+      "oldScorerDiagnosticFull": 9
+    }
+  },
+  "defects": {
+    "A304": {
+      "status": "frozen-oracle-defect",
+      "appliedToFrozen": false,
+      "erratumStatus": "proposed-not-applied",
+      "substrate": "CC#CCCC",
+      "originalExpected": [
+        "CC(Br)=CCCC",
+        "CCC(Br)=CCC"
+      ],
+      "proposedConnectivityOnly": [
+        "CC(Br)=CCCC",
+        "CC=C(Br)CCC"
+      ],
+      "rationale": "Both net orientations retain the original C2-C3 double-bond position after HBr addition to hex-2-yne. The second frozen expectation incorrectly moves it to C3-C4. E/Z is unassigned; no ratio, condition completeness or 3D permission follows from this graph correction.",
+      "evidenceLocation": "docs/reaction-lab-alkyne-phase4e-consistency-review.md, section on A304; independent mapped bond-edit reconstruction, not engine-product copying.",
+      "approval": null
+    }
+  }
+}

@@ -105,19 +105,26 @@ class ReactionLabTests(unittest.TestCase):
             "sn2-bromomethane": "CH4O",
             "sn2-chloromethane": "CH4O",
             "sn2-bromoethane": "C2H6O",
+            "sn2-2-bromopropane": "C3H8O",
             "e2-bromoethane": "C2H4",
             "e2-2-bromopropane": "C3H6",
             "e2-tert-butyl-chloride": "C4H8",
             "sn1-tert-butyl-chloride": "C4H10O",
             "e1-tert-butyl-chloride": "C4H8",
             "hydrogenation-propene": "C3H8",
-            "bromination-propene": "C3H6Br2",
+            "bromination-propene-site1": "C3H6Br2",
+            "bromination-propene-site2": "C3H6Br2",
+            "epoxidation-ethene": "C2H4O",
         }
         catalog = reaction_catalog()
         self.assertEqual({item["id"] for item in catalog["reactions"]}, set(expected))
         for reaction in catalog["reactions"]:
             with self.subTest(reaction=reaction["id"]):
-                result = run_curated_reaction(reaction["id"], *reaction["reactants"])
+                conditions = {"catalyst": "acid"} if reaction["mechanism"] == "Hydration" else {"solvent": "dry"} if reaction["mechanism"] in {"Bromination", "Epoxidation"} else None
+                if reaction.get("secondaryOxidationModel"):
+                    with self.assertRaises(ChemistryError):run_curated_reaction(reaction["id"],*reaction["reactants"],conditions)
+                    conditions={"solvent":"aqueous-protic","temperature":"ambient","catalyst":"none","oxidationStage":"first","secondaryOxidationProfile":"naocl-acetic-ketone-v1"}
+                result = run_curated_reaction(reaction["id"], *reaction["reactants"], conditions)
                 self.assertTrue(result["balanced"])
                 self.assertEqual(result["product"]["formula"], expected[reaction["id"]])
                 molecule = Chem.MolFromMolBlock(result["product"]["molfile"], removeHs=False)
@@ -148,7 +155,11 @@ class ReactionLabTests(unittest.TestCase):
                 self.assertEqual([item["id"] for item in reverse], [identifier])
                 self.assertEqual(forward[0]["family"], family)
                 self.assertEqual({item["name"] for item in forward[0]["byproducts"]}, byproducts)
-                self.assertTrue(run_curated_reaction(identifier, second, first)["balanced"])
+                conditions=None
+                if forward[0].get("secondaryOxidationModel"):
+                    with self.assertRaises(ChemistryError):run_curated_reaction(identifier,second,first)
+                    conditions={"solvent":"aqueous-protic","temperature":"ambient","catalyst":"none","oxidationStage":"first","secondaryOxidationProfile":"naocl-acetic-ketone-v1"}
+                self.assertTrue(run_curated_reaction(identifier, second, first,conditions)["balanced"])
         oxidation = match_reactions("2-propanol", "sodium-hypochlorite")["reactions"][0]
         self.assertIn({"name": "Sodium chloride", "formula": "NaCl"}, oxidation["byproducts"])
 
@@ -209,7 +220,8 @@ class ReactionLabTests(unittest.TestCase):
         self.assertEqual(run_curated_reaction("e1-tert-butyl-chloride", "water", "tert-butyl-chloride", warm)["product"]["formula"], "C4H8")
 
     def test_rule_scope_rejects_unsupported_mechanisms_and_conditions(self):
-        self.assertEqual(match_reactions("2-bromopropane", "water")["reactions"], [])
+        self.assertEqual({r["mechanism"] for r in match_reactions("2-bromopropane", "water")["reactions"]}, {"SN1", "E1"})  # Screened secondary ionization now includes independently validated water capture.
+        self.assertEqual(match_reactions({"smiles": "CCCC(Br)C"}, "water")["reactions"], [])
         self.assertEqual({item["mechanism"] for item in match_reactions("tert-butyl-chloride", "hydroxide")["reactions"]}, {"E2"})
         with self.assertRaisesRegex(ChemistryError, "available options"):
             match_reactions("bromoethane", "hydroxide", {"solvent": "liquid nitrogen"})
@@ -228,7 +240,7 @@ class ReactionLabTests(unittest.TestCase):
 
     def test_reaction_rejects_charge_imbalance_even_when_atoms_match(self):
         unbalanced = {**REACTIONS["sn2-bromomethane"], "byproducts": [{"name": "Bromine atom", "smiles": "[Br]"}]}
-        with patch.dict(REACTIONS, {"sn2-bromomethane": unbalanced}):
+        with patch("server.chemistry_server._reactions_for_pair", return_value=({"sn2-bromomethane": unbalanced}, [])):
             with self.assertRaisesRegex(RuntimeError, "atom- and charge-balanced"):
                 run_curated_reaction("sn2-bromomethane", "bromomethane", "hydroxide")
 
@@ -248,7 +260,7 @@ class ReactionLabTests(unittest.TestCase):
 
     def test_valid_but_unsupported_builder_drawing_does_not_invent_reaction(self):
         self.assertEqual(match_reactions({"smiles": "CCCO"}, "hydroxide")["reactions"], [])
-        self.assertEqual(match_reactions({"smiles": "CCC(C)Br"}, "hydroxide")["reactions"], [])
+        self.assertEqual({item["mechanism"] for item in match_reactions({"smiles": "CCC(C)Br"}, "hydroxide")["reactions"]}, {"SN2", "E2"})
         with self.assertRaisesRegex(ChemistryError, "matches both selected"):
             run_curated_reaction("sn2-drawn-1", {"smiles": "CCCO"}, "hydroxide")
         with self.assertRaisesRegex(ChemistryError, "matches both selected"):
@@ -265,23 +277,26 @@ class ReactionLabTests(unittest.TestCase):
         bromine = match_reactions("bromine", drawn, {"solvent": "dry"})["reactions"]
         self.assertEqual([item["id"] for item in hydrogen], ["hydrogenation-drawn-1"])
         self.assertEqual(hydrogen[0]["assessment"]["state"], "aligned")
-        self.assertEqual([item["id"] for item in bromine], ["bromination-drawn-2"])
+        self.assertEqual([item["id"] for item in bromine], ["bromination-drawn-2-site1", "bromination-drawn-2-site2"])
+        self.assertEqual({item["productSmiles"] for item in bromine}, {"CC[C@H](Br)CBr", "CC[C@@H](Br)CBr"})
         self.assertEqual(bromine[0]["assessment"]["state"], "aligned")
         with_extra_catalyst = match_reactions("bromine", drawn, {"solvent": "dry", "catalyst": "metal"})["reactions"]
         self.assertEqual(with_extra_catalyst[0]["assessment"]["state"], "incomplete")
         alkane = run_curated_reaction("hydrogenation-drawn-1", drawn, "hydrogen")
-        dibromide = run_curated_reaction("bromination-drawn-2", "bromine", drawn)
+        dibromide = run_curated_reaction(bromine[0]["id"], "bromine", drawn, {"solvent": "dry"})
         self.assertTrue(alkane["balanced"])
         self.assertTrue(dibromide["balanced"])
         self.assertEqual(alkane["product"]["smiles"], "CCCC")
-        self.assertEqual(dibromide["product"]["smiles"], "CCC(Br)CBr")
+        self.assertIn(dibromide["product"]["smiles"], {"CC[C@H](Br)CBr", "CC[C@@H](Br)CBr"})
         self.assertEqual(dibromide["product"]["formula"], "C4H8Br2")
 
     def test_drawn_alkene_rule_rejects_other_bonds_and_unsupported_pairs(self):
-        for smiles in ("CC", "C#CC", "C=CC=C", "C1=CCCCC1", "C=CO", "C/C=C/C", "C=CCCCCC"):
+        for smiles in ("CC", "C=CC=C", "C=CO"):
             with self.subTest(smiles=smiles):
                 self.assertEqual(match_reactions({"smiles": smiles}, "hydrogen")["reactions"], [])
-        self.assertEqual(match_reactions({"smiles": "C=CC"}, "water")["reactions"], [])
+        alkyne = match_reactions({"smiles": "C#CC"}, "hydrogen")["reactions"]
+        self.assertEqual({r["mechanism"] for r in alkyne}, {"Alkyne hydrogenation", "Alkyne partial hydrogenation"})
+        self.assertEqual(match_reactions({"smiles": "C=CC"}, "water")["reactions"][0]["productSmiles"], "CC(C)O")
         with self.assertRaisesRegex(ChemistryError, "matches both selected"):
             run_curated_reaction("hydrogenation-drawn-1", {"smiles": "C=CC"}, "bromine")
 

@@ -1,0 +1,23 @@
+# Prepared only: creation/deployment still needs the owner's explicit approval.
+# No repo URL: use the repository containing this file after reviewing the
+# frozen release snapshot. No secrets or guessed public URL belong in Git.
+services:
+  - type: web
+    name: molecule-playground-beta-v1
+    runtime: docker
+    plan: free
+    region: ohio
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    autoDeployTrigger: "off"
+    healthCheckPath: /healthz
+    maxShutdownDelaySeconds: 30
+    envVars:
+      - key: CAPSTONE_TRIAL_PASSWORD
+        sync: false
+      # Must be random HEX, not Render generateValue's base64 format.
+      - key: CAPSTONE_SESSION_SECRET
+        sync: false
+# RENDER_EXTERNAL_URL supplies the real HTTPS origin at runtime. For a custom
+# domain, explicitly set CAPSTONE_PUBLIC_ORIGIN and CAPSTONE_FRAME_ANCESTORS
+# to that same verified origin. No database, disk, cron or second service.

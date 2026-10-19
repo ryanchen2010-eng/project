@@ -6,3 +6,10 @@ __pycache__/
 .DS_Store
 npm-debug.log*
 pnpm-debug.log*
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+server/.secrets/
+releases/

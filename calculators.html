@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Local chemistry calculators for moles, solutions, reaction amounts, equilibrium, pH and solubility." />
+    <title>Calculators · Molecule Playground</title>
+  </head>
+  <body>
+    <div class="calculator-shell">
+      <header class="site-header">
+        <a class="site-brand" href="/">Molecule Playground</a>
+        <nav class="site-nav" aria-label="Project pages">
+          <a href="/">Home</a>
+          <a href="/explore.html">Explore molecules</a>
+          <a href="/builder.html">Build a molecule</a>
+          <a href="/reaction-lab.html">Reaction Lab</a>
+          <a class="is-current" href="/calculators.html" aria-current="page">Calculators</a>
+        </nav>
+      </header>
+      <main>
+        <div class="calculator-intro">
+          <p class="eyebrow">Chemistry tools</p>
+          <h1>Calculators</h1>
+          <p>Choose a topic. Enter values. Calculate.</p>
+        </div>
+        <div class="calculator-layout">
+          <aside class="calculator-menu">
+            <label class="mobile-topic-label" for="calculator-topic">Calculator topic</label>
+            <select id="calculator-topic" aria-controls="calculator-workspace"></select>
+            <nav id="calculator-topics" aria-label="Calculator topics"></nav>
+            <p class="calc-note menu-note">Arithmetic stays in your browser. Reaction choices use the chemistry service.</p>
+          </aside>
+          <section id="calculator-workspace" class="calculator-workspace" aria-labelledby="calculator-title">
+            <div class="calculator-heading">
+              <p id="calculator-model" class="eyebrow"></p>
+              <h2 id="calculator-title"></h2>
+              <p id="calculator-description" class="calc-note"></p>
+            </div>
+            <div id="calculator-context" class="calculator-context">
+              <label for="calculator-compound">Compound (optional)</label>
+              <select id="calculator-compound"></select>
+              <p id="calculator-compound-notice" class="calc-note" role="status"></p>
+            </div>
+            <div id="calculator-panels"></div>
+          </section>
+        </div>
+      </main>
+      <footer class="calculator-footer">Defined calculation models · not reaction-speed, experimental-accuracy or safety predictions</footer>
+    </div>
+    <script type="module" src="/src/calculators.ts"></script>
+  </body>
+</html>

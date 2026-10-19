@@ -17,9 +17,32 @@ from rdkit import Chem
 from rdkit.Chem import AllChem, Descriptors, rdMolDescriptors
 
 if __package__:
+    from .reaction_condition_guidance import guidance as guided_condition_metadata
+else:
+    from reaction_condition_guidance import guidance as guided_condition_metadata
+
+if __package__:
     from .pubchem_service import PubChemError, get_pubchem_depiction, get_pubchem_smiles, get_pubchem_structure, search_pubchem
+    from .reaction_diagrams import build_reaction_diagram, mapped_product_molecule
+    from .reaction_engine import generate_pair, reagent_role
+    from .reaction_reasoning import explain_pathway, compare_pathways
+    from .reaction_conditions import assess_conditions, REVIEWED
+    from .reaction_mechanisms import build_mechanism
+    from .reaction_information import reaction_information
+    from .functional_groups import inspect_structure
+    from . import ester_rules, molecular_graph, hydration_rule, epoxidation_rule, dihydroxylation_rule, addition_contract, alkyne_partial_hydrogenation_rule, alkyne_complete_hydrogenation_rule, alkyne_halogenation_rule, alkyne_hydrohalogenation_rule, alcohol_dehydration_rule, alcohol_substitution_rule, primary_alcohol_oxidation_rule, secondary_alcohol_oxidation_rule
+    from .stereochemistry import stereo_scope_issue
 else:  # Also support the documented ``python server/chemistry_server.py`` command.
     from pubchem_service import PubChemError, get_pubchem_depiction, get_pubchem_smiles, get_pubchem_structure, search_pubchem
+    from reaction_diagrams import build_reaction_diagram, mapped_product_molecule
+    from reaction_engine import generate_pair, reagent_role
+    from reaction_reasoning import explain_pathway, compare_pathways
+    from reaction_conditions import assess_conditions, REVIEWED
+    from reaction_mechanisms import build_mechanism
+    from reaction_information import reaction_information
+    from functional_groups import inspect_structure
+    import ester_rules, molecular_graph, hydration_rule, epoxidation_rule, dihydroxylation_rule, addition_contract, alkyne_partial_hydrogenation_rule, alkyne_complete_hydrogenation_rule, alkyne_halogenation_rule, alkyne_hydrohalogenation_rule, alcohol_dehydration_rule, alcohol_substitution_rule, primary_alcohol_oxidation_rule, secondary_alcohol_oxidation_rule
+    from stereochemistry import stereo_scope_issue
 
 
 MAX_BODY_BYTES = 200_000
@@ -28,13 +51,23 @@ ALLOWED_ELEMENTS = {"H", "C", "N", "O", "F", "Si", "P", "S", "Cl", "Br", "I"}
 BUILDER_3D_ELEMENTS = {"H", "B", "C", "N", "O", "F", "Si", "P", "S", "Cl", "Ge", "As", "Se", "Br", "Sb", "Te", "I"}
 ELEMENT_NAMES = {"C": "Carbon", "N": "Nitrogen", "O": "Oxygen", "H": "Hydrogen"}
 
-# A small, reviewed teaching collection—not a general reaction predictor.
+# Example identity/display data. Eligibility is decided by reaction_engine's
+# structural rules, never by membership in this collection.
 # The source links explain the reaction classes and required conditions.
 REACTANTS = {
     "ethene": {"name": "Ethene", "smiles": "C=C", "aliases": ["ethylene"]},
     "hydrogen": {"name": "Hydrogen", "smiles": "[H][H]", "aliases": ["H2"]},
     "bromine": {"name": "Bromine", "smiles": "BrBr", "aliases": ["Br2"]},
+    "chlorine": {"name": "Chlorine", "smiles": "ClCl", "aliases": ["Cl2"]},
+    "hydrogen-chloride": {"name": "Hydrogen chloride", "smiles": "Cl", "aliases": ["HCl"]},
+    "hydrogen-bromide": {"name": "Hydrogen bromide", "smiles": "Br", "aliases": ["HBr"]},
+    "hydrogen-iodide": {"name": "Hydrogen iodide", "smiles": "I", "aliases": ["HI"]},
     "water": {"name": "Water", "smiles": "O", "aliases": ["H2O"]},
+    "peracetic-acid": {"name": "Peracetic acid", "smiles": "CC(=O)OO", "aliases": ["peroxyacetic acid", "peroxyethanoic acid"]},
+    "sulfuric-acid": {"name": "Sulfuric acid", "smiles": "OS(=O)(=O)O", "aliases": ["H2SO4", "sulphuric acid"]},
+    "hydrogen-peroxide": {"name": "Hydrogen peroxide", "smiles": "OO", "aliases": ["H2O2"]},
+    "benzoyl-peroxide": {"name": "Benzoyl peroxide", "smiles": "O=C(OOC(=O)c1ccccc1)c1ccccc1", "aliases": ["dibenzoyl peroxide"]},
+    "propyne": {"name": "Propyne", "smiles": "CC#C", "aliases": ["methylacetylene"]},
     "ethanol": {"name": "Ethanol", "smiles": "CCO", "aliases": ["ethyl alcohol"]},
     "dimethyl-ether": {"name": "Dimethyl ether", "smiles": "COC", "aliases": ["methoxymethane"]},
     "ethanoic-acid": {"name": "Ethanoic acid", "smiles": "CC(=O)O", "aliases": ["acetic acid"]},
@@ -139,7 +172,11 @@ REACTIONS = {
 CONDITION_VALUES = {
     "solvent": {"", "polar-aprotic", "aqueous-protic", "ethanolic-protic", "dry"},
     "temperature": {"", "ambient", "heated"},
-    "catalyst": {"", "none", "acid", "metal"},
+    "catalyst": {"", "none", "acid", "metal", "lindlar", "osmium", "radical"},
+    "oxidationStage": {"", "first", "further"},
+    "additionStage": {"", "one", "two"},
+    "polymerUnits": {"", "2", "4", "6"},
+    "workup": {"", "aqueous-release"},
 }
 
 PRODUCT_NAMES = {
@@ -180,201 +217,58 @@ def _formal_charge(smiles: str) -> int:
     return sum(atom.GetFormalCharge() for atom in _molecule(smiles).GetAtoms())
 
 
-def _alkyl_halide_site(smiles: str) -> dict[str, object] | None:
-    """Recognize a narrow, uncharged, acyclic C/H/Cl/Br teaching substrate."""
-    molecule = _molecule(smiles)
-    if molecule.GetRingInfo().NumRings() or any(atom.GetChiralTag() != Chem.ChiralType.CHI_UNSPECIFIED for atom in molecule.GetAtoms()):
-        return None
-    if any(atom.GetSymbol() not in {"C", "Cl", "Br"} or atom.GetFormalCharge() for atom in molecule.GetAtoms()):
-        return None
-    if any(bond.GetBondType() != Chem.BondType.SINGLE for bond in molecule.GetBonds()):
-        return None
-    halogens = [atom for atom in molecule.GetAtoms() if atom.GetSymbol() in {"Cl", "Br"}]
-    if len(halogens) != 1 or molecule.GetNumHeavyAtoms() > 5:
-        return None
-    halogen = halogens[0]
-    if len(halogen.GetNeighbors()) != 1 or halogen.GetNeighbors()[0].GetSymbol() != "C":
-        return None
-    carbon = halogen.GetNeighbors()[0]
-    carbon_neighbors = [atom for atom in carbon.GetNeighbors() if atom.GetSymbol() == "C"]
-    beta_sites = [atom.GetIdx() for atom in carbon_neighbors if atom.GetTotalNumHs() > 0]
-    return {
-        "carbon": carbon.GetIdx(), "halogen": halogen.GetIdx(),
-        "symbol": halogen.GetSymbol(), "degree": len(carbon_neighbors),
-        "beta_sites": beta_sites,
-    }
-
-
-def _alcohol_product(smiles: str, site: dict[str, object]) -> str:
-    editor = Chem.RWMol(_molecule(smiles))
-    carbon = int(site["carbon"])
-    halogen = int(site["halogen"])
-    editor.RemoveAtom(halogen)
-    oxygen = editor.AddAtom(Chem.Atom("O"))
-    editor.AddBond(carbon - (halogen < carbon), oxygen, Chem.BondType.SINGLE)
-    product = editor.GetMol()
-    Chem.SanitizeMol(product)
-    return Chem.MolToSmiles(product, canonical=True)
-
-
-def _unique_alkene_product(smiles: str, site: dict[str, object]) -> str | None:
-    products = set()
-    for beta in site["beta_sites"]:
-        editor = Chem.RWMol(_molecule(smiles))
-        carbon = int(site["carbon"])
-        halogen = int(site["halogen"])
-        editor.RemoveBond(carbon, halogen)
-        bond = editor.GetBondBetweenAtoms(carbon, int(beta))
-        if bond is None:
-            continue
-        bond.SetBondType(Chem.BondType.DOUBLE)
-        editor.RemoveAtom(halogen)
-        product = editor.GetMol()
-        Chem.SanitizeMol(product)
-        products.add(Chem.MolToSmiles(product, canonical=True))
-    # Avoid pretending to choose a regioisomer or stereoisomer automatically.
-    return next(iter(products)) if len(products) == 1 else None
-
-
-def _simple_alkene_bond(smiles: str) -> tuple[int, int] | None:
-    """Find one C=C in a small, acyclic hydrocarbon without specified stereo."""
-    molecule = _molecule(smiles)
-    if molecule.GetRingInfo().NumRings() or not 2 <= molecule.GetNumHeavyAtoms() <= 6:
-        return None
-    if any(atom.GetSymbol() != "C" or atom.GetChiralTag() != Chem.ChiralType.CHI_UNSPECIFIED
-           for atom in molecule.GetAtoms()):
-        return None
-    double_bonds = []
-    for bond in molecule.GetBonds():
-        if bond.GetStereo() != Chem.BondStereo.STEREONONE:
-            return None
-        if bond.GetBondType() == Chem.BondType.DOUBLE:
-            double_bonds.append(bond)
-        elif bond.GetBondType() != Chem.BondType.SINGLE:
-            return None
-    if len(double_bonds) != 1:
-        return None
-    return double_bonds[0].GetBeginAtomIdx(), double_bonds[0].GetEndAtomIdx()
-
-
-def _alkene_addition_product(smiles: str, ends: tuple[int, int], halogen: str | None = None) -> str:
-    editor = Chem.RWMol(_molecule(smiles))
-    bond = editor.GetBondBetweenAtoms(*ends)
-    if bond is None:
-        raise RuntimeError("The alkene bond was not found in the selected structure.")
-    bond.SetBondType(Chem.BondType.SINGLE)
-    if halogen:
-        for carbon in ends:
-            atom = editor.AddAtom(Chem.Atom(halogen))
-            editor.AddBond(carbon, atom, Chem.BondType.SINGLE)
-    product = editor.GetMol()
-    Chem.SanitizeMol(product)
-    return Chem.MolToSmiles(product, canonical=True)
-
-
-def _generate_alkene_reactions(custom_reactants: dict[str, dict[str, object]]) -> dict[str, dict[str, object]]:
-    generated = {}
-    for substrate_id, substrate in custom_reactants.items():
-        ends = _simple_alkene_bond(substrate["smiles"])
-        if ends is None:
-            continue
-        alkane = _alkene_addition_product(substrate["smiles"], ends)
-        dibromide = _alkene_addition_product(substrate["smiles"], ends, "Br")
-        generated[f"hydrogenation-{substrate_id}"] = {
-            "name": "Alkene hydrogenation", "family": "Addition", "mechanism": "Hydrogenation",
-            "reactants": (substrate_id, "hydrogen"), "profile": {"catalyst": "metal"},
-            "productName": PRODUCT_NAMES.get(alkane, "Alkane product"), "productSmiles": alkane, "byproducts": [],
-            "conditions": "Hydrogenation requires a metal catalyst such as palladium or platinum. Stereochemical outcomes are not assigned in this preview.",
-            "explanation": "The C=C bond becomes a single bond as one hydrogen adds to each carbon. This shows connectivity, not a guaranteed stereoisomer or yield.",
-            "sourceUrl": "https://openstax.org/books/organic-chemistry/pages/8-6-reduction-of-alkenes-hydrogenation",
-        }
-        generated[f"bromination-{substrate_id}"] = {
-            "name": "Bromine addition", "family": "Addition", "mechanism": "Bromination",
-            "reactants": (substrate_id, "bromine"), "profile": {"solvent": "dry"},
-            "productName": PRODUCT_NAMES.get(dibromide, "Dibromoalkane product"), "productSmiles": dibromide, "byproducts": [],
-            "conditions": "Bromine addition is shown without water as a competing reactant. The product connectivity is shown, but anti-addition stereochemistry is not assigned.",
-            "explanation": "The C=C bond becomes a single bond and one bromine attaches to each carbon. The 3D view is one unassigned conformer, not a stereochemical prediction.",
-            "sourceUrl": "https://openstax.org/books/organic-chemistry/pages/8-2-halogenation-of-alkenes-addition-of-x2",
-        }
-    return generated
-
-
-def _generate_rule_reactions(reactants: dict[str, dict[str, object]] = REACTANTS) -> dict[str, dict[str, object]]:
-    generated = {}
-    for substrate_id, substrate in reactants.items():
-        site = _alkyl_halide_site(substrate["smiles"])
-        if not site:
-            continue
-        symbol = str(site["symbol"])
-        halide = {"name": "Bromide ion" if symbol == "Br" else "Chloride ion", "smiles": f"[{symbol}-]", "formula": f"{symbol}⁻"}
-        hydrogen_halide = {"name": "Hydrogen bromide" if symbol == "Br" else "Hydrogen chloride", "smiles": symbol}
-        degree = int(site["degree"])
-        alcohol = _alcohol_product(substrate["smiles"], site)
-        alkene = _unique_alkene_product(substrate["smiles"], site)
-
-        if degree <= 1 and f"sn2-{substrate_id}" not in REACTIONS:
-            generated[f"sn2-{substrate_id}"] = {
-                "name": "SN2 substitution", "family": "Substitution", "mechanism": "SN2",
-                "reactants": (substrate_id, "hydroxide"),
-                "productName": PRODUCT_NAMES.get(alcohol, "Alcohol product"), "productSmiles": alcohol,
-                "byproducts": [halide], "profile": {"solvent": "polar-aprotic"},
-                "conditions": "An unhindered alkyl halide and hydroxide; a polar aprotic medium supports SN2. Other pathways may compete.",
-                "explanation": "Hydroxide replaces the halogen in a concerted substitution. This narrow model does not handle chiral inversion.",
-                "sourceUrl": "https://openstax.org/books/organic-chemistry/pages/11-3-characteristics-of-the-sn2-reaction",
-            }
-
-        if alkene is not None:
-            generated[f"e2-{substrate_id}"] = {
-                "name": "E2 elimination", "family": "Elimination", "mechanism": "E2",
-                "reactants": (substrate_id, "hydroxide"),
-                "productName": PRODUCT_NAMES.get(alkene, "Alkene product"), "productSmiles": alkene,
-                "byproducts": [{"name": "Water", "smiles": "O"}, halide],
-                "profile": {"solvent": "ethanolic-protic", "temperature": "heated"},
-                "conditions": "Strong base and heat can support E2; a beta hydrogen is required. This simple model does not check anti-periplanar geometry or product ratios.",
-                "explanation": "The base takes a beta hydrogen while the halide leaves and a carbon–carbon double bond forms in one step.",
-                "sourceUrl": "https://openstax.org/books/organic-chemistry/pages/11-8-the-e2-reaction-and-the-deuterium-isotope-effect",
-            }
-
-        if degree == 3:
-            generated[f"sn1-{substrate_id}"] = {
-                "name": "SN1 substitution", "family": "Substitution", "mechanism": "SN1",
-                "reactants": (substrate_id, "water"),
-                "productName": PRODUCT_NAMES.get(alcohol, "Alcohol product"), "productSmiles": alcohol,
-                "byproducts": [hydrogen_halide],
-                "profile": {"solvent": "aqueous-protic", "temperature": "ambient"},
-                "conditions": "A tertiary alkyl halide in water can undergo SN1 solvolysis. E1 can compete, especially on warming.",
-                "explanation": "The halide leaves to form a carbocation; water then captures it to make an alcohol. Carbocation rearrangements are outside this prototype.",
-                "sourceUrl": "https://openstax.org/books/organic-chemistry/pages/11-4-the-sn1-reaction",
-            }
-
-        if degree == 3 and alkene is not None:
-            generated[f"e1-{substrate_id}"] = {
-                "name": "E1 elimination", "family": "Elimination", "mechanism": "E1",
-                "reactants": (substrate_id, "water"),
-                "equationReactants": (substrate_id,),  # Water is the selected solvent, not consumed.
-                "productName": PRODUCT_NAMES.get(alkene, "Alkene product"), "productSmiles": alkene,
-                "byproducts": [hydrogen_halide],
-                "profile": {"solvent": "aqueous-protic", "temperature": "heated"},
-                "conditions": "In a warm protic medium, E1 can compete with SN1. Water is shown as the medium, not a stoichiometric reactant.",
-                "explanation": "The halide leaves to form a carbocation, then a beta hydrogen is lost to form an alkene. Product mixtures and rearrangements are not modeled.",
-                "sourceUrl": "https://openstax.org/books/organic-chemistry/pages/11-10-the-e1-and-e1cb-reactions",
-            }
-    return generated
-
-
-GENERATED_REACTIONS = _generate_rule_reactions()
-GENERATED_ALKENE_REACTIONS = _generate_alkene_reactions(
-    {key: value for key, value in REACTANTS.items() if key != "ethene"}
-)
+# Catalog pairs are examples only. All eligibility/products come from generate_pair.
+CATALOG_PAIRS = [
+    *[tuple(item["reactants"]) for item in REACTIONS.values()],
+    ("bromoethane", "hydroxide"), ("2-bromopropane", "hydroxide"),
+    ("tert-butyl-chloride", "hydroxide"), ("tert-butyl-chloride", "water"),
+    ("propene", "hydrogen"), ("propene", "bromine"),
+    ("ethene", "peracetic-acid"),
+]
 ALKALI_COUNTERIONS = {"Li", "Na", "K", "Rb", "Cs"}
 
 
-def _all_reactions(custom_reactants: dict[str, dict[str, object]] | None = None) -> dict[str, dict[str, object]]:
-    return {
-        **REACTIONS, **GENERATED_REACTIONS, **GENERATED_ALKENE_REACTIONS,
-        **(_generate_rule_reactions(custom_reactants) if custom_reactants else {}),
-        **(_generate_alkene_reactions(custom_reactants) if custom_reactants else {}),
-    }
+def _reactions_for_pair(first, second, catalog, conditions=None):
+    # Exact identity data below supplies names / stable example IDs ONLY.
+    # It cannot add eligibility or change a graph-generated product.
+    names = {Chem.MolToSmiles(_molecule(item["smiles"]), canonical=True): item["name"]
+             for item in catalog.values()}
+    names.update({Chem.MolToSmiles(_molecule(smiles), canonical=True): name
+                  for smiles, name in PRODUCT_NAMES.items()})
+    for example in REACTIONS.values():
+        names[Chem.MolToSmiles(_molecule(example["productSmiles"]), canonical=True)] = example["productName"]
+    generated, notes = generate_pair(first, second, catalog, names, conditions=conditions)
+    result = {}
+    for identifier, reaction in generated.items():
+        same_options = [r for r in generated.values()
+                        if r["mechanism"] == reaction["mechanism"] and r["reactants"] == reaction["reactants"]]
+        for example_id, example in REACTIONS.items():
+            if (len(same_options) == 1 and sorted(example["reactants"]) == sorted(reaction["reactants"])
+                    and example["mechanism"] == reaction["mechanism"]):
+                identifier = example_id
+                if ("productEquationFormula" in example and
+                        Chem.MolToSmiles(_molecule(example["productSmiles"]), canonical=True) == reaction["productSmiles"]):
+                    reaction["productEquationFormula"] = example["productEquationFormula"]
+                break
+        for product in reaction["byproducts"]:
+            for example in REACTIONS.values():
+                for display in example["byproducts"]:
+                    if "formula" in display and Chem.MolToSmiles(_molecule(display["smiles"]), canonical=True) == product["smiles"]:
+                        product["formula"] = display["formula"]
+        reaction["site"]["siteId"] = identifier
+        result[identifier] = reaction
+    return result, notes
+
+
+def _all_reactions(custom_reactants=None):
+    catalog = {**REACTANTS, **(custom_reactants or {})}
+    pairs = list(CATALOG_PAIRS)
+    if custom_reactants:
+        pairs.extend((first, second) for first in custom_reactants for second in catalog if first != second)
+    result = {}
+    for first, second in pairs:
+        result.update(_reactions_for_pair(first, second, catalog)[0])
+    return result
 
 
 def _hydroxide_from_salt(molecule: Chem.Mol) -> str | None:
@@ -410,13 +304,101 @@ def _resolve_reactants(reactant_a: str | dict[str, str], reactant_b: str | dict[
         molecule = Chem.MolFromSmiles(smiles)
         if molecule is None or not molecule.GetNumAtoms() or molecule.GetNumAtoms() > MAX_ATOMS:
             raise ChemistryError("The Builder structure is invalid or too large.")
+        if reagent_role(molecule) == "hydrogen-peroxide":
+            partner = (reactant_a, reactant_b)[1 - slot]
+            partner_smiles = (REACTANTS[partner]["smiles"] if isinstance(partner,str) and partner in REACTANTS else partner.get("smiles") if isinstance(partner,dict) else None)
+            partner_mol = Chem.MolFromSmiles(partner_smiles) if isinstance(partner_smiles,str) and 0 < len(partner_smiles) <= 1024 else None
+            if partner_mol is not None and molecular_graph.find_alkenes(partner_mol):
+                issue = dihydroxylation_rule.input_reagent_issue(smiles)
+                if issue: raise ChemistryError(issue)
+        if epoxidation_rule.peroxyacid_sites(molecule):
+            partner = (reactant_a, reactant_b)[1 - slot]
+            partner_smiles = (REACTANTS[partner]["smiles"] if isinstance(partner, str) and partner in REACTANTS else
+                              partner.get("smiles") if isinstance(partner, dict) else None)
+            partner_mol = (Chem.MolFromSmiles(partner_smiles)
+                           if isinstance(partner_smiles, str) and 0 < len(partner_smiles) <= 1024 else None)
+            if partner_mol is not None and molecular_graph.find_alkenes(partner_mol):
+                peracid_issue = epoxidation_rule.input_stereo_issue(smiles, molecule)
+                if peracid_issue:
+                    raise ChemistryError(peracid_issue)
+        # Ordinary SMILES canonicalization drops CX enhanced stereo groups.
+        # Reject these ester inputs BEFORE that boundary, never silently erase
+        # relative/racemic or unsupported non-tetrahedral configurations.
+        if molecular_graph.find_esters(molecule):
+            stereo_issue = ester_rules.stereo_scope_issue(molecule)
+            if stereo_issue:
+                raise ChemistryError(stereo_issue)
+        elif molecular_graph.find_alkenes(molecule):
+            # This guard does not approve any other pathway. Nonstandard CX
+            # stereo must not disappear before a site's policy can inspect it.
+            stereo_issue = stereo_scope_issue(molecule, "the current alkene rules")
+            if stereo_issue:
+                raise ChemistryError(stereo_issue)
+        elif molecular_graph.find_aldehydes(molecule) or molecular_graph.find_ketones(molecule):
+            partner = (reactant_a, reactant_b)[1 - slot]
+            partner_smiles = (REACTANTS[partner]["smiles"] if isinstance(partner, str) and partner in REACTANTS else
+                              partner.get("smiles") if isinstance(partner, dict) else None)
+            partner_mol = (Chem.MolFromSmiles(partner_smiles)
+                           if isinstance(partner_smiles, str) and 0 < len(partner_smiles) <= 1024 else None)
+            if partner_mol is not None and reagent_role(partner_mol) == "hydrogen":
+                # Fail closed before ordinary SMILES can erase enhanced stereo.
+                # This branch is specific to the new carbonyl/H2 consumer.
+                stereo_issue = stereo_scope_issue(molecule, "carbonyl hydrogenation")
+                if stereo_issue:
+                    raise ChemistryError(stereo_issue)
+        if molecular_graph.find_alcohols(molecule):
+            partner = (reactant_a, reactant_b)[1 - slot]
+            partner_smiles = (REACTANTS[partner]["smiles"] if isinstance(partner, str) and partner in REACTANTS else
+                              partner.get("smiles") if isinstance(partner, dict) else None)
+            partner_mol = (Chem.MolFromSmiles(partner_smiles)
+                           if isinstance(partner_smiles, str) and 0 < len(partner_smiles) <= 1024 else None)
+            if partner_mol is not None and reagent_role(partner_mol) == "hypochlorite":
+                stereo_issue = stereo_scope_issue(molecule, "alcohol oxidation")
+                if stereo_issue:
+                    raise ChemistryError(stereo_issue)
+                if primary_alcohol_oxidation_rule.sites(molecule):
+                    stereo_issue = primary_alcohol_oxidation_rule.input_stereo_issue(smiles, molecule)
+                    if stereo_issue: raise ChemistryError(stereo_issue)
+                if secondary_alcohol_oxidation_rule.sites(molecule):
+                    stereo_issue = secondary_alcohol_oxidation_rule.input_stereo_issue(smiles,molecule)
+                    if stereo_issue: raise ChemistryError(stereo_issue)
+            if partner_mol is not None and reagent_role(partner_mol) == "sulfuric-acid":
+                stereo_issue = alcohol_dehydration_rule.input_stereo_issue(smiles, molecule)
+                if stereo_issue: raise ChemistryError(stereo_issue)
+            if partner_mol is not None and reagent_role(partner_mol) == "hydrogen-halide":
+                stereo_issue = alcohol_substitution_rule.input_stereo_issue(smiles, molecule)
+                if stereo_issue: raise ChemistryError(stereo_issue)
+        if molecular_graph.find_alkyl_halides(molecule):
+            partner = (reactant_a, reactant_b)[1 - slot]
+            partner_smiles = (REACTANTS[partner]["smiles"] if isinstance(partner, str) and partner in REACTANTS else
+                              partner.get("smiles") if isinstance(partner, dict) else None)
+            partner_mol = (Chem.MolFromSmiles(partner_smiles)
+                           if isinstance(partner_smiles, str) and 0 < len(partner_smiles) <= 1024 else None)
+            if partner_mol is not None and (reagent_role(partner_mol) == "hydroxide" or _hydroxide_from_salt(partner_mol)):
+                stereo_issue = stereo_scope_issue(molecule, "hydroxide SN2 substitution")
+                if stereo_issue:
+                    raise ChemistryError(stereo_issue)
+            elif partner_mol is not None and reagent_role(partner_mol) == "water":
+                stereo_issue = stereo_scope_issue(molecule, "water SN1 solvolysis")
+                if stereo_issue:
+                    raise ChemistryError(stereo_issue)
         if len(Chem.GetMolFrags(molecule)) != 1:
             counterion = _hydroxide_from_salt(molecule)
             if counterion:
                 ids.append("hydroxide")
                 interpretation_notes.append(f"Molecule {slot + 1}: this alkali-metal hydroxide supplies OH⁻; {counterion}⁺ is omitted from the simplified ionic equation.")
                 continue
-            raise ChemistryError("This multi-part compound is outside the current reaction rules.")
+            if reagent_role(molecule) != "hypochlorite":
+                raise ChemistryError("This multi-part compound is outside the current reaction rules.")
+        hydration_stereo_issue = hydration_rule.input_stereo_issue(smiles, molecule)
+        partial_alkyne_stereo_issue = (alkyne_partial_hydrogenation_rule.input_stereo_issue(smiles, molecule)
+                                      if molecular_graph.find_alkynes(molecule) else None)
+        complete_alkyne_stereo_issue = (alkyne_complete_hydrogenation_rule.input_stereo_issue(smiles, molecule)
+                                       if molecular_graph.find_alkynes(molecule) else None)
+        halogen_alkyne_stereo_issue = (alkyne_halogenation_rule.input_stereo_issue(smiles, molecule)
+                                      if molecular_graph.find_alkynes(molecule) else None)
+        hx_alkyne_stereo_issue = (alkyne_hydrohalogenation_rule.input_stereo_issue(smiles, molecule)
+                                 if molecular_graph.find_alkynes(molecule) else None)
         canonical = Chem.MolToSmiles(molecule, canonical=True)
         reviewed_id = next(
             (key for key, item in REACTANTS.items()
@@ -424,15 +406,47 @@ def _resolve_reactants(reactant_a: str | dict[str, str], reactant_b: str | dict[
             None,
         )
         if reviewed_id:
+            if partial_alkyne_stereo_issue:
+                custom[reviewed_id] = {**REACTANTS[reviewed_id], "alkynePartialStereoIssue": partial_alkyne_stereo_issue}
+            if hydration_stereo_issue:
+                # Preserve only a hydration-specific input caveat when the
+                # canonical graph matches a preset; other pathways are unchanged.
+                custom[reviewed_id] = {**REACTANTS[reviewed_id], "hydrationStereoIssue": hydration_stereo_issue}
+            if complete_alkyne_stereo_issue:
+                custom[reviewed_id] = {**custom.get(reviewed_id, REACTANTS[reviewed_id]), "alkyneCompleteStereoIssue": complete_alkyne_stereo_issue}
+            if halogen_alkyne_stereo_issue:
+                custom[reviewed_id] = {**custom.get(reviewed_id, REACTANTS[reviewed_id]), "alkyneHalogenStereoIssue": halogen_alkyne_stereo_issue}
+            if hx_alkyne_stereo_issue:
+                custom[reviewed_id] = {**custom.get(reviewed_id, REACTANTS[reviewed_id]), "alkyneHxStereoIssue": hx_alkyne_stereo_issue}
             ids.append(reviewed_id)
             continue
-        if any(atom.GetSymbol() not in ALLOWED_ELEMENTS or atom.GetFormalCharge() or atom.HasQuery()
+        if reagent_role(molecule) != "hypochlorite" and any(atom.GetSymbol() not in ALLOWED_ELEMENTS or atom.GetFormalCharge() or atom.HasQuery()
                or atom.GetNumRadicalElectrons() or atom.GetIsotope() for atom in molecule.GetAtoms()):
             raise ChemistryError("This structure is outside the supported neutral, non-radical molecule scope.")
         identifier = f"drawn-{slot + 1}"
-        custom[identifier] = {"name": "Drawn molecule", "smiles": canonical}
+        supplied_name = reference.get("name")
+        custom[identifier] = {"name": supplied_name[:200] if isinstance(supplied_name, str) and supplied_name.strip() else "Drawn molecule", "smiles": canonical}
+        if hydration_stereo_issue:
+            custom[identifier]["hydrationStereoIssue"] = hydration_stereo_issue
+        if partial_alkyne_stereo_issue:
+            custom[identifier]["alkynePartialStereoIssue"] = partial_alkyne_stereo_issue
+        if complete_alkyne_stereo_issue:
+            custom[identifier]["alkyneCompleteStereoIssue"] = complete_alkyne_stereo_issue
+        if halogen_alkyne_stereo_issue:
+            custom[identifier]["alkyneHalogenStereoIssue"] = halogen_alkyne_stereo_issue
+        if hx_alkyne_stereo_issue:
+            custom[identifier]["alkyneHxStereoIssue"] = hx_alkyne_stereo_issue
         ids.append(identifier)
     return (ids[0], ids[1]), custom, interpretation_notes
+
+
+class ConditionInputs(dict):
+    """Retain unsupported field names for pathway-specific confidence checks.
+
+    Values are deliberately not echoed or interpreted as new chemistry. The
+    existing normalized string dictionary remains the serialization contract.
+    """
+    unsupported_fields = ()
 
 
 def _conditions(raw: dict[str, str] | None) -> dict[str, str]:
@@ -440,11 +454,15 @@ def _conditions(raw: dict[str, str] | None) -> dict[str, str]:
         return {key: "" for key in CONDITION_VALUES}
     if not isinstance(raw, dict):
         raise ChemistryError("Choose the reaction conditions from the available options.")
-    result = {}
+    result = ConditionInputs()
+    # Namespaced declaration is consumed ONLY by secondary oxidation. Keep it
+    # unknown to other pathways, preserving their existing input assessment.
+    result.secondary_oxidation_profile = getattr(raw,'secondary_oxidation_profile',raw.get(secondary_alcohol_oxidation_rule.PROFILE_KEY,''))
+    result.unsupported_fields = tuple(sorted(str(k)[:120] for k in raw if k not in CONDITION_VALUES))
     for key, allowed in CONDITION_VALUES.items():
         value = raw.get(key, "")
         if not isinstance(value, str) or value not in allowed:
-            raise ChemistryError("Choose the reaction conditions from the available options.")
+            raise ChemistryError(f"Unsupported condition value for '{key}'; choose from the available options. No new condition model is inferred.")
         result[key] = value
     return result
 
@@ -453,7 +471,20 @@ def _profile(reaction: dict[str, object]) -> dict[str, str]:
     return reaction["profile"]
 
 
-def _assessment(reaction: dict[str, object], conditions: dict[str, str]) -> dict[str, str]:
+def _assessment(reaction: dict[str, object], conditions: dict[str, str]) -> dict[str, object]:
+    if reaction.get("secondaryOxidationModel"):
+        assessment=secondary_alcohol_oxidation_rule.assess_conditions(reaction,conditions)
+        assessment["evidence"]=addition_contract.evidence(reaction,assessment,conditions)
+        return assessment
+    if reaction.get("primaryOxidationModel"):
+        assessment = primary_alcohol_oxidation_rule.assess_conditions(reaction, conditions)
+        assessment["evidence"] = addition_contract.evidence(reaction, assessment, conditions)
+        return assessment
+    if reaction["mechanism"] in REVIEWED:
+        assessment = assess_conditions(reaction, conditions)
+        if reaction["mechanism"] in addition_contract.NET_PATHWAYS:
+            assessment["evidence"] = addition_contract.evidence(reaction, assessment, conditions)
+        return assessment
     profile = _profile(reaction)
     missing = [key for key, value in profile.items() if not conditions[key]]
     different = [key for key, value in profile.items() if conditions[key] and conditions[key] != value]
@@ -466,18 +497,150 @@ def _assessment(reaction: dict[str, object], conditions: dict[str, str]) -> dict
     return {"state": "aligned", "note": "Selected conditions align with this reviewed pathway; this does not predict yield or certainty."}
 
 
-def _serialize_reaction(reaction_id: str, reaction: dict[str, object], conditions: dict[str, str] | None = None) -> dict[str, object]:
+def _reaction_is_balanced(reaction: dict[str, object], reactants: dict[str, dict[str, object]]) -> bool:
+    """Check atom/charge balance; repeated IDs encode verified coefficients."""
+    inputs = Counter()
+    input_charge = 0
+    for reactant_id in reaction.get("equationReactants", reaction["reactants"]):
+        reactant = reactants.get(reactant_id)
+        if reactant is None:
+            return False
+        inputs.update(_element_counts(reactant["smiles"]))
+        input_charge += _formal_charge(reactant["smiles"])
+    outputs = _element_counts(reaction["productSmiles"])
+    output_charge = _formal_charge(reaction["productSmiles"])
+    for byproduct in reaction["byproducts"]:
+        outputs.update(_element_counts(byproduct["smiles"]))
+        output_charge += _formal_charge(byproduct["smiles"])
+    return bool(inputs) and inputs == outputs and input_charge == output_charge
+
+
+def _calculator_input(reference: str | dict[str, str], resolved_id: str,
+                      reactants: dict[str, dict[str, object]]) -> tuple[dict[str, object], str | None]:
+    """Keep the selected reagent's identity when its spectator ion is omitted."""
+    resolved = reactants[resolved_id]
+    source = REACTANTS[reference] if isinstance(reference, str) and reference in REACTANTS else resolved
+    smiles = reference["smiles"] if isinstance(reference, dict) else source["smiles"]
+    molecule = _molecule(smiles)
+    name = source["name"]
+    formula = source.get("formula", _formula(smiles))
+    if isinstance(reference, dict):
+        formula = _formula(smiles)
+        supplied_name = reference.get("name")
+        if isinstance(supplied_name, str) and supplied_name.strip() and len(supplied_name) <= 200:
+            name = supplied_name.strip()
+    counterion = _hydroxide_from_salt(molecule) if resolved_id == "hydroxide" else None
+    note = None
+    if counterion:
+        names = {"Li": "Lithium", "Na": "Sodium", "K": "Potassium", "Rb": "Rubidium", "Cs": "Caesium"}
+        name = f"{names[counterion]} hydroxide"
+        formula = f"{counterion}OH"
+        note = f"{name}: 1 mol supplies 1 mol OH⁻. Its full salt molar mass is used; the spectator {counterion}⁺ is omitted from the net equation."
+    return {"name": name, "formula": formula, "molarMass": round(Descriptors.MolWt(molecule), 6)}, note
+
+
+def _reaction_stoichiometry(reaction: dict[str, object], reactants: dict[str, dict[str, object]],
+                            pair_ids: tuple[str, str] | None = None,
+                            originals: tuple[str | dict[str, str], str | dict[str, str]] | None = None) -> dict[str, object]:
+    """Serialize the selected pathway's trusted calculation basis and roles."""
+    pair_ids = pair_ids or tuple(reaction["reactants"])
+    originals = originals or pair_ids
+    consumed = Counter(reaction.get("equationReactants", reaction["reactants"]))
+    included = []
+    excluded = []
+    notes = ["Theoretical maximum for this pathway at complete conversion; not a predicted or actual yield."]
+    for slot, (resolved_id, original) in enumerate(zip(pair_ids, originals)):
+        item, salt_note = _calculator_input(original, resolved_id, reactants)
+        if resolved_id in consumed:
+            coefficient = consumed.pop(resolved_id)
+            included.append({"inputSlot": slot, **item, "coefficient": coefficient})
+            if salt_note:
+                notes.append(salt_note)
+        else:
+            excluded.append({"inputSlot": slot, "name": item["name"],
+                             "reason": "Acid catalyst; regenerated, not consumed in this net equation." if reaction["mechanism"] == "Alcohol dehydration" else "Solvent / medium; not consumed in this net equation."})
+    balanced = not consumed and _reaction_is_balanced(reaction, reactants)
+    if reaction.get("profile", {}).get("catalyst") in {"acid", "metal"}:
+        notes.append("Catalyst amounts are excluded: the catalyst is not consumed in the net equation.")
+    if reaction["mechanism"] in {"Esterification", "Ester hydrolysis"}:
+        notes.append("This reversible reaction may not reach complete conversion.")
+    if reaction["mechanism"] == "Alcohol dehydration":
+        notes.append("One alcohol gives one alkene plus one water. Acid is catalytic and excluded from amounts. Reversibility, ether formation, isomerization and selective mono-dehydration are not predicted; alternative products must not be summed as yields.")
+    if reaction["mechanism"] == "Polymerization model":
+        notes.append("Calculation describes only the selected finite, phenyl-ended oligomer model, not bulk-polymer yield or molecular weight. Benzoyl peroxide is consumed as initiator.")
+    if reaction["mechanism"] == "SN1":
+        notes.append("One water equivalent in the simplified alcohol + HX net reporting equation. Additional water is solvent/proton-transfer medium; the mechanism shows hydronium + halide. This is not a prescription for solvent quantity, isolated conversion or racemization ratio.")
+    if reaction["mechanism"] == "E1":
+        notes.append("Water is solvent/base and excluded from the simplified alkene + HX net calculation. The explicit aqueous mechanism shows hydronium + halide. This describes one selected elimination site, not solvent quantity, selective mono-conversion, major-product or E/Z ratios.")
+    if reaction["mechanism"] == "Hydration":
+        notes.append("One water equivalent is consumed at the selected C=C. Acid is regenerated and excluded. Amounts are conditional on supported acid activation and describe theoretical net conversion, not equilibrium yield, regioisomer ratios or selective one-site conversion.")
+    if reaction["mechanism"] == "Hydrohalogenation":
+        notes.append("One actual HX equivalent supplies both H and halogen and is consumed; HX is not a regenerated acid catalyst. Amounts describe a selected conditional ionic net option, not selective mono-addition, regio/stereoisomer ratios or an actual experimental yield.")
+    if reaction["mechanism"] == "Bromination":
+        notes.append("One actual Br2 equivalent is consumed per selected C=C, with no net byproduct. Each stereochemical alternative is a separate complete-conversion upper bound, not an amount to add across alternatives or a stereoisomer ratio. Non-nucleophilic model conditions are required; actual yield and selective mono-bromination are not predicted.")
+    if reaction["mechanism"] == "Epoxidation":
+        notes.append("One actual peroxyacid equivalent transfers one O to one selected C=C and gives one equivalent of its actual carboxylic acid coproduct. Each face/site alternative is a separate theoretical bound, not an amount to sum or a stereoisomer ratio. Peroxyacid is consumed, not a catalyst; subsequent epoxide opening and isolated yields are not predicted.")
+    if reaction["mechanism"] == "Alkene dihydroxylation":
+        notes.append("One H2O2 equivalent per selected C=C balances the explicit net diol graph. Os catalyst and aqueous release species are omitted, not consumed calculated reagents. Formal O/H maps are not catalyst oxygen/proton-exchange provenance. Amounts are conditional theoretical net upper bounds, not actual yield, stereo ratios or selective mono-oxidation.")
+    if reaction["mechanism"] == "Chlorination":
+        notes.append("One actual Cl2 equivalent is consumed per selected C=C, with no net byproduct. Each stereochemical alternative is a separate complete-conversion upper bound, not an amount to add across alternatives or a stereoisomer ratio. Non-nucleophilic model conditions are required; actual yield and selective mono-chlorination are not predicted.")
+    if not balanced:
+        notes.append("Calculation unavailable: the net equation has not passed atom and charge balance checks.")
+    return {
+        "balanced": balanced,
+        "reactants": included,
+        "product": {"name": reaction["productName"], "formula": _formula(reaction["productSmiles"]),
+                    "molarMass": round(Descriptors.MolWt(_molecule(reaction["productSmiles"])), 6), "coefficient": 1},
+        "excludedInputs": excluded,
+        "notes": notes,
+    }
+
+
+def _serialize_reaction(reaction_id: str, reaction: dict[str, object], conditions: dict[str, str] | None = None,
+                        *, custom_reactants: dict[str, dict[str, object]] | None = None,
+                        pair_ids: tuple[str, str] | None = None,
+                        originals: tuple[str | dict[str, str], str | dict[str, str]] | None = None) -> dict[str, object]:
+    information = reaction_information(reaction)
     payload = {
         "id": reaction_id, "name": reaction["name"], "family": reaction["family"], "mechanism": reaction["mechanism"],
+        "productSmiles": reaction["productSmiles"], "site": reaction.get("site"),
         "reactants": reaction["reactants"],
         "equationReactants": reaction.get("equationReactants", reaction["reactants"]),
         "productName": reaction["productName"], "productFormula": _formula(reaction["productSmiles"]),
         "productEquationFormula": reaction.get("productEquationFormula", _formula(reaction["productSmiles"])),
         "byproducts": [{"name": item["name"], "formula": item.get("formula", _formula(item["smiles"]))} for item in reaction["byproducts"]],
         "conditions": reaction["conditions"], "explanation": reaction["explanation"], "sourceUrl": reaction["sourceUrl"],
+        "stoichiometry": _reaction_stoichiometry(reaction, {**REACTANTS, **(custom_reactants or {})}, pair_ids, originals),
+        **({"aldehydeOxidationModel": reaction["aldehydeOxidationModel"]} if reaction.get("aldehydeOxidationModel") else {}),
+        "reasoning": explain_pathway(reaction, {**REACTANTS, **(custom_reactants or {})}, conditions),
+        "information": information,
+        "classifications": information["classifications"],
+        **({"dehydrationModel": reaction["dehydrationModel"], "stereochemistry": reaction["stereochemistry"]} if reaction["mechanism"] == "Alcohol dehydration" else {}),
+        **({"alcoholSubstitutionModel": reaction["alcoholSubstitutionModel"], "stereochemistry": reaction["stereochemistry"]} if reaction["mechanism"] == "Alcohol substitution" else {}),
+        **({"primaryOxidationModel": reaction["primaryOxidationModel"], "stereochemistry": reaction["stereochemistry"]} if reaction.get("primaryOxidationModel") else {}),
+        **({"secondaryOxidationModel": reaction["secondaryOxidationModel"], "stereochemistry": reaction["stereochemistry"]} if reaction.get("secondaryOxidationModel") else {}),
+        **({"compatibility": reaction["compatibility"]} if reaction.get("compatibility") else {}),
+        **({"regioselectivity": reaction["regioselectivity"], "stereochemistry": reaction["stereochemistry"]} if reaction["mechanism"] == "Hydration" else {}),
+        **({"regioselectivity": reaction["regioselectivity"], "stereochemistry": reaction["stereochemistry"], "hxModel": reaction["hxModel"]} if reaction["mechanism"] == "Hydrohalogenation" else {}),
+        **({"stereochemistry": reaction["stereochemistry"], "epoxidationStereo": reaction["epoxidationStereo"]} if reaction["mechanism"] == "Epoxidation" else {}),
+        **({"stereochemistry": reaction["stereochemistry"], "dihydroxylationStereo": reaction["dihydroxylationStereo"]} if reaction["mechanism"] == "Alkene dihydroxylation" else {}),
+        **({"stereochemistry": reaction["stereochemistry"], "chlorinationStereo": reaction["chlorinationStereo"]} if reaction["mechanism"] == "Chlorination" else {}),
+        **({"stereochemistry": reaction["stereochemistry"], "brominationStereo": reaction["brominationStereo"]} if reaction["mechanism"] == "Bromination" else {}),
+        **({"stereochemistry": reaction["stereochemistry"], "alkynePartialStereo": reaction["alkynePartialStereo"]} if reaction["mechanism"] == "Alkyne partial hydrogenation" else {}),
+        **({"stereochemistry": reaction["stereochemistry"], "alkyneCompleteModel": reaction["alkyneCompleteModel"]} if reaction["mechanism"] == "Alkyne hydrogenation" else {}),
+        **({"stereochemistry": reaction["stereochemistry"], "alkyneHalogenModel": reaction["alkyneHalogenModel"]} if reaction["mechanism"] == "Alkyne halogenation" else {}),
+        **({"stereochemistry": reaction["stereochemistry"], "alkyneHxModel": reaction["alkyneHxModel"], "regioselectivity": reaction["regioselectivity"]} if reaction["mechanism"] == "Alkyne hydrohalogenation" else {}),
     }
     if conditions is not None:
         payload["assessment"] = _assessment(reaction, conditions)
+        guidance = guided_condition_metadata(reaction_id, reaction, payload["assessment"], conditions)
+        if guidance is not None:
+            payload["guidedConditions"] = guidance
+    if reaction["mechanism"] in addition_contract.NET_PATHWAYS or reaction.get("primaryOxidationModel") or reaction.get("secondaryOxidationModel"):
+        context = _conditions(conditions)
+        assessment = payload.get("assessment") or _assessment(reaction, context)
+        payload["stoichiometry"]["context"] = addition_contract.calculation_context(
+            reaction, assessment, context, payload["stoichiometry"]["notes"])
     return payload
 
 
@@ -496,46 +659,208 @@ def reaction_catalog() -> dict[str, object]:
     }
 
 
+def inspect_reactant(reactant, include_3d=False):
+    return inspect_structure(reactant, REACTANTS, include_3d, analyze_molfile)
+
+
 def match_reactions(reactant_a: str | dict[str, str], reactant_b: str | dict[str, str], conditions: dict[str, str] | None = None) -> dict[str, object]:
     pair_ids, custom, interpretation_notes = _resolve_reactants(reactant_a, reactant_b)
     context = _conditions(conditions)
     pair = sorted(pair_ids)
+    generated, unsupported = _reactions_for_pair(*pair_ids, {**REACTANTS, **custom}, context)
     matches = [
-        _serialize_reaction(key, value, context)
-        for key, value in _all_reactions(custom).items()
+        _serialize_reaction(key, value, context, custom_reactants=custom, pair_ids=pair_ids,
+                            originals=(reactant_a, reactant_b))
+        for key, value in generated.items()
         if sorted(value["reactants"]) == pair
     ]
-    return {"reactions": matches, "interpretationNotes": interpretation_notes}
+    options = addition_contract.grouped_options(matches, {**REACTANTS, **custom})
+    conditional = bool(matches) and all(r["mechanism"] in addition_contract.NET_PATHWAYS or r.get("primaryOxidationModel") or r.get("secondaryOxidationModel") for r in matches)
+    comparison = compare_pathways(options)
+    if comparison:
+        for column, option in zip(comparison["columns"], options):
+            column["label"] = option.get("assessment", {}).get("evidence", {}).get("label", column["label"])
+    return {"contractVersion": 2, "reactions": matches, "reactionOptions": options,
+            "reactionsContract": "Legacy independently addressable sites; use reactionOptions for grouped product choices.",
+            "optionCounts": addition_contract.option_counts(options),
+            "interpretationNotes": interpretation_notes, "unsupportedReasons": unsupported,
+            "structuralEligibility": "eligible" if matches else "unsupported",
+            "supportState": "Conditional" if conditional else "Supported" if matches else "Unsupported",
+            "comparison": comparison}
+
+
+def reaction_diagram(reaction_id: str, reactant_a: str | dict[str, str], reactant_b: str | dict[str, str], conditions: dict[str, str] | None = None) -> dict[str, object]:
+    """Preview verified net structures without running the 3D calculation."""
+    pair_ids, custom, interpretation_notes = _resolve_reactants(reactant_a, reactant_b)
+    context = _conditions(conditions)
+    reaction = _reactions_for_pair(*pair_ids, {**REACTANTS, **custom}, context)[0].get(reaction_id)
+    if not reaction or sorted(reaction["reactants"]) != sorted(pair_ids):
+        raise ChemistryError("Choose a reaction that matches both selected molecules.")
+    diagram = build_reaction_diagram(reaction, {**REACTANTS, **custom})
+    if reaction["mechanism"] == "Aldehyde oxidation":
+        diagram["assessment"] = _assessment(reaction, context)
+        diagram["aldehydeOxidationModel"] = reaction["aldehydeOxidationModel"]
+        diagram["note"] = diagram["assessment"]["note"] + " Formal net mapping only; no full oxidation mechanism or acidification step is depicted."
+    if reaction["mechanism"] == "Alkyne hydrohalogenation":
+        diagram["assessment"] = _assessment(reaction, context)
+        diagram["alkyneHxModel"] = reaction["alkyneHxModel"]
+        diagram["note"] = "Conditional ionic alkyne HX net equation. " + diagram["assessment"]["note"] + " " + reaction["alkyneHxModel"]["note"] + " No complete vinyl-cation/radical mechanism or experimental stopping/selectivity is asserted."
+    if reaction["mechanism"] == "Alkyne halogenation":
+        diagram["assessment"] = _assessment(reaction, context)
+        diagram["alkyneHalogenModel"] = reaction["alkyneHalogenModel"]
+        diagram["note"] = "Conditional alkyne X2 net equation. " + diagram["assessment"]["note"] + " " + reaction["alkyneHalogenModel"]["note"] + " No complete mapped halonium mechanism or stable vinyl carbocation is asserted."
+    if reaction["mechanism"] == "Alkyne hydrogenation":
+        diagram["assessment"] = _assessment(reaction, context)
+        diagram["alkyneCompleteModel"] = reaction["alkyneCompleteModel"]
+        diagram["note"] = "Conditional complete alkyne hydrogenation net model. " + diagram["assessment"]["note"] + " " + reaction["alkyneCompleteModel"]["note"] + " No catalytic surface mechanism or discrete ionic/radical intermediates are implemented."
+    if reaction["mechanism"] == "Alkyne partial hydrogenation":
+        diagram["assessment"] = _assessment(reaction, context)
+        diagram["alkynePartialStereo"] = reaction["alkynePartialStereo"]
+        diagram["note"] = "Conditional Lindlar net option. " + diagram["assessment"]["note"] + " " + reaction["alkynePartialStereo"]["note"] + " No catalytic surface mechanism or discrete ionic/radical intermediates are implemented."
+    if reaction["mechanism"] == "Alkene dihydroxylation":
+        diagram["assessment"] = _assessment(reaction, context)
+        diagram["dihydroxylationStereo"] = reaction["dihydroxylationStereo"]
+        diagram["note"] = "Conditional syn dihydroxylation net option. " + diagram["assessment"]["note"] + " " + reaction["dihydroxylationStereo"]["note"]
+    if reaction["mechanism"] == "Epoxidation":
+        assessment = _assessment(reaction, context)
+        diagram["assessment"] = assessment
+        diagram["epoxidationStereo"] = reaction["epoxidationStereo"]
+        diagram["note"] = "Conditional peroxyacid epoxidation. " + assessment["note"] + " " + reaction["epoxidationStereo"]["note"] + " The mapped mechanism is one formal concerted oxygen transfer; no stable intermediate or secondary ring opening is inferred."
+    if reaction["mechanism"] == "Bromination":
+        assessment = _assessment(reaction, context)
+        diagram["assessment"] = assessment
+        diagram["brominationStereo"] = reaction["brominationStereo"]
+        diagram["note"] = ("Conditional Br2 net option. " + assessment["note"] + " " +
+                           "Wedges/dashes show assigned local configurations where validated; " + reaction["brominationStereo"]["outcome"] +
+                           ". Dots show supported lone pairs, not spatial orientation. Anti describes addition geometry, not a universal trans label. A complete bromonium mechanism and product ratios are not modeled.")
+    if reaction["mechanism"] == "Chlorination":
+        assessment = _assessment(reaction, context)
+        diagram["assessment"] = assessment
+        diagram["chlorinationStereo"] = reaction["chlorinationStereo"]
+        diagram["note"] = ("Conditional Cl2 net option. " + assessment["note"] + " " +
+                           "Wedges/dashes show assigned local configurations where validated; " + reaction["chlorinationStereo"]["outcome"] +
+                           ". Dots show supported lone pairs, not spatial orientation. Anti describes addition geometry, not a universal trans label. A complete chloronium mechanism and product ratios are not modeled.")
+    if reaction["mechanism"] == "Alcohol dehydration":
+        diagram["assessment"] = _assessment(reaction, context)
+        diagram["dehydrationModel"] = reaction["dehydrationModel"]
+        diagram["note"] = "Conditional dehydration net option. " + diagram["assessment"]["note"] + " " + reaction["dehydrationModel"]["provenance"] + " No complete mapped acid cycle/proton-transfer mechanism is implemented; bare OH departure is not an elementary step."
+    if reaction["mechanism"] == "Alcohol substitution":
+        diagram["assessment"] = _assessment(reaction, context)
+        diagram["alcoholSubstitutionModel"] = reaction["alcoholSubstitutionModel"]
+        diagram["note"] = "Conditional activated-HX net substitution. " + diagram["assessment"]["note"] + " " + reaction["alcoholSubstitutionModel"]["provenance"] + " No complete mapped protonation/water-departure/capture mechanism is implemented; net C–O cleavage is not bare OH departure."
+    if reaction.get("primaryOxidationModel"):
+        diagram["assessment"] = _assessment(reaction, context)
+        diagram["primaryOxidationModel"] = reaction["primaryOxidationModel"]
+        diagram["note"] = "Hypothetical primary-alcohol first-stage net equation, not an asserted aldehyde endpoint. " + diagram["assessment"]["note"] + " " + reaction["primaryOxidationModel"]["provenance"] + " No complete hypochlorite/catalyst mechanism is implemented; no H2 gas is generated."
+    if reaction.get("secondaryOxidationModel"):
+        diagram["assessment"]=_assessment(reaction,context)
+        diagram["secondaryOxidationModel"]=reaction["secondaryOxidationModel"]
+        diagram["note"]="Secondary ketone net equation, not isolated product certainty. "+diagram["assessment"]["note"]+" "+reaction["secondaryOxidationModel"]["provenance"]+" No complete mapped oxidation mechanism is implemented."
+    if reaction["mechanism"] == "Hydration":
+        assessment = _assessment(reaction, context)
+        diagram["assessment"] = assessment
+        diagram["note"] = ("Conditional net hydration option. " + assessment["note"] + " " if not assessment["canRun"] else "") + diagram["note"]
+    if reaction["mechanism"] == "Hydrohalogenation":
+        assessment = _assessment(reaction, context)
+        diagram["assessment"] = assessment
+        diagram["note"] = "Conditional ionic HX net option. " + assessment["note"] + " " + diagram["note"]
+    return {**diagram,
+            "mechanism": build_mechanism(reaction, {**REACTANTS, **custom}),
+            "interpretationNotes": interpretation_notes}
 
 
 def run_curated_reaction(reaction_id: str, reactant_a: str | dict[str, str], reactant_b: str | dict[str, str], conditions: dict[str, str] | None = None) -> dict[str, object]:
     pair_ids, custom, interpretation_notes = _resolve_reactants(reactant_a, reactant_b)
-    reaction = _all_reactions(custom).get(reaction_id)
+    context = _conditions(conditions)
+    reaction = _reactions_for_pair(*pair_ids, {**REACTANTS, **custom}, context)[0].get(reaction_id)
     if not reaction or sorted(reaction["reactants"]) != sorted(pair_ids):
         raise ChemistryError("Choose a reaction that matches both selected molecules.")
 
-    inputs = Counter()
-    input_charge = 0
-    for reactant_id in reaction.get("equationReactants", reaction["reactants"]):
-        reactant_smiles = {**REACTANTS, **custom}[reactant_id]["smiles"]
-        inputs.update(_element_counts(reactant_smiles))
-        input_charge += _formal_charge(reactant_smiles)
-    outputs = _element_counts(reaction["productSmiles"])
-    output_charge = _formal_charge(reaction["productSmiles"])
-    for byproduct in reaction["byproducts"]:
-        outputs.update(_element_counts(byproduct["smiles"]))
-        output_charge += _formal_charge(byproduct["smiles"])
-    if inputs != outputs or input_charge != output_charge:
+    if reaction["mechanism"] == "Aldehyde oxidation":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Inspect conditional 2D; no qualified 3D reporting product is available for these inputs.")
+
+    if reaction.get("primaryOxidationModel"):
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Primary oxidation remains conditional 2D only; no final aldehyde 3D product is asserted.")
+    if reaction.get("secondaryOxidationModel"):
+        assessment=_assessment(reaction,context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"]+" Secondary oxidation remains conditional 2D for this context; no qualified ketone 3D is asserted.")
+
+    if reaction["mechanism"] == "Alcohol dehydration":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Inspect conditional 2D; no 3D dehydration outcome is asserted for this context.")
+    if reaction["mechanism"] == "Alcohol substitution":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Inspect conditional 2D; no 3D HX substitution outcome is asserted for this context.")
+    if reaction["mechanism"] == "Hydration":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Inspect the conditional 2D net option or select supported acid/water conditions before generating its 3D product.")
+    if reaction["mechanism"] == "Hydrohalogenation":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Only the conditional 2D ionic HX net option is available for these settings; no 3D product is inferred.")
+
+    if reaction["mechanism"] == "Bromination":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Inspect the conditional 2D net option; no 3D dibromide is inferred for these conditions.")
+    if reaction["mechanism"] == "Epoxidation":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Inspect the conditional 2D mechanism; no isolated 3D epoxide is inferred for these settings.")
+    if reaction["mechanism"] == "Chlorination":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Inspect the conditional 2D net option; no 3D dichloride is inferred for these conditions.")
+
+    if reaction["mechanism"] == "Alkene dihydroxylation":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Only the conditional 2D net diol option is available.")
+    if reaction["mechanism"] == "Alkyne partial hydrogenation":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Inspect the conditional 2D net option; no 3D Lindlar alkene is inferred for these settings.")
+    if reaction["mechanism"] == "Alkyne hydrogenation":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Inspect the conditional 2D net equation; no 3D complete-reduction outcome is asserted for these settings.")
+    if reaction["mechanism"] == "Alkyne halogenation":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Inspect the conditional 2D net equation; no selected 3D halogenation outcome is asserted for these settings.")
+    if reaction["mechanism"] == "Alkyne hydrohalogenation":
+        assessment = _assessment(reaction, context)
+        if not assessment["canRun"]:
+            raise ChemistryError(assessment["note"] + " Inspect the conditional 2D HX net equation; no selected 3D hydrohalogenation outcome is asserted for these settings.")
+    if not _reaction_is_balanced(reaction, {**REACTANTS, **custom}):
         raise RuntimeError(f"Curated reaction {reaction_id} is not atom- and charge-balanced.")
 
-    product = _molecule(reaction["productSmiles"])
+    # Reuse the verified mapped graph used by the 2D diagram. Explicit-H atom
+    # order survives Molfile loading, embedding, and geometry optimization.
+    product = mapped_product_molecule(reaction, {**REACTANTS, **custom})
     return {
         "productName": reaction["productName"],
         "product": analyze_molfile(Chem.MolToMolBlock(product)),
         "balanced": True,
-        "assessment": _assessment(reaction, _conditions(conditions)),
+        "assessment": _assessment(reaction, context),
         "interpretationNotes": interpretation_notes,
     }
+
+
+def _unmapped_smiles(molecule: Chem.Mol) -> str:
+    """Keep atom identities in geometry, while showing ordinary chemistry text."""
+    copy = Chem.Mol(molecule)
+    for atom in copy.GetAtoms():
+        atom.SetAtomMapNum(0)
+    return Chem.MolToSmiles(Chem.RemoveHs(copy), canonical=True, isomericSmiles=True)
 
 
 def analyze_molfile(molfile: str) -> dict[str, object]:
@@ -568,7 +893,7 @@ def analyze_molfile(molfile: str) -> dict[str, object]:
             raise ChemistryError(f"{element} has too many bonds in this drawing. Remove or change a bond, then try again.") from exc
         raise ChemistryError("This drawing has an invalid bond or valence. Check the atoms and their bonds, then try again.") from exc
 
-    smiles = Chem.MolToSmiles(molecule, canonical=True, isomericSmiles=True)
+    smiles = _unmapped_smiles(molecule)
     base = {
         "formula": rdMolDescriptors.CalcMolFormula(molecule),
         "molarMass": round(Descriptors.MolWt(molecule), 3),
@@ -616,11 +941,13 @@ def analyze_molfile(molfile: str) -> dict[str, object]:
         "molfile": Chem.MolToMolBlock(molecule),
         "formula": rdMolDescriptors.CalcMolFormula(molecule),
         "molarMass": round(Descriptors.MolWt(molecule), 3),
-        "smiles": Chem.MolToSmiles(Chem.RemoveHs(molecule), canonical=True),
+        "smiles": _unmapped_smiles(molecule),
         "atoms": molecule.GetNumAtoms(),
         "bonds": molecule.GetNumBonds(),
         "forceField": force_field,
         "converged": optimization_status == 0,
+        "atomLinks": [{"index": atom.GetIdx(), "mapId": atom.GetAtomMapNum(), "element": atom.GetSymbol()}
+                      for atom in molecule.GetAtoms() if atom.GetAtomMapNum() > 0],
     }
 
 
@@ -697,7 +1024,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_error(404)
 
     def do_POST(self) -> None:
-        if self.path not in ("/api/chemistry", "/api/reactions/match", "/api/reactions/run"):
+        if self.path not in ("/api/chemistry", "/api/reactions/match", "/api/reactions/run", "/api/reactions/diagram", "/api/reactions/inspect"):
             self.send_error(404)
             return
         try:
@@ -711,13 +1038,17 @@ class Handler(BaseHTTPRequestHandler):
                 if not isinstance(body.get("molfile"), str):
                     raise ChemistryError("Expected a molecule drawing in Molfile format.")
                 payload = analyze_molfile(body["molfile"])
+            elif self.path == "/api/reactions/inspect":
+                payload = inspect_reactant(body.get("reactant"), body.get("include3D", False))
             else:
-                if self.path == "/api/reactions/run" and not isinstance(body.get("reactionId"), str):
+                if self.path != "/api/reactions/match" and not isinstance(body.get("reactionId"), str):
                     raise ChemistryError("Choose two molecules and a matching reaction.")
                 if not all(isinstance(body.get(key), (str, dict)) for key in ("reactantA", "reactantB")):
                     raise ChemistryError("Choose two molecules and a matching reaction.")
                 if self.path == "/api/reactions/match":
                     payload = match_reactions(body["reactantA"], body["reactantB"], body.get("conditions"))
+                elif self.path == "/api/reactions/diagram":
+                    payload = reaction_diagram(body["reactionId"], body["reactantA"], body["reactantB"], body.get("conditions"))
                 else:
                     payload = run_curated_reaction(body["reactionId"], body["reactantA"], body["reactantB"], body.get("conditions"))
             code = 200

@@ -1,0 +1,21 @@
+{
+  "release": "molecule-playground-beta-v1",
+  "repository": "ryanchen2010-eng/project",
+  "remote": "git@github.com:ryanchen2010-eng/project.git",
+  "runtimeFiles": 107,
+  "changed": [],
+  "added": [],
+  "missing": [],
+  "archiveBytesMatchLocal": true,
+  "archiveSha256": "52ee21388501a6a317480797b27edbc961616e9cb7e54c69723f632ffabfbcbb",
+  "phase5hIncluded": true,
+  "phase5iIncluded": true,
+  "snapshotUpdated": false,
+  "checkedDate": "2026-10-19",
+  "notes": [
+    "Runtime source, public assets and build/deployment configuration match exactly.",
+    "Tests, documentation, Git metadata, node_modules, dist and local environments are deliberately not deployment archive inputs.",
+    "Git origin was updated from capstone-project to the verified renamed project repository.",
+    "No current local website implementation differs from the frozen release."
+  ]
+}

@@ -17,12 +17,16 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
+    // Ketcher includes mixed ESM/CommonJS files (notably Raphael loading).
+    // Convert their require() calls too; they cannot run natively in browsers.
+    commonjsOptions: { transformMixedEsModules: true },
     rollupOptions: {
       input: {
         home: resolve(__dirname, 'index.html'),
         explorer: resolve(__dirname, 'explore.html'),
         builder: resolve(__dirname, 'builder.html'),
         reactionLab: resolve(__dirname, 'reaction-lab.html'),
+        calculators: resolve(__dirname, 'calculators.html'),
       },
     },
   },

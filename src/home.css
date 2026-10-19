@@ -146,14 +146,16 @@ h1 { max-width: 780px; margin-bottom: 22px; font-size: clamp(3.2rem, 5.8vw, 6.1r
 .section-intro .eyebrow { flex-basis: 100%; margin-bottom: -3px; }
 .section-intro h2 { margin-bottom: 0; font-size: clamp(2.3rem, 4vw, 3.7rem); letter-spacing: -0.05em; line-height: 1; }
 .section-intro > p:last-child { max-width: 410px; margin: 0; color: #64746a; font-size: 0.85rem; line-height: 1.6; }
-.tool-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; }
+.tool-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
 .tool-card { display: flex; flex-direction: column; min-width: 0; min-height: 300px; padding: 26px; border: 1px solid rgb(26 52 42 / 12%); border-radius: 22px; background: #faf8f2; box-shadow: 0 15px 40px rgb(47 63 56 / 7%); }
 .tool-card:nth-child(2) { background: #edf2e9; }
 .tool-card:nth-child(3) { background: #f5eee4; }
+.tool-card:nth-child(4) { background: #edf1f5; }
 .tool-number { color: #5c8068; font-size: 0.69rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
 .tool-symbol { width: 55px; height: 55px; margin: 19px 0 13px; border: 1px solid #cee0d2; border-radius: 16px; color: #315c4b; background: #e6efe4; text-align: center; font-family: Georgia, "Times New Roman", serif; font-size: 2.2rem; line-height: 53px; }
 .tool-symbol-builder { border-color: #c7d9c9; background: #dbe9db; font-size: 2rem; }
 .tool-symbol-lab { border-color: #e1d2ba; color: #935b40; background: #f1e0ce; font-size: 1.8rem; }
+.tool-symbol-calculator { border-color: #c7d5e2; color: #426380; background: #e0e9f1; font-size: 2rem; }
 .tool-card h3 { margin: 0 0 10px; font-size: 1.65rem; letter-spacing: -0.04em; }
 .tool-card p { margin: 0 0 18px; color: #596a5f; font-size: 0.83rem; line-height: 1.65; }
 .tool-card a { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; padding-top: 15px; border-top: 1px solid rgb(49 92 75 / 15%); color: #315c4b; font-size: 0.8rem; font-weight: 800; text-decoration: none; }
@@ -171,6 +173,7 @@ h1 { max-width: 780px; margin-bottom: 22px; font-size: clamp(3.2rem, 5.8vw, 6.1r
   .home-hero { grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr); }
   .hero-content { padding: 40px 30px; }
   .tool-card { padding: 22px; }
+  .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 780px) {

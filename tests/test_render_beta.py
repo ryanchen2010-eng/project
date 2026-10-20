@@ -89,6 +89,18 @@ class RenderBetaTests(unittest.TestCase):
         self.assertNotIn('generateValue:', blueprint)
         self.assertNotRegex(blueprint, r'(?m)^\s*(?:databases|repo|image|disk):')
 
+    def test_rdkit_drawing_system_dependency_is_installed_in_python_stage(self):
+        image = (ROOT / 'Dockerfile').read_text()
+        runtime = image.split('FROM python:3.12-slim-bookworm AS trial', 1)[1]
+        install = runtime.split('apt-get install -y --no-install-recommends ', 1)[1].split('\\', 1)[0]
+        self.assertIn('libexpat1', install.split())
+        self.assertLess(runtime.index('libexpat1'), runtime.index('pip install'))
+        # Keep the real import gate: missing native drawing dependencies must fail
+        # during the image build, never after a supposedly successful deployment.
+        self.assertIn('from server import chemistry_server', runtime)
+        diagrams = (ROOT / 'server/reaction_diagrams.py').read_text()
+        self.assertIn('from rdkit.Chem.Draw import rdMolDraw2D', diagrams)
+
     def test_release_allowlist_contains_all_runtime_but_no_local_data(self):
         from scripts.prepare_beta_release import source_files
         paths = {str(p.relative_to(ROOT)) for p in source_files()}

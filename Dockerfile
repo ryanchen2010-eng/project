@@ -15,7 +15,8 @@ FROM python:3.12-slim-bookworm AS trial
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PORT=10000 \
     OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
 WORKDIR /app
-RUN apt-get update && apt-get install -y --no-install-recommends libxrender1 libxext6 libgomp1 \
+# RDKit's 2D drawing extension also links against the system Expat runtime.
+RUN apt-get update && apt-get install -y --no-install-recommends libxrender1 libxext6 libgomp1 libexpat1 \
     && rm -rf /var/lib/apt/lists/*
 COPY server/requirements.txt server/requirements-production.txt ./server/
 RUN pip install --no-cache-dir --only-binary=:all: -r server/requirements-production.txt

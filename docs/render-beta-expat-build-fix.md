@@ -21,4 +21,10 @@ Deployment-specific tests: 12 passed. JavaScript regression: 1,881 passed. TypeS
 
 Full Python regression: 1,885 passed in 201.746 seconds. Combined regression: **3,766 passed**, including one new deployment test. Local drawing and all 24 pathway definitions import successfully. Patch whitespace checks pass. No chemistry, benchmark, UI, calculator or authentication code changed.
 
-Actual Render Linux build remains to be verified after publication. No local Docker/Podman runtime is installed. Local macOS tests alone do not prove the Linux dependency closure.
+Actual Render Linux build **passed** for commit `1f5a9a579e8d4bd7312932555060ccbbc926e480`, manually deployed as `dep-dbbb3l6q1p3s73buksag`. The previously failing chemistry import gate completed in 0.9 seconds, and the Docker image was built successfully. No local Docker/Podman runtime is installed.
+
+## Separate startup blocker: private configuration
+
+Gunicorn then failed closed because `CAPSTONE_TRIAL_PASSWORD` did not meet the existing 12–256-character/no-surrounding-whitespace requirement. No password values were inspected, copied or logged here. The user must correct the value directly in Render and submit it themselves. The session secret must also remain a private hexadecimal value accepted by the existing validation. Do not remove or weaken either check.
+
+The service URL has been assigned as `https://molecule-playground-beta-v1.onrender.com/`, but the application is **not live or functionally verified** until credential configuration and startup succeed. Do not share it as a working beta yet. The original beta snapshot remains unchanged; the original `main` ref remains `a6142c67563978111ea672b93059ca395c8c3cb3`.

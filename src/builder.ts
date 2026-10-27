@@ -7,8 +7,14 @@ import 'ketcher-react/dist/index.css';
 import './builder.css';
 import './bond-measurements.css';
 import { BondMeasurements, type MeasurementAtom, type MeasurementViewer } from './bond-measurements';
+import { mountViewerControls, type CameraViewer } from './viewer-controls';
+import { guardEditorStartup } from './editor-startup';
+import { BuilderMoleculeSearch } from './builder-molecule-search';
+import './ui-system.css';
+import { mountWorkspaceShell } from './workspace-shell';
+import './workspace-shell.css';
 
-type Viewer = MeasurementViewer & {
+type Viewer = MeasurementViewer & CameraViewer & {
   removeAllModels: () => void;
   addModel: (data: string, format: string) => { selectedAtoms: (selection: Record<string, never>) => MeasurementAtom[] };
   setStyle: (selection: Record<string, never>, style: Record<string, unknown>) => void;
@@ -34,17 +40,18 @@ type ChemistryResult = ChemistryBase & ({
 const app = document.querySelector<HTMLDivElement>('#builder-app');
 if (!app) throw new Error('Builder root was not found.');
 app.innerHTML = `
-  <main class="builder-shell">
+  <a class="skip-link" href="#main-content">Skip to workspace</a>
+  <main class="builder-shell" id="main-content" tabindex="-1">
     <header class="builder-header">
       <div>
         <p class="eyebrow">Molecule Playground · Builder</p>
-        <h1>Build a molecule</h1>
-        <p class="builder-copy">Draw in 2D. Preview in 3D when possible.</p>
+        <h1>Builder</h1>
+        <p class="builder-copy">Draw or load a molecule by name. Preview in 3D when possible.</p>
       </div>
       <nav class="builder-nav" aria-label="Project pages">
         <a href="/">Home</a>
-        <a href="/explore.html">Explore molecules</a>
-        <a class="is-current" href="/builder.html" aria-current="page">Build a molecule</a>
+        <a href="/explore.html">Explore</a>
+        <a class="is-current" href="/builder.html" aria-current="page">Builder</a>
         <a href="/reaction-lab.html">Reaction Lab</a>
         <a href="/calculators.html">Calculators</a>
       </nav>
@@ -60,6 +67,7 @@ app.innerHTML = `
           </div>
           <button id="load-ethanol" class="secondary-button" type="button" disabled>Load ethanol example</button>
         </div>
+        <div id="builder-molecule-search"></div>
         <div id="ketcher-editor" class="ketcher-frame" aria-label="2D chemical structure editor"></div>
         <div class="editor-actions">
           <button id="generate-3d" class="primary-button" type="button" disabled>Check + preview 3D</button>
@@ -95,6 +103,8 @@ app.innerHTML = `
   </main>
 `;
 
+mountWorkspaceShell(document.querySelector<HTMLElement>('.builder-shell')!);
+
 function required<T extends Element>(selector: string): T {
   const element = document.querySelector<T>(selector);
   if (!element) throw new Error(`Missing Builder element: ${selector}`);
@@ -122,8 +132,9 @@ const DRAFT_KEY = 'molecule-playground.builder-draft.v1';
 
 const viewerFactory = (window as unknown as { $3Dmol?: { createViewer: (element: HTMLElement, options: Record<string, unknown>) => Viewer } }).$3Dmol;
 if (!viewerFactory) throw new Error('3Dmol.js did not load.');
-const viewer = viewerFactory.createViewer(viewerHost, { backgroundColor: '#f5f3ee', antialias: true });
+const viewer = viewerFactory.createViewer(viewerHost, { backgroundColor: '#f7fbff', antialias: true });
 const measurements = new BondMeasurements(required<HTMLElement>('#builder-measurements'), viewer);
+const cameraControls = mountViewerControls(viewerHost, viewer);
 
 let ketcher: Ketcher | null = null;
 let generating = false;
@@ -131,6 +142,34 @@ let editRevision = 0;
 let lastResult: ChemistryResult | null = null;
 let saveTimer: number | undefined;
 let saveRevision = 0;
+let importingMolecule = false;
+let loadingExample = false;
+
+const moleculeSearch = new BuilderMoleculeSearch(required<HTMLElement>('#builder-molecule-search'), {
+  getEditor: () => ketcher,
+  canImport: () => !generating && !loadingExample && !importingMolecule,
+  lockEditor: () => {
+    importingMolecule = true;
+    generateButton.disabled = true;
+    ethanolButton.disabled = true;
+    transferButtons.forEach((button) => { button.disabled = true; });
+    const wasInert = editorHost.inert;
+    editorHost.inert = true;
+    return () => {
+      editorHost.inert = wasInert;
+      importingMolecule = false;
+      generateButton.disabled = !ketcher || generating;
+      ethanolButton.disabled = !ketcher;
+      transferButtons.forEach((button) => { button.disabled = !lastResult; });
+    };
+  },
+  onImported: (match) => {
+    resetResult();
+    setStatus(`${match.name} is loaded in the drawing editor. Select Check + preview 3D.`);
+    window.clearTimeout(saveTimer);
+    void saveDrawing(++saveRevision);
+  },
+});
 
 async function saveDrawing(revision: number) {
   const instance = ketcher;
@@ -147,6 +186,7 @@ function setStatus(message: string, error = false) {
 }
 
 function resetResult() {
+  cameraControls.setEnabled(false);
   editRevision += 1;
   lastResult = null;
   transferButtons.forEach((button) => { button.disabled = true; });
@@ -168,6 +208,7 @@ function resetResult() {
 }
 
 function displayResult(result: ChemistryResult) {
+  cameraControls.setEnabled(false);
   lastResult = result;
   transferButtons.forEach((button) => { button.disabled = false; });
   measurements.reset();
@@ -195,6 +236,7 @@ function displayResult(result: ChemistryResult) {
   measurements.setAtoms(model.selectedAtoms({}));
   viewer.render();
   placeholder.hidden = true;
+  cameraControls.setEnabled(true);
   ruleCheck.textContent = 'Passed';
   ruleCheck.classList.add('is-valid');
   energyMethod.textContent = result.converged ? result.forceField : `${result.forceField} · not fully minimized`;
@@ -202,7 +244,7 @@ function displayResult(result: ChemistryResult) {
 }
 
 async function generate3D() {
-  if (!ketcher || generating) return;
+  if (!ketcher || generating || importingMolecule) return;
   const revision = editRevision;
   generating = true;
   generateButton.disabled = true;
@@ -240,7 +282,7 @@ async function generate3D() {
 
 generateButton.addEventListener('click', generate3D);
 transferButtons.forEach((button, slot) => button.addEventListener('click', () => {
-  if (!lastResult) return;
+  if (!lastResult || importingMolecule) return;
   try {
     sessionStorage.setItem(TRANSFER_KEY, JSON.stringify({ slot, smiles: lastResult.smiles, formula: lastResult.formula }));
     window.location.assign('/reaction-lab.html');
@@ -249,7 +291,8 @@ transferButtons.forEach((button, slot) => button.addEventListener('click', () =>
   }
 }));
 ethanolButton.addEventListener('click', async () => {
-  if (!ketcher) return;
+  if (!ketcher || importingMolecule || loadingExample) return;
+  loadingExample = true;
   ethanolButton.disabled = true;
   try {
     await ketcher.setMolecule('CCO');
@@ -258,10 +301,16 @@ ethanolButton.addEventListener('click', async () => {
   } catch (error) {
     setStatus(error instanceof Error ? error.message : 'Could not load ethanol.', true);
   } finally {
+    loadingExample = false;
     ethanolButton.disabled = false;
   }
 });
 
+const releaseStartupGuard = guardEditorStartup(editorHost);
+const releaseEditorStartup = () => {
+  releaseStartupGuard();
+  requestAnimationFrame(() => requestAnimationFrame(() => moleculeSearch.setReady(ketcher !== null)));
+};
 createRoot(editorHost).render(React.createElement(Editor, {
   staticResourcesUrl: '/',
   structServiceProvider: new StandaloneStructServiceProvider(),
@@ -272,6 +321,7 @@ createRoot(editorHost).render(React.createElement(Editor, {
     generateButton.disabled = false;
     ethanolButton.disabled = false;
     instance.editor.subscribe('change', () => {
+      moleculeSearch.drawingChanged();
       resetResult();
       setStatus('Drawing changed. Check it again when ready.');
       window.clearTimeout(saveTimer);
@@ -282,12 +332,15 @@ createRoot(editorHost).render(React.createElement(Editor, {
     try { saved = sessionStorage.getItem(DRAFT_KEY); } catch { /* Private browsing can disable storage. */ }
     if (saved && saved.length <= 200_000 && saved.includes('V2000')) {
       void instance.setMolecule(saved).then(() => setStatus('Your drawing was restored from this browser tab. Check it when ready.'))
-        .catch(() => setStatus('The saved drawing could not be restored. Start a new drawing.', true));
+        .catch(() => setStatus('The saved drawing could not be restored. Start a new drawing.', true))
+        .finally(releaseEditorStartup);
     } else {
-      setStatus('Drawing editor ready. Add atoms or load the ethanol example.');
+      setStatus('Drawing editor ready. Draw, search by name, or load the ethanol example.');
+      releaseEditorStartup();
     }
   },
   errorHandler: (message: string) => {
+    releaseEditorStartup();
     measurements.reset();
     setStatus(message, true);
   },

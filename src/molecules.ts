@@ -46,7 +46,8 @@ const reviewedMolecules: Molecule[] = [
     category: 'Everyday essential',
     description:
       'A small, bent molecule whose polarity helps it dissolve many ionic and polar substances.',
-    structureFile: '/molecules/water.sdf',
+    // Reference-based 104.5° water geometry; original PubChem conformer retained separately.
+    structureFile: '/molecules/water-reference.sdf',
     cid: 962,
     aliases: ['water', 'h2o'],
     properties: {

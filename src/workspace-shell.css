@@ -1,0 +1,218 @@
+/* Shared light-blue application chrome. Never target Ketcher internals or
+   scientific atom/bond colors. Reaction Lab keeps its specialized workbench. */
+body.workspace-page {
+  --ui-bg: #f4f9ff;
+  --ui-subtle: #f7fbff;
+  --ui-text: #173c5a;
+  --ui-muted: #52677c;
+  --ui-brand: #21639b;
+  --ui-brand-soft: #e3f1ff;
+  --ui-border: #ccdfed;
+  --ui-control-border: #7b96af;
+  --ui-focus: #165fcc;
+  color: var(--ui-text);
+  background: var(--ui-bg);
+}
+body .workspace-shell:not(.lab-research) {
+  display: grid;
+  grid-template-columns: 196px minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  gap: 0 28px;
+  width: 100%;
+  max-width: 1920px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 0 28px 28px 0;
+}
+.workspace-shell > :not(.workspace-rail):not(dialog) { grid-column: 2; min-width: 0; }
+.workspace-shell [hidden] { display: none !important; }
+.workspace-shell .workspace-rail {
+  position: sticky;
+  top: 0;
+  grid-column: 1;
+  grid-row: 1 / -1;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100dvh;
+  padding: 28px 14px;
+  border-right: 1px solid #c9deef;
+  background: #e3f1ff;
+}
+.workspace-shell .workspace-brand {
+  padding: 0 10px;
+  color: var(--ui-text);
+  font-family: var(--ui-font);
+  font-size: 1.18rem;
+  font-weight: 750;
+  letter-spacing: -.04em;
+  line-height: 1.25;
+  text-decoration: none;
+  white-space: pre-line;
+}
+.workspace-shell .workspace-nav { display: grid; align-self: stretch; gap: 6px; width: auto; }
+.workspace-shell .workspace-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+  min-height: 44px;
+  padding: 12px 10px;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: #345873;
+  background: transparent;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.workspace-shell .workspace-nav a:hover { color: var(--ui-text); background: #d4e8fa; }
+.workspace-shell .workspace-nav a[aria-current="page"] { color: #174c78; background: #c6e2ff; border-color: #b8d8f5; }
+.workspace-icon { display: block; width: 20px; height: 20px; flex: 0 0 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.workspace-rail-note { margin-top: auto; padding: 10px; color: var(--ui-muted); font-size: .75rem; line-height: 1.5; }
+.workspace-shell:not(.lab-research) > :is(.hero, .builder-header) { padding: 26px 0 22px; }
+.workspace-shell:not(.lab-research) :is(.hero, .builder-header) h1 { margin-bottom: 5px; font-size: clamp(1.8rem, 2.6vw, 2.35rem); }
+.workspace-shell:not(.lab-research) :is(.hero-copy, .builder-copy) { font-size: .875rem; }
+.workspace-shell:not(.lab-research) > :is(.workspace, .builder-workspace) { align-self: start; border-radius: 12px; border-color: var(--ui-border); box-shadow: none; background: #fff; }
+.workspace-shell:not(.lab-research) :is(h2, h3):not(:where(.ketcher-frame *)) { font-family: var(--ui-font); }
+.workspace-shell:not(.lab-research) :where(button, input, select, summary, a):not(:where(.ketcher-frame *)):focus-visible { outline: 3px solid var(--ui-focus); outline-offset: 3px; }
+.workspace-shell:not(.lab-research) :where(input, select):not(:where(.ketcher-frame *)) { color: var(--ui-text); border-color: var(--ui-control-border); background: #fff; accent-color: var(--ui-brand); }
+.workspace-shell:not(.lab-research) :where(button):not(:where(.ketcher-frame *)) { color: var(--ui-brand); border-color: var(--ui-control-border); background: #fff; }
+.workspace-shell:not(.lab-research) :where(button:disabled):not(:where(.ketcher-frame *)) { opacity: .5; }
+.workspace-shell:not(.lab-research) :is(.primary-button, .molecule-search button, .solution-submit, .calculator-submit, .calculator-workspace button[type="submit"]):not(:where(.ketcher-frame *)) {
+  border-color: var(--ui-brand);
+  color: #fff;
+  background: var(--ui-brand);
+}
+.workspace-shell:not(.lab-research) :is(.solution-modes button, .calculator-modes button, #calculator-topics button, .calculator-workspace button)[aria-pressed="true"]:not(:where(.ketcher-frame *)) { color: #fff; border-color: var(--ui-brand); background: var(--ui-brand); }
+.workspace-shell:not(.lab-research) :is(.secondary-button, .explorer-transfer button, .solution-clear, .reaction-amounts-retry):not(:where(.ketcher-frame *)) { color: var(--ui-brand); border-color: #b5cdde; background: #fff; }
+.workspace-shell:not(.lab-research) :is(.search-help summary, .builder-help summary, .prototype-note summary, .molecule-information__help summary, .molecule-information a) { color: var(--ui-brand); }
+.workspace-shell:not(.lab-research) :is(.solution-calculator, .reaction-calculator) { color: var(--ui-text); background: var(--ui-subtle); border-color: var(--ui-border); }
+.workspace-shell:not(.lab-research) :is(.solution-context, .solution-caption, .solution-field small, .solution-fact span, .solution-assumptions p, .solution-assumptions a, .calculator-caption, .calculator-notes p, .calculator-assumptions p, .calculator-field small, .calc-note, .calculator-workspace small, .reaction-amounts-status:not([role="alert"]), .reaction-amounts-caption, .reaction-amounts-context) { color: var(--ui-muted); }
+.workspace-shell:not(.lab-research) :is(.solution-calculator > summary, .reaction-calculator > summary, .calculator-field label, .reaction-amounts-controls label) { color: var(--ui-text); }
+.workspace-shell:not(.lab-research) :is(.solution-output, .calculator-fact, .calc-result) { color: var(--ui-text); border-color: var(--ui-border); background: #edf6ff; }
+.workspace-shell:not(.lab-research) .calculator-fact strong { color: var(--ui-text); }
+.workspace-shell:not(.lab-research) :is(.solution-assumptions, .calculator-assumptions, .calculator-workspace details) { border-color: var(--ui-border); }
+
+/* Explorer: the search library and model remain separate, shrinkable regions. */
+.workspace-shell .workspace { grid-template-columns: minmax(250px, .34fr) minmax(0, 1fr); }
+.workspace-shell .library { padding: 24px 18px; border-color: var(--ui-border); background: var(--ui-subtle); }
+.workspace-shell .viewer-panel { background: #fff; }
+.workspace-shell .viewer-toolbar { padding: 24px 24px 18px; }
+.workspace-shell .formula { color: var(--ui-brand); }
+.workspace-shell .viewer-stage { margin-inline: 18px; background: var(--ui-subtle); }
+.workspace-shell .viewer-status { color: var(--ui-text); background: #fff; }
+.workspace-shell .viewer-status.is-error { color: var(--ui-danger); }
+.workspace-shell .molecule-card { border-radius: 8px; }
+.workspace-shell .molecule-card.is-active { background: #e3f1ff; border-color: var(--ui-brand); }
+.workspace-shell .molecule-card:nth-child(n) .molecule-card__formula { color: var(--ui-brand); background: #ddecfb; }
+.workspace-shell .molecule-card__text strong { color: var(--ui-text); }
+.workspace-shell .molecule-information__definitions { border: 1px solid var(--ui-border); background: var(--ui-subtle); }
+.workspace-shell .details { padding: 24px; }
+.workspace-shell .molecule-information__grid dd { color: var(--ui-text); }
+.workspace-shell .molecule-information__grid > :is([data-status="unreviewed"], [data-status="unavailable"], [data-status="not-applicable"]) dd { color: var(--ui-muted); }
+.workspace-shell .viewer-panel > .viewer-controls { margin-inline: 24px; }
+.workspace-shell .explorer-transfer { border-color: var(--ui-border); }
+
+/* Builder: theme only the app wrapper, never the embedded drawing controls. */
+.workspace-shell .editor-panel, .workspace-shell .preview-panel { padding: 22px; }
+.workspace-shell .preview-panel { background: var(--ui-subtle); border-color: var(--ui-border); }
+.workspace-shell .preview-badge { color: var(--ui-brand); background: #e3f1ff; }
+.workspace-shell .builder-viewer { background: var(--ui-subtle); border-radius: 8px; }
+.workspace-shell .builder-facts div { background: #fff; border-color: var(--ui-border); border-radius: 8px; }
+.workspace-shell .builder-facts strong:not(.is-valid):not(.is-invalid) { color: var(--ui-text); }
+.workspace-shell .editor-actions p:not(.is-error) { color: var(--ui-muted); }
+
+/* Home is an entrance to the same application, not a separate visual identity. */
+.home-shell.workspace-shell > main, .calculator-shell.workspace-shell > main { grid-row: 1 / span 2; padding-top: 26px; }
+.workspace-shell > :is(.site-footer, .calculator-footer) { grid-row: 3; }
+.workspace-shell .home-hero { grid-template-columns: minmax(0, 1.4fr) minmax(280px, .8fr); gap: 18px; min-height: 350px; }
+.workspace-shell .hero-content { min-width: 0; padding: 32px; border-radius: 12px; border-color: var(--ui-border); background: #fff; box-shadow: none; }
+.workspace-shell .home-hero h1 { color: var(--ui-text); font-family: var(--ui-font); font-size: clamp(2rem, 3.5vw, 3.4rem); font-weight: 650; letter-spacing: -.045em; line-height: 1.12; }
+.workspace-shell .hero-intro { color: var(--ui-muted); font-size: .9375rem; }
+.workspace-shell .action-primary { color: #fff; border-color: var(--ui-brand); background: var(--ui-brand); }
+.workspace-shell .action-primary:hover { background: #174f80; }
+.workspace-shell .action-secondary { color: var(--ui-brand); border-color: #b5cdde; background: #fff; }
+.workspace-shell .action-secondary:hover { background: var(--ui-brand-soft); }
+.workspace-shell .molecule-figure { min-height: 350px; border-radius: 12px; border-color: var(--ui-border); background: #e8f3ff; box-shadow: none; }
+.workspace-shell .figure-topline, .workspace-shell .molecule-figure figcaption, .workspace-shell .figure-formula { color: var(--ui-muted); }
+.workspace-shell .figure-name { color: var(--ui-text); font-family: var(--ui-font); font-size: 1.4rem; font-weight: 650; }
+.workspace-shell .tool-section { padding: 32px 0; }
+.workspace-shell .section-intro { margin-bottom: 18px; }
+.workspace-shell .tool-grid { gap: 14px; }
+.workspace-shell .tool-card { min-height: 260px; padding: 20px; border-radius: 12px; border-color: var(--ui-border); box-shadow: none; }
+.workspace-shell .tool-number { color: var(--ui-muted); }
+.workspace-shell .tool-symbol { display: grid; place-items: center; width: 44px; height: 44px; margin: 14px 0; border-radius: 10px; color: var(--ui-brand); border-color: var(--ui-border); background: var(--ui-brand-soft); }
+.workspace-shell .tool-symbol .workspace-icon { width: 24px; height: 24px; }
+.workspace-shell .tool-card a { color: var(--ui-brand); border-color: var(--ui-border); }
+.workspace-shell .scope-panel { gap: 24px; padding: 24px; border-radius: 12px; border-color: var(--ui-border); background: #e3f1ff; }
+.workspace-shell .scope-copy p { color: var(--ui-muted); }
+
+/* Calculators retain all topic selectors, models, arithmetic and assumptions. */
+.workspace-shell .calculator-intro { padding: 0 0 22px; }
+.workspace-shell .calculator-intro h1 { margin-bottom: 5px; font-size: clamp(1.8rem, 2.6vw, 2.35rem); }
+.workspace-shell .calculator-intro > p:last-child { color: var(--ui-muted); font-size: .875rem; }
+.workspace-shell .calculator-layout { grid-template-columns: 220px minmax(0, 1fr); gap: 18px; }
+.workspace-shell .calculator-menu { top: 20px; padding: 8px; border-color: var(--ui-border); border-radius: 12px; background: #fff; }
+.workspace-shell #calculator-topics button { color: var(--ui-muted); }
+.workspace-shell .calculator-workspace { padding: 24px; border-radius: 12px; background: #fff; border-color: var(--ui-border); box-shadow: none; }
+.workspace-shell .calculator-context { color: var(--ui-text); background: var(--ui-subtle); border-color: var(--ui-border); }
+.workspace-shell .calculator-workspace :is(label, legend) { color: var(--ui-text); }
+.workspace-shell .calculator-workspace details :is(p, a):not(.solution-error):not(.calculator-error):not(.calc-error):not([role="alert"]) { color: var(--ui-muted); }
+.workspace-shell .calc-result span { color: var(--ui-muted); }
+.workspace-shell .calculator-workspace fieldset { border-color: var(--ui-border); }
+
+@media (max-width: 1280px) {
+  .workspace-shell .builder-workspace { display: block; }
+  .workspace-shell .preview-panel { border-left: 0; border-top: 1px solid var(--ui-border); }
+  .workspace-shell .tool-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 1250px) {
+  body .workspace-shell:not(.lab-research) { grid-template-columns: 170px minmax(0, 1fr); gap: 0 18px; padding-right: 18px; }
+  .workspace-shell .home-hero { grid-template-columns: minmax(0, 1fr); }
+  .workspace-shell .molecule-figure { min-height: 260px; }
+  .workspace-shell .water-illustration { max-height: 230px; }
+}
+@media (max-width: 1100px) {
+  .workspace-shell .workspace { grid-template-columns: minmax(0, 1fr); }
+  .workspace-shell .library { border-right: 0; border-bottom: 1px solid var(--ui-border); }
+  .workspace-shell .molecule-list { grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: 240px; }
+  .workspace-shell .calculator-layout { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .workspace-shell .calculator-menu { position: static; }
+  .workspace-shell :is(#calculator-topics, .menu-note) { display: none; }
+  .workspace-shell .mobile-topic-label { display: block; font-size: .8125rem; font-weight: 650; margin-bottom: 6px; }
+  .workspace-shell #calculator-topic { display: block; width: 100%; min-height: 44px; padding: 10px; border: 1px solid var(--ui-control-border); border-radius: 8px; color: var(--ui-text); background: #fff; font: inherit; }
+}
+@media (max-width: 760px) {
+  body .workspace-shell:not(.lab-research) { display: block; padding: 0 14px 24px; }
+  .workspace-shell .workspace-rail { position: static; height: auto; margin: 0 -14px; padding: 14px; gap: 12px; border-right: 0; border-bottom: 1px solid #c9deef; }
+  .workspace-shell .workspace-brand { padding: 0; font-size: 1rem; white-space: normal; }
+  .workspace-shell .workspace-nav { display: flex; flex-wrap: wrap; justify-content: start; gap: 4px; }
+  .workspace-shell .workspace-nav a { padding: 10px 8px; font-size: .75rem; }
+  .workspace-shell .workspace-nav .workspace-icon { width: 17px; height: 17px; flex-basis: 17px; }
+  .workspace-rail-note { display: none; }
+  .workspace-shell:not(.lab-research) > :is(.hero, .builder-header) { padding: 20px 0; }
+  .home-shell.workspace-shell > main, .calculator-shell.workspace-shell > main { padding-top: 20px; }
+  .workspace-shell .hero-content { padding: 24px; }
+  .workspace-shell .home-hero h1 { font-size: clamp(2rem, 7vw, 2.6rem); }
+  .workspace-shell .scope-panel { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .workspace-shell .calculator-workspace { padding: 18px 14px; }
+  .workspace-shell .calculator-heading h2 { font-size: 1.35rem; }
+  .workspace-shell .viewer-toolbar, .workspace-shell .details { padding: 20px 16px; }
+  .workspace-shell .editor-panel, .workspace-shell .preview-panel { padding: 16px; }
+  .workspace-shell .viewer-panel > .viewer-controls { margin-inline: 16px; }
+}
+@media (max-width: 500px) {
+  .workspace-shell .tool-grid, .workspace-shell .molecule-list { grid-template-columns: minmax(0, 1fr); }
+  .workspace-shell .tool-card { min-height: 220px; }
+  .workspace-shell .figure-topline { padding-inline: 18px; }
+  .workspace-shell .molecule-figure figcaption { padding-inline: 18px; }
+  .workspace-shell .solution-fields { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workspace-shell :where(button, a):not(:where(.ketcher-frame *)) { transition: none; }
+}

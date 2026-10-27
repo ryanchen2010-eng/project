@@ -32,7 +32,8 @@ function harness({ fetcher } = {}) {
     { index: 1, elem: 'O', x: 0.6, y: -0.2, z: -0.1, bonds: [0] },
   ];
   const state = {
-    editRevision: 0, lastResult: null, generating: false,
+    cameraControls: { setEnabled() {}, setVisible() {} },
+    editRevision: 0, lastResult: null, generating: false, importingMolecule: false,
     transferButtons: [element(), element()],
     placeholder: element(), formula: element(), mass: element(), atomCount: element(), bondCount: element(),
     ruleCheck: element(), energyMethod: element(), atomLabel: element(), bondLabel: element(), previewBadge: element(),
@@ -119,4 +120,12 @@ test('Builder ignores an old preview result when drawing changes while it is loa
   assert.deepEqual(calls.models, []);
   assert.deepEqual(calls.atoms, []);
   assert.equal(state.lastResult, null);
+});
+
+test('Builder does not calculate a preview while a name-search import is replacing the drawing', async () => {
+  const { generate3D, calls, state } = harness();
+  state.importingMolecule = true;
+  await generate3D();
+  assert.equal(calls.resets, 0);
+  assert.equal(calls.status.length, 0);
 });

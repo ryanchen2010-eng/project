@@ -14,10 +14,37 @@ export type GuidedConditions = {
   targetConditions?: Record<string, string>;
   limitations: string[];
   sourceUrl?: string;
+  profileDescriptor?: { facts: { field: string; value: unknown; provenance: string; relevance: string; source?: string }[]; assumptions: string[]; unknowns: string[] };
 };
 
 export function guidedControlValues(guidance: GuidedConditions): Record<string, string> {
   if (!guidance.canApply || !guidance.targetConditions) throw new Error('No applicable settings were supplied by the backend.');
+  if (['cooled-isobutylene-os-peroxide-v1','cooled-crotonic-os-peroxide-v1','cooled-cinnamic-os-peroxide-v1'].includes(guidance.profileId ?? '')) {
+    const values = guidance.targetConditions;
+    if (values.solvent !== 'dry' || values.catalyst !== 'osmium' || values.workup !== (guidance.profileId === 'cooled-isobutylene-os-peroxide-v1' ? '' : 'aqueous-release')
+      || values.conditionProfileId !== guidance.profileId || values.conditionProfileVersion !== '1'
+      || Object.keys(values).some(key => !['solvent','catalyst','workup','conditionProfileId','conditionProfileVersion'].includes(key))) {
+      throw new Error('These settings do not match the source-specific free-product reference.');
+    }
+    return { ...values }; // Explicit reviewed release contract, never automatic work-up substitution.
+  }
+  if (guidance.profileId === 'cooled-cyclohexene-pd-silica-v1') {
+    const values = guidance.targetConditions;
+    if (values.solvent !== 'dry' || values.catalyst !== 'metal'
+      || values.conditionProfileId !== guidance.profileId || values.conditionProfileVersion !== '1'
+      || Object.keys(values).some(key => !['solvent', 'catalyst', 'conditionProfileId', 'conditionProfileVersion'].includes(key))) {
+      throw new Error('These settings do not match the exact cyclohexene Pd/silica reference.');
+    }
+    return { ...values }; // Deliberate reference selection, never temperature or arbitrary facts.
+  }
+  if (guidance.profileId === 'cooled-perbenzoic-epoxidation-v1') {
+    const controls = guidance.targetConditions;
+    if (controls.solvent !== 'dry' || controls.catalyst !== 'none'
+      || Object.keys(controls).some(key => !['solvent', 'catalyst'].includes(key))) {
+      throw new Error('These settings do not match the bounded perbenzoic-acid medium/activation model.');
+    }
+    return { ...controls }; // No temperature changes, stage clearing or chemistry permission.
+  }
   if (guidance.profileId === 'Alkyne partial hydrogenation') {
     // Direct transport for the existing activation control. Do not fill a
     // solvent/temperature or silently discard unknown profile declarations.
@@ -73,6 +100,17 @@ export class GuidedConditionsPanel {
     this.host.append(title, node('strong', guidance.title));
     const status = node('p', STATES[guidance.state]); status.setAttribute('role', 'status');
     this.host.append(status, node('p', guidance.message));
+    const changes = guidance.requirements.filter(row => row.state === 'missing' || row.state === 'conflicting');
+    if (guidance.canApply && changes.length) {
+      const next = node('p', 'Next: open “Review supported settings” below. Nothing changes until you review and apply.');
+      const checklist = node('ul'); checklist.setAttribute('aria-label', 'Settings to review');
+      for (const row of changes) {
+        checklist.append(node('li', row.state === 'missing'
+          ? `Choose ${row.label}: ${row.requiredLabel}.`
+          : `Review ${row.label}: ${row.selectedLabel} → ${row.requiredLabel} (confirmation required).`));
+      }
+      this.host.append(next, checklist);
+    }
     const details = node('details');
     details.append(node('summary', guidance.canApply ? 'Review supported settings' : 'Settings and limitations'));
     const list = node('ul');
@@ -81,6 +119,15 @@ export class GuidedConditionsPanel {
     }
     if (guidance.requirements.length) details.append(list);
     for (const text of guidance.limitations) details.append(node('p', text));
+    if (guidance.profileDescriptor) {
+      const facts = node('details'); facts.append(node('summary', 'Source Observations, Assumptions and Unknowns'));
+      for (const item of guidance.profileDescriptor.facts) {
+        facts.append(node('p', `${item.field} — ${item.provenance}: ${typeof item.value === 'string' ? item.value : JSON.stringify(item.value)}. ${item.relevance}${item.source ? ` Source: ${item.source}.` : ''}`));
+      }
+      for (const text of guidance.profileDescriptor.assumptions) facts.append(node('p', `Model assumption: ${text}`));
+      for (const text of guidance.profileDescriptor.unknowns) facts.append(node('p', `Unknown / not modeled: ${text}`));
+      details.append(facts);
+    }
     if (guidance.sourceUrl?.startsWith('https://')) {
       const source = node('a', 'Profile reference'); source.href = guidance.sourceUrl;
       source.target = '_blank'; source.rel = 'noopener noreferrer'; details.append(source);

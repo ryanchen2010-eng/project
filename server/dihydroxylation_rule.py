@@ -6,10 +6,12 @@ No NMO, permanganate, cleavage or asymmetric ligand model is introduced.
 """
 from rdkit import Chem
 if __package__:
+    from . import cooled_dihydroxylation_r3 as r3
     from . import molecular_graph as graph, reaction_compatibility as compatibility, stereochemistry as stereo
     from .bromination_stereo import references, local_centers, normalized_tag, set_tag, projected_product
     from .bromination_rule import equivalent_sites
 else:
+    import cooled_dihydroxylation_r3 as r3
     import molecular_graph as graph, reaction_compatibility as compatibility, stereochemistry as stereo
     from bromination_stereo import references, local_centers, normalized_tag, set_tag, projected_product
     from bromination_rule import equivalent_sites
@@ -101,7 +103,23 @@ def extra_check(molecule, ends):
 POLICY = compatibility.SitePolicy("selected-site syn Os/H2O2 dihydroxylation", frozenset({"C", "H", "O"}), site_check, group_check, extra_check, added_atoms=4)
 
 
-def assess(molecule, site): return compatibility.assess_site(molecule, site[:2], POLICY)
+def assess(molecule, site, profile_id=None):
+    model = r3.MODELS.get(profile_id)
+    if model and model.workup and r3.identity(molecule) == model.substrate:
+        # Exact independently evidenced acid only. No global relaxation of
+        # conjugated/functional-group, stereo or spectator restrictions.
+        def source_site(mol, ends):
+            if frozenset(ends) not in {frozenset(s) for s in graph.find_alkenes(mol)}:
+                return 'Choose the actual source-parent C=C site.'
+            if len(graph.find_alkenes(mol)) != 1: return 'No multi-site acid oxidation is qualified.'
+            return None
+        def source_group(mol, ends, group):
+            if group['type'] == 'carboxylic acid':
+                return 'preserved', 'source-specific', 'Exact source acid group retained as a neutral free-acid reporting graph; no general conjugated-acid inertness or solution-speciation claim.'
+            return group_check(mol, ends, group)
+        policy = compatibility.SitePolicy('R3 exact source acid syn net reference', frozenset({'C','H','O'}), source_site, source_group, extra_check, added_atoms=4)
+        return compatibility.assess_site(molecule, site[:2], policy)
+    return compatibility.assess_site(molecule, site[:2], POLICY)
 
 
 def participants(substrate, reagent, site):
@@ -178,9 +196,9 @@ def variants(molecule, ends):
     return [0, 1] if centers and assigned else [0]
 
 
-def sites(molecule):
+def sites(molecule, profile_id=None):
     return [(*ends, face) for ends in graph.find_alkenes(molecule)
-            for face in (variants(molecule, ends) if assess(molecule, ends)["eligible"] else [0])]
+            for face in (variants(molecule, ends) if assess(molecule, ends, profile_id)["eligible"] else [0])]
 
 
 def edit(editor, combined, substrate, reagent, site):
@@ -190,8 +208,8 @@ def edit(editor, combined, substrate, reagent, site):
     apply_stereo(substrate, editor, participants(substrate, reagent, site), site[2])
 
 
-def validate(before, after, substrate, reagent, site):
-    report = assess(substrate, site)
+def validate(before, after, substrate, reagent, site, profile_id=None):
+    report = assess(substrate, site, profile_id)
     if not report["eligible"]: raise ValueError(" ".join(r["message"] for r in report["rejections"]))
     if len(site) != 3 or type(site[2]) is not int or site[2] not in variants(substrate, site[:2]):
         raise ValueError("Invalid dihydroxylation face/site.")

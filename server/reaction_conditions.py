@@ -4,6 +4,24 @@ Eligibility stays in graph/reagent validators. Reference profiles are not
 activation requirements, measured selectivity, or a solvent/pH/kinetic model.
 Hydration separately requires independently validated acid activation.
 """
+from copy import deepcopy
+
+# Keep the original v1 imports available; the registry now owns these policies.
+if __package__:
+    from .reaction_temperature_profiles import (
+        CONDITION_FIELDS, COOLING_NOTE, COOLING_LIMITATIONS, COOLED_BROMINATION_MODEL,
+        COOLED_BROMINATION_SOURCES, COOLED_EPOXIDATION_MODEL, COOLED_EPOXIDATION_SOURCES,
+        MCPBA_IDENTITY, assess_cooling_support, profile_for_review, current_cooling_overlay,
+        reject_cooling_contract, normalize_legacy_cooling_assessment,
+    )
+else:
+    from reaction_temperature_profiles import (
+        CONDITION_FIELDS, COOLING_NOTE, COOLING_LIMITATIONS, COOLED_BROMINATION_MODEL,
+        COOLED_BROMINATION_SOURCES, COOLED_EPOXIDATION_MODEL, COOLED_EPOXIDATION_SOURCES,
+        MCPBA_IDENTITY, assess_cooling_support, profile_for_review, current_cooling_overlay,
+        reject_cooling_contract, normalize_legacy_cooling_assessment,
+    )
+
 REVIEWED = frozenset({"SN1", "SN2", "E1", "E2", "Hydration", "Hydrohalogenation", "Bromination", "Chlorination", "Epoxidation", "Alcohol dehydration", "Alcohol substitution", "Aldehyde oxidation", "Alkene dihydroxylation", "Alkyne partial hydrogenation", "Alkyne hydrogenation", "Alkyne halogenation", "Alkyne hydrohalogenation"})
 LABELS = {"model-match": "Model conditions match", "reference-difference": "Reference differs",
           "missing": "Conditions incomplete", "disfavored": "Disfavored factors", "unevaluated": "Not evaluated",
@@ -165,7 +183,11 @@ def assess_hydration_conditions(conditions):
                        "temperature": {"status": "unevaluated", "effect": "unknown", "explanation": "Temperature does not establish a universal hydration rate or selectivity. Equilibrium composition, dehydration, acid-specific kinetics and experimental conversion are not calculated."}}}
 
 
-def assess_dihydroxylation_conditions(conditions):
+def assess_dihydroxylation_conditions(conditions, reaction=None):
+    if __package__: from .cooled_dihydroxylation_r3 import endpoint_assessment
+    else: from cooled_dihydroxylation_r3 import endpoint_assessment
+    named = endpoint_assessment(reaction or {}, conditions)
+    if named is not None: return named
     catalyst, workup, temperature = (conditions.get(k, "") for k in ("catalyst", "workup", "temperature"))
     missing = [k for k, value in (("catalyst", catalyst), ("workup", workup)) if not value or (k == "catalyst" and value == "none")]
     wrong = catalyst not in {"", "none", "osmium"} or workup not in {"", "aqueous-release"} or temperature == "heated"
@@ -373,7 +395,6 @@ def assess_alkyne_hx_conditions(reaction, conditions):
 
 
 ALKYNE_PATHWAYS = frozenset({"Alkyne partial hydrogenation", "Alkyne hydrogenation", "Alkyne halogenation", "Alkyne hydrohalogenation"})
-CONDITION_FIELDS = frozenset({"solvent", "temperature", "catalyst", "oxidationStage", "additionStage", "polymerUnits", "workup"})
 
 
 def alkyne_input_evidence(assessment, conditions, path):
@@ -416,7 +437,91 @@ def alkyne_input_evidence(assessment, conditions, path):
     return assessment
 
 
+def cooling_confidence(assessment, conditions, reaction=None):
+    """Shared cooling assessment, retaining unreviewed pathways' prior gate.
+
+    This does not alter graph matching or invent a low-temperature protocol.
+    Existing ambient/heated/unset behavior is unchanged, and stronger activation,
+    missing-input or unsupported-pathway explanations are retained.
+    """
+    if __package__:
+        from . import named_condition_profiles as named, reaction_temperature_profiles as profiles
+    else:
+        import named_condition_profiles as named, reaction_temperature_profiles as profiles
+    issue = named.selection_issue(profiles.selected_profile(conditions), reaction or {}, conditions)
+    if issue:
+        return named.reject_selection(assessment, conditions, issue)
+    if conditions.get("temperature") != "cooled":
+        return assessment
+    if "coolingPolicy" in assessment:
+        return assessment if current_cooling_overlay(assessment, reaction, conditions) else reject_cooling_contract(assessment, reaction)
+    assessment = normalize_legacy_cooling_assessment(assessment, conditions, reaction)
+    review = assess_cooling_support(reaction, conditions, assessment)
+    result = deepcopy(assessment)
+    result["cooling"] = review
+    if review["canGenerate3D"]:
+        result.update(canRun=True, state="aligned", status="model-match", coolingPolicy=review["modelId"], coolingUnvalidated=False,
+                      confidenceLabel=profile_for_review(review).confidence_label)
+        if profile_for_review(review).explicit_only:
+            result["label"] = "Named condition profile matches"
+        result["factors"]["temperature"] = {
+            "status": "model-match", "effect": "neutral", "explanation": review["note"]}
+        # Persistent UI selectors are not equivalents or activation evidence.
+        result["notApplicableSettings"] = list(dict.fromkeys([
+            *result.get("notApplicableSettings", []),
+            *(key for key in ("additionStage", "polymerUnits") if conditions.get(key))]))
+        result["note"] = review["note"] + " " + result.get("note", "")
+        return result
+    if review["status"] == "conditions-unresolved":
+        # A recognized cooling model can fail on reagent/medium/activation.
+        # Do not misattribute these failures to an unreviewed temperature.
+        model_name = profile_for_review(review).model_name
+        result.update(canRun=False, state="incomplete", coolingPolicy=review["modelId"],
+                      coolingUnvalidated=True, confidenceLabel=f"Cooled {model_name} conditions unresolved · conditional 2D only")
+        if result.get("status") not in {"missing", "activation-required", "unsupported-pathway"}:
+            result.update(status="unevaluated", label=f"Cooled {model_name} conditions unresolved")
+        issues = result.setdefault("conditionIssues", [])
+        for issue in review["conditionIssues"]:
+            if not any(existing.get("field") == issue["field"] for existing in issues):
+                issues.append(deepcopy(issue))
+            result.setdefault("factors", {})[issue["field"]] = {
+                "status": "unsupported-pathway" if issue["kind"] == "unsupported" else "unevaluated",
+                "effect": "unknown", "explanation": issue["explanation"]}
+        result["factors"]["temperature"] = {"status": "model-match", "effect": "neutral",
+            "explanation": f"Cooling is compatible with the bounded {model_name} net model, but does not override unresolved reagent, medium, activation or condition-input requirements."}
+        result["note"] = review["note"] + " " + result.get("note", "")
+        return result
+    result.update(canRun=False, state="incomplete", coolingPolicy="unvalidated-low-temperature-v1", coolingUnvalidated=True)
+    if result.get("status") not in {"missing", "activation-required", "unsupported-pathway"}:
+        result.update(status="unevaluated", label="Cooled conditions not evaluated")
+    result["confidenceLabel"] = "Cooled conditions unvalidated · conditional 2D only"
+    previous_note = result.get("note", "")
+    result.setdefault("missingSettings", [])
+    result.setdefault("referenceDifferences", [])
+    result.setdefault("factors", {})["temperature"] = {
+        "status": "unevaluated", "effect": "unknown", "explanation": COOLING_NOTE}
+    issues = result.setdefault("conditionIssues", [])
+    # A few older assessors describe every non-ambient input as "heated".
+    # Keep their gates, but do not repeat that misleading explanation for a
+    # newly distinct cooled selection.
+    for issue in issues:
+        if issue.get("field") == "temperature":
+            previous_note = previous_note.replace(issue["explanation"], "").strip()
+            issue["explanation"] = COOLING_NOTE
+    if not any(i.get("field") == "temperature" for i in issues):
+        issues.append({"field": "temperature", "kind": "unvalidated-alternative", "explanation": COOLING_NOTE})
+    result["note"] = (review["note"] + " Other model settings (excluding the unvalidated cooled temperature): "
+                      + previous_note)
+    if "conditionCompleteEligibility" in result:
+        result["conditionCompleteEligibility"] = False
+    return result
+
+
 def assess_conditions(reaction, conditions):
+    return cooling_confidence(_assess_conditions(reaction, conditions), conditions, reaction)
+
+
+def _assess_conditions(reaction, conditions):
     path, profile = reaction["mechanism"], reaction["profile"]
     if path == "Aldehyde oxidation":
         if __package__: from .aldehyde_oxidation_conditions import assess_conditions as assess_aldehyde
@@ -438,7 +543,7 @@ def assess_conditions(reaction, conditions):
                       else assessor[path](reaction, conditions))
         return alkyne_input_evidence(assessment, conditions, path)
     if path == "Alkene dihydroxylation":
-        return assess_dihydroxylation_conditions(conditions)
+        return assess_dihydroxylation_conditions(conditions, reaction)
     if path == "Epoxidation":
         return assess_epoxidation_conditions(conditions)
     if path == "Chlorination":

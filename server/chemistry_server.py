@@ -17,6 +17,11 @@ from rdkit import Chem
 from rdkit.Chem import AllChem, Descriptors, rdMolDescriptors
 
 if __package__:
+    from . import named_condition_profiles as named_profiles, reaction_temperature_profiles as thermal_profiles
+else:
+    import named_condition_profiles as named_profiles, reaction_temperature_profiles as thermal_profiles
+
+if __package__:
     from .reaction_condition_guidance import guidance as guided_condition_metadata
 else:
     from reaction_condition_guidance import guidance as guided_condition_metadata
@@ -26,7 +31,7 @@ if __package__:
     from .reaction_diagrams import build_reaction_diagram, mapped_product_molecule
     from .reaction_engine import generate_pair, reagent_role
     from .reaction_reasoning import explain_pathway, compare_pathways
-    from .reaction_conditions import assess_conditions, REVIEWED
+    from .reaction_conditions import assess_conditions, cooling_confidence, REVIEWED
     from .reaction_mechanisms import build_mechanism
     from .reaction_information import reaction_information
     from .functional_groups import inspect_structure
@@ -37,7 +42,7 @@ else:  # Also support the documented ``python server/chemistry_server.py`` comma
     from reaction_diagrams import build_reaction_diagram, mapped_product_molecule
     from reaction_engine import generate_pair, reagent_role
     from reaction_reasoning import explain_pathway, compare_pathways
-    from reaction_conditions import assess_conditions, REVIEWED
+    from reaction_conditions import assess_conditions, cooling_confidence, REVIEWED
     from reaction_mechanisms import build_mechanism
     from reaction_information import reaction_information
     from functional_groups import inspect_structure
@@ -171,7 +176,7 @@ REACTIONS = {
 # Non-aligned pathways remain visible because mechanisms may compete.
 CONDITION_VALUES = {
     "solvent": {"", "polar-aprotic", "aqueous-protic", "ethanolic-protic", "dry"},
-    "temperature": {"", "ambient", "heated"},
+    "temperature": {"", "cooled", "ambient", "heated"},
     "catalyst": {"", "none", "acid", "metal", "lindlar", "osmium", "radical"},
     "oxidationStage": {"", "first", "further"},
     "additionStage": {"", "one", "two"},
@@ -458,12 +463,18 @@ def _conditions(raw: dict[str, str] | None) -> dict[str, str]:
     # Namespaced declaration is consumed ONLY by secondary oxidation. Keep it
     # unknown to other pathways, preserving their existing input assessment.
     result.secondary_oxidation_profile = getattr(raw,'secondary_oxidation_profile',raw.get(secondary_alcohol_oxidation_rule.PROFILE_KEY,''))
-    result.unsupported_fields = tuple(sorted(str(k)[:120] for k in raw if k not in CONDITION_VALUES))
+    result.unsupported_fields = tuple(sorted(str(k)[:120] for k in raw if k not in CONDITION_VALUES and k not in named_profiles.SELECTION_FIELDS))
     for key, allowed in CONDITION_VALUES.items():
         value = raw.get(key, "")
         if not isinstance(value, str) or value not in allowed:
             raise ChemistryError(f"Unsupported condition value for '{key}'; choose from the available options. No new condition model is inferred.")
         result[key] = value
+    if any(key in raw for key in named_profiles.SELECTION_FIELDS):
+        identifier, version = raw.get("conditionProfileId"), raw.get("conditionProfileVersion")
+        if (not isinstance(identifier, str) or not re.fullmatch(r"[a-z][a-z0-9-]{0,127}", identifier)
+                or not isinstance(version, str) or not re.fullmatch(r"[1-9][0-9]{0,5}", version)):
+            raise ChemistryError("A named condition profile requires an exact ID and string version; no arbitrary profile facts are accepted.")
+        result.update(conditionProfileId=identifier, conditionProfileVersion=version)
     return result
 
 
@@ -472,6 +483,43 @@ def _profile(reaction: dict[str, object]) -> dict[str, str]:
 
 
 def _assessment(reaction: dict[str, object], conditions: dict[str, str]) -> dict[str, object]:
+    selection_issue = named_profiles.selection_issue(thermal_profiles.selected_profile(conditions), reaction, conditions)
+    if selection_issue:
+        return named_profiles.reject_selection({"state": "incomplete", "note": ""}, conditions, selection_issue)
+    assessment = _base_assessment(reaction, conditions)
+    if conditions.get("temperature") != "cooled":
+        return assessment
+    original_assessment = assessment
+    assessment = cooling_confidence(assessment, conditions, reaction)
+    if reaction.get("primaryOxidationModel"):
+        # Cooling cannot turn an unvalidated aldehyde stopping point into a
+        # merely correctable temperature choice. Retain that stronger reason.
+        assessment["label"] = original_assessment["label"]
+        assessment["confidenceLabel"] = original_assessment["confidenceLabel"] + " · cooled conditions unvalidated"
+    if reaction["mechanism"] in addition_contract.NET_PATHWAYS or reaction.get("primaryOxidationModel") or reaction.get("secondaryOxidationModel"):
+        # Regenerate confidence from the overlaid gate, not the pre-cooling
+        # permission. Calculators and diagrams consume this same evidence.
+        assessment["evidence"] = addition_contract.evidence(reaction, assessment, conditions)
+    else:
+        # Older pathways did not have a versioned addition confidence payload.
+        # Supply an explicit cooled-only presentation contract without turning
+        # their reference-example profiles into new chemistry requirements.
+        assessment["evidence"] = {
+            "version": 1, "structuralEligibility": "eligible", "reagentIdentity": "validated",
+            "assertionLevel": "conditional-net", "experimentalOutcome": "not-predicted",
+            "label": assessment["confidenceLabel"], "requiredSettings": [], "missingRequiredSettings": [],
+            "requirementsState": "not-evaluated", "conditionCompleteness": "not-evaluated",
+            "unknownConditions": [key for key, factor in assessment["factors"].items()
+                                  if factor["status"] != "model-match"],
+            "evaluatedFactors": assessment["factors"], "canPreview2D": True, "canGenerate3D": False,
+            "renderingPolicy": "unvalidated-low-temperature-gate", "renderingNote": assessment["note"]}
+        if assessment.get("cooling", {}).get("canGenerate3D") is True and assessment.get("canRun") is True:
+            assessment["evidence"].update(canGenerate3D=True, requirementsState="assumptions-satisfied",
+                conditionCompleteness="model-assumptions-only", renderingPolicy="named-theoretical-product-conformer")
+    return thermal_profiles.attach_named_profile(assessment, conditions)
+
+
+def _base_assessment(reaction: dict[str, object], conditions: dict[str, str]) -> dict[str, object]:
     if reaction.get("secondaryOxidationModel"):
         assessment=secondary_alcohol_oxidation_rule.assess_conditions(reaction,conditions)
         assessment["evidence"]=addition_contract.evidence(reaction,assessment,conditions)
@@ -633,10 +681,16 @@ def _serialize_reaction(reaction_id: str, reaction: dict[str, object], condition
     }
     if conditions is not None:
         payload["assessment"] = _assessment(reaction, conditions)
+        if conditions.get("temperature") == "cooled":
+            payload["reasoning"]["label"] = payload["assessment"]["label"]
+            for factor in payload["reasoning"]["factors"]:
+                if factor["factor"] == "temperature":
+                    factor.update(value="Cooled / Low Temperature", effect=payload["assessment"]["factors"]["temperature"]["effect"],
+                                  explanation=payload["assessment"]["factors"]["temperature"]["explanation"])
         guidance = guided_condition_metadata(reaction_id, reaction, payload["assessment"], conditions)
         if guidance is not None:
             payload["guidedConditions"] = guidance
-    if reaction["mechanism"] in addition_contract.NET_PATHWAYS or reaction.get("primaryOxidationModel") or reaction.get("secondaryOxidationModel"):
+    if reaction["mechanism"] in addition_contract.NET_PATHWAYS or reaction.get("primaryOxidationModel") or reaction.get("secondaryOxidationModel") or (conditions is not None and conditions.get("temperature") == "cooled"):
         context = _conditions(conditions)
         assessment = payload.get("assessment") or _assessment(reaction, context)
         payload["stoichiometry"]["context"] = addition_contract.calculation_context(
@@ -685,7 +739,7 @@ def match_reactions(reactant_a: str | dict[str, str], reactant_b: str | dict[str
             "optionCounts": addition_contract.option_counts(options),
             "interpretationNotes": interpretation_notes, "unsupportedReasons": unsupported,
             "structuralEligibility": "eligible" if matches else "unsupported",
-            "supportState": "Conditional" if conditional else "Supported" if matches else "Unsupported",
+            "supportState": "Conditional" if matches and (conditional or context.get("temperature") == "cooled") else "Supported" if matches else "Unsupported",
             "comparison": comparison}
 
 
@@ -764,6 +818,11 @@ def reaction_diagram(reaction_id: str, reactant_a: str | dict[str, str], reactan
         assessment = _assessment(reaction, context)
         diagram["assessment"] = assessment
         diagram["note"] = "Conditional ionic HX net option. " + assessment["note"] + " " + diagram["note"]
+    if context.get("temperature") == "cooled" or named_profiles.reference(context):
+        # The same confidence contract also covers older non-addition diagrams.
+        diagram["assessment"] = _assessment(reaction, context)
+        if diagram["assessment"]["note"] not in diagram["note"]:
+            diagram["note"] = diagram["assessment"]["note"] + " " + diagram["note"]
     return {**diagram,
             "mechanism": build_mechanism(reaction, {**REACTANTS, **custom}),
             "interpretationNotes": interpretation_notes}
@@ -775,6 +834,11 @@ def run_curated_reaction(reaction_id: str, reactant_a: str | dict[str, str], rea
     reaction = _reactions_for_pair(*pair_ids, {**REACTANTS, **custom}, context)[0].get(reaction_id)
     if not reaction or sorted(reaction["reactants"]) != sorted(pair_ids):
         raise ChemistryError("Choose a reaction that matches both selected molecules.")
+
+    if context.get("temperature") == "cooled" or named_profiles.reference(context):
+        cooling_assessment = _assessment(reaction, context)
+        if not cooling_assessment.get("canRun", False):
+            raise ChemistryError(cooling_assessment["note"])
 
     if reaction["mechanism"] == "Aldehyde oxidation":
         assessment = _assessment(reaction, context)

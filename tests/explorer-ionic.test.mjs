@@ -21,6 +21,18 @@ const { solutionCompoundFromMolecule } = await import(`data:text/javascript;base
 const saltIds = ['sodium-chloride', 'sodium-hydroxide'];
 const ids = (items) => items.map(({ id }) => id);
 
+test('both sample and PubChem water selection use the reviewed reference geometry', () => {
+  const water = molecules.find(({ id }) => id === 'water');
+  assert.equal(water.structureFile, '/molecules/water-reference.sdf');
+  const searched = moleculeFromPubChem({
+    cid: 962, name: 'Water', iupacName: 'oxidane', formula: 'H2O',
+    molecularWeight: '18.015', structure: 'O',
+  });
+  assert.equal(searched.structureFile, water.structureFile);
+  assert.equal(searched.cid, water.cid);
+  assert.equal(searched.structureForm, 'O');
+});
+
 test('Explorer samples omit ionic compounds without removing their shared identities or information', () => {
   assert.equal(sharedCatalog.length, 20, 'Reaction Lab retains the complete shared collection');
   assert.equal(molecules.length, sharedCatalog.length);
@@ -206,6 +218,7 @@ function explorerHarness({ fetcher, viewerPresent = true, cleanupError = false }
     setStyle() {}, zoomTo() {}, render() { calls.lifecycle.push('render'); },
   };
   const state = {
+    cameraControls: { setEnabled() {}, setVisible() {} },
     activeMolecule: null, activeMoleculeId: '', modelReady: false, loadSequence: 0,
     depictionUrl: 'blob:previous-compound',
     buttons: new Map(explorerSamples.map((molecule) => [molecule.id, element()])),
@@ -315,7 +328,7 @@ test('a pending older 3D response cannot replace an ionic information-only selec
   assert.deepEqual(calls.models, []);
   assert.equal(calls.solutionCompounds.at(-1).id, salt.id, 'stale 3D responses cannot replace the current solution compound');
   assert.deepEqual(calls.measuredAtoms, [], 'stale models cannot revive the measurement panel');
-  assert.deepEqual(calls.fetch, ['/molecules/water.sdf']);
+  assert.deepEqual(calls.fetch, ['/molecules/water-reference.sdf']);
   assert.ok([...state.buttons.values()].every((button) => !button.disabled));
 });
 

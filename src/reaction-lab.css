@@ -105,9 +105,9 @@ h3 { margin: 16px 0 6px; font-size: .82rem; }
 .mechanism-step-buttons button[aria-pressed="true"], .electron-moves button[aria-pressed="true"] { background: #e6f1ea; border-color: #315c4b; }
 .mechanism-state { margin-top: 12px; padding: 10px; background: #fff; border-radius: 10px; overflow: auto; }
 .mechanism-state svg { display: block; width: 100%; min-width: 420px; height: auto; }
-.atom-target.is-electron-source .atom-hit { fill: #f6d3b8; fill-opacity: .45; stroke: #bd5923; stroke-width: 2; }
-.atom-target.is-electron-destination .atom-hit { fill: #c3edf3; fill-opacity: .45; stroke: #168ba0; stroke-width: 2; }
-.atom-target.is-electron-source.is-electron-destination .atom-hit { fill: #e0d0f5; stroke: #7f5cc1; }
+.atom-target.is-electron-source .atom-glow { fill: #f6d3b8; fill-opacity: .45; stroke: #bd5923; stroke-width: 2; opacity: 1; }
+.atom-target.is-electron-destination .atom-glow { fill: #c3edf3; fill-opacity: .45; stroke: #168ba0; stroke-width: 2; opacity: 1; }
+.atom-target.is-electron-source.is-electron-destination .atom-glow { fill: #e0d0f5; stroke: #7f5cc1; }
 .mechanism-state .atom-target { cursor: default; pointer-events: none; }
 .condition-fields > div:last-child { grid-column: 1 / -1; }
 .empty-options { align-self: start; margin: 0; padding: 22px; border: 1px dashed #b9cbbd; border-radius: 12px; color: #728078; background: #f7f8f2; font-size: .86rem; line-height: 1.5; }
@@ -179,6 +179,9 @@ h3 { margin: 16px 0 6px; font-size: .82rem; }
 .diagram-scroll svg { display: block; width: 100%; min-width: 500px; height: auto; }
 .is-comparing .diagram-scroll svg { min-width: 360px; }
 .atom-target { cursor: pointer; outline: none; }
+/* SVG focus uses the measured halo below, not a rectangular browser outline
+   that can cross adjacent lone-pair dots. Keep the dashed focus indicator. */
+.lab-shell .atom-target:focus-visible { outline: none; }
 .atom-target .atom-glow { fill: #ede3ff; stroke: #9061de; stroke-width: 2; transition: opacity 90ms ease; pointer-events: none; }
 .atom-target.is-observed .atom-glow, .atom-target:focus-visible .atom-glow { opacity: 1; }
 .atom-target:focus-visible .atom-glow { stroke-width: 3; stroke-dasharray: 3 2; }

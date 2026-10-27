@@ -24,6 +24,21 @@ h2 { margin-bottom: 0; font-size: clamp(1.5rem, 2vw, 2.2rem); }
 .builder-help p, .prototype-note p { max-width: 620px; margin: 7px 0 0; color: #61716a; font-size: .75rem; line-height: 1.5; }
 .ketcher-frame { height: 610px; min-height: 450px; overflow: hidden; border: 1px solid rgb(26 52 42 / 12%); border-radius: 16px; background: #fff; }
 .ketcher-frame > * { height: 100%; }
+.builder-molecule-search { margin-bottom: 16px; padding: 14px; border: 1px solid var(--ui-border, #ccdfed); border-radius: 8px; background: var(--ui-subtle, #f7fbff); }
+.builder-molecule-search label { display: block; margin-bottom: 8px; color: var(--ui-text, #173c5a); font-size: .875rem; font-weight: 750; }
+.builder-search-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.builder-search-controls input { flex: 1 1 220px; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid var(--ui-control-border, #7b96af); border-radius: 8px; font: inherit; font-size: 1rem; }
+.builder-search-controls button { min-height: 44px; }
+.builder-molecule-search p { margin: 8px 0 0; color: var(--ui-muted, #52677c); font-size: .8125rem; line-height: 1.5; }
+.builder-molecule-search p.is-error { color: #a33227; }
+.builder-search-results { display: grid; gap: 8px; max-height: 300px; margin: 12px 0 0; padding: 0; overflow: auto; list-style: none; }
+.builder-search-results[hidden] { display: none; }
+.builder-search-results li { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 12px; border: 1px solid var(--ui-border, #ccdfed); border-radius: 8px; background: #fff; }
+.builder-search-results li > div { flex: 1 1 180px; min-width: 0; }
+.builder-search-results :is(strong, span, small) { display: block; overflow-wrap: anywhere; }
+.builder-search-results strong { color: var(--ui-text, #173c5a); font-size: .875rem; }
+.builder-search-results :is(span, small) { margin-top: 4px; color: var(--ui-muted, #52677c); font-size: .8125rem; line-height: 1.5; }
+.builder-search-results button { min-height: 44px; }
 .editor-actions { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
 .editor-actions p { flex: 1; margin: 0; color: #52605b; font-size: .82rem; line-height: 1.4; }
 .editor-actions p.is-error { color: #af4439; }

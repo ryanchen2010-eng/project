@@ -1,0 +1,1187 @@
+{
+  "phase": "5B",
+  "date": "2026-10-16",
+  "scope": "Existing alcohol/HX net substitution only; no complete mechanism or experimental protocol admission",
+  "benchmarkSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+  "companionVersion": "1.0.0",
+  "companionManifestSha256": "35ce7ce6f3c3967a06fc354c8bc9fc8319a2247f3b3ac0c7cd246ec75ed8ca1e",
+  "baselineEngineSha256": "2e38f6e20e339e42c7a466b2b988a6307b8ca2dd3bbc434aab9c6de9d324a248",
+  "currentEngineSha256": "7ad29b2562f33ebcd4fa531016c52fe4e9a34d2d61e0e982fd616f3ce2316fbb",
+  "originalSubstitution": {
+    "positiveDenominator": 11,
+    "structuralMatching": 5,
+    "fullySupported": 5,
+    "partial": 0,
+    "unsupported": 6,
+    "controlsCorrectlyRejected": 2
+  },
+  "updatedSubstitution": {
+    "positiveDenominator": 11,
+    "structuralMatching": 7,
+    "fullySupported": 3,
+    "partial": 4,
+    "unsupported": 4,
+    "controlsCorrectlyRejected": 2
+  },
+  "originalStructuralPercent": 45.5,
+  "updatedStructuralPercent": 63.6,
+  "originalStrictFullPercent": 45.5,
+  "updatedStrictFullPercent": 27.3,
+  "caseCount": 347,
+  "allFrozenStatuses": {
+    "Fully supported": 165,
+    "Unsupported": 90,
+    "Correctly rejected": 38,
+    "Partially supported": 53,
+    "Incorrect result": 1
+  },
+  "unchangedUnrelatedRows": 334,
+  "changedIds": [
+    "A217",
+    "A218",
+    "A219",
+    "A220",
+    "A221",
+    "A222",
+    "A223",
+    "A229"
+  ],
+  "substitutionCaseComparisons": [
+    {
+      "before": {
+        "id": "A216",
+        "label": "long primary",
+        "substrate": "CCCCCCCO",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "CCCCCCCBr"
+        ],
+        "actual": [
+          "CCCCCCCBr"
+        ],
+        "options": 1,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "after": {
+        "id": "A216",
+        "label": "long primary",
+        "substrate": "CCCCCCCO",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "CCCCCCCBr"
+        ],
+        "actual": [
+          "CCCCCCCBr"
+        ],
+        "options": 1,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "afterNotes": []
+    },
+    {
+      "before": {
+        "id": "A217",
+        "label": "secondary internal",
+        "substrate": "CCCC(O)CC",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "CCCC(Br)CC"
+        ],
+        "actual": [
+          "CCCC(Br)CC"
+        ],
+        "options": 1,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "after": {
+        "id": "A217",
+        "label": "secondary internal",
+        "substrate": "CCCC(O)CC",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "CCCC(Br)CC"
+        ],
+        "actual": [
+          "CCCC(Br)CC"
+        ],
+        "options": 1,
+        "preview": "failed",
+        "geometry": "not run",
+        "status": "Partially supported"
+      },
+      "afterNotes": [
+        "Preview/run error: ChemistryError: Selected alcohol site and actual activating HBr validated for formal net bookkeeping. Temperature differs from the bounded HX model. Heated secondary/tertiary substitution can compete with dehydration; ambient primary conversion/activation is not established. No winner or rate is predicted. Secondary/benzylic HX mechanism and selectivity need substrate/formulation-specific validation. Conditional 2D net connectivity only; no universal SN2 inversion or free-cation SN1 sequence is asserted. The reacting product center is stereogenic but unresolved. Its configuration stays unsigned; no exact racemization ratio or stereochemical 3D outcome is asserted. HX is consumed 1:1, supplying H to net water and halogen to the haloalkane; it is not merely catalytic. OH must be protonated so water, not bare hydroxide, can leave. Temperature/medium selectors are bounded assumptions, not a complete experimental protocol. Dehydration, ether formation, exchange and actual yields are not predicted. Inspect conditional 2D; no 3D HX substitution outcome is asserted for this context."
+      ]
+    },
+    {
+      "before": {
+        "id": "A218",
+        "label": "tertiary branched",
+        "substrate": "CCCC(O)(C)C",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "CCCC(Br)(C)C"
+        ],
+        "actual": [
+          "CCCC(C)(C)Br"
+        ],
+        "options": 1,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "after": {
+        "id": "A218",
+        "label": "tertiary branched",
+        "substrate": "CCCC(O)(C)C",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "CCCC(Br)(C)C"
+        ],
+        "actual": [
+          "CCCC(C)(C)Br"
+        ],
+        "options": 1,
+        "preview": "failed",
+        "geometry": "not run",
+        "status": "Partially supported"
+      },
+      "afterNotes": [
+        "Preview/run error: ChemistryError: Selected alcohol site and actual activating HBr validated for formal net bookkeeping. Temperature differs from the bounded HX model. Heated secondary/tertiary substitution can compete with dehydration; ambient primary conversion/activation is not established. No winner or rate is predicted. HX is consumed 1:1, supplying H to net water and halogen to the haloalkane; it is not merely catalytic. OH must be protonated so water, not bare hydroxide, can leave. Temperature/medium selectors are bounded assumptions, not a complete experimental protocol. Dehydration, ether formation, exchange and actual yields are not predicted. Inspect conditional 2D; no 3D HX substitution outcome is asserted for this context."
+      ]
+    },
+    {
+      "before": {
+        "id": "A219",
+        "label": "cyclic alcohol",
+        "substrate": "OC1CCCCCC1",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "BrC1CCCCCC1"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "after": {
+        "id": "A219",
+        "label": "cyclic alcohol",
+        "substrate": "OC1CCCCCC1",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "BrC1CCCCCC1"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "afterNotes": [
+        "Ring-bound, geminal-O/hemiacetal or directly heteroatom-substituted alcohols need independent activation/neighboring-group validation."
+      ]
+    },
+    {
+      "before": {
+        "id": "A220",
+        "label": "remote ether",
+        "substrate": "COCCCCO",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "COCCCCBr"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "after": {
+        "id": "A220",
+        "label": "remote ether",
+        "substrate": "COCCCCO",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "COCCCCBr"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "afterNotes": [
+        "Potential 5-membered intramolecular oxygen capture/neighboring-group participation competes with HX substitution; this is not an inert spectator."
+      ]
+    },
+    {
+      "before": {
+        "id": "A221",
+        "label": "diol multiple groups",
+        "substrate": "OCCCCO",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "OCCCCBr"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "after": {
+        "id": "A221",
+        "label": "diol multiple groups",
+        "substrate": "OCCCCO",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "OCCCCBr"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "afterNotes": [
+        "Potential 5-membered intramolecular oxygen capture/neighboring-group participation competes with HX substitution; this is not an inert spectator."
+      ]
+    },
+    {
+      "before": {
+        "id": "A222",
+        "label": "specified center",
+        "substrate": "CC[C@H](O)CCC",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "CCCC(Br)CC"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "after": {
+        "id": "A222",
+        "label": "specified center",
+        "substrate": "CC[C@H](O)CCC",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "CCCC(Br)CC"
+        ],
+        "actual": [
+          "CCCC(Br)CC"
+        ],
+        "options": 1,
+        "preview": "failed",
+        "geometry": "not run",
+        "status": "Partially supported"
+      },
+      "afterNotes": [
+        "Preview/run error: ChemistryError: Selected alcohol site and actual activating HBr validated for formal net bookkeeping. Temperature differs from the bounded HX model. Heated secondary/tertiary substitution can compete with dehydration; ambient primary conversion/activation is not established. No winner or rate is predicted. Secondary/benzylic HX mechanism and selectivity need substrate/formulation-specific validation. Conditional 2D net connectivity only; no universal SN2 inversion or free-cation SN1 sequence is asserted. The reacting product center is stereogenic but unresolved. Its configuration stays unsigned; no exact racemization ratio or stereochemical 3D outcome is asserted. HX is consumed 1:1, supplying H to net water and halogen to the haloalkane; it is not merely catalytic. OH must be protonated so water, not bare hydroxide, can leave. Temperature/medium selectors are bounded assumptions, not a complete experimental protocol. Dehydration, ether formation, exchange and actual yields are not predicted. Inspect conditional 2D; no 3D HX substitution outcome is asserted for this context."
+      ]
+    },
+    {
+      "before": {
+        "id": "A223",
+        "label": "benzyl alcohol",
+        "substrate": "OCc1ccccc1",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "BrCc1ccccc1"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "after": {
+        "id": "A223",
+        "label": "benzyl alcohol",
+        "substrate": "OCc1ccccc1",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "BrCc1ccccc1"
+        ],
+        "actual": [
+          "BrCc1ccccc1"
+        ],
+        "options": 1,
+        "preview": "failed",
+        "geometry": "not run",
+        "status": "Partially supported"
+      },
+      "afterNotes": [
+        "Preview/run error: ChemistryError: Selected alcohol site and actual activating HBr validated for formal net bookkeeping. Temperature differs from the bounded HX model. Heated secondary/tertiary substitution can compete with dehydration; ambient primary conversion/activation is not established. No winner or rate is predicted. Secondary/benzylic HX mechanism and selectivity need substrate/formulation-specific validation. Conditional 2D net connectivity only; no universal SN2 inversion or free-cation SN1 sequence is asserted. HX is consumed 1:1, supplying H to net water and halogen to the haloalkane; it is not merely catalytic. OH must be protonated so water, not bare hydroxide, can leave. Temperature/medium selectors are bounded assumptions, not a complete experimental protocol. Dehydration, ether formation, exchange and actual yields are not predicted. Inspect conditional 2D; no 3D HX substitution outcome is asserted for this context."
+      ]
+    },
+    {
+      "before": {
+        "id": "A224",
+        "label": "negative: ether",
+        "substrate": "COCCC",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": null,
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Correctly rejected"
+      },
+      "after": {
+        "id": "A224",
+        "label": "negative: ether",
+        "substrate": "COCCC",
+        "reagent": "hydrogen-bromide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": null,
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Correctly rejected"
+      },
+      "afterNotes": []
+    },
+    {
+      "before": {
+        "id": "A227",
+        "label": "actual HX: HI",
+        "substrate": "CCCCCO",
+        "reagent": "hydrogen-iodide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "CCCCCI"
+        ],
+        "actual": [
+          "CCCCCI"
+        ],
+        "options": 1,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "after": {
+        "id": "A227",
+        "label": "actual HX: HI",
+        "substrate": "CCCCCO",
+        "reagent": "hydrogen-iodide",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "expected": [
+          "CCCCCI"
+        ],
+        "actual": [
+          "CCCCCI"
+        ],
+        "options": 1,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "afterNotes": []
+    },
+    {
+      "before": {
+        "id": "A228",
+        "label": "tertiary HX: HCl",
+        "substrate": "CCCC(O)(C)C",
+        "reagent": "hydrogen-chloride",
+        "conditions": {
+          "temperature": "ambient"
+        },
+        "expected": [
+          "CCCC(Cl)(C)C"
+        ],
+        "actual": [
+          "CCCC(C)(C)Cl"
+        ],
+        "options": 1,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "after": {
+        "id": "A228",
+        "label": "tertiary HX: HCl",
+        "substrate": "CCCC(O)(C)C",
+        "reagent": "hydrogen-chloride",
+        "conditions": {
+          "temperature": "ambient"
+        },
+        "expected": [
+          "CCCC(Cl)(C)C"
+        ],
+        "actual": [
+          "CCCC(C)(C)Cl"
+        ],
+        "options": 1,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "afterNotes": []
+    },
+    {
+      "before": {
+        "id": "A229",
+        "label": "alternative activation: PBr3",
+        "substrate": "CCCCCO",
+        "reagent": "P(Br)(Br)Br",
+        "conditions": {},
+        "expected": [
+          "CCCCCBr"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "after": {
+        "id": "A229",
+        "label": "alternative activation: PBr3",
+        "substrate": "CCCCCO",
+        "reagent": "P(Br)(Br)Br",
+        "conditions": {},
+        "expected": [
+          "CCCCCBr"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "afterNotes": [
+        "Alcohol substitution needs actual neutral HX activation and its consumed halide. Bare halide/HF and alternative PBr3/SOCl2 activating systems are not implemented; no unactivated OH displacement or HX coproducts are inferred."
+      ]
+    },
+    {
+      "before": {
+        "id": "A230",
+        "label": "negative: bare OH is not activated",
+        "substrate": "CCCCCO",
+        "reagent": "hydroxide",
+        "conditions": {},
+        "expected": null,
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Correctly rejected"
+      },
+      "after": {
+        "id": "A230",
+        "label": "negative: bare OH is not activated",
+        "substrate": "CCCCCO",
+        "reagent": "hydroxide",
+        "conditions": {},
+        "expected": null,
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Correctly rejected"
+      },
+      "afterNotes": [
+        "SN2 requires a supported single C(sp\u00b3)\u2013Cl/Br/I bond; aryl/vinyl halides, fluoride and other leaving-group families are not enabled."
+      ]
+    }
+  ],
+  "phase5aReconciliation": {
+    "unrelated": 337,
+    "positiveDehydrationCases": 8,
+    "negativeDehydrationControls": 2,
+    "total": 347,
+    "negativeIds": {
+      "A215": "Correctly rejected",
+      "A226": "Correctly rejected"
+    },
+    "all10DehydrationRowsUnchanged": true
+  },
+  "protectedCases": {
+    "A276": {
+      "status": "Partially supported",
+      "unchanged": true
+    },
+    "A304": {
+      "status": "Incorrect result",
+      "unchanged": true
+    }
+  },
+  "independentDiagnostic": {
+    "phase": "5B",
+    "assertionScope": "Independent formal net structures/API invariants, not experimental protocols",
+    "caseCount": 45,
+    "positiveDenominator": 21,
+    "structuralMatching": 21,
+    "casesWithAnyNet3D": 9,
+    "runCounts": {
+      "verified": 9,
+      "policy-blocked": 13
+    },
+    "failures": []
+  },
+  "diagnosticCases": [
+    {
+      "label": "methyl",
+      "substrate": "CO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CBr",
+          "canGenerateNet3D": true,
+          "run": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "ethanol",
+      "substrate": "CCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCBr",
+          "canGenerateNet3D": true,
+          "run": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "primary propanol",
+      "substrate": "CCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCCBr",
+          "canGenerateNet3D": true,
+          "run": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "long primary",
+      "substrate": "CCCCCCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCCCCCCBr",
+          "canGenerateNet3D": true,
+          "run": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "distant branch",
+      "substrate": "OCCCC(C)CC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCC(C)CCCBr",
+          "canGenerateNet3D": true,
+          "run": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "secondary achiral",
+      "substrate": "CC(O)C",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC(C)Br",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "secondary unspecified",
+      "substrate": "CCC(O)C",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCC(C)Br",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "long secondary",
+      "substrate": "CCCC(O)CC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCCC(Br)CC",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "specified reacting secondary @",
+      "substrate": "CC[C@H](O)CCC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCCC(Br)CC",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "specified reacting secondary @@",
+      "substrate": "CC[C@@H](O)CCC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCCC(Br)CC",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "tertiary achiral",
+      "substrate": "CC(O)(C)C",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC(C)(C)Br",
+          "canGenerateNet3D": true,
+          "run": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "tertiary extended",
+      "substrate": "CCCC(O)(C)C",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCCC(C)(C)Br",
+          "canGenerateNet3D": true,
+          "run": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "specified reacting tertiary",
+      "substrate": "CC[C@](O)(C)CCC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCCC(C)(Br)CC",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "remote specified @",
+      "substrate": "CC[C@H](C)CCCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC[C@H](C)CCCCBr",
+          "canGenerateNet3D": true,
+          "run": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "remote specified @@",
+      "substrate": "CC[C@@H](C)CCCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC[C@@H](C)CCCCBr",
+          "canGenerateNet3D": true,
+          "run": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "remote CIP order change",
+      "substrate": "C[C@H](CCCCO)CCCCOC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "COCCCC[C@H](C)CCCCBr",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "remote ether",
+      "substrate": "COCCCCCCCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "COCCCCCCCCBr",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "equivalent remote alcohols",
+      "substrate": "OCCCCCCCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "OCCCCCCCCBr",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "different alcohol sites",
+      "substrate": "CC(O)CCCCCCCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC(Br)CCCCCCCCO",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        },
+        {
+          "smiles": "CC(O)CCCCCCCCBr",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "primary benzyl",
+      "substrate": "OCc1ccccc1",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "BrCc1ccccc1",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "alkyl-substituted benzyl",
+      "substrate": "OCc1ccc(C)cc1",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "Cc1ccc(CBr)cc1",
+          "canGenerateNet3D": false,
+          "run": "policy-blocked"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "ether not alcohol",
+      "substrate": "COCCC",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "primary chloride activation",
+      "substrate": "CCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "secondary chloride activation",
+      "substrate": "CC(O)C",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "benzyl chloride activation",
+      "substrate": "OCc1ccccc1",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "neopentyl",
+      "substrate": "OCC(C)(C)C",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "adjacent branching",
+      "substrate": "OCC(C)CC",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "secondary shift",
+      "substrate": "CC(O)C(C)C",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "secondary sequence",
+      "substrate": "CC(O)CC(C)C",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "tertiary adjacent branch",
+      "substrate": "CC(O)(C)C(C)C",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "ring alcohol",
+      "substrate": "OC1CCCCCC1",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "remote saturated ring",
+      "substrate": "OCCCC1CCCCC1",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "allylic",
+      "substrate": "OCC=C",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "propargylic",
+      "substrate": "OCC#C",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "phenol",
+      "substrate": "Oc1ccccc1",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "short oxygen capture",
+      "substrate": "OCCCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "short ether capture",
+      "substrate": "COCCCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "vicinal capture",
+      "substrate": "OCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "hemiacetal",
+      "substrate": "COC(O)CC",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "tertiary ether",
+      "substrate": "CC(C)(C)OCCCCCCCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "secondary benzyl",
+      "substrate": "CC(O)c1ccccc1",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "activated aromatic",
+      "substrate": "OCc1ccc(O)cc1",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "remote carbonyl",
+      "substrate": "OCCCCCCC=O",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "amine",
+      "substrate": "NCCCCCCCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "remote alkene",
+      "substrate": "C=CCCCCCCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    }
+  ],
+  "companion": {
+    "defaultMetrics": {
+      "denominator": 53,
+      "structuralMatching": 40,
+      "conditionCompleteEligibility": 0,
+      "fullySupportedProductGeneration": 0,
+      "independentlyVerifiedChemistry": 0,
+      "diagnosticModelGenerationOnly": 0
+    },
+    "diagnosticMetrics": {
+      "denominator": 53,
+      "structuralMatching": 40,
+      "conditionCompleteEligibility": 0,
+      "fullySupportedProductGeneration": 0,
+      "independentlyVerifiedChemistry": 0,
+      "diagnosticModelGenerationOnly": 33
+    },
+    "diagnosticByPathway": {
+      "Alkene dihydroxylation": {
+        "denominator": 11,
+        "structuralMatching": 10,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 10
+      },
+      "Alkyne halogenation": {
+        "denominator": 21,
+        "structuralMatching": 15,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 12
+      },
+      "Alkyne hydrohalogenation": {
+        "denominator": 21,
+        "structuralMatching": 15,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 11
+      }
+    },
+    "failures": [],
+    "controlsRejected": 5,
+    "defaultRowsUnchanged": true,
+    "diagnosticRowsUnchanged": true,
+    "profilesPromoted": 0
+  },
+  "tests": {
+    "originalFunctionsRetained": 3055,
+    "newPython": 72,
+    "newJavaScript": 100,
+    "pythonPassing": 1630,
+    "javascriptPassing": 1597,
+    "totalPassing": 3227,
+    "failures": 0,
+    "updatedOriginalAssertion": {
+      "file": "tests/test_alcohol_oxidation_compatibility.py",
+      "test": "test_separate_aldehyde_oxidation_and_other_paths_do_not_inherit_policy",
+      "reason": "Replaces the obsolete blanket HX stereo ban with explicit new-policy ownership and conditional confidence assertions; unrelated oxidation/dehydration/water checks retained"
+    },
+    "typescript": "passed tsc --noEmit",
+    "productionBuild": "passed Vite, pre-existing dependency/chunk warnings",
+    "gitDiffCheck": "passed",
+    "changedAndNewTextWhitespace": "passed"
+  },
+  "browser": {
+    "unchangedExample": "Replace ethanol OH with Br",
+    "consumedHXShownInEquation": true,
+    "reactantBromineLinkedIn2DAnd3D": true,
+    "calculatorHasBothConsumedInputs": true,
+    "limitingInput": "Hydrogen bromide",
+    "ethanolMoles": 0.001,
+    "hxMoles": 0.0005,
+    "theoreticalProductMoles": 0.0005,
+    "theoreticalProductGrams": 0.054483,
+    "missingTemperatureClearsStale3D": true,
+    "conditional2DStillAvailable": true,
+    "secondaryMechanismUncertaintyVisible": true,
+    "persistentAlkyneAndChainSelectorsExplicitlyNotApplicable": true,
+    "temporaryTabClosed": true,
+    "temporaryPreviewStopped": true
+  },
+  "preservation": {
+    "snapshotFiles": 330,
+    "modifiedBaselineFiles": {
+      "server/chemistry_server.py": {
+        "before": "804f5873044abbf99f900890e37f64d2b70bf3735c1d7512f122b4cd9a530f16",
+        "after": "83115cae2f442906062678610f6b7b7cf1377845a1fefad0d36eab673bfdf1aa"
+      },
+      "server/reaction_conditions.py": {
+        "before": "41212aa4629e8ba93b536f797d0238f63b2bb6ef9d1660af06b740d5d82e6a5f",
+        "after": "4283aa0a722592bd448527281d501cc240df27bb7120bfd6e53e2c5ec213d93a"
+      },
+      "server/addition_contract.py": {
+        "before": "450e178ca92d5244a7afd1170e0fcc6212a93a38f3fc740096bf6da82b2567bd",
+        "after": "12497d918e81859e1fa0ca702d0ba19a83fe762049c396684ce1dba1f48f1af8"
+      },
+      "server/reaction_information.py": {
+        "before": "c5daba72dfc115030fed7771f6bcc7809e8af6e344b6f53fbbb049449024fdb4",
+        "after": "f132283ce00aabb450111511ffc5be1d0c00683540341a89c9f8228b576585c9"
+      },
+      "server/extended_reaction_rules.py": {
+        "before": "7c34423fceffdf3cf2879259e3dc5f3ab2a04f4f00bbf23a4d62950aefe2721e",
+        "after": "85886aaa148ccca67aa5d82c9a320ee97cd2fdecf87b533628584cfea08a038e"
+      },
+      "server/reaction_engine.py": {
+        "before": "48b855fc2a9a4dfcc771ac4fdbe9b17adf95b6c458af70853e036d445ec093b4",
+        "after": "36d0d14531d429d4d98dfc2208d88092749ab7e2f2f40881b79d73e5e84aef1e"
+      },
+      "src/reaction-lab.ts": {
+        "before": "32914cb1dda0ccd856316c8278e8c56f3da146afea03edb41c87852344a5a865",
+        "after": "0b62db2b2c9b4be247d2fd1644b57f9aead73ec49b28629b5a39ead935de574b"
+      },
+      "tests/test_alcohol_oxidation_compatibility.py": {
+        "before": "fbd7aae1af41dd3ba4381d2862922cf86712790a9320d9f3f63c6a1b4c59fb2d",
+        "after": "9d81e6dac9074b80f4f280239a6b71f0d576cee360bef31daf51e3f903e13e7f"
+      }
+    },
+    "newFileHashes": {
+      "server/alcohol_substitution_rule.py": "2050d7834675800c4242de6f969f292fa42c0db0509a7bd8ebb3e2d6c6e3c24e",
+      "tests/test_alcohol_substitution_phase5b.py": "07a8eb36da6ceafc3b02e030248e127e80a45be8edde82d4f5d14022f1960a9f",
+      "tests/alcohol-substitution-phase5b.test.mjs": "751207ab5701fe54121e1460a0c8e5817d4e42100fc922fed7371bb24a0d1a3e",
+      "tests/fixtures/alcohol-substitution-phase5b.json": "edec8a88c2647b1a3cec1fee3bd3bf57f76a35bb16812fb7108abae9cc0ef74f",
+      "scripts/audit_alcohol_substitution.py": "69a0f067bc0f3edc01b22b8bef52917b141b07247bef4750d65a193d96ac59da",
+      "docs/reaction-lab-alcohol-substitution-phase5b.md": "07fb44c5ac649c6091c208d72d8d3a0953dde06db5b6c5f39e5fcd1dcfb59e6d",
+      "docs/reaction-lab-alcohol-substitution-phase5b-preview.png": "aa764468a82038ddf2b5b2d02631afcfaaa2106d49e8d639d8425c230e65988a",
+      "docs/reaction-lab-alcohol-substitution-phase5b-conditions.png": "139ef245441f0af564a4f273c01f9e0e7f3b81f480acf7d77e3bcb3804c41772",
+      "docs/reaction-lab-alcohol-substitution-phase5b-calculator.png": "973a3dc534378198488293d6f1051bd9e7c1c642d3681fe942cec54fbb86e951"
+    },
+    "otherOriginalTestsByteIdentical": true,
+    "historicalReportsByteIdentical": true,
+    "benchmarkFilesByteIdentical": true,
+    "dehydrationRuleByteIdentical": true,
+    "htmlAndStylesByteIdentical": true
+  },
+  "limitations": [
+    "Mapped activation/proton transfer/carbocation mechanisms remain unsupported; net edits only",
+    "No new stereogenic-center HX SN2 inversion model or exact SN1 racemization claim",
+    "Secondary/primary-benzylic mechanism unresolved, conditional 2D only",
+    "Remote oxygen and other alcohol sites not claimed experimentally inert or selectively converted",
+    "Heated tertiary substitution has unresolved dehydration competition",
+    "No experimental rates/yields/ratios/protocol certification",
+    "Frozen scorer combines 2D/run errors; blocked 3D is not a failed conditional SVG"
+  ],
+  "stoppedAfterPhase": "5B"
+}

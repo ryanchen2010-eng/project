@@ -1,0 +1,1126 @@
+{
+  "phase": "5A",
+  "date": "2026-10-16",
+  "scope": "Existing alcohol dehydration only; finite net-model checks, no experimental protocol admission",
+  "benchmarkSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+  "companionVersion": "1.0.0",
+  "companionManifestSha256": "35ce7ce6f3c3967a06fc354c8bc9fc8319a2247f3b3ac0c7cd246ec75ed8ca1e",
+  "baselineServerSha256": "a86c5ce7b8a0598f2baaec1621f494ba45aa010c40bb705e58cd04155c2e33e0",
+  "currentServerSha256": "2e38f6e20e339e42c7a466b2b988a6307b8ca2dd3bbc434aab9c6de9d324a248",
+  "originalDehydration": {
+    "positiveDenominator": 8,
+    "structuralMatching": 3,
+    "fullySupported": 2,
+    "partial": 1,
+    "unsupported": 5,
+    "controlsCorrectlyRejected": 2
+  },
+  "updatedDehydration": {
+    "positiveDenominator": 8,
+    "structuralMatching": 4,
+    "fullySupported": 2,
+    "partial": 2,
+    "unsupported": 4,
+    "controlsCorrectlyRejected": 2
+  },
+  "fullCoveragePercentBefore": 25.0,
+  "fullCoveragePercentAfter": 25.0,
+  "frozenCaseCount": 347,
+  "allFrozenStatuses": {
+    "Fully supported": 167,
+    "Unsupported": 92,
+    "Correctly rejected": 38,
+    "Partially supported": 49,
+    "Incorrect result": 1
+  },
+  "unchangedUnrelatedRows": 337,
+  "changedRelatedIds": [
+    "A209",
+    "A210",
+    "A211",
+    "A212",
+    "A213",
+    "A214",
+    "A225",
+    "A226"
+  ],
+  "dehydrationCaseComparisons": [
+    {
+      "before": {
+        "id": "A208",
+        "label": "long primary",
+        "substrate": "CCCCCCCO",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "C=CCCCCC"
+        ],
+        "actual": [
+          "C=CCCCCC"
+        ],
+        "options": 1,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "after": {
+        "id": "A208",
+        "label": "long primary",
+        "substrate": "CCCCCCCO",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "C=CCCCCC"
+        ],
+        "actual": [
+          "C=CCCCCC"
+        ],
+        "options": 1,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "afterNotes": []
+    },
+    {
+      "before": {
+        "id": "A209",
+        "label": "secondary internal",
+        "substrate": "CCCC(O)CC",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "CCC=CCC",
+          "CC=CCCC"
+        ],
+        "actual": [
+          "CC=CCCC",
+          "CCC=CCC"
+        ],
+        "options": 2,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Partially supported"
+      },
+      "after": {
+        "id": "A209",
+        "label": "secondary internal",
+        "substrate": "CCCC(O)CC",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "CCC=CCC",
+          "CC=CCCC"
+        ],
+        "actual": [
+          "CC=CCCC",
+          "CCC=CCC"
+        ],
+        "options": 2,
+        "preview": "failed",
+        "geometry": "not run",
+        "status": "Partially supported"
+      },
+      "afterNotes": [
+        "E/Z outcomes are unassigned.",
+        "Preview/run error: ChemistryError: Structurally supported dehydration site. The new alkene admits unresolved E/Z alternatives. Geometry remains unassigned; no single 3D stereochemical product or ratio is asserted. Sulfuric acid is regenerated, not consumed; heated/unspecified-or-dry medium is a bounded net assumption, not a complete experimental protocol. Ether formation, isomerization, exact temperature and conversion are not predicted. Inspect conditional 2D; no 3D dehydration outcome is asserted for this context.",
+        "Preview/run error: ChemistryError: Structurally supported dehydration site. The new alkene admits unresolved E/Z alternatives. Geometry remains unassigned; no single 3D stereochemical product or ratio is asserted. Sulfuric acid is regenerated, not consumed; heated/unspecified-or-dry medium is a bounded net assumption, not a complete experimental protocol. Ether formation, isomerization, exact temperature and conversion are not predicted. Inspect conditional 2D; no 3D dehydration outcome is asserted for this context."
+      ]
+    },
+    {
+      "before": {
+        "id": "A210",
+        "label": "tertiary branched",
+        "substrate": "CCCC(O)(C)C",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "C=C(C)CCC",
+          "CCC=C(C)C"
+        ],
+        "actual": [
+          "C=C(C)CCC",
+          "CCC=C(C)C"
+        ],
+        "options": 2,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "after": {
+        "id": "A210",
+        "label": "tertiary branched",
+        "substrate": "CCCC(O)(C)C",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "C=C(C)CCC",
+          "CCC=C(C)C"
+        ],
+        "actual": [
+          "C=C(C)CCC",
+          "CCC=C(C)C"
+        ],
+        "options": 3,
+        "preview": "verified",
+        "geometry": "3D; converged",
+        "status": "Fully supported"
+      },
+      "afterNotes": []
+    },
+    {
+      "before": {
+        "id": "A211",
+        "label": "cyclic alcohol",
+        "substrate": "OC1CCCCCC1",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "C1=CCCCCC1"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "after": {
+        "id": "A211",
+        "label": "cyclic alcohol",
+        "substrate": "OC1CCCCCC1",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "C1=CCCCCC1"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "afterNotes": [
+        "Cyclic alcohols and ring-containing dehydration require independently validated ring/rearrangement geometry; this increment is acyclic.",
+        "Ring-bound or heteroatom-substituted beta elimination needs separate geometry/enol validation."
+      ]
+    },
+    {
+      "before": {
+        "id": "A212",
+        "label": "remote ether",
+        "substrate": "COCCCCO",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "COCCC=C"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "after": {
+        "id": "A212",
+        "label": "remote ether",
+        "substrate": "COCCCCO",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "COCCC=C"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "afterNotes": [
+        "Potential 5-membered intramolecular oxygen capture or coupled dehydration is unresolved; this group is not an inert spectator."
+      ]
+    },
+    {
+      "before": {
+        "id": "A213",
+        "label": "diol multiple groups",
+        "substrate": "OCCCCO",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "C=CCCO"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "after": {
+        "id": "A213",
+        "label": "diol multiple groups",
+        "substrate": "OCCCCO",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "C=CCCO"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "afterNotes": [
+        "Potential 5-membered intramolecular oxygen capture or coupled dehydration is unresolved; this group is not an inert spectator."
+      ]
+    },
+    {
+      "before": {
+        "id": "A214",
+        "label": "specified center",
+        "substrate": "CC[C@H](O)CCC",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "CCC=CCC",
+          "CC=CCCC"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "after": {
+        "id": "A214",
+        "label": "specified center",
+        "substrate": "CC[C@H](O)CCC",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": [
+          "CCC=CCC",
+          "CC=CCCC"
+        ],
+        "actual": [
+          "CC=CCCC",
+          "CCC=CCC"
+        ],
+        "options": 2,
+        "preview": "failed",
+        "geometry": "not run",
+        "status": "Partially supported"
+      },
+      "afterNotes": [
+        "Preview/run error: ChemistryError: Structurally supported dehydration site. The new alkene admits unresolved E/Z alternatives. Geometry remains unassigned; no single 3D stereochemical product or ratio is asserted. Sulfuric acid is regenerated, not consumed; heated/unspecified-or-dry medium is a bounded net assumption, not a complete experimental protocol. Ether formation, isomerization, exact temperature and conversion are not predicted. Inspect conditional 2D; no 3D dehydration outcome is asserted for this context.",
+        "Preview/run error: ChemistryError: Structurally supported dehydration site. The new alkene admits unresolved E/Z alternatives. Geometry remains unassigned; no single 3D stereochemical product or ratio is asserted. Sulfuric acid is regenerated, not consumed; heated/unspecified-or-dry medium is a bounded net assumption, not a complete experimental protocol. Ether formation, isomerization, exact temperature and conversion are not predicted. Inspect conditional 2D; no 3D dehydration outcome is asserted for this context."
+      ]
+    },
+    {
+      "before": {
+        "id": "A215",
+        "label": "negative: ether",
+        "substrate": "COCCC",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": null,
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Correctly rejected"
+      },
+      "after": {
+        "id": "A215",
+        "label": "negative: ether",
+        "substrate": "COCCC",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "temperature": "heated",
+          "catalyst": "acid"
+        },
+        "expected": null,
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Correctly rejected"
+      },
+      "afterNotes": []
+    },
+    {
+      "before": {
+        "id": "A225",
+        "label": "alternative acid: phosphoric acid",
+        "substrate": "CCCCCO",
+        "reagent": "OP(=O)(O)O",
+        "conditions": {
+          "catalyst": "acid",
+          "temperature": "heated"
+        },
+        "expected": [
+          "C=CCCC"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "after": {
+        "id": "A225",
+        "label": "alternative acid: phosphoric acid",
+        "substrate": "CCCCCO",
+        "reagent": "OP(=O)(O)O",
+        "conditions": {
+          "catalyst": "acid",
+          "temperature": "heated"
+        },
+        "expected": [
+          "C=CCCC"
+        ],
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Unsupported"
+      },
+      "afterNotes": [
+        "Alcohol dehydration currently validates the existing actual sulfuric-acid model only; phosphoric-acid activation is not implemented, not chemically impossible."
+      ]
+    },
+    {
+      "before": {
+        "id": "A226",
+        "label": "negative: methanol lacks beta carbon",
+        "substrate": "CO",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "catalyst": "acid",
+          "temperature": "heated"
+        },
+        "expected": null,
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Correctly rejected"
+      },
+      "after": {
+        "id": "A226",
+        "label": "negative: methanol lacks beta carbon",
+        "substrate": "CO",
+        "reagent": "sulfuric-acid",
+        "conditions": {
+          "catalyst": "acid",
+          "temperature": "heated"
+        },
+        "expected": null,
+        "actual": [],
+        "options": 0,
+        "preview": "not run",
+        "geometry": "not run",
+        "status": "Correctly rejected"
+      },
+      "afterNotes": [
+        "Geminal-O, hemiacetal or nonordinary alcohol environments need separate dehydration validation.",
+        "Alcohol dehydration needs an actual beta C\u2013H; methanol and beta-H-free sites cannot lose an invented hydrogen."
+      ]
+    }
+  ],
+  "protectedCases": {
+    "A276": {
+      "status": "Partially supported",
+      "unchanged": true
+    },
+    "A304": {
+      "status": "Incorrect result",
+      "unchanged": true
+    }
+  },
+  "independentDiagnostic": {
+    "phase": "5A",
+    "assertionScope": "Independent formal net structures and API invariants; no experimental approval",
+    "benchmarkSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+    "caseCount": 40,
+    "positiveDenominator": 20,
+    "structuralMatching": 20,
+    "casesWithAnyModel3D": 15,
+    "casesWithAllOptionsModel3D": 8,
+    "runCounts": {
+      "verified": 16,
+      "policy-blocked": 16
+    },
+    "failures": []
+  },
+  "diagnosticCases": [
+    {
+      "label": "ethanol",
+      "substrate": "CCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "C=C",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "1-propanol",
+      "substrate": "CCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "C=CC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "1-heptanol",
+      "substrate": "CCCCCCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "C=CCCCCC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "far branched primary",
+      "substrate": "OCCCC(C)CC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "C=CCC(C)CC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "2-propanol equivalent betas",
+      "substrate": "CC(O)C",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "C=CC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "2-butanol",
+      "substrate": "CC(O)CC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC=CC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "C=CCC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "3-pentanol equivalent arms",
+      "substrate": "CCC(O)CC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC=CCC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "3-hexanol",
+      "substrate": "CCCC(O)CC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCC=CCC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "CC=CCCC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "2-heptanol",
+      "substrate": "CC(O)CCCCC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC=CCCCC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "C=CCCCCC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "tert-butanol",
+      "substrate": "CC(O)(C)C",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "C=C(C)C",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "2-methyl-2-pentanol",
+      "substrate": "CCCC(O)(C)C",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCC=C(C)C",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "C=C(C)CCC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "three distinct beta arms",
+      "substrate": "CCC(O)(C)CCC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CCC=C(C)CC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "C=C(CC)CCC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "CC=C(C)CCC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "reacting R-like center",
+      "substrate": "C[C@H](O)CCC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC=CCC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "C=CCCC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "opposite reacting center",
+      "substrate": "C[C@@H](O)CCC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC=CCC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "C=CCCC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "distant physical stereo",
+      "substrate": "CC(O)CCC[C@H](C)CC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC=CCC[C@H](C)CC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "C=CCCC[C@H](C)CC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "distant opposite physical stereo",
+      "substrate": "CC(O)CCC[C@@H](C)CC",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "CC=CCC[C@@H](C)CC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "C=CCCC[C@@H](C)CC",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "remote ordinary ether, conditional only",
+      "substrate": "COCCCCCCCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "C=CCCCCCCOC",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "remote diol equivalent sites",
+      "substrate": "OCCCCCCCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "C=CCCCCCCO",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "different separated alcohol sites",
+      "substrate": "CC(O)CCCCCCCCO",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "C=CCCCCCCCCO",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "CC=CCCCCCCCO",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        },
+        {
+          "smiles": "C=CCCCCCCC(C)O",
+          "allowNetModel3D": false,
+          "run": "policy-blocked",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "physical retention with CIP R to S change",
+      "substrate": "C[C@H](CCCCO)CCC(C)C",
+      "positive": true,
+      "products": [
+        {
+          "smiles": "C=CCC[C@@H](C)CCC(C)C",
+          "allowNetModel3D": true,
+          "run": "verified",
+          "diagram": "verified"
+        }
+      ],
+      "failures": []
+    },
+    {
+      "label": "methanol",
+      "substrate": "CO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "ether not alcohol",
+      "substrate": "COCCC",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "neopentyl rearrangement",
+      "substrate": "OCC(C)(C)C",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "isobutanol shift risk",
+      "substrate": "OCC(C)C",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "secondary adjacent branching",
+      "substrate": "CC(O)C(C)C",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "secondary sequential shifts",
+      "substrate": "CC(O)CC(C)C",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "cyclic",
+      "substrate": "OC1CCCCCC1",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "small strained ring",
+      "substrate": "OC1CC1",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "vicinal diol",
+      "substrate": "OCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "five-membered closure",
+      "substrate": "OCCCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "near ether capture",
+      "substrate": "COCCCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "acid-sensitive tert ether",
+      "substrate": "CC(C)(C)OCCCCCCCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "hemiacetal",
+      "substrate": "COC(O)CC",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "peroxide",
+      "substrate": "CC(O)CCCCOO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "conjugated or further pi chemistry",
+      "substrate": "C=CCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "alkyne competitor",
+      "substrate": "C#CCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "remote amine",
+      "substrate": "NCCCCCCCO",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "carbonyl competitor",
+      "substrate": "CC(O)CCCC=O",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "benzylic",
+      "substrate": "OCc1ccccc1",
+      "positive": false,
+      "products": [],
+      "failures": []
+    },
+    {
+      "label": "phenol",
+      "substrate": "Oc1ccccc1",
+      "positive": false,
+      "products": [],
+      "failures": []
+    }
+  ],
+  "companion": {
+    "defaultMetrics": {
+      "denominator": 53,
+      "structuralMatching": 40,
+      "conditionCompleteEligibility": 0,
+      "fullySupportedProductGeneration": 0,
+      "independentlyVerifiedChemistry": 0,
+      "diagnosticModelGenerationOnly": 0
+    },
+    "diagnosticMetrics": {
+      "denominator": 53,
+      "structuralMatching": 40,
+      "conditionCompleteEligibility": 0,
+      "fullySupportedProductGeneration": 0,
+      "independentlyVerifiedChemistry": 0,
+      "diagnosticModelGenerationOnly": 33
+    },
+    "diagnosticByPathway": {
+      "Alkene dihydroxylation": {
+        "denominator": 11,
+        "structuralMatching": 10,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 10
+      },
+      "Alkyne halogenation": {
+        "denominator": 21,
+        "structuralMatching": 15,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 12
+      },
+      "Alkyne hydrohalogenation": {
+        "denominator": 21,
+        "structuralMatching": 15,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 11
+      }
+    },
+    "failures": [],
+    "controlsRejected": 5,
+    "defaultRowsUnchanged": true,
+    "diagnosticRowsUnchanged": true,
+    "unreviewedProfilesPromoted": 0
+  },
+  "tests": {
+    "original": 2900,
+    "newPython": 85,
+    "newJavaScript": 70,
+    "pythonPassing": 1558,
+    "javascriptPassing": 1497,
+    "totalPassing": 3055,
+    "failures": 0,
+    "typescript": "passed tsc --noEmit",
+    "productionBuild": "passed Vite; existing dependency notices and chunk-size warning",
+    "gitDiffCheck": "passed",
+    "changedAndNewTextWhitespace": "passed"
+  },
+  "browser": {
+    "existingExample": "Dehydrate ethanol",
+    "equationLabelsCatalystNotConsumed": true,
+    "qualifiedCompare3DVerified": true,
+    "mappedCarbonLinkedInBothViews": true,
+    "missingTemperatureClearsStaleProduct": true,
+    "conditional2DRemainsAvailable": true,
+    "missingTemperatureBlocks3D": true,
+    "temporaryTabClosed": true,
+    "temporaryLocalPreviewStopped": true
+  },
+  "preservation": {
+    "snapshotFileCount": 316,
+    "originalTestsByteIdentical": true,
+    "historicalDocsByteIdentical": true,
+    "benchmarksByteIdentical": true,
+    "modifiedBaselineFiles": {
+      "server/chemistry_server.py": {
+        "before": "d58b23aaee28081b00236c45c0d40069761baa2bb3ecfdbc73e822425cca3017",
+        "after": "804f5873044abbf99f900890e37f64d2b70bf3735c1d7512f122b4cd9a530f16"
+      },
+      "server/reaction_conditions.py": {
+        "before": "cc7b398b8f84f8e9f6d26b573bdb7f46f2355d0f34cb3ffd6811580258927ed8",
+        "after": "41212aa4629e8ba93b536f797d0238f63b2bb6ef9d1660af06b740d5d82e6a5f"
+      },
+      "server/addition_contract.py": {
+        "before": "d48cff2bfd5eeebf6df1737de83e2c38a30c9833d445dc8d3ecf03bcdf9db460",
+        "after": "450e178ca92d5244a7afd1170e0fcc6212a93a38f3fc740096bf6da82b2567bd"
+      },
+      "server/reaction_information.py": {
+        "before": "900774c60ba8b19d5a923f9ace68e60ef970c6a5e451a0dc53a70eb9ec950a36",
+        "after": "c5daba72dfc115030fed7771f6bcc7809e8af6e344b6f53fbbb049449024fdb4"
+      },
+      "server/reaction_diagrams.py": {
+        "before": "b82a06802eb3b84987a28f75370493b06ada0fa710c4bd98c44521799c6d9d13",
+        "after": "8e1561814d24e2fb01474716c861d24282670c384bbe0656b8b7becabdf205d9"
+      },
+      "server/extended_reaction_rules.py": {
+        "before": "d649d96f69154aeba4eb21a1fd1287f4c04558f6fcecf1b4a2b12f3dd54816f5",
+        "after": "7c34423fceffdf3cf2879259e3dc5f3ab2a04f4f00bbf23a4d62950aefe2721e"
+      },
+      "server/reaction_engine.py": {
+        "before": "5338c3536d40c4eb4e5e6a1588dd982e7b5fd4417b77a7199d028511929d4051",
+        "after": "48b855fc2a9a4dfcc771ac4fdbe9b17adf95b6c458af70853e036d445ec093b4"
+      },
+      "src/reaction-lab.ts": {
+        "before": "d57003b4537a44be94e32d19a27bdf733963437de0b5a61a150555dacdc12d36",
+        "after": "32914cb1dda0ccd856316c8278e8c56f3da146afea03edb41c87852344a5a865"
+      }
+    },
+    "newFileHashes": {
+      "server/alcohol_dehydration_rule.py": "173886554adbcb0ca76819b0a1f153fd8baad186cd57abc7ab99356327a87114",
+      "tests/test_alcohol_dehydration_phase5a.py": "21dd2297d64f51d6e3a695d4d84d6bd4b795cfebad00dbec62b87037999c6dce",
+      "tests/alcohol-dehydration-phase5a.test.mjs": "22862749c1b4415dd3df65d1f4668a7eb500eed555ddef1073b4b13b97ec4622",
+      "tests/fixtures/alcohol-dehydration-phase5a.json": "166c047fb1b539217987325d9895a28ed674bf19e24f6bc50a1a1dfcead1842d",
+      "scripts/audit_alcohol_dehydration.py": "859dc8bdb77958ef495b9002ee433ee5e621c154673f49352bb0b4220d77ebd7",
+      "docs/reaction-lab-alcohol-dehydration-phase5a.md": "6c92a589c97c74e1516f0d32beaeca5d05db6f34d05256a46c60f303dfd6dccb",
+      "docs/reaction-lab-alcohol-dehydration-phase5a-preview.png": "c8600cf0fe9e85b956cfc80145e1734f4ae49552fde6813f3fa37de081029838",
+      "docs/reaction-lab-alcohol-dehydration-phase5a-conditions.png": "d71652c67b766a59cf8f7fb16c05463a9d6a5f1f88aedaad7a25eb9a60be0477"
+    }
+  },
+  "limitations": [
+    "No complete mapped acid-catalytic mechanism; net changes only",
+    "Primary cases have no invented free primary carbocation",
+    "Unresolved newly formed E/Z blocks asserted stereochemical 3D",
+    "Screened remote oxygen/multiple alcohol sites are conditional 2D only",
+    "No experimental yield, rate, selectivity or complete condition profile claimed",
+    "Frozen scorer combines preview/run errors and does not prove every alternative has 3D"
+  ],
+  "stoppedAfterPhase": "5A"
+}

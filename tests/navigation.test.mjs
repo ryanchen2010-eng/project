@@ -25,9 +25,27 @@ test('the Home page links to each tool and explains the teaching limits', async 
     assert.ok(home.includes(`href="${target}"`), `${target} must be reachable from Home`);
   }
   assert.match(home, /No match does not mean no reaction/);
-  assert.match(home, /Four tools\. One workspace\./);
+  assert.match(home, /Four Tools\. One Workspace\./);
   assert.equal((home.match(/<article class="tool-card">/g) ?? []).length, 4);
   assert.doesNotMatch(home, /3Dmol-min\.js/, 'Home should not load the 3D viewer unnecessarily');
+});
+
+test('Home uses title case for key headings and actions without changing descriptive or chemical text', async () => {
+  const home = await read('index.html');
+  for (const heading of [
+    'A Clearer Way to Explore Molecules.',
+    'Explore Molecules',
+    'Build a Molecule',
+    'Try a Reaction',
+    'Chemistry Calculators',
+    'Learn with Models, Not Predictions.',
+  ]) {
+    assert.ok(home.includes(`>${heading}</h`), `${heading} must retain its intended capitalization`);
+  }
+  assert.match(home, />Explore Molecules <span/);
+  assert.match(home, />Draw a Structure <span/);
+  assert.match(home, /Explore molecules, draw structures, compare reactions, and calculate quantities\./);
+  assert.match(home, /class="figure-formula">H₂O<\/span>/);
 });
 
 test('every tool links back to Home and to the other tools', async () => {

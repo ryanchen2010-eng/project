@@ -8,6 +8,11 @@ from collections import Counter
 from rdkit import Chem
 
 if __package__:
+    from .product_naming import simple_product_name
+else:
+    from product_naming import simple_product_name
+
+if __package__:
     from . import molecular_graph as graph
     from . import epoxidation_rule, dihydroxylation_rule, alkyne_partial_hydrogenation_rule, alkyne_complete_hydrogenation_rule, alkyne_halogenation_rule, alkyne_hydrohalogenation_rule
     from . import extended_reaction_rules, aldehyde_oxidation_conditions
@@ -109,7 +114,7 @@ def validate_products(before, after, main_map, allow_carboxylate=False):
     return [main, *[f for f in fragments if f is not main]]
 
 
-def transform(mechanism, inputs, site):
+def transform(mechanism, inputs, site, *, dihydroxylation_profile=None):
     """One source of truth for product chemistry AND 2D/3D atom mapping.
 
 Site indices address the first input's heavy-atom graph. No first-match search
@@ -240,7 +245,7 @@ occurs here; the chosen candidate is applied explicitly.
     elif mechanism == "Epoxidation":
         epoxidation_rule.validate(combined, after, substrate, reagent, site)
     elif mechanism == "Alkene dihydroxylation":
-        dihydroxylation_rule.validate(combined, after, substrate, reagent, site)
+        dihydroxylation_rule.validate(combined, after, substrate, reagent, site, dihydroxylation_profile)
     elif mechanism == "Alkyne partial hydrogenation":
         alkyne_partial_hydrogenation_rule.validate(combined, after, substrate, reagent, site)
     elif mechanism == "Alkyne hydrogenation":
@@ -305,7 +310,17 @@ def generate_pair(first_id, second_id, catalog, product_names=None, *, condition
         elimination_sites = [(site, e2_rule.assess(substrate, site)) for site in e2_rule.sites(substrate)] if role == "hydroxide" else []
         solvolysis_sites = [(site, sn1_rule.assess(substrate, site)) for site in sn1_rule.sites(substrate)] if role == "water" else []
         unimolecular_sites = [(site, e1_rule.assess(substrate, site)) for site in e1_rule.sites(substrate)] if role == "water" else []
-        dihydroxylation_sites = [(site, dihydroxylation_rule.assess(substrate, site)) for site in dihydroxylation_rule.sites(substrate)] if role == "hydrogen-peroxide" else []
+        dihydroxylation_profile = dihydroxylation_rule.r3.structural_reference(substrate, conditions) if role == 'hydrogen-peroxide' else None
+        if role == 'hydrogen-peroxide' and conditions.get('temperature') == 'cooled':
+            parent = Chem.MolToSmiles(substrate, isomericSmiles=False)
+            if parent == 'O=C(O)C=CC(=O)O':
+                notes.append('The fumaric-acid cold source experiment also forms oxalic acid and recovers calcium salts. A single neutral tartaric-acid product would omit validated competing oxidation and salt isolation; this endpoint is not implemented. Maleic acid was not a 0 C example.')
+            elif dihydroxylation_profile is None and any(m.workup and m.substrate == parent for m in dihydroxylation_rule.r3.MODELS.values()):
+                if dihydroxylation_rule.r3.identity(substrate) != parent:
+                    notes.append('The R3 acid source profile does not establish the specified E/Z or tetrahedral outcome. Specified stereochemistry is not discarded to fit an unconfigured source reference.')
+                else:
+                    notes.append('This source-parent acid has an R3 reference, but the selected named profile ID/version conflicts. Clear the stale reference and review the matching source profile; no implicit fallback is allowed.')
+        dihydroxylation_sites = [(site, dihydroxylation_rule.assess(substrate, site, dihydroxylation_profile)) for site in dihydroxylation_rule.sites(substrate, dihydroxylation_profile)] if role == "hydrogen-peroxide" else []
         dehydration_sites = [(site, alcohol_dehydration_rule.assess(substrate, site)) for site in alcohol_dehydration_rule.sites(substrate)] if role == "sulfuric-acid" else []
         # Mixed pi/alcohol systems remain with the existing HX-addition
         # assessors. They are not new alcohol-substitution permissions or new
@@ -399,9 +414,16 @@ def generate_pair(first_id, second_id, catalog, product_names=None, *, condition
                 notes.append(catalog[substrate_id]["hydrationStereoIssue"].replace("Hydration", "Dihydroxylation")); continue
             if not report["eligible"]:
                 notes.extend(r["message"] for r in report["rejections"]); continue
-            plan("Alkene dihydroxylation", "Oxidation", site, {"catalyst": "osmium", "workup": "aqueous-release"},
+            release_profile = {"catalyst": "osmium", "workup": "aqueous-release"}
+            if conditions.get('conditionProfileId') == dihydroxylation_profile and dihydroxylation_profile:
+                if not dihydroxylation_rule.r3.MODELS[dihydroxylation_profile].workup:
+                    release_profile = {"catalyst": "osmium"}
+            source_reference = bool(dihydroxylation_profile and (conditions.get('conditionProfileId') == dihydroxylation_profile
+                or dihydroxylation_rule.r3.MODELS[dihydroxylation_profile].workup))
+            plan("Alkene dihydroxylation", "Oxidation", site, release_profile,
                  "The selected C=C receives two same-face OH groups in the catalytic Os/H2O2 net model. Starting geometry determines validated relative configurations; opposite faces are alternatives without ratios.",
-                 dihydroxylation_rule.SOURCE, dihydroxylation_rule.LIMITATION, compatibility=report)
+                 dihydroxylation_rule.r3.SOURCE if source_reference else dihydroxylation_rule.SOURCE,
+                 ('Exact source-parent free-product net reference; catalyst/recovery species are not mapped, and unspecified stereocenters remain unassigned. No predicted conversion, isolated purity, yield or mixtures.' if source_reference else dihydroxylation_rule.LIMITATION), compatibility=report)
         for ends, report in hydrogenation_sites:
             if not report["eligible"]:
                 notes.extend(r["message"] for r in report["rejections"])
@@ -607,7 +629,7 @@ def generate_pair(first_id, second_id, catalog, product_names=None, *, condition
                     and conditions.get("additionStage") == "one" and conditions.get("catalyst") in {None, "", "none"}
                     and conditions.get("temperature") != "heated")
             try:
-                fragments = transform(mechanism, inputs, site)
+                fragments = transform(mechanism, inputs, site, dihydroxylation_profile=dihydroxylation_profile if mechanism == 'Alkene dihydroxylation' else None)
                 smiles = _identity(fragments[0])
                 if mechanism == "Alkene dihydroxylation":
                     equivalent = next((old for old in seen_dihydroxylation_products if old["productSmiles"] == smiles
@@ -657,8 +679,14 @@ def generate_pair(first_id, second_id, catalog, product_names=None, *, condition
                          "Alcohol dehydration": "Alkene product", "Alcohol substitution": "Haloalkane product", "Ester saponification": "Carboxylate ion",
                          "Alkyne hydrogenation": "Hydrogenated product", "Alkyne partial hydrogenation": "Alkene product", "Alkyne halogenation": "Halogenated product",
                          "Alkyne hydrohalogenation": "Hydrohalogenated product", "Alkene dihydroxylation": "Diol product", "Polymerization model": "Finite phenyl-ended oligomer"}.get(mechanism, "Organic product"))
+                # Naming is downstream of validated graph generation. Preserve
+                # reviewed identity names and the explicit partial-reduction
+                # qualifier; neither names nor formulas affect eligibility.
+                if smiles not in product_names and name != "Partially hydrogenated product":
+                    name = simple_product_name(smiles) or name
                 outputs = _fragment_outputs(fragments, name)
-                for output in outputs[1:]: output["name"] = product_names.get(output["smiles"], output["name"])
+                for output in outputs[1:]:
+                    output["name"] = product_names.get(output["smiles"], simple_product_name(output["smiles"]) or output["name"])
                 if mechanism == "E2":
                     outputs = [outputs[0], *sorted(outputs[1:], key=lambda out: out["smiles"] != "O")]
             except (ValueError, RuntimeError, StopIteration, IndexError) as exc:
@@ -769,6 +797,8 @@ def generate_pair(first_id, second_id, catalog, product_names=None, *, condition
                                **({"primaryOxidationModel": primary_alcohol_oxidation_rule.metadata(inputs[0]["mol"], inputs[1]["mol"], fragments[0], site, compatibility)} if mechanism == "Alcohol oxidation" and primary_alcohol_oxidation_rule.is_primary(inputs[0]["mol"], site) else {}),
                                **({"secondaryOxidationModel": secondary_alcohol_oxidation_rule.metadata(inputs[0]["mol"], inputs[1]["mol"], fragments[0], site, compatibility)} if mechanism == "Alcohol oxidation" and secondary_alcohol_oxidation_rule.is_secondary(inputs[0]["mol"],site) else {}),
                                **({"compatibility": compatibility_data} if compatibility_data else {}),
+                               **({"hydrogenationSubstrateIdentity": _identity(inputs[0]["mol"]),
+                                   "hydrogenationReagentIdentity": _identity(inputs[1]["mol"])} if mechanism == "Hydrogenation" else {}),
                                **({"regioselectivity": {"basis": compatibility["orientationBasis"],
                                                        "alternativeOrientations": compatibility["orientationCount"],
                                                        "oxygenCarbonMap": parameters["oxygenCarbon"],
@@ -778,7 +808,13 @@ def generate_pair(first_id, second_id, catalog, product_names=None, *, condition
                                    "hxModel": {"mode": "ionic", "hydrogenHalide": compatibility["hydrogenHalide"], "consumedReagent": True,
                                                "radicalPathway": "unsupported", "oxygenSpectators": any(g["type"] in {"alcohol", "ether"} and g["disposition"] == "preserved" for g in compatibility["groups"])}} if mechanism == "Hydrohalogenation" else {}),
                                **({"epoxidationStereo": epoxidation_rule.stereo_metadata(inputs[0]["mol"], fragments[0], inputs[1]["mol"], site)} if mechanism == "Epoxidation" else {}),
-                               **({"dihydroxylationStereo": dihydroxylation_rule.stereo_metadata(inputs[0]["mol"], fragments[0], inputs[1]["mol"], site)} if mechanism == "Alkene dihydroxylation" else {}),
+                               # Exact validated reagent graph for condition-profile evidence;
+                               # never infer a peracid identity from its name or formula.
+                               **({"peroxyacidIdentity": _identity(inputs[1]["mol"]),
+                                   "epoxidationSubstrateIdentity": _identity(inputs[0]["mol"])} if mechanism == "Epoxidation" else {}),
+                               **({"dihydroxylationStereo": dihydroxylation_rule.stereo_metadata(inputs[0]["mol"], fragments[0], inputs[1]["mol"], site),
+                                   "dihydroxylationSubstrateIdentity": _identity(inputs[0]["mol"]),
+                                   "dihydroxylationReagentIdentity": _identity(inputs[1]["mol"])} if mechanism == "Alkene dihydroxylation" else {}),
                                **({"chlorinationStereo": chlorination_rule.stereo_metadata(inputs[0]["mol"], fragments[0], inputs[1]["mol"], site)} if mechanism == "Chlorination" else {}),
                                **({"brominationStereo": bromination_rule.stereo_metadata(inputs[0]["mol"], fragments[0], inputs[1]["mol"], site)} if mechanism == "Bromination" else {}),
                                **({"alkynePartialStereo": alkyne_partial_hydrogenation_rule.stereo_metadata(inputs[0]["mol"], fragments[0], inputs[1]["mol"], site)} if mechanism == "Alkyne partial hydrogenation" else {}),

@@ -9,9 +9,14 @@ import { molecules } from './molecules';
 import { CALCULATOR_TRANSFER_KEY, calculatorCompoundFromReactant, encodeCalculatorTransfer } from './calculator-compound';
 import { MechanismPanel, renderReasoning, renderComparison, type PathwayReasoning, type PathwayComparison, type ReactionMechanism } from './pathway-insights';
 import { FunctionalGroupPanel } from './functional-group-panel';
-import { conditionLabel, unsupportedInputMessage, reactionOptionSummary, conditionGuidance, type ConditionAssessment } from './reaction-conditions';
+import { conditionLabel, unsupportedInputMessage, reactionOptionSummary, conditionGuidance, conditionNextStep, productStructureLabel, restoreNamedProfile, type NamedProfileSelection, type ConditionAssessment } from './reaction-conditions';
 import { ReactionInformationPanel, type ReactionInformation } from './reaction-information-panel';
 import { GuidedConditionsPanel, guidedControlValues, type GuidedConditions } from './guided-reaction-conditions';
+import { mountViewerControls, type CameraViewer } from './viewer-controls';
+import './ui-system.css';
+import './workspace-shell.css';
+import { mountResearchWorkspace } from './reaction-workspace';
+import './reaction-research.css';
 
 type Byproduct = { name: string; formula: string };
 type Reaction = {
@@ -50,7 +55,7 @@ type ReactionDiagram = {
   atoms?: DiagramAtom[];
   mechanism?: ReactionMechanism | null;
 };
-type Conditions = { solvent: string; temperature: string; catalyst: string; oxidationStage?: string; additionStage?: string; polymerUnits?: string; workup?: string; secondaryOxidationProfile?: string };
+type Conditions = { solvent: string; temperature: string; catalyst: string; oxidationStage?: string; additionStage?: string; polymerUnits?: string; workup?: string; secondaryOxidationProfile?: string; conditionProfileId?: string; conditionProfileVersion?: string };
 type ReactionFamily = 'Addition' | 'Elimination' | 'Substitution' | 'Oxidation' | 'Reduction' | 'Condensation' | 'Hydrolysis' | 'Polymerization';
 type Example = {
   id: string;
@@ -60,7 +65,7 @@ type Example = {
   change: string;
   conditions: Conditions;
 };
-type Viewer = AtomViewer & MeasurementViewer & {
+type Viewer = AtomViewer & MeasurementViewer & CameraViewer & {
   removeAllModels: () => void;
   addModel: (data: string, format: string, options?: { keepH: boolean }) => { selectedAtoms: (selection: Record<string, never>) => ModelAtom[] };
   setStyle: (selection: Record<string, never>, style: Record<string, unknown>) => void;
@@ -72,7 +77,8 @@ type Viewer = AtomViewer & MeasurementViewer & {
 const app = document.querySelector<HTMLDivElement>('#reaction-app');
 if (!app) throw new Error('Reaction Lab root was not found.');
 app.innerHTML = `
-  <main class="lab-shell">
+  <a class="skip-link" href="#main-content">Skip to workspace</a>
+  <main class="lab-shell" id="main-content" tabindex="-1">
     <header class="lab-header">
       <div>
         <p class="eyebrow">Molecule Playground · Reaction Lab</p>
@@ -81,8 +87,8 @@ app.innerHTML = `
       </div>
       <nav class="lab-nav" aria-label="Project pages">
         <a href="/">Home</a>
-        <a href="/explore.html">Explore molecules</a>
-        <a href="/builder.html">Build a molecule</a>
+        <a href="/explore.html">Explore</a>
+        <a href="/builder.html">Builder</a>
         <a class="is-current" href="/reaction-lab.html" aria-current="page">Reaction Lab</a>
         <a href="/calculators.html">Calculators</a>
       </nav>
@@ -102,6 +108,7 @@ app.innerHTML = `
         <section><h2>Polymerization</h2><p>Finite 2/4/6-unit model with benzoyl peroxide, phenyl end groups and CO₂. No bulk-polymer size, tacticity or yield prediction.</p></section>
       </div>
     </details>
+    <ol class="lab-flow" aria-label="Reaction workflow"><li><span>1</span>Choose reactants</li><li><span>2</span>Review a pathway</li><li><span>3</span>Inspect the result</li></ol>
     <section class="lab-workspace" aria-label="Interactive reaction lab">
       <section class="lab-input-panel">
         <div class="panel-heading"><p class="eyebrow">01 · Reactants</p><h2>Choose two molecules</h2></div>
@@ -109,17 +116,19 @@ app.innerHTML = `
           <div class="reactant-fields">
             <div><label for="reactant-a">Molecule 1</label><div class="reactant-lookup"><input id="reactant-a" list="reactant-options" placeholder="Name or formula" required /><button id="reactant-a-search" type="button">Search PubChem</button></div><p id="reactant-a-lookup-status" class="reactant-lookup-status" role="status"></p><div id="reactant-a-choices" class="reactant-choices"></div><button id="reactant-a-calculators" class="calculator-shortcut" type="button" hidden>Use in Calculators ↗</button></div>
             <span class="reactant-plus" aria-hidden="true">+</span>
-            <div><label for="reactant-b">Molecule 2 · reagent or solvent</label><div class="reactant-lookup"><input id="reactant-b" list="reactant-options" placeholder="Name or formula" required /><button id="reactant-b-search" type="button">Search PubChem</button></div><p id="reactant-b-lookup-status" class="reactant-lookup-status" role="status"></p><div id="reactant-b-choices" class="reactant-choices"></div><button id="reactant-b-calculators" class="calculator-shortcut" type="button" hidden>Use in Calculators ↗</button></div>
+            <div><label for="reactant-b">Molecule 2 · Reagent / Partner</label><div class="reactant-lookup"><input id="reactant-b" list="reactant-options" placeholder="Name or formula" aria-describedby="reaction-reagent-help reactant-b-lookup-status" required /><button id="reactant-b-search" type="button">Search PubChem</button></div><p id="reaction-reagent-help" class="condition-input-help">Choose the actual chemical. Its role—consumed reactant, solvent or catalyst—depends on the pathway.</p><p id="reactant-b-lookup-status" class="reactant-lookup-status" role="status"></p><div id="reactant-b-choices" class="reactant-choices"></div><button id="reactant-b-calculators" class="calculator-shortcut" type="button" hidden>Use in Calculators ↗</button></div>
           </div>
           <datalist id="reactant-options"></datalist>
           <details class="field-help"><summary>Input tips</summary><p>Use a full name or correctly capitalized formula (CH3Br, not Ch3br). Choose a bracketed structure if several match. PubChem lookup needs internet. You can also draw in <a href="/builder.html">Builder</a>.</p></details>
           <p id="reactant-interpretation" class="reactant-interpretation" hidden></p>
+          <fieldset class="condition-group"><legend>Reaction conditions</legend>
           <div class="condition-fields" aria-label="Reaction conditions">
             <div><label for="reaction-solvent">Solvent / medium</label><select id="reaction-solvent"><option value="">Not specified</option><option value="polar-aprotic">Polar aprotic</option><option value="aqueous-protic">Water · polar protic</option><option value="ethanolic-protic">Ethanol · protic</option><option value="dry">Dry / no water</option><option value="secondary-naocl-acetic">Aqueous acetic acid · secondary NaOCl</option></select></div>
-            <div><label for="reaction-temperature">Temperature</label><select id="reaction-temperature"><option value="">Not specified</option><option value="ambient">Room temperature</option><option value="heated">Heated</option></select></div>
-            <div><label for="reaction-catalyst">Catalyst / activation</label><select id="reaction-catalyst"><option value="">Not specified</option><option value="none">None added</option><option value="acid">Acid</option><option value="metal">Metal (Pd/Pt)</option><option value="lindlar">Lindlar</option><option value="osmium">Os-based dihydroxylation</option><option value="radical">Radical initiation model</option></select></div>
+            <div><label for="reaction-temperature">Temperature</label><select id="reaction-temperature" aria-describedby="reaction-temperature-help"><option value="">Not specified</option><option value="cooled">Cooled / Low Temperature</option><option value="ambient">Room temperature</option><option value="heated">Heated</option></select><p id="reaction-temperature-help" class="condition-input-help">Qualitative settings, not exact temperatures. Cooling is assessed by pathway: eligible alkene Br₂ addition can show a theoretical 3D product when all model requirements are met. A bounded mCPBA epoxidation profile can also qualify where its existing chemistry checks pass; this does not approve every peroxyacid. A separate perbenzoic-acid profile covers screened terminal styrene-type hydrocarbons using a named chloroform-reference net assumption. These are mild cooled reference models, not arbitrary cryogenic conditions. Other cooled cases remain conditional 2D where unvalidated; review the pathway explanation. 3D does not simulate temperature.</p></div>
+            <div><label for="reaction-catalyst">Additional Catalyst / Activation</label><select id="reaction-catalyst" aria-describedby="reaction-catalyst-help"><option value="">Not specified</option><option value="none">None Added</option><option value="acid">Acid Activation / Catalysis</option><option value="metal">Metal Catalyst (Pd/Pt)</option><option value="lindlar">Lindlar Catalyst</option><option value="osmium">Os-Based Dihydroxylation Catalyst</option><option value="radical">Radical Initiation (Supported Model)</option></select><p id="reaction-catalyst-help" class="condition-input-help">Additional activation—not a replacement reagent. For supported base-driven reactions, choose hydroxide (OH⁻) as a chemical input above. No general base-catalysis model is assumed; a selected partner may already supply acid activation.</p></div>
             <div><label for="reaction-oxidation-stage">Oxidation stage</label><select id="reaction-oxidation-stage"><option value="">Not specified</option><option value="first">First stage · alcohol → carbonyl</option><option value="further">Further oxidation · aldehyde → acid</option></select></div>
           </div>
+          </fieldset>
           <section id="guided-conditions" class="guided-conditions" aria-labelledby="guided-conditions-heading" hidden></section>
         </form>
         <details id="reactant-groups" class="functional-group-panel"></details>
@@ -189,6 +198,8 @@ app.innerHTML = `
     </section>
   </main>
 `;
+
+const researchWorkspace = mountResearchWorkspace(document.querySelector<HTMLElement>('.lab-shell')!);
 
 function required<T extends Element>(selector: string): T {
   const element = document.querySelector<T>(selector);
@@ -275,7 +286,9 @@ let activeFamily: ReactionFamily | 'All' = 'All';
 let reactionSiteShapes: unknown[] = [];
 
 const viewerFactory = (window as unknown as { $3Dmol?: { createViewer: (host: HTMLElement, options: Record<string, unknown>) => Viewer } }).$3Dmol;
-const viewer = viewerFactory?.createViewer(viewerHost, { backgroundColor: '#f5f3ee', antialias: true });
+const viewer = viewerFactory?.createViewer(viewerHost, { backgroundColor: '#f7fbff', antialias: true });
+const cameraControls = mountViewerControls(viewerHost, viewer);
+cameraControls.setVisible(false);
 if (viewer) new ResizeObserver(() => {
   if (!viewerHost.hidden) { viewer.resize(); viewer.render(); }
 }).observe(viewerHost);
@@ -287,11 +300,11 @@ const atomInspector = new AtomInspector(diagramScroll, viewerHost, viewer, requi
 const mechanismPanel = new MechanismPanel(required<HTMLDetailsElement>('#reaction-mechanism'), required<HTMLElement>('.lab-result-panel'), viewer ?? null);
 const informationPanel = new ReactionInformationPanel(learning, () => {
   const host = required<HTMLDetailsElement>('#reaction-mechanism');
-  if (!host.hidden) { host.open = true; host.querySelector('summary')?.focus(); }
+  if (!host.hidden) { researchWorkspace.openDock('mechanism'); host.open = true; host.querySelector('summary')?.focus(); }
   else setStatus('The mapped mechanism is still loading or unavailable. Try again once the 2D diagram is ready.');
 });
 const groupPanel = new FunctionalGroupPanel(required<HTMLDetailsElement>('#reactant-groups'), viewerFactory
-  ? (host) => viewerFactory.createViewer(host, { backgroundColor: '#f5f3ee', antialias: true }) : undefined);
+  ? (host) => viewerFactory.createViewer(host, { backgroundColor: '#f7fbff', antialias: true }) : undefined);
 
 let catalog: Catalog | null = null;
 let selectedReaction: Reaction | null = null;
@@ -307,9 +320,16 @@ type PubChemLookup = { query: string; items: Reactant[] };
 let pubchemLookups: [PubChemLookup | null, PubChemLookup | null] = [null, null];
 const lookupRevisions = [0, 0];
 const DRAFT_KEY = 'molecule-playground.reaction-draft.v1';
+let namedProfileSelection: NamedProfileSelection | null = null;
 const TRANSFER_KEY = 'molecule-playground.builder-reactant.v1';
 const EXPLORER_TRANSFER_KEY = 'molecule-playground.explorer-reactant.v1';
 const guidedConditions = new GuidedConditionsPanel(required<HTMLElement>('#guided-conditions'), applyGuidedConditions);
+const clearNamedProfile = document.createElement('button');
+clearNamedProfile.type = 'button'; clearNamedProfile.textContent = 'Clear Named Condition Profile'; clearNamedProfile.hidden = true;
+required<HTMLElement>('#guided-conditions').after(clearNamedProfile);
+clearNamedProfile.addEventListener('click', () => {
+  namedProfileSelection = null; clearNamedProfile.hidden = true; saveDraft(); void updateMatches(selectedReaction?.id);
+});
 
 function guidanceSignature(): string {
   return JSON.stringify({ values: inputs.map(input => input.value), reactants: [resolveReactant(0), resolveReactant(1)].map(r => r ? reactantReference(r) : null), conditions: currentConditions() });
@@ -322,9 +342,12 @@ async function applyGuidedConditions(guidance: GuidedConditions, signature: stri
   // Validate all UI values before changing any field. No chemistry permission is
   // inferred here; matching and generation independently revalidate on server.
   for (const [key, value] of Object.entries(targets)) {
+    if (key === 'conditionProfileId' || key === 'conditionProfileVersion') continue;
     if (!controls[key] || ![...controls[key].options].some(option => option.value === value)) throw new Error('The suggested settings do not match the available controls. Refresh the page.');
   }
-  for (const [key, value] of Object.entries(targets)) controls[key].value = value;
+  for (const [key, value] of Object.entries(targets)) if (controls[key]) controls[key].value = value;
+  if ('conditionProfileId' in targets || 'conditionProfileVersion' in targets) namedProfileSelection = restoreNamedProfile(targets);
+  clearNamedProfile.hidden = !namedProfileSelection;
   saveDraft();
   await updateMatches(guidance.reactionId);
 }
@@ -424,7 +447,7 @@ function saveDraft() {
 function currentConditions(): Conditions {
   const secondaryProfile = solventInput.value === 'secondary-naocl-acetic';
   return { solvent: secondaryProfile ? 'aqueous-protic' : solventInput.value, temperature: temperatureInput.value, catalyst: catalystInput.value, oxidationStage: oxidationStageInput.value, additionStage: additionStageInput.value, polymerUnits: polymerUnitsInput.value, workup: workupInput.value,
-    ...(secondaryProfile ? { secondaryOxidationProfile: 'naocl-acetic-ketone-v1' } : {}) };
+    ...(secondaryProfile ? { secondaryOxidationProfile: 'naocl-acetic-ketone-v1' } : {}), ...(namedProfileSelection ?? {}) };
 }
 
 function isReviewedReactant(reactant: Reactant): boolean {
@@ -507,6 +530,7 @@ async function searchPubChem(slot: 0 | 1) {
 }
 
 function resetResult() {
+  cameraControls.setEnabled(false);
   informationPanel.setReaction();
   mechanismPanel.reset();
   for (const shape of reactionSiteShapes) viewer?.removeShape(shape);
@@ -570,6 +594,7 @@ function setPreview(mode: '2d' | '3d' | 'compare') {
   viewCompare.setAttribute('aria-pressed', String(mode === 'compare'));
   diagramHost.hidden = mode === '3d';
   viewerHost.hidden = mode === '2d';
+  cameraControls.setVisible(mode !== '2d');
   viewerHint.hidden = mode === '2d';
   measurementsHost.hidden = mode === '2d' || !productReady || !measurements.available;
   bondLegend.hidden = mode === '3d' || !diagramData?.highlightsAvailable;
@@ -725,7 +750,7 @@ async function updateMatches(preferredReactionId?: string) {
     showEmpty(unsupportedReasons.length ? unsupportedReasons.join(' ') : customInput
       ? 'No supported structural pathway for this pair. PubChem identifies molecules; it does not predict reactions. This does not prove the pair cannot react.'
       : 'No supported pathway for this pair yet. That does not prove the molecules cannot react.');
-    setStatus(unsupportedReasons.length ? 'No qualified option yet. Review the requirements above.' : 'No supported rule matches these structures.');
+    setStatus(unsupportedReasons.length ? 'No qualified option yet. Review Reaction pathways and Edit conditions for the requirements.' : 'No supported rule matches these structures.');
     return;
   }
   updatePathwaySettings(matches);
@@ -736,6 +761,7 @@ async function updateMatches(preferredReactionId?: string) {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'reaction-option';
+    button.dataset.preview = reaction.assessment?.canRun === false || reaction.assessment?.evidence ? 'conditional' : 'model';
     button.setAttribute('aria-pressed', 'false');
     const title = document.createElement('strong');
     title.textContent = `${reaction.mechanism} · ${(reaction.classifications ?? [reaction.family]).join(' + ')}`;
@@ -745,6 +771,18 @@ async function updateMatches(preferredReactionId?: string) {
     assessment.className = `assessment-${reaction.assessment?.state ?? 'incomplete'}`;
     assessment.textContent = reaction.assessment?.evidence ? conditionLabel(reaction.assessment) : reaction.reasoning?.label ?? conditionLabel(reaction.assessment);
     button.append(title, summary, assessment);
+    const structureLabel = productStructureLabel(reaction.productName, reaction.productSmiles);
+    if (structureLabel) {
+      const structure = document.createElement('small');
+      structure.textContent = structureLabel;
+      structure.style.overflowWrap = 'anywhere';
+      button.append(structure);
+    }
+    const nextStep = conditionNextStep(reaction.assessment);
+    if (nextStep) {
+      const prompt = document.createElement('small'); prompt.textContent = nextStep;
+      button.append(prompt);
+    }
     if (reaction.site) {
       const site = document.createElement('small');
       site.textContent = `${reaction.site.label} · amber marks the selected site`;
@@ -769,10 +807,18 @@ async function updateMatches(preferredReactionId?: string) {
   }
   if (reaction.mechanism === 'Aldehyde oxidation') conditionAssessment.textContent += ` — ${conditionGuidance(reaction.assessment)}`;
       const guidance = conditionGuidance(reaction.assessment);
+      if (reaction.mechanism === 'Bromination' && reaction.assessment?.cooling) {
+        conditionAssessment.textContent += ` — ${guidance}`;
+      } else if (reaction.assessment?.cooling && !conditionAssessment.textContent.includes(guidance)) {
+        conditionAssessment.textContent += ` — ${guidance}`;
+      }
       for (const control of [view3D, viewCompare, runButton]) control.title = guidance;
       conditionAssessment.title = guidance;
       conditionAssessment.className = `condition-assessment assessment-${reaction.assessment?.state ?? 'incomplete'}`;
       conditionAssessment.hidden = false;
+      workupInput.options[0].textContent = reaction.assessment?.productReleaseAssumptionConfirmed
+        && reaction.assessment.productRelease?.aqueousReleaseAssumed === false
+        ? 'Named fractionated endpoint · no aqueous release' : 'Not confirmed';
       for (const option of optionsHost.querySelectorAll<HTMLButtonElement>('button')) {
         option.setAttribute('aria-pressed', String(option === button));
       }
@@ -780,7 +826,8 @@ async function updateMatches(preferredReactionId?: string) {
       updatePreviewActions();
       void loadDiagram(reaction, first, second);
       setStatus(reaction.assessment?.canRun === false
-        ? `${reaction.mechanism}: conditional 2D net option. ${reaction.assessment.note}`
+        ? `${reaction.mechanism}: conditional 2D net option. ${conditionNextStep(reaction.assessment)}`
+        : reaction.assessment?.cooling ? `${reaction.mechanism} selected. ${conditionNextStep(reaction.assessment)}`
         : `${reaction.mechanism} selected. Inspect the 2D changes or view the 3D product.`);
     });
     const wrapper = document.createElement('div');
@@ -831,6 +878,7 @@ exampleCards.addEventListener('click', (event) => {
   if (!target || !catalog) return;
   const example = EXAMPLES.find((item) => item.id === target.dataset.example);
   if (!example) return;
+  namedProfileSelection = null; clearNamedProfile.hidden = true;
   const [firstId, secondId] = example.reactants;
   inputA.value = catalog.reactants.find((item) => item.id === firstId)?.name ?? '';
   inputB.value = catalog.reactants.find((item) => item.id === secondId)?.name ?? '';
@@ -916,10 +964,16 @@ async function showProduct3D(mode: '3d' | 'compare' = 'compare') {
     viewer.zoomTo();
     if (previewMode !== '2d') { viewer.resize(); viewer.render(); }
     productReady = true;
+    cameraControls.setEnabled(true);
     measurementsHost.hidden = previewMode === '2d' || !measurements.available;
     placeholder.hidden = true;
     equation.textContent = formatEquation(reaction, first, second);
     conditionAssessment.textContent = conditionLabel(payload.assessment);
+    if (payload.assessment.cooling) {
+      const coolingGuidance = conditionGuidance(payload.assessment);
+      conditionAssessment.textContent += ` — ${coolingGuidance}`;
+      conditionAssessment.title = coolingGuidance;
+    }
     conditionAssessment.className = `condition-assessment assessment-${payload.assessment.state}`;
     conditionAssessment.hidden = false;
     formulaNote.hidden = reaction.productEquationFormula === payload.product.formula;
@@ -940,6 +994,7 @@ async function showProduct3D(mode: '3d' | 'compare' = 'compare') {
       atomInspector.reset();
       if (diagramData?.atoms) atomInspector.setDiagram(diagramData.atoms);
       productReady = false;
+      cameraControls.setEnabled(false);
       mechanismPanel.clearModel();
       viewer?.removeAllModels();
       if (!viewerHost.hidden) viewer?.render();
@@ -1011,6 +1066,8 @@ try {
         if (typeof value === 'string' && [...select.options].some((option) => option.value === value)) select.value = value;
       }
       if (draft.conditions?.secondaryOxidationProfile === 'naocl-acetic-ketone-v1' && draft.conditions?.solvent === 'aqueous-protic') solventInput.value = 'secondary-naocl-acetic';
+      namedProfileSelection = restoreNamedProfile(draft.conditions);
+      clearNamedProfile.hidden = !namedProfileSelection;
     }
     const transfer = JSON.parse(sessionStorage.getItem(TRANSFER_KEY) ?? 'null') as { slot?: unknown; smiles?: unknown; formula?: unknown } | null;
     sessionStorage.removeItem(TRANSFER_KEY);

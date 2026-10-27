@@ -98,7 +98,7 @@ test('catalog retains six reviewed starters and shares the expanded compound col
   for (const molecule of molecules.slice(0, 6)) {
     const baseline = expected[molecule.id];
     assert.equal(molecule.cid, baseline.cid, `${molecule.id} source identity`);
-    assert.equal(molecule.structureFile, `/molecules/${molecule.id}.sdf`);
+    assert.equal(molecule.structureFile, `/molecules/${molecule.id === 'water' ? 'water-reference' : molecule.id}.sdf`);
     assert.equal(normalizeQuery(molecule.formula), normalizeQuery(baseline.formula));
     for (const field of ['name', 'formula', 'category', 'description']) {
       assert.equal(typeof molecule[field], 'string');

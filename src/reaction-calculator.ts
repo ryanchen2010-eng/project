@@ -5,6 +5,7 @@ export type CalculationContext = {
   version: 1; assertionLevel: 'conditional-net'; pathway: string; label: string; conditionStatus: string;
   conditions: Record<string, string>; missingRequiredSettings: string[]; unknownConditions: string[];
   canGenerate3D: boolean; assumptions: string[]; warning: string;
+  namedConditionProfile?: Record<string, unknown>;
 };
 export type ReactionStoichiometry = {
   balanced: boolean;
@@ -31,10 +32,33 @@ export function copyCalculationContext(value: unknown): CalculationContext {
   const conditions = Object.entries(item.conditions);
   if (conditions.length > 12 || conditions.some(([key, v]) => !/^[A-Za-z][A-Za-z0-9]*$/.test(key)
     || key.length > 50 || typeof v !== 'string' || v.length > 200)) throw new Error('Calculation context is invalid.');
+  let named: Record<string, unknown> | undefined;
+  if (item.namedConditionProfile !== undefined) {
+    const raw = item.namedConditionProfile as Record<string, unknown>;
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw) || raw.version !== 1
+      || !['explicit', 'legacy-inferred'].includes(String(raw.selection))
+      || !['qualified', 'unresolved', 'rejected'].includes(String(raw.status))
+      || JSON.stringify(raw).length > 30000) throw new Error('Named calculation context is invalid.');
+    const ref = raw.reference as Record<string, unknown>;
+    const descriptor = raw.descriptor as Record<string, unknown> | null;
+    if (!ref || typeof ref.id !== 'string' || typeof ref.version !== 'string'
+      || (raw.status !== 'rejected' && (!descriptor || descriptor.version !== 1
+        || descriptor.id !== ref.id || String(descriptor.profileVersion) !== ref.version
+        || descriptor.pathway !== item.pathway || !Array.isArray(descriptor.facts)
+        || !Array.isArray(descriptor.assumptions) || !Array.isArray(descriptor.unknowns)))) {
+      throw new Error('Named calculation context is invalid.');
+    }
+    if (raw.selection === 'explicit' && ((item.conditions as Record<string, unknown>).conditionProfileId !== ref.id
+      || (item.conditions as Record<string, unknown>).conditionProfileVersion !== ref.version)) {
+      throw new Error('Named calculation context conflicts with its inputs.');
+    }
+    named = JSON.parse(JSON.stringify(raw)) as Record<string, unknown>; // Detached facts, never authorization.
+  }
   return { version: 1, assertionLevel: 'conditional-net', pathway: item.pathway, label: item.label,
     conditionStatus: item.conditionStatus, conditions: Object.fromEntries(conditions),
     missingRequiredSettings: [...item.missingRequiredSettings], unknownConditions: [...item.unknownConditions],
-    canGenerate3D: item.canGenerate3D, assumptions: [...item.assumptions], warning: item.warning };
+    canGenerate3D: item.canGenerate3D, assumptions: [...item.assumptions], warning: item.warning,
+    ...(named ? { namedConditionProfile: named } : {}) };
 }
 
 function positive(value: number, label: string): void {

@@ -6,8 +6,10 @@
     <meta name="description" content="Explore molecules, draw structures, compare supported reaction pathways, and calculate chemistry quantities." />
     <title>Home · Molecule Playground</title>
     <link rel="stylesheet" href="/src/home.css" />
+    <link rel="stylesheet" href="/src/ui-system.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to workspace</a>
     <div class="home-shell">
       <header class="site-header">
         <a class="site-brand" href="/" aria-label="Molecule Playground home">
@@ -23,21 +25,21 @@
         </nav>
       </header>
 
-      <main>
+      <main id="main-content" tabindex="-1">
         <section class="home-hero" aria-labelledby="home-title">
           <div class="hero-content">
-            <p class="eyebrow">Chemistry, made tangible</p>
-            <h1 id="home-title">A clearer way to explore molecules.</h1>
+            <p class="eyebrow">Chemistry, Made Tangible</p>
+            <h1 id="home-title">A Clearer Way to Explore Molecules.</h1>
             <p class="hero-intro">Explore molecules, draw structures, compare reactions, and calculate quantities.</p>
             <div class="hero-actions">
-              <a class="action action-primary" href="/explore.html">Explore molecules <span aria-hidden="true">↗</span></a>
-              <a class="action action-secondary" href="/builder.html">Draw a structure <span aria-hidden="true">↗</span></a>
+              <a class="action action-primary" href="/explore.html">Explore Molecules <span aria-hidden="true">↗</span></a>
+              <a class="action action-secondary" href="/builder.html">Draw a Structure <span aria-hidden="true">↗</span></a>
             </div>
-            <p class="hero-qualifier">Educational prototype · Not a reaction predictor</p>
+            <p class="hero-qualifier">Educational Prototype · Not a Reaction Predictor</p>
           </div>
 
           <figure class="molecule-figure">
-            <div class="figure-topline"><span>Featured structure</span><span class="figure-dots" aria-hidden="true">● ● ●</span></div>
+            <div class="figure-topline"><span>Featured Structure</span><span class="figure-dots" aria-hidden="true">● ● ●</span></div>
             <svg class="water-illustration" viewBox="0 0 500 360" role="img" aria-labelledby="water-title water-desc">
               <title id="water-title">Illustration of a water molecule</title>
               <desc id="water-desc">One oxygen atom connected to two hydrogen atoms in a bent arrangement.</desc>
@@ -56,46 +58,46 @@
 
         <section class="tool-section" aria-labelledby="tools-title">
           <div class="section-intro">
-            <p class="eyebrow">Choose a starting point</p>
-            <h2 id="tools-title">Four tools. One workspace.</h2>
+            <p class="eyebrow">Choose a Starting Point</p>
+            <h2 id="tools-title">Four Tools. One Workspace.</h2>
             <p>Find, draw, react, or calculate.</p>
           </div>
           <div class="tool-grid">
             <article class="tool-card">
               <span class="tool-number">01 / Find</span>
               <div class="tool-symbol" aria-hidden="true">⌕</div>
-              <h3>Explore molecules</h3>
+              <h3>Explore Molecules</h3>
               <p>Search compounds and view their shapes and properties.</p>
-              <a href="/explore.html" aria-label="Open Explore molecules">Open Explorer <span aria-hidden="true">→</span></a>
+              <a href="/explore.html" aria-label="Open Explore Molecules">Open Explorer <span aria-hidden="true">→</span></a>
             </article>
             <article class="tool-card">
               <span class="tool-number">02 / Draw</span>
               <div class="tool-symbol tool-symbol-builder" aria-hidden="true">⌬</div>
-              <h3>Build a molecule</h3>
+              <h3>Build a Molecule</h3>
               <p>Draw a structure and turn it into 3D when possible.</p>
               <a href="/builder.html" aria-label="Open Molecule Builder">Open Builder <span aria-hidden="true">→</span></a>
             </article>
             <article class="tool-card">
               <span class="tool-number">03 / Compare</span>
               <div class="tool-symbol tool-symbol-lab" aria-hidden="true">⇄</div>
-              <h3>Try a reaction</h3>
+              <h3>Try a Reaction</h3>
               <p>Choose two reactants and explore supported pathways.</p>
               <a href="/reaction-lab.html" aria-label="Open Reaction Lab">Open Reaction Lab <span aria-hidden="true">→</span></a>
             </article>
             <article class="tool-card">
               <span class="tool-number">04 / Calculate</span>
               <div class="tool-symbol tool-symbol-calculator" aria-hidden="true">±</div>
-              <h3>Chemistry calculators</h3>
+              <h3>Chemistry Calculators</h3>
               <p>Calculate solutions, reaction amounts, equilibrium, and more.</p>
-              <a href="/calculators.html" aria-label="Open Chemistry calculators">Open Calculators <span aria-hidden="true">→</span></a>
+              <a href="/calculators.html" aria-label="Open Chemistry Calculators">Open Calculators <span aria-hidden="true">→</span></a>
             </article>
           </div>
         </section>
 
         <section class="scope-panel" aria-labelledby="scope-title">
           <div>
-            <p class="eyebrow">Good to know</p>
-            <h2 id="scope-title">Learn with models, not predictions.</h2>
+            <p class="eyebrow">Good to Know</p>
+            <h2 id="scope-title">Learn with Models, Not Predictions.</h2>
           </div>
           <div class="scope-copy">
             <p>3D shapes are models. Some compounds are shown in 2D only.</p>
@@ -104,7 +106,8 @@
         </section>
       </main>
 
-      <footer class="site-footer"><span>Molecule Playground · Capstone prototype</span><span>Explore carefully. Keep asking why.</span></footer>
+      <footer class="site-footer"><span>Molecule Playground · Capstone Prototype</span><span>Explore carefully. Keep asking why.</span></footer>
     </div>
+    <script type="module" src="/src/home.ts"></script>
   </body>
 </html>

@@ -1,0 +1,3834 @@
+{
+  "schemaVersion": 1,
+  "phase": "5G",
+  "readOnly": true,
+  "regression": {
+    "python": 1825,
+    "javascript": 1849,
+    "total": 3674,
+    "failures": 0,
+    "skipped": 0
+  },
+  "benchmark": {
+    "caseCount": 347,
+    "applicable": 309,
+    "controls": 38,
+    "statuses": {
+      "Fully supported": 156,
+      "Unsupported": 90,
+      "Correctly rejected": 38,
+      "Partially supported": 62,
+      "Incorrect result": 1
+    },
+    "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+    "allCompleteRowsEqualPhase5F": true,
+    "allIdsExactlyA001ThroughA347": true,
+    "summaries": {
+      "Hydrogenation": {
+        "fully_supported": 11,
+        "applicable": 14,
+        "score": 78.6,
+        "statuses": {
+          "Fully supported": 11,
+          "Unsupported": 3,
+          "Correctly rejected": 2
+        }
+      },
+      "Bromination": {
+        "fully_supported": 9,
+        "applicable": 14,
+        "score": 64.3,
+        "statuses": {
+          "Fully supported": 9,
+          "Partially supported": 1,
+          "Unsupported": 4,
+          "Correctly rejected": 2
+        }
+      },
+      "Chlorination": {
+        "fully_supported": 9,
+        "applicable": 14,
+        "score": 64.3,
+        "statuses": {
+          "Fully supported": 9,
+          "Partially supported": 1,
+          "Unsupported": 4,
+          "Correctly rejected": 1
+        }
+      },
+      "Hydration": {
+        "fully_supported": 10,
+        "applicable": 14,
+        "score": 71.4,
+        "statuses": {
+          "Fully supported": 10,
+          "Unsupported": 4,
+          "Correctly rejected": 1
+        }
+      },
+      "Hydrohalogenation": {
+        "fully_supported": 12,
+        "applicable": 16,
+        "score": 75,
+        "statuses": {
+          "Fully supported": 12,
+          "Unsupported": 4,
+          "Correctly rejected": 1
+        }
+      },
+      "Epoxidation": {
+        "fully_supported": 9,
+        "applicable": 11,
+        "score": 81.8,
+        "statuses": {
+          "Fully supported": 9,
+          "Partially supported": 1,
+          "Unsupported": 1,
+          "Correctly rejected": 2
+        }
+      },
+      "SN2": {
+        "fully_supported": 10,
+        "applicable": 15,
+        "score": 66.7,
+        "statuses": {
+          "Fully supported": 10,
+          "Unsupported": 5,
+          "Correctly rejected": 4
+        }
+      },
+      "SN1": {
+        "fully_supported": 6,
+        "applicable": 11,
+        "score": 54.5,
+        "statuses": {
+          "Fully supported": 6,
+          "Unsupported": 5,
+          "Correctly rejected": 1
+        }
+      },
+      "E2": {
+        "fully_supported": 7,
+        "applicable": 13,
+        "score": 53.8,
+        "statuses": {
+          "Fully supported": 7,
+          "Unsupported": 4,
+          "Partially supported": 2,
+          "Correctly rejected": 1
+        }
+      },
+      "E1": {
+        "fully_supported": 5,
+        "applicable": 9,
+        "score": 55.6,
+        "statuses": {
+          "Fully supported": 5,
+          "Unsupported": 3,
+          "Partially supported": 1,
+          "Correctly rejected": 1
+        }
+      },
+      "Alcohol oxidation": {
+        "fully_supported": 0,
+        "applicable": 12,
+        "score": 0,
+        "statuses": {
+          "Partially supported": 9,
+          "Unsupported": 3,
+          "Correctly rejected": 2
+        }
+      },
+      "Aldehyde oxidation": {
+        "fully_supported": 7,
+        "applicable": 11,
+        "score": 63.6,
+        "statuses": {
+          "Fully supported": 7,
+          "Unsupported": 4,
+          "Correctly rejected": 2
+        }
+      },
+      "Carbonyl hydrogenation": {
+        "fully_supported": 7,
+        "applicable": 11,
+        "score": 63.6,
+        "statuses": {
+          "Fully supported": 7,
+          "Unsupported": 4,
+          "Correctly rejected": 1
+        }
+      },
+      "Esterification": {
+        "fully_supported": 7,
+        "applicable": 10,
+        "score": 70,
+        "statuses": {
+          "Fully supported": 7,
+          "Unsupported": 3,
+          "Correctly rejected": 1
+        }
+      },
+      "Ester hydrolysis": {
+        "fully_supported": 9,
+        "applicable": 10,
+        "score": 90,
+        "statuses": {
+          "Fully supported": 9,
+          "Unsupported": 1,
+          "Correctly rejected": 1
+        }
+      },
+      "Alcohol dehydration": {
+        "fully_supported": 2,
+        "applicable": 8,
+        "score": 25,
+        "statuses": {
+          "Fully supported": 2,
+          "Partially supported": 2,
+          "Unsupported": 4,
+          "Correctly rejected": 2
+        }
+      },
+      "Alcohol substitution": {
+        "fully_supported": 3,
+        "applicable": 11,
+        "score": 27.3,
+        "statuses": {
+          "Fully supported": 3,
+          "Partially supported": 4,
+          "Unsupported": 4,
+          "Correctly rejected": 2
+        }
+      },
+      "Ester saponification": {
+        "fully_supported": 10,
+        "applicable": 11,
+        "score": 90.9,
+        "statuses": {
+          "Fully supported": 10,
+          "Unsupported": 1,
+          "Correctly rejected": 1
+        }
+      },
+      "Alkyne hydrogenation": {
+        "fully_supported": 7,
+        "applicable": 10,
+        "score": 70,
+        "statuses": {
+          "Fully supported": 7,
+          "Unsupported": 2,
+          "Partially supported": 1,
+          "Correctly rejected": 1
+        }
+      },
+      "Alkyne partial hydrogenation": {
+        "fully_supported": 7,
+        "applicable": 10,
+        "score": 70,
+        "statuses": {
+          "Fully supported": 7,
+          "Unsupported": 2,
+          "Partially supported": 1,
+          "Correctly rejected": 1
+        }
+      },
+      "Alkyne halogenation": {
+        "fully_supported": 0,
+        "applicable": 21,
+        "score": 0,
+        "statuses": {
+          "Partially supported": 15,
+          "Unsupported": 6,
+          "Correctly rejected": 2
+        }
+      },
+      "Alkyne hydrohalogenation": {
+        "fully_supported": 0,
+        "applicable": 21,
+        "score": 0,
+        "statuses": {
+          "Partially supported": 14,
+          "Incorrect result": 1,
+          "Unsupported": 6,
+          "Correctly rejected": 2
+        }
+      },
+      "Alkene dihydroxylation": {
+        "fully_supported": 0,
+        "applicable": 11,
+        "score": 0,
+        "statuses": {
+          "Partially supported": 10,
+          "Correctly rejected": 1,
+          "Unsupported": 1
+        }
+      },
+      "Polymerization model": {
+        "fully_supported": 9,
+        "applicable": 21,
+        "score": 42.9,
+        "statuses": {
+          "Fully supported": 9,
+          "Unsupported": 12,
+          "Correctly rejected": 3
+        }
+      }
+    },
+    "rows": [
+      [
+        "A001",
+        "Hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A002",
+        "Hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A003",
+        "Hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A004",
+        "Hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A005",
+        "Hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A006",
+        "Hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A007",
+        "Hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A008",
+        "Hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A009",
+        "Hydrogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A010",
+        "Hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A011",
+        "Hydrogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A012",
+        "Hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A013",
+        "Hydrogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A014",
+        "Hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A015",
+        "Hydrogenation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A016",
+        "Bromination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A017",
+        "Bromination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A018",
+        "Bromination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A019",
+        "Bromination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A020",
+        "Bromination",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A021",
+        "Bromination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A022",
+        "Bromination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A023",
+        "Bromination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A024",
+        "Bromination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A025",
+        "Bromination",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A026",
+        "Bromination",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A027",
+        "Bromination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A028",
+        "Bromination",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A029",
+        "Bromination",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A030",
+        "Bromination",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A031",
+        "Chlorination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A032",
+        "Chlorination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A033",
+        "Chlorination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A034",
+        "Chlorination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A035",
+        "Chlorination",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A036",
+        "Chlorination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A037",
+        "Chlorination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A038",
+        "Chlorination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A039",
+        "Chlorination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A040",
+        "Chlorination",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A041",
+        "Chlorination",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A042",
+        "Chlorination",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A043",
+        "Chlorination",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A044",
+        "Chlorination",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A045",
+        "Chlorination",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A046",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A047",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A048",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A049",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A050",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A051",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A052",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A053",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A054",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A055",
+        "Hydrohalogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A056",
+        "Hydrohalogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A057",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A058",
+        "Hydrohalogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A059",
+        "Hydrohalogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A060",
+        "Hydrohalogenation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A061",
+        "Hydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A062",
+        "Hydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A063",
+        "Hydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A064",
+        "Hydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A065",
+        "Hydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A066",
+        "Hydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A067",
+        "Hydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A068",
+        "Hydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A069",
+        "Hydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A070",
+        "Hydration",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A071",
+        "Hydration",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A072",
+        "Hydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A073",
+        "Hydration",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A074",
+        "Hydration",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A075",
+        "Hydration",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A076",
+        "Hydrogenation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A077",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A078",
+        "Hydrohalogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A079",
+        "Bromination",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A080",
+        "Alcohol oxidation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A081",
+        "Alcohol oxidation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A082",
+        "Alcohol oxidation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A083",
+        "Alcohol oxidation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A084",
+        "Alcohol oxidation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A085",
+        "Alcohol oxidation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A086",
+        "Alcohol oxidation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A087",
+        "Alcohol oxidation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A088",
+        "Alcohol oxidation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A089",
+        "Alcohol oxidation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A090",
+        "Aldehyde oxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A091",
+        "Aldehyde oxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A092",
+        "Aldehyde oxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A093",
+        "Aldehyde oxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A094",
+        "Aldehyde oxidation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A095",
+        "Aldehyde oxidation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A096",
+        "Aldehyde oxidation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A097",
+        "Aldehyde oxidation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A098",
+        "Aldehyde oxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A099",
+        "Aldehyde oxidation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A100",
+        "Alcohol oxidation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A101",
+        "Alcohol oxidation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A102",
+        "Alcohol oxidation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A103",
+        "Alcohol oxidation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A104",
+        "Aldehyde oxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A105",
+        "Aldehyde oxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A106",
+        "Aldehyde oxidation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A107",
+        "Carbonyl hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A108",
+        "Carbonyl hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A109",
+        "Carbonyl hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A110",
+        "Carbonyl hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A111",
+        "Carbonyl hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A112",
+        "Carbonyl hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A113",
+        "Carbonyl hydrogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A114",
+        "Carbonyl hydrogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A115",
+        "Carbonyl hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A116",
+        "Carbonyl hydrogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A117",
+        "Carbonyl hydrogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A118",
+        "Carbonyl hydrogenation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A119",
+        "Esterification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A120",
+        "Esterification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A121",
+        "Esterification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A122",
+        "Esterification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A123",
+        "Esterification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A124",
+        "Esterification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A125",
+        "Esterification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A126",
+        "Esterification",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A127",
+        "Esterification",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A128",
+        "Esterification",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A129",
+        "Esterification",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A130",
+        "Ester hydrolysis",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A131",
+        "Ester hydrolysis",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A132",
+        "Ester hydrolysis",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A133",
+        "Ester hydrolysis",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A134",
+        "Ester hydrolysis",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A135",
+        "Ester hydrolysis",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A136",
+        "Ester hydrolysis",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A137",
+        "Ester hydrolysis",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A138",
+        "Ester hydrolysis",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A139",
+        "Ester hydrolysis",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A140",
+        "Ester hydrolysis",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A141",
+        "Ester saponification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A142",
+        "Ester saponification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A143",
+        "Ester saponification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A144",
+        "Ester saponification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A145",
+        "Ester saponification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A146",
+        "Ester saponification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A147",
+        "Ester saponification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A148",
+        "Ester saponification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A149",
+        "Ester saponification",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A150",
+        "Ester saponification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A151",
+        "Ester saponification",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A152",
+        "Ester saponification",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A153",
+        "SN2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A154",
+        "SN2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A155",
+        "SN2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A156",
+        "SN2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A157",
+        "SN2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A158",
+        "SN2",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A159",
+        "SN2",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A160",
+        "SN2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A161",
+        "SN2",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A162",
+        "SN2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A163",
+        "SN2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A164",
+        "SN2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A165",
+        "SN2",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A166",
+        "SN2",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A167",
+        "SN2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A168",
+        "SN2",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A169",
+        "SN2",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A170",
+        "SN2",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A171",
+        "SN2",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A172",
+        "SN1",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A173",
+        "SN1",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A174",
+        "SN1",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A175",
+        "SN1",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A176",
+        "SN1",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A177",
+        "SN1",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A178",
+        "SN1",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A179",
+        "SN1",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A180",
+        "SN1",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A181",
+        "SN1",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A182",
+        "SN1",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A183",
+        "SN1",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A184",
+        "E2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A185",
+        "E2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A186",
+        "E2",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A187",
+        "E2",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A188",
+        "E2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A189",
+        "E2",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A190",
+        "E2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A191",
+        "E2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A192",
+        "E2",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A193",
+        "E1",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A194",
+        "E1",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A195",
+        "E1",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A196",
+        "E1",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A197",
+        "E1",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A198",
+        "E1",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A199",
+        "E1",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A200",
+        "E1",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A201",
+        "E1",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A202",
+        "E2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A203",
+        "E2",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A204",
+        "E2",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A205",
+        "E2",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A206",
+        "E2",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A207",
+        "E1",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A208",
+        "Alcohol dehydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A209",
+        "Alcohol dehydration",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A210",
+        "Alcohol dehydration",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A211",
+        "Alcohol dehydration",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A212",
+        "Alcohol dehydration",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A213",
+        "Alcohol dehydration",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A214",
+        "Alcohol dehydration",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A215",
+        "Alcohol dehydration",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A216",
+        "Alcohol substitution",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A217",
+        "Alcohol substitution",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A218",
+        "Alcohol substitution",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A219",
+        "Alcohol substitution",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A220",
+        "Alcohol substitution",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A221",
+        "Alcohol substitution",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A222",
+        "Alcohol substitution",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A223",
+        "Alcohol substitution",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A224",
+        "Alcohol substitution",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A225",
+        "Alcohol dehydration",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A226",
+        "Alcohol dehydration",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A227",
+        "Alcohol substitution",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A228",
+        "Alcohol substitution",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A229",
+        "Alcohol substitution",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A230",
+        "Alcohol substitution",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A231",
+        "Epoxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A232",
+        "Epoxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A233",
+        "Epoxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A234",
+        "Epoxidation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A235",
+        "Epoxidation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A236",
+        "Epoxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A237",
+        "Epoxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A238",
+        "Epoxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A239",
+        "Epoxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A240",
+        "Epoxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A241",
+        "Epoxidation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A242",
+        "Alkene dihydroxylation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A243",
+        "Alkene dihydroxylation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A244",
+        "Alkene dihydroxylation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A245",
+        "Alkene dihydroxylation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A246",
+        "Alkene dihydroxylation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A247",
+        "Alkene dihydroxylation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A248",
+        "Alkene dihydroxylation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A249",
+        "Alkene dihydroxylation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A250",
+        "Alkene dihydroxylation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A251",
+        "Alkene dihydroxylation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A252",
+        "Alkene dihydroxylation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A253",
+        "Epoxidation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A254",
+        "Epoxidation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A255",
+        "Alkene dihydroxylation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A256",
+        "Alkyne hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A257",
+        "Alkyne hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A258",
+        "Alkyne hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A259",
+        "Alkyne hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A260",
+        "Alkyne hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A261",
+        "Alkyne hydrogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A262",
+        "Alkyne hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A263",
+        "Alkyne hydrogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A264",
+        "Alkyne hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A265",
+        "Alkyne hydrogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A266",
+        "Alkyne hydrogenation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A267",
+        "Alkyne partial hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A268",
+        "Alkyne partial hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A269",
+        "Alkyne partial hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A270",
+        "Alkyne partial hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A271",
+        "Alkyne partial hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A272",
+        "Alkyne partial hydrogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A273",
+        "Alkyne partial hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A274",
+        "Alkyne partial hydrogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A275",
+        "Alkyne partial hydrogenation",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A276",
+        "Alkyne partial hydrogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A277",
+        "Alkyne partial hydrogenation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A278",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A279",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A280",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A281",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A282",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A283",
+        "Alkyne halogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A284",
+        "Alkyne halogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A285",
+        "Alkyne halogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A286",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A287",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A288",
+        "Alkyne halogenation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A289",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A290",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A291",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A292",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A293",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A294",
+        "Alkyne halogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A295",
+        "Alkyne halogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A296",
+        "Alkyne halogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A297",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A298",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A299",
+        "Alkyne halogenation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A300",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A301",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A302",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A303",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A304",
+        "Alkyne hydrohalogenation",
+        "Incorrect result",
+        "Incorrect result",
+        true
+      ],
+      [
+        "A305",
+        "Alkyne hydrohalogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A306",
+        "Alkyne hydrohalogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A307",
+        "Alkyne hydrohalogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A308",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A309",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A310",
+        "Alkyne hydrohalogenation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A311",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A312",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A313",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A314",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A315",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A316",
+        "Alkyne hydrohalogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A317",
+        "Alkyne hydrohalogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A318",
+        "Alkyne hydrohalogenation",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A319",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A320",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A321",
+        "Alkyne hydrohalogenation",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A322",
+        "Alkyne halogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A323",
+        "Alkyne hydrohalogenation",
+        "Partially supported",
+        "Partially supported",
+        true
+      ],
+      [
+        "A324",
+        "Polymerization model",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A325",
+        "Polymerization model",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A326",
+        "Polymerization model",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A327",
+        "Polymerization model",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A328",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A329",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A330",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A331",
+        "Polymerization model",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A332",
+        "Polymerization model",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A333",
+        "Polymerization model",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A334",
+        "Polymerization model",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A335",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A336",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A337",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A338",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A339",
+        "Polymerization model",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ],
+      [
+        "A340",
+        "Polymerization model",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A341",
+        "Polymerization model",
+        "Fully supported",
+        "Fully supported",
+        true
+      ],
+      [
+        "A342",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A343",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A344",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A345",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A346",
+        "Polymerization model",
+        "Unsupported",
+        "Unsupported",
+        false
+      ],
+      [
+        "A347",
+        "Polymerization model",
+        "Correctly rejected",
+        "Correctly rejected",
+        false
+      ]
+    ]
+  },
+  "diagnostics": {
+    "dehydration": {
+      "phase": "5A",
+      "assertionScope": "Independent formal net structures and API invariants; no experimental approval",
+      "benchmarkSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+      "caseCount": 40,
+      "positiveDenominator": 20,
+      "structuralMatching": 20,
+      "casesWithAnyModel3D": 15,
+      "casesWithAllOptionsModel3D": 8,
+      "runCounts": {
+        "verified": 16,
+        "policy-blocked": 16
+      },
+      "failures": []
+    },
+    "substitution": {
+      "phase": "5B",
+      "assertionScope": "Independent formal net structures/API invariants, not experimental protocols",
+      "caseCount": 45,
+      "positiveDenominator": 21,
+      "structuralMatching": 21,
+      "casesWithAnyNet3D": 9,
+      "runCounts": {
+        "verified": 9,
+        "policy-blocked": 13
+      },
+      "failures": []
+    },
+    "primary": {
+      "phase": "5C",
+      "assertionScope": "Literal net structures and API invariants; no independent experimental protocol approval",
+      "caseCount": 40,
+      "positiveDenominator": 20,
+      "structuralMatching": 20,
+      "conditionCompleteEligibility": 0,
+      "fullySupportedProductGeneration": 0,
+      "independentlyApprovedProfiles": 0,
+      "runCounts": {
+        "policy-blocked": 21
+      },
+      "failures": []
+    },
+    "secondary": {
+      "schemaVersion": 1,
+      "version": "secondary-naocl-acetic-net-diagnostic-1.0.0",
+      "phase": "5D",
+      "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+      "profile": {
+        "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+        "solvent": "aqueous-protic",
+        "temperature": "ambient",
+        "catalyst": "none",
+        "oxidationStage": "first"
+      },
+      "assertionScope": "Explicit model-condition eligibility, literal net graphs and API invariants; no experimental yields or automatic companion admission",
+      "caseCount": 41,
+      "positiveDenominator": 25,
+      "structuralMatching": 25,
+      "conditionCompleteModelCases": 16,
+      "casesWithQualifiedNet3D": 16,
+      "independentlyEvidenceSupportedProfile": 1,
+      "independentlyApprovedCompanionCases": 0,
+      "runCounts": {
+        "verified-qualified-net-3D": 16,
+        "policy-blocked": 10
+      },
+      "geometryScope": "SP2 topology and loss of tetrahedral tags are asserted; numeric out-of-plane deviations are reported without inventing a physical accuracy cutoff.",
+      "failures": []
+    },
+    "lindlar": {
+      "phase": "4A",
+      "fixedBenchmarkModified": false,
+      "benchmarkSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+      "caseCount": 52,
+      "optionCount": 33,
+      "failures": []
+    }
+  },
+  "companion": {
+    "schemaVersion": 1,
+    "version": "1.0.0",
+    "engineSha256": "b6b10774c23bbcdecc8f1113afd67f94c7bda1208ac6fb8edbd7a28c0de359d1",
+    "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+    "failures": [],
+    "mode": "evidence-gated-companion",
+    "scope": {
+      "parentRows": 347,
+      "reviewedScopeRows": 58,
+      "positiveDenominator": 53,
+      "controls": 5,
+      "outOfReviewScope": 289
+    },
+    "metrics": {
+      "denominator": 53,
+      "structuralMatching": 40,
+      "conditionCompleteEligibility": 0,
+      "fullySupportedProductGeneration": 0,
+      "independentlyVerifiedChemistry": 0,
+      "diagnosticModelGenerationOnly": 0
+    },
+    "byPathway": {
+      "Alkene dihydroxylation": {
+        "denominator": 11,
+        "structuralMatching": 10,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 0
+      },
+      "Alkyne halogenation": {
+        "denominator": 21,
+        "structuralMatching": 15,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 0
+      },
+      "Alkyne hydrohalogenation": {
+        "denominator": 21,
+        "structuralMatching": 15,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 0
+      }
+    },
+    "controlsCorrectlyRejected": 5,
+    "profileBacklog": {
+      "evidence-gap": 52,
+      "unsupported-engine-model": 1
+    },
+    "historicalDiagnostics": {
+      "Alkyne halogenation": {
+        "positiveDenominator": 21,
+        "frozenStrictFull": 0,
+        "diagnosticGeneration": 12,
+        "oldScorerDiagnosticFull": 6
+      },
+      "Alkyne hydrohalogenation": {
+        "positiveDenominator": 21,
+        "frozenStrictFull": 0,
+        "diagnosticGeneration": 11,
+        "oldScorerDiagnosticFull": 11
+      },
+      "Alkene dihydroxylation": {
+        "positiveDenominator": 11,
+        "frozenStrictFull": 0,
+        "diagnosticGeneration": 10,
+        "oldScorerDiagnosticFull": 9
+      }
+    },
+    "defects": {
+      "A304": {
+        "status": "frozen-oracle-defect",
+        "appliedToFrozen": false,
+        "erratumStatus": "proposed-not-applied",
+        "substrate": "CC#CCCC",
+        "originalExpected": [
+          "CC(Br)=CCCC",
+          "CCC(Br)=CCC"
+        ],
+        "proposedConnectivityOnly": [
+          "CC(Br)=CCCC",
+          "CC=C(Br)CCC"
+        ],
+        "rationale": "Both net orientations retain the original C2-C3 double-bond position after HBr addition to hex-2-yne. The second frozen expectation incorrectly moves it to C3-C4. E/Z is unassigned; no ratio, condition completeness or 3D permission follows from this graph correction.",
+        "evidenceLocation": "docs/reaction-lab-alkyne-phase4e-consistency-review.md, section on A304; independent mapped bond-edit reconstruction, not engine-product copying.",
+        "approval": null
+      }
+    }
+  },
+  "companionDiagnostic": {
+    "schemaVersion": 1,
+    "version": "1.0.0",
+    "engineSha256": "b6b10774c23bbcdecc8f1113afd67f94c7bda1208ac6fb8edbd7a28c0de359d1",
+    "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+    "failures": [],
+    "mode": "unvalidated-diagnostic-overlay",
+    "scope": {
+      "parentRows": 347,
+      "reviewedScopeRows": 58,
+      "positiveDenominator": 53,
+      "controls": 5,
+      "outOfReviewScope": 289
+    },
+    "metrics": {
+      "denominator": 53,
+      "structuralMatching": 40,
+      "conditionCompleteEligibility": 0,
+      "fullySupportedProductGeneration": 0,
+      "independentlyVerifiedChemistry": 0,
+      "diagnosticModelGenerationOnly": 33
+    },
+    "byPathway": {
+      "Alkene dihydroxylation": {
+        "denominator": 11,
+        "structuralMatching": 10,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 10
+      },
+      "Alkyne halogenation": {
+        "denominator": 21,
+        "structuralMatching": 15,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 12
+      },
+      "Alkyne hydrohalogenation": {
+        "denominator": 21,
+        "structuralMatching": 15,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 11
+      }
+    },
+    "controlsCorrectlyRejected": 5,
+    "profileBacklog": {
+      "evidence-gap": 52,
+      "unsupported-engine-model": 1
+    },
+    "historicalDiagnostics": {
+      "Alkyne halogenation": {
+        "positiveDenominator": 21,
+        "frozenStrictFull": 0,
+        "diagnosticGeneration": 12,
+        "oldScorerDiagnosticFull": 6
+      },
+      "Alkyne hydrohalogenation": {
+        "positiveDenominator": 21,
+        "frozenStrictFull": 0,
+        "diagnosticGeneration": 11,
+        "oldScorerDiagnosticFull": 11
+      },
+      "Alkene dihydroxylation": {
+        "positiveDenominator": 11,
+        "frozenStrictFull": 0,
+        "diagnosticGeneration": 10,
+        "oldScorerDiagnosticFull": 9
+      }
+    },
+    "defects": {
+      "A304": {
+        "status": "frozen-oracle-defect",
+        "appliedToFrozen": false,
+        "erratumStatus": "proposed-not-applied",
+        "substrate": "CC#CCCC",
+        "originalExpected": [
+          "CC(Br)=CCCC",
+          "CCC(Br)=CCC"
+        ],
+        "proposedConnectivityOnly": [
+          "CC(Br)=CCCC",
+          "CC=C(Br)CCC"
+        ],
+        "rationale": "Both net orientations retain the original C2-C3 double-bond position after HBr addition to hex-2-yne. The second frozen expectation incorrectly moves it to C3-C4. E/Z is unassigned; no ratio, condition completeness or 3D permission follows from this graph correction.",
+        "evidenceLocation": "docs/reaction-lab-alkyne-phase4e-consistency-review.md, section on A304; independent mapped bond-edit reconstruction, not engine-product copying.",
+        "approval": null
+      }
+    }
+  },
+  "companionVersionComparison": {
+    "before": "1.0.0",
+    "after": "1.0.0",
+    "parentUnchanged": true,
+    "changedCases": [],
+    "changedProfiles": [],
+    "defectChanges": false
+  },
+  "independentPublicProbes": {
+    "caseCount": 28,
+    "optionCount": 24,
+    "runCounts": {
+      "200": 7,
+      "422": 17
+    },
+    "failures": [],
+    "rows": [
+      {
+        "label": "primary-profile-crossfeed",
+        "substrate": "CCO",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "supportState": "Supported",
+        "products": [
+          "CC=O"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "methyl-oxidation",
+        "substrate": "CO",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "supportState": "Supported",
+        "products": [
+          "C=O"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "secondary-normal",
+        "substrate": "CCC(O)CC",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "supportState": "Supported",
+        "products": [
+          "CCC(=O)CC"
+        ],
+        "runStatus": [
+          200
+        ],
+        "failures": []
+      },
+      {
+        "label": "secondary-remote-stereo",
+        "substrate": "CC[C@H](C)CCCCC(O)C",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "supportState": "Supported",
+        "products": [
+          "CC[C@H](C)CCCCC(C)=O"
+        ],
+        "runStatus": [
+          200
+        ],
+        "failures": []
+      },
+      {
+        "label": "secondary-ether",
+        "substrate": "COCCCC(O)C",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "supportState": "Supported",
+        "products": [
+          "COCCCC(C)=O"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "secondary-extra-OH",
+        "substrate": "CC(O)CCCCCC(O)CC",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "supportState": "Supported",
+        "products": [
+          "CCC(=O)CCCCCC(C)O",
+          "CCC(O)CCCCCC(C)=O"
+        ],
+        "runStatus": [
+          422,
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "secondary-other-counterion",
+        "substrate": "CC(O)C",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "supportState": "Supported",
+        "products": [
+          "CC(C)=O"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "secondary-C8-ring",
+        "substrate": "OC1CCCCCCC1",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "supportState": "Supported",
+        "products": [
+          "O=C1CCCCCCC1"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "secondary-unknown-pressure",
+        "substrate": "CC(O)C",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first",
+          "pressure": "unknown"
+        },
+        "supportState": "Supported",
+        "products": [
+          "CC(C)=O"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "secondary-withdraw-profile",
+        "substrate": "CC(O)C",
+        "conditions": {
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "supportState": "Supported",
+        "products": [
+          "CC(C)=O"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "tertiary-oxidation",
+        "substrate": "CC(O)(C)CC",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "supportState": "Unsupported",
+        "products": [],
+        "runStatus": [],
+        "failures": []
+      },
+      {
+        "label": "primary-HBr",
+        "substrate": "CCCCO",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "CCCCBr"
+        ],
+        "runStatus": [
+          200
+        ],
+        "failures": []
+      },
+      {
+        "label": "secondary-HBr",
+        "substrate": "CCC(O)C",
+        "conditions": {
+          "temperature": "ambient"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "CCC(C)Br"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "tertiary-HBr-ambient",
+        "substrate": "CCC(O)(C)CC",
+        "conditions": {
+          "temperature": "ambient"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "CCC(C)(Br)CC"
+        ],
+        "runStatus": [
+          200
+        ],
+        "failures": []
+      },
+      {
+        "label": "tertiary-HBr-heated",
+        "substrate": "CCC(O)(C)CC",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "CCC(C)(Br)CC"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "primary-HCl",
+        "substrate": "CCCCO",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "supportState": "Unsupported",
+        "products": [],
+        "runStatus": [],
+        "failures": []
+      },
+      {
+        "label": "unactivated-hydroxide",
+        "substrate": "CCCCO",
+        "conditions": {
+          "temperature": "heated"
+        },
+        "supportState": "Unsupported",
+        "products": [],
+        "runStatus": [],
+        "failures": []
+      },
+      {
+        "label": "dehydrate-primary",
+        "substrate": "CCCCCO",
+        "conditions": {
+          "catalyst": "acid",
+          "temperature": "heated"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "C=CCCC"
+        ],
+        "runStatus": [
+          200
+        ],
+        "failures": []
+      },
+      {
+        "label": "dehydrate-primary-noactivation",
+        "substrate": "CCCCCO",
+        "conditions": {
+          "catalyst": "none",
+          "temperature": "heated"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "C=CCCC"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "dehydrate-symmetric-internal",
+        "substrate": "CCC(O)CC",
+        "conditions": {
+          "catalyst": "acid",
+          "temperature": "heated"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "CC=CCC"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "dehydrate-methanol",
+        "substrate": "CO",
+        "conditions": {
+          "catalyst": "acid",
+          "temperature": "heated"
+        },
+        "supportState": "Unsupported",
+        "products": [],
+        "runStatus": [],
+        "failures": []
+      },
+      {
+        "label": "dehydrate-cyclic",
+        "substrate": "OC1CCCCC1",
+        "conditions": {
+          "catalyst": "acid",
+          "temperature": "heated"
+        },
+        "supportState": "Unsupported",
+        "products": [],
+        "runStatus": [],
+        "failures": []
+      },
+      {
+        "label": "Lindlar-internal",
+        "substrate": "CCC#CCC",
+        "conditions": {
+          "catalyst": "lindlar"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "CC/C=C\\CC"
+        ],
+        "runStatus": [
+          200
+        ],
+        "failures": []
+      },
+      {
+        "label": "Lindlar-terminal",
+        "substrate": "C#CCCC",
+        "conditions": {
+          "catalyst": "lindlar"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "C=CCCC"
+        ],
+        "runStatus": [
+          200
+        ],
+        "failures": []
+      },
+      {
+        "label": "Lindlar-multisite",
+        "substrate": "C#CCCCCC#C",
+        "conditions": {
+          "catalyst": "lindlar"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "C#CCCCCC=C"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "Lindlar-unknown-pressure",
+        "substrate": "CCC#CCC",
+        "conditions": {
+          "catalyst": "lindlar",
+          "pressure": "unknown"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "CC/C=C\\CC"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "Lindlar-forged-profile",
+        "substrate": "CCC#CCC",
+        "conditions": {
+          "catalyst": "lindlar",
+          "profileId": "approved"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "CC/C=C\\CC"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      },
+      {
+        "label": "Lindlar-heated",
+        "substrate": "CCC#CCC",
+        "conditions": {
+          "catalyst": "lindlar",
+          "temperature": "heated"
+        },
+        "supportState": "Conditional",
+        "products": [
+          "CC/C=C\\CC"
+        ],
+        "runStatus": [
+          422
+        ],
+        "failures": []
+      }
+    ],
+    "adjacentLegacyObservations": [
+      {
+        "conditions": {
+          "solvent": "aqueous-protic",
+          "oxidationStage": "further"
+        },
+        "product": "CCCCC(=O)O",
+        "supportState": "Supported",
+        "assessment": {
+          "note": "Selected conditions align with this reviewed pathway; this does not predict yield or certainty.",
+          "state": "aligned"
+        },
+        "context": null,
+        "diagramAssessment": null,
+        "diagramNote": "Net bond changes; all H are explicit. Dots show supported lone pairs, not their 3D orientation. This net view omits intermediate steps and stereochemistry; supported steps appear separately in Mapped mechanism.",
+        "mechanism": null,
+        "runStatus": 200
+      },
+      {
+        "conditions": {
+          "solvent": "aqueous-protic",
+          "oxidationStage": "further",
+          "catalyst": "radical"
+        },
+        "product": "CCCCC(=O)O",
+        "supportState": "Supported",
+        "assessment": {
+          "note": "Selected conditions align with this reviewed pathway; this does not predict yield or certainty.",
+          "state": "aligned"
+        },
+        "context": null,
+        "diagramAssessment": null,
+        "diagramNote": "Net bond changes; all H are explicit. Dots show supported lone pairs, not their 3D orientation. This net view omits intermediate steps and stereochemistry; supported steps appear separately in Mapped mechanism.",
+        "mechanism": null,
+        "runStatus": 200
+      },
+      {
+        "conditions": {
+          "solvent": "aqueous-protic",
+          "oxidationStage": "further",
+          "workup": "aqueous-release"
+        },
+        "product": "CCCCC(=O)O",
+        "supportState": "Supported",
+        "assessment": {
+          "note": "Selected conditions align with this reviewed pathway; this does not predict yield or certainty.",
+          "state": "aligned"
+        },
+        "context": null,
+        "diagramAssessment": null,
+        "diagramNote": "Net bond changes; all H are explicit. Dots show supported lone pairs, not their 3D orientation. This net view omits intermediate steps and stereochemistry; supported steps appear separately in Mapped mechanism.",
+        "mechanism": null,
+        "runStatus": 200
+      },
+      {
+        "conditions": {
+          "solvent": "aqueous-protic",
+          "oxidationStage": "further",
+          "pressure": "unknown"
+        },
+        "product": "CCCCC(=O)O",
+        "supportState": "Supported",
+        "assessment": {
+          "note": "Selected conditions align with this reviewed pathway; this does not predict yield or certainty.",
+          "state": "aligned"
+        },
+        "context": null,
+        "diagramAssessment": null,
+        "diagramNote": "Net bond changes; all H are explicit. Dots show supported lone pairs, not their 3D orientation. This net view omits intermediate steps and stereochemistry; supported steps appear separately in Mapped mechanism.",
+        "mechanism": null,
+        "runStatus": 200
+      },
+      {
+        "conditions": {
+          "solvent": "aqueous-protic",
+          "oxidationStage": "further",
+          "catalyst": "acid"
+        },
+        "product": "CCCCC(=O)O",
+        "supportState": "Supported",
+        "assessment": {
+          "note": "The required conditions align, but this additional catalyst is not evaluated for this pathway.",
+          "state": "incomplete"
+        },
+        "context": null,
+        "diagramAssessment": null,
+        "diagramNote": "Net bond changes; all H are explicit. Dots show supported lone pairs, not their 3D orientation. This net view omits intermediate steps and stereochemistry; supported steps appear separately in Mapped mechanism.",
+        "mechanism": null,
+        "runStatus": 200
+      },
+      {
+        "conditions": {
+          "solvent": "aqueous-protic",
+          "oxidationStage": "further",
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1"
+        },
+        "product": "CCCCC(=O)O",
+        "supportState": "Supported",
+        "assessment": {
+          "note": "Selected conditions align with this reviewed pathway; this does not predict yield or certainty.",
+          "state": "aligned"
+        },
+        "context": null,
+        "diagramAssessment": null,
+        "diagramNote": "Net bond changes; all H are explicit. Dots show supported lone pairs, not their 3D orientation. This net view omits intermediate steps and stereochemistry; supported steps appear separately in Mapped mechanism.",
+        "mechanism": null,
+        "runStatus": 200
+      }
+    ]
+  },
+  "typeScript": "pass",
+  "productionBuild": "pass; existing large-chunk warning",
+  "gitDiffCheck": "pass",
+  "integrity": {
+    "protectedFileCount": 229,
+    "changed": [],
+    "addedProtectedFiles": [],
+    "beforeSha256": {
+      ".dockerignore": "90c4a78bfc58696e0ec2b0eef88cdb80e015d14db1b79bbd9be83f8b302554d1",
+      ".gitignore": "5a6ef4b2076e4e1cb49072b3232ead9f7f762398681b5aa150473b58d990c532",
+      "Dockerfile": "fc858572ae5afd395aaf64975ee7c830bd17e8d2ee2117ea94aee5fb15b5465e",
+      "README.md": "fd777a2a55fd2fe127bd592053f0b15254c1714873072f497f8507d82c50e8dd",
+      "benchmarks/reaction-conditions/1.0.0.json": "35ce7ce6f3c3967a06fc354c8bc9fc8319a2247f3b3ac0c7cd246ec75ed8ca1e",
+      "benchmarks/reaction-conditions/README.md": "0311b22b5058aac2c95eb2b7893df2718e238db75fd7334175d022c94c097bc6",
+      "benchmarks/reaction-conditions/index.json": "1b365f7f31143a82536b1ab0570b1ecd00d1e77fbfde46ed145bf631ee7996a4",
+      "builder.html": "fe287e83b1f3bff9baa7dfe46ec2f03c50e969b6d65a0a42e56bb7ed1ee2e312",
+      "calculators.html": "6303d939b4cd5c693bb5dab908cf9d593525490996abf61717bf1e2f3392873d",
+      "explore.html": "26c08b21324ce6814ee34df2c2cd6bf7abe5716646abe43d2bc2972ee63233c5",
+      "index.html": "e114c98514310e34ab1078d55f085f80856e963b333ef5269c8b3a10cb41c17b",
+      "package.json": "b914c39801c6699213bce022fb99c3107d08cfce41c9c6159df75252851f9449",
+      "pnpm-lock.yaml": "2b4d205d1b26266c9fe79a3c16b16f6a8a80ac5bcaa059ec61ea4f22e01a9a05",
+      "pnpm-workspace.yaml": "ac02d96368617c760f093cfe61fdec64b6244007ab3553e0d6621f706f54a353",
+      "reaction-lab.html": "f4ba8fb8e1ade7ffbbaef7a162f3ec4b7b92bd269fe12ea7d67d0f721e37793f",
+      "scripts/audit_addition_consistency.py": "1aecf9268e0282d83118731b7fcc451c6bbe38d54b58577394078fea4f2a426e",
+      "scripts/audit_alcohol_dehydration.py": "859dc8bdb77958ef495b9002ee433ee5e621c154673f49352bb0b4220d77ebd7",
+      "scripts/audit_alcohol_substitution.py": "69a0f067bc0f3edc01b22b8bef52917b141b07247bef4750d65a193d96ac59da",
+      "scripts/audit_alkyne_complete_hydrogenation.py": "2d52f888be4afc5bee7e53219696e25a355899e539f126495e791f677779fea0",
+      "scripts/audit_alkyne_halogenation.py": "c983fb95c43f2393e76ec30130c54d24c9bb2e16072673155dcd3869c234f0c6",
+      "scripts/audit_alkyne_hydrohalogenation.py": "3b2120a96e83ee5e2f51e45fe09e7bab296ede226361d7f70c81fb68f8a0783b",
+      "scripts/audit_alkyne_partial_hydrogenation.py": "667430a2b694219363503a94c38e4a44203be0844706dd5f959b62329e66fd0c",
+      "scripts/audit_primary_alcohol_oxidation.py": "f37a2fb91e803633b3604c3a07f3783b574def2413cb96ebfed9683118b2ea59",
+      "scripts/audit_reaction_lab.py": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+      "scripts/audit_secondary_alcohol_oxidation.py": "090f3b0a3a3606c5594283fb42bd390a3dfa5f62fbb4987926d045f8bc45c00c",
+      "scripts/compress-dist.mjs": "84e8c39e56792d28688ac4c1b46b2b3aeb7e72bcdcaf1404a222084b81315533",
+      "scripts/reaction_conditions_companion.py": "f021cbd4ef47413849ab0a3c54da12f7d69fb98e5b5e7b6ca2cf4ebe10bf77ef",
+      "server/addition_contract.py": "66fc9e45590f3aa4c6251a4c93ce0d98fa62fc6ff199300bec0b4593e344e8cf",
+      "server/alcohol_dehydration_rule.py": "173886554adbcb0ca76819b0a1f153fd8baad186cd57abc7ab99356327a87114",
+      "server/alcohol_oxidation_rule.py": "d3455f9c010822f35e801433b018dcbdf10264243bd2993aa523ac3bf4ee78c2",
+      "server/alcohol_substitution_rule.py": "2050d7834675800c4242de6f969f292fa42c0db0509a7bd8ebb3e2d6c6e3c24e",
+      "server/alkyne_complete_hydrogenation_rule.py": "f1ec3d16037bc428ff77eb25a1533ce6633247af749cba2695e2ec636c667b75",
+      "server/alkyne_halogenation_rule.py": "e3d3514c299445e0b9156a8a8f63218fd1bbc95a1309ea155b1f5a6f88efa887",
+      "server/alkyne_hydrohalogenation_rule.py": "88e500fc2ea79224bf4fcbab375018675dda2eea9eea9a74be68e19dca5c44f0",
+      "server/alkyne_partial_hydrogenation_rule.py": "db6a79b64fcc613292e257daaadd86f97d5d4f6a7236e2678decf54b297cc2e9",
+      "server/bromination_rule.py": "05b824d330d56a4b184943dd833b41d8cd59f81526f1dfe1ccb4b03430541318",
+      "server/bromination_stereo.py": "e33c725194a47afc545678fc2550692d71d6fd0339171f483e6e8976737d0dd8",
+      "server/carbocation_compatibility.py": "f357009a8851f3e55a9896e2dd2da31917c172f24fb0e1ab04d9444e12dea657",
+      "server/carbonyl_hydrogenation_rule.py": "966a78167b12ce2d816659176abdbafab3a4d0fcf3b8a21135da4a961a684f3a",
+      "server/chemistry_server.py": "a44c7bf4688afdbbc09845c2b272f93f108719385e8486659f78c1e025189c4e",
+      "server/chlorination_rule.py": "95b25e3d240ffd4d4aee7b604e6991095265a765af04886ace804940406ecc91",
+      "server/dihydroxylation_rule.py": "ca71c3ae8b66a196c2378e64d04387ea58b4e5df6129e986adf3a312e9b4cdbe",
+      "server/e1_rule.py": "a66480dd824370d6cf2b3509b7bd24f09eb036735f2b2bfc9b40e3be80404d5b",
+      "server/e2_rule.py": "f2fcf20b9174667d6ca43983a6678c4ace8970cafdaa30ddd41a6896fed1eef3",
+      "server/epoxidation_mechanism.py": "f22c59401baf3526db492b7f4945bdb8163b32f065b430488b902e383347fcb4",
+      "server/epoxidation_rule.py": "9baa6d18b2f0992491c5a9a3de461062cdd960a974f47171f535b1a417da99e6",
+      "server/epoxidation_stereo.py": "11f47683513de79367ac019f0143a28a205bc794981d2c378cd1f586fb847e22",
+      "server/ester_rules.py": "9d0a4893385454d4c10cd74cdcd5a422baafdb7a5eceaf2f40c90e541e63d53e",
+      "server/extended_reaction_rules.py": "85886aaa148ccca67aa5d82c9a320ee97cd2fdecf87b533628584cfea08a038e",
+      "server/functional_groups.py": "3f44005028664d11c2bb03ca8a47b3279ddcc060a4d1cb006bf26b02b9dc975e",
+      "server/gunicorn.conf.py": "291b77ffa8858af29f241183d5efc2dbb7058f5ab7a83f8f443d9c7d2856114a",
+      "server/halogen_addition_stereo.py": "a9b07d2b98fd9591e035241cf42e8c13bfd1f3cf926f7bccd6f572580fcc7a55",
+      "server/hydration_rule.py": "53ad255dc3eaee0ee6e0bdc187bb9b1b4160be8e3a20fafce0555e9ae5b3b4be",
+      "server/hydrogenation_rule.py": "e2e4ed43cfe4b999f84e2c6e038ac26e71bafc03c35cf9c3fb159ddbfdea50cb",
+      "server/hydrohalogenation_rule.py": "c231cd90bbf2e818cd9af117412ce22c8850c241ebb60dc1a41b8c15f492e882",
+      "server/molecular_graph.py": "f3b9c634eea84e92b041a369a6aa95fa313f6189f281fb5c35ed4f590b6f4387",
+      "server/primary_alcohol_oxidation_rule.py": "5be8debc49822d7cb5bd07bea2f30305e8b6f33e7664c4f27f431f8ad8dc9252",
+      "server/production_app.py": "b03ec820bd16558fb92072c59bbddbc243a383f466aa7b5b2d49d481b7049dc3",
+      "server/pubchem_service.py": "fb45337bca36e47b24cb9071389fc49718baecc16b88b9c14638918a230b690e",
+      "server/reaction_compatibility.py": "fcc51fb765c71e64f3cdcaec022eaf2a3269be782b8bbaa7284a4e156273ea35",
+      "server/reaction_condition_guidance.py": "fc5ef5604ea99959c9598a56de60e8c042a2405887b7aa6754123ea9836ab167",
+      "server/reaction_conditions.py": "4283aa0a722592bd448527281d501cc240df27bb7120bfd6e53e2c5ec213d93a",
+      "server/reaction_diagrams.py": "8e1561814d24e2fb01474716c861d24282670c384bbe0656b8b7becabdf205d9",
+      "server/reaction_engine.py": "caafbe3c298325ba4cee41fecf3ec8e95a9bb07ed4f0871dafea87a42b6e6320",
+      "server/reaction_information.py": "bd6d0dc255d5623860b764b29529fdd2981bca9f0fd68d4a794e409c3f1ff428",
+      "server/reaction_mechanisms.py": "fd37c6d2e8c1a310c9e95e04d0da1dacf41f978535c9dc6839a0cb8c0d8b5943",
+      "server/reaction_reasoning.py": "aadcf7d280512e8e4b052f3a6679eb6caee0074abe131a1e532ad46b44447532",
+      "server/requirements-production.txt": "b25af21144663662b456eb4e7bc9e7ae274ab0bdb4741199b2b20d49157ccf1f",
+      "server/requirements.txt": "49e6bca42d1ba9442f7c6570cb4a2d4a4cb23c434471987912348074eafd0938",
+      "server/secondary_alcohol_oxidation_rule.py": "d23dd716d487a335e598219a9f109c3c263b204543affdbfb6788a557a83ddd9",
+      "server/sn1_rule.py": "fc40852c5acae38e4e805ef778cf5df379465b083dd2c58db34fc51200984f52",
+      "server/sn2_rule.py": "abec4345c69bf6be332f0f0e1f1c4bdae3b9cf7530f48b6abf4d5adfa1051108",
+      "server/stereochemistry.py": "7d5183aae9d7c0f56c5d594e18673bc0793d33dbc2c215d43d16fecdf5d353a3",
+      "src/acid-base-calculator-panel.ts": "7454341cbe458aca721746edf7ce68ed7e0cf6345a74f4a2c6cce699b89c3462",
+      "src/acid-base-calculator.ts": "38cc84ac57c00ecd1c07a214e1534f4dea57f801991f98e12995edfc43a08b42",
+      "src/atom-inspector.ts": "853217018ea1c455f3dcf469c3b89da1bb99ca05367a79571061c0162e4e6008",
+      "src/bond-measurements.css": "d01c774725f9f4daa5cf7da02bbc837719eacccff2f2b12e48c038a7da054634",
+      "src/bond-measurements.ts": "2a8c81a3572e0884699cb4cc3a8d6010c3490c66059b0845c18e3e3b7ed6425d",
+      "src/builder.css": "70260289b436f2bb0d0cf32ae2704262df58897fe09dad08c5544ee7499e9c21",
+      "src/builder.ts": "c3f54d75faa649c4037599716e0c21f738436225dfcb72bda3adf1194bf12a1b",
+      "src/calculator-compound.ts": "063d2da5485c5865b91b50287ec7992770bb49ad139574a92576e9b2faf5cd46",
+      "src/calculator-reactions.ts": "57e774657695713c91335db2cf14b631b458a3f60bd5aca42516dc7368cd6159",
+      "src/calculators.css": "5ab46dc8d56878f4c6f3ab9e5ab6c215a1e7b1ce871074e45dfb806837f42a74",
+      "src/calculators.ts": "4fce83a96a6b199667ccb45b730fa2476b1d0cce80a2f762b8ca18eeeb78852e",
+      "src/chemical-descriptions.ts": "13a17ea7950e6bf445bda94fd3dc339163c90bcb4d8350f650d748e4445b3e22",
+      "src/chemical-property-guide.ts": "b3d26d532dba7ac43bc9311e33d225d292224fd1488a672fe0ed82405bc0be40",
+      "src/equilibrium-calculator-panel.ts": "796a482a464c0178e7f7bd114dec7b84c27e954c8673039e6163c70dd8873e54",
+      "src/equilibrium-calculator.ts": "866c5175e810a23caca7a8373be6bec0ef9f648e9277e8b5832cb03498e35101",
+      "src/explorer-description.ts": "1cae05e60eab7cd3609de2f9d7f1c11b05c73cbf57aaa21aa77847773d5f1176",
+      "src/functional-group-panel.ts": "f647d1240fb04b6b8b493c502ee5d9c9ce4759f1031ae538bf729789fedd8bfd",
+      "src/guided-reaction-conditions.ts": "c44281127573ac6b045415160dfbec988f8145b041a5b347847f7c1bad4fa41d",
+      "src/home.css": "fc5220c2917efb5ca9bfd935ff1de3cc98edb97f79bf6d7c2560a2c2361d8952",
+      "src/main.ts": "36395394afc0a531ae68a62cf6e3e78b49124006cd7039f1901ef98e92faf982",
+      "src/mole-calculator-panel.ts": "8e0d83eb8d550970ffd9b1ef19b061a53e2b31d63dcc375ea725dc423246d5d0",
+      "src/mole-calculator.ts": "31ad3507ad92774e9398920f8b72d8123458b45c2017c58fe1cc80edcb23fa73",
+      "src/molecules.ts": "eda9703dd097dce2fc6d04b7ba911078b0abe9a47b0ff9fc5f22045d674d6fb9",
+      "src/pathway-insights.ts": "b9776d08c8baa274893e92fbd4294e2c47f31e9f2e1b31a336ba7e907691528b",
+      "src/reactant-entry.ts": "4aba5bfe41c13f35959ec8410e088b3f78b2774be0e20f3d79c1244f275b547c",
+      "src/reaction-calculator-panel.ts": "8fc5a6ef406efe94341595b8af190b0dddf47514ff6b6b6c6d192b4ad23b473e",
+      "src/reaction-calculator.css": "cc272b070ee8f2f815eba2e1e772ce6deb3054575e082f640b07a28467a1618d",
+      "src/reaction-calculator.ts": "153c6f5b15a93835b6fd9cf5c2074674e36089e7ad4c590829ed40abb0e79853",
+      "src/reaction-conditions.ts": "2956f682fd203acf8e74c1c06c3dc1da01f2008e0afd48d56aeadc3a1c303088",
+      "src/reaction-information-panel.ts": "c70f81836b759b909ccd9d7efafa88cff9417ae8bf01e218f503a0bf04d38556",
+      "src/reaction-lab.css": "536bd34dee0cd2c3472926f221b44c6756badb48041b9c4618a01f62beec5ff9",
+      "src/reaction-lab.ts": "e5c5ff2dca56b836ff8605d1c031faed11098b5c30cddd17d93013cb0ba7a9b7",
+      "src/shared-molecules.json": "19aaa76111201c7f6932b71c1041f2e519410df7acf7bc126a8c85f2a9f394dd",
+      "src/solubility-calculator-panel.ts": "d0eaa0df65ca4a285fffb45225fc91833f2ac916a47d363a606620939f871faa",
+      "src/solubility-calculator.ts": "f43d0ae1056cd23120da9a90d947f423ddeef9091bdbcea982c1668ee093b431",
+      "src/solution-calculator-panel.ts": "452181e4cb2935e9fd1a90981c23b8b7914575f211d2539ce9c1d62f573a63b6",
+      "src/solution-calculator.css": "764c535591d4326b530db9d96f9646cfac1bc173179e0842cd02c44930333359",
+      "src/solution-calculator.ts": "3e00a273da1e4a1fa617d17890e52ec8453f83210583e68e84a439d34e2c98b4",
+      "src/solution-compound.ts": "9a9b70ba023598d694ad4f1b7bd9bc79fbd4ea518de5dd05fe17d17ad112b8a8",
+      "src/styles.css": "c62afc9ebbccd1a9271e0e81d0f1e65c32e679194e55940000c28e83af0d7c9e",
+      "start-local.command": "f10f207a7cec07b55c61625727ffed508e63e96cec3ead1576747f3abfa99a4d",
+      "tests/acid-base-calculator-panel.test.mjs": "e3391e56e745786bd786e42c886bdbd1eaa89ca247b4b802a9504c1326ef41f4",
+      "tests/acid-base-calculator.test.mjs": "26ef377b36bec94292d2321cea0d5b6d58e1688598a4876e08e8155816616d61",
+      "tests/addition-consistency-phase3h.test.mjs": "f7b66314b6fbe9a0db5dc348c55209ab9a04fbad0f53bfff4afbda3c65f3c10a",
+      "tests/alcohol-dehydration-phase5a.test.mjs": "22862749c1b4415dd3df65d1f4668a7eb500eed555ddef1073b4b13b97ec4622",
+      "tests/alcohol-oxidation-calculation.test.mjs": "3bcd27b460c431d83658d9966b54c19a0fd3fda2d10bda9dd19b46cc57a4ad0e",
+      "tests/alcohol-substitution-phase5b.test.mjs": "751207ab5701fe54121e1460a0c8e5817d4e42100fc922fed7371bb24a0d1a3e",
+      "tests/alkyne-complete-calculation.test.mjs": "cc50e4baf88c3cd869ad8e294af7f7c4ca8f9944f23895ea04e4cc6f5dca8b6b",
+      "tests/alkyne-consistency-phase4f.test.mjs": "110bd2a77c7bbd81550babcb9df3203613825ed107ebb8b4c231e4c6812d4158",
+      "tests/alkyne-halogenation-calculation.test.mjs": "0ee09ac6394348c24808664aaaa71ba6cc41fc2b80ad114ee1f01acfbe81cb7a",
+      "tests/alkyne-hydrohalogenation-calculation.test.mjs": "0cc46c6fe2d299c50f95559675e625697d806203f9e7a04eb8ba9c3a67b72ef2",
+      "tests/alkyne-partial-calculation.test.mjs": "56ef5538540b9bf5bae30b4fc9540950a46f3a0b33fee7d195ad6e44feb2454c",
+      "tests/atom-inspector.test.mjs": "df99e1a14354aa310881824dbaea894d361e4b51e4c59a96f2b24eb518cd6e68",
+      "tests/baseline.test.mjs": "3d9c89406c2c0fab087595bf4b7e653ed2d38d91c22a5a795a70539647517d5f",
+      "tests/bond-measurements.test.mjs": "aeb2cdb9e41fad8f4ebe4cc32f4647253dc2fb2e182b971e22bb60cf9edbceea",
+      "tests/bromination-calculation.test.mjs": "63b1b762593a720e68f7bfb16a3240a3e3bd207cd420eac2a05b2b00414c61c0",
+      "tests/builder-measurements.test.mjs": "f4e9cebb75783b06b18acb3bb9361b6717dffd3cad3f2aa0e6d4edd705776f63",
+      "tests/calculator-hub-audit.test.mjs": "3578b087952ae074e62174bb3d54197ab5482ef36402068aad6ebbdd5a11a0f3",
+      "tests/calculator-reactions.test.mjs": "d74f2ecd747e9a035710fc26faab9fefb2a585f11a72722172f7b2391f05a2a7",
+      "tests/calculator-transfer.test.mjs": "8212a427a2df97cf9eaaac7c67d06ef438d68344f76422808f3f36752e905ff0",
+      "tests/carbonyl-calculation.test.mjs": "ac2dfdee34c65c0dd9f79837c793c0c373abde1af33bf7e26694e762a40e8b91",
+      "tests/chlorination-calculation.test.mjs": "033b55cbf0b192c4f564a58b765f1b84b81609095033066aa9ca08be65b510c9",
+      "tests/deployment-package.test.mjs": "26dd7ebb8f4dda3e465ac0faf55b15927ccf7e9c8d95f3a60f20dc81f3ef8122",
+      "tests/dihydroxylation-calculation.test.mjs": "83a0ff563fa48c9e5b29280a395264a6446a0078b6daef6d377296179db4bf0f",
+      "tests/e1-calculation.test.mjs": "dbf4898bd085cbee5b695fd570cbf2715dc6eb5a0df74692558d45ebca783bae",
+      "tests/e2-calculation.test.mjs": "dd628d60edc51e080f81a1c63acf6613c5db2d02e9997216c6050dea24923376",
+      "tests/epoxidation-calculation.test.mjs": "a649e704c11ecd87b80541cd817d0f866e2bc31709d4fbe37160770c677c3fd0",
+      "tests/equilibrium-calculator.test.mjs": "7d3aef778c4be27b32fa899455129cbc1460a9753e7dc791e283ef8ccda1928d",
+      "tests/equilibrium-independent-audit.test.mjs": "f3835e2677bde2db1c0534677c70d3af5461dd74799620ef32c80f2a3c39087c",
+      "tests/equilibrium-solubility-panels.test.mjs": "8ff1004c0022ce0579fc0c51167cf2453220c53aa64f1ec0c6820135cf3ff2b1",
+      "tests/ester-calculation.test.mjs": "9a6564de0a379841899e34f5052296d39e3f5524adf417c9c0a5c9aae4e816bb",
+      "tests/explorer-description.test.mjs": "aa47c6019246e9a1bbdd39033d03ff12c5d53a4da3f39f78d67f953c44fae9bc",
+      "tests/explorer-ionic.test.mjs": "f4f264963be93a70d6de717b188d9a1b0416db3cedd50b98cf096cdeb7a7136d",
+      "tests/fixtures/alcohol-dehydration-phase5a.json": "166c047fb1b539217987325d9895a28ed674bf19e24f6bc50a1a1dfcead1842d",
+      "tests/fixtures/alcohol-substitution-phase5b.json": "edec8a88c2647b1a3cec1fee3bd3bf57f76a35bb16812fb7108abae9cc0ef74f",
+      "tests/fixtures/alkyne-complete-hydrogenation.json": "c177713976a2d17a16380b4134eb7c314609dbdb6696e59292355129e50f9bbc",
+      "tests/fixtures/alkyne-halogenation.json": "cbc9047cad6f5bb0c6d40a743fb8cda8044a3966174846afe1293cf49b0ef0de",
+      "tests/fixtures/alkyne-hydrohalogenation.json": "d16908da0d44079a1b9934f64f3aae1b92971ca7a0a71922041a9195e874e714",
+      "tests/fixtures/alkyne-partial-hydrogenation.json": "6df023a3b1d2df52f1e510b347b367333246fb59ccf19ef9ff6739b969b03228",
+      "tests/fixtures/primary-alcohol-oxidation-phase5c.json": "90c6453ee45f4b44169db0ec8ad894aab4e1185f9ea27185a401cd5ee9b7de57",
+      "tests/fixtures/reaction-baseline.json": "0c959bba93e88e3b45b367e953e329360bc11a37f9742ce625b748a26aa54e53",
+      "tests/fixtures/secondary-alcohol-oxidation-phase5d.json": "67c74e92c119ecd5b7b7a820ab1ea05777f4654cf0f0d6d60c406744328cdc88",
+      "tests/guided-conditions-phase5e.test.mjs": "d68e1ee79096fd45d1518c78cae9694254f9155cd53aff2e4d1d4fd2e2785e91",
+      "tests/guided-conditions-phase5f.test.mjs": "7ebfa29aebe01c43f7e2796fd45f782d54c5e6a876b9e0c4dd359f8b506f2286",
+      "tests/hydration-calculation.test.mjs": "9abf134bac6d4d339d17376f6dd9f3f08194634ff6dc82670b554e347ec22148",
+      "tests/hydrogenation-calculation.test.mjs": "0dbae68a31b4adda343450b67293acc58c646ed4f5da3a3cb87b0815c773498f",
+      "tests/hydrohalogenation-calculation.test.mjs": "68c6749c19c4630bd5b99f424dbaad1340945b805dc456929cf1fb021c24f7ca",
+      "tests/mole-calculator-panel.test.mjs": "97648488ee787bcf3e4c86132a6079e7f0f8c73386c63fd23f3367604ae0e59c",
+      "tests/mole-calculator.test.mjs": "46aae4129cbc2afab76e892a37063b683350c45b688063c9de5c73b3ff01c39e",
+      "tests/navigation.test.mjs": "21bf4d10091394cfef95eae11f2f771db1aaeb5e3503ffcf2cc7180a29d18737",
+      "tests/pathway-insights.test.mjs": "65398a9e121ae444f39ba7d896bd67ec37f8da577745ec8ed4f36aa5600cabbd",
+      "tests/primary-alcohol-oxidation-phase5c.test.mjs": "470324372d1e1749d8318cd49e164baf65735ca363e4ebaa3cb8684ae3f86c33",
+      "tests/reactant-entry.test.mjs": "46bf2bdadc5869ac231edb062c555fa55b397f233b90dd7ea4c6ed76eaadaf3d",
+      "tests/reaction-calculator-panel.test.mjs": "b2142766ad2edc17340d660304f0356c9a977eecf613c92e946b56f436ef8059",
+      "tests/reaction-calculator.test.mjs": "61d5f95545560862f54b72821843988e4e9495d17518e481ece2f124a2204e88",
+      "tests/reaction-consistency-phase2h.test.mjs": "1d967803aaffbeddb138c3592f7db0dcf1b8da815398bc1028b63f9e7ca6e77b",
+      "tests/reaction-expansion-panels.test.mjs": "fc50f605460ac22c7abefe9ee17ce61163f7b9fee90f068821c2a6dc2b4cbe43",
+      "tests/reaction-measurements.test.mjs": "974e070462060d025aba4a0049044fde0d3f33b5fcc9a3c5376832b1b1145361",
+      "tests/reaction-pathway-settings.test.mjs": "3c595774d9740da9494ec62e046ee8f77b20246e562cb5cb61d3b1cf041d7d7c",
+      "tests/secondary-alcohol-oxidation-phase5d.test.mjs": "594aab5de566c0ac97fe3add07a5ce5a6e0efc4a5cba60458154fef7036790b3",
+      "tests/sn1-calculation.test.mjs": "9c62823f4b10850e23c328781f8803b7bc5464a9de0e2e4b208c92728860d941",
+      "tests/sn2-calculation.test.mjs": "7cf26e5d441149408b3a7740c57e8188bdb816b6892413cd3aa9c7037638bf66",
+      "tests/solubility-calculator.test.mjs": "e89650ca17cfffc182b10623786ed4c7c33b332a17720fbeeaceb76efa23d515",
+      "tests/solution-calculator-panel.test.mjs": "50d4db62636d17cf33ed6a3bb063f44dbcb6c4af2900a647587791b36afad5a7",
+      "tests/solution-calculator.test.mjs": "4a5a27066977fc89fb78310e274a5b0d978927d1e77aad3463f76fa1a21d3ebb",
+      "tests/solution-integrations.test.mjs": "26047341bbd4342bf2a3f678742eaa3a1d190cc71d72aabb6c0d34a6c8ab47fb",
+      "tests/test_addition_consistency_phase3h.py": "0a1df0dff15f27c7de72785c2dc80fa86dc05b7a5d4b478d278b270e21d00519",
+      "tests/test_alcohol_dehydration_phase5a.py": "21dd2297d64f51d6e3a695d4d84d6bd4b795cfebad00dbec62b87037999c6dce",
+      "tests/test_alcohol_oxidation_compatibility.py": "b058d1e052813ca7944bf4684a0be8bc9bf83c4fda6b5229f9a573467b21b9aa",
+      "tests/test_alcohol_substitution_phase5b.py": "07a8eb36da6ceafc3b02e030248e127e80a45be8edde82d4f5d14022f1960a9f",
+      "tests/test_alkyne_complete_hydrogenation.py": "6972ea761e8c0121399e6a42e0165dee8458e23c4833e1faa0f14cd583c0d192",
+      "tests/test_alkyne_complete_public_api.py": "8ee08da5c7d922b3808e0aff7f7dcbfd096983a96755b78bf5ce0f6f56ccd1fc",
+      "tests/test_alkyne_consistency_phase4f.py": "b6d0ee8ef319a8fa6ddfc57b1413fbae0c9886add724db87314c48043a69abe7",
+      "tests/test_alkyne_halogenation.py": "fb410538537f88eaf4a635ae13671d8e44499f7e5b2ffd1fabf93cf5334d7106",
+      "tests/test_alkyne_halogenation_public_api.py": "badc46eccf01267453ba53ce93eb301aa82f6ad93fc48242e2f4cebf0e79207c",
+      "tests/test_alkyne_hydrohalogenation.py": "b3eaf2f970a4173f5ccae0dbf109401a172a7a4234d2aeed1c1cf81fec94df27",
+      "tests/test_alkyne_hydrohalogenation_public_api.py": "5f00e9ebda657cdbee14f84fd987f8b3939e30c437de984e950075aac6962942",
+      "tests/test_alkyne_partial_hydrogenation.py": "ec1549fd29970bb2b12412607506907180448aa441b67d1e693d2747a9012ea6",
+      "tests/test_alkyne_partial_public_api.py": "ae6d1f11729501e0349e31d45bb1e3884fbd9215b17162e3f9f4b28ddf4b365f",
+      "tests/test_bromination_compatibility.py": "4e3a051cc6c35aea91d7b21203bfe8e5249b4b77d8521622b65b989e073c6df6",
+      "tests/test_bromination_public_api.py": "c49d4b799dd2c6a9b014ad5f36ab18ea18908163c809386bae02b6a7122e95e9",
+      "tests/test_carbonyl_compatibility.py": "daf5d852e937b41a406b7f26a90f8d2918903567f01a5987b2e3b9fd7f2d85d5",
+      "tests/test_chemistry.py": "4173d98853cbb659ec44550d10d6cc7ce14b9170ce391eb6eddefc15557c01c4",
+      "tests/test_chemistry_depth.py": "e2cd74388390ffa5d686079b0715e8ad62be7169d30c1c12c2161d2c97e14d79",
+      "tests/test_chlorination_compatibility.py": "7571a6a23f38ebba4d221c5618b5c19aed46f1706ffdffc8f6a7fee3f39fd537",
+      "tests/test_chlorination_public_api.py": "c9e90af2f707e77f7cabac480bec6460d6dfedb951be77305d34e70ebd6cbb75",
+      "tests/test_cross_page.py": "4d646bb85f93f26251beaae1f9a6aa4b167562c5a69f4ae9f1e9cdda2ffcd770",
+      "tests/test_dihydroxylation_compatibility.py": "f967276a03b6096257d3c57ff85cbc501e70ca2a8deb9abdcf301a0643ddd029",
+      "tests/test_dihydroxylation_public_api.py": "9555a01805410a7539e7a86e05de84630ea8bb6b08e95f58efd463c6eb9f365a",
+      "tests/test_e1_compatibility.py": "18341d8e407c84dd1539c7a9aa23afbee493a96b1efd17b7f93e21a421845c16",
+      "tests/test_e2_compatibility.py": "0bb7006c1aed432fe19b38369e5a8b5e1bda07e9d5e332ac58a974cee4a6c85b",
+      "tests/test_epoxidation_compatibility.py": "f70a59feb652c49304287d27ba1fe639a13b685626fa2bf204d8e19aa83e1146",
+      "tests/test_epoxidation_public_api.py": "3001ffd9ab8c6e7d58aa3deac8bbce28f7be04128609414ca79c42ed5a7ca7e0",
+      "tests/test_ester_phase1.py": "cca3dd7e8eddcb6f17d3be955811630abd6f72d229bc08a00b82ca98a41150a4",
+      "tests/test_guided_conditions_phase5e.py": "9195862ab8e8c5f6f11c96dbed45920656b0504b56e80aac2dd29bb945714ec0",
+      "tests/test_guided_conditions_phase5f.py": "169eee3c82e08617e97d3662ca33983d60e00f74ae83f717c1f0dc9d53ce26ad",
+      "tests/test_hydration_compatibility.py": "f21f13ebf404a790ed057c883a404fd9be2345a43d3dadd0dc8523b99e41d215",
+      "tests/test_hydration_public_api.py": "6f7dafd41e1f67a952dd1c835d5cbaf7ebb00bd407a44023dba88cffd754fade",
+      "tests/test_hydrogenation_compatibility.py": "6740e5d872e5fe4f4048f14229c0b1bf084d6cba3927ea521ef473bc2eb068f3",
+      "tests/test_hydrohalogenation_compatibility.py": "a52ff4014e751f02de976efa2c60704fecb560c45179e86fe55984dd2b156115",
+      "tests/test_hydrohalogenation_public_api.py": "d81823195500c51eacad55db125e2d53ea6f2c2b17264755a0d466f114c9572a",
+      "tests/test_pathway_insights.py": "8deff6fed2321820bbb1040eb47b36d099ada799bda5f394e0a2c24339351414",
+      "tests/test_primary_alcohol_oxidation_phase5c.py": "25dcfa5ad95fa7e1c5b54326bc9d8c6695f96edbda1efb30e865eb3a7a4ae561",
+      "tests/test_production_app.py": "7ab0e854ca6f6150d09e11feabc61ab8b133f48dfc09a6faf6ac84a3569479e8",
+      "tests/test_pubchem.py": "a3c9fbee9cd42d0fbeff936583797b8387089ce4d9aa900e7412f06bc401b346",
+      "tests/test_reaction_consistency_phase2h.py": "a59992132ed752b445ae63e25c40994e5d6ce4106712c0e281fef2218e4bab32",
+      "tests/test_reaction_diagrams.py": "fe784d04fbb9165924aa73736a597cadac84644096346ca3cee56360211df520",
+      "tests/test_reaction_engine.py": "cc01c711ddedd6dbdfc17b8f5d3863e54a27e37610c462cb4dd5e54bb65eab0e",
+      "tests/test_reaction_expansion.py": "863435252aa55cbd45572bdc8ab1fe2ca6c959b1cbe64ad1b5dd11a761132fdb",
+      "tests/test_reaction_preview_api.py": "893798da5c6ecca83b486d67b6b368f41d231f3819f5d5ef80df9aef7a07f388",
+      "tests/test_reaction_stoichiometry.py": "9a80efe8e83e51b0b166c9409208183859cbda52819a3d7587fc7a0eaacf772b",
+      "tests/test_secondary_alcohol_oxidation_phase5d.py": "60b0b8a941b08f1710b055fc0cf7332f05e0c8039114524d4bae1e96a1a76864",
+      "tests/test_sn1_compatibility.py": "4b7c3ff728c1d08d8bee482056ddfab561bda2e33bed5b11e7f575e49f60aac3",
+      "tests/test_sn2_compatibility.py": "8e5cf112250120a8852b48dd4a4aff740437bc70abbcc7313d8daf62d3985bd1",
+      "tsconfig.json": "79df716e1aecea2eabe4b34c64a57f4ad88a78d2dfeb7456b3348e9f3f9d9dfb",
+      "vite.config.ts": "0269d3790ebb60082b60d4759fe372d473a9ad4ab9277e857886496361c612d0"
+    }
+  },
+  "scope": {
+    "productionChanges": false,
+    "existingTestChanges": false,
+    "benchmarkChanges": false,
+    "calculatorChanges": false,
+    "profileChanges": false,
+    "layoutChanges": false,
+    "deployment": false
+  },
+  "browser": {
+    "explorerTransfer": "2-propanol exact identity",
+    "builderTransfer": "existing ethanol drawing, validated then exact ethanol identity",
+    "secondaryGuide": "review/apply; 2D first; separate Compare; original O linked",
+    "secondaryArithmetic": {
+      "alcoholGrams": 0.060096,
+      "hypochloriteGrams": 0.074442,
+      "productMoles": 0.001,
+      "productGrams": 0.05808
+    },
+    "withdrawal": "3D/atom selection/yield removed; replacement consent required",
+    "primary": "conditional 2D; no validated profile; 3D disabled",
+    "lindlar": "metal-to-Lindlar explicit consent; medium/temperature not altered; separate Compare; Carbon 2 linked",
+    "reload": "inputs/catalyst restored, selected output not restored",
+    "completePathwaySwitch": "does not inherit Lindlar permission",
+    "reagentReplacement": "H2 to water removes choices/output",
+    "limits": "Expert walkthrough plus automated tests, not recruited student study; multisite selection covered by public API/regressions",
+    "builderTimingObservation": "Rapid Load ethanol / Check issued 422 before loaded state; loaded-state retry and transfer passed. Failed request body not captured; precise rejection not asserted. No Builder changes."
+  },
+  "confirmedFindings": [
+    "F1 legacy aldehyde oxidation ignores unsupported extra conditions and lacks modern confidence contract",
+    "F2 top-level oxidation Supported is not qualified output",
+    "F3 generic-water replacement summary is missing instead of conflict",
+    "F4 blocked Lindlar 2D inspector suggests both views"
+  ],
+  "cleanup": {
+    "ownedBrowserTab": "closed",
+    "ownedLocalServer": "stopped via interrupt; ports 5173 and 8000 no longer listening"
+  }
+}

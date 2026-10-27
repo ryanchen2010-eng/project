@@ -8,8 +8,10 @@ formula matching or maximum-common-substructure mapping is used for highlights.
 from __future__ import annotations
 
 from html import escape
-from math import atan2, cos, pi, sin
+from math import atan2, cos, hypot, pi, sin, sqrt
+import re
 from typing import Any
+import xml.etree.ElementTree as ET
 
 from rdkit import Chem
 from rdkit.Chem import rdDepictor, rdMolDescriptors
@@ -186,30 +188,103 @@ def _atom_metadata(item: dict[str, Any], side: str, species_index: int,
             for atom in item["mol"].GetAtoms()]
 
 
-def _electron_dots(atom: Chem.Atom, coordinates: dict[int, tuple[float, float]]) -> str:
+def _label_layout(drawing: str, molecule: Chem.Mol,
+                  coordinates: dict[int, tuple[float, float]]) -> dict[int, dict[str, Any]]:
+    """Measure RDKit's actual glyph outlines, not the charged label's atom anchor.
+
+    The capital/lowercase element glyphs are taller than the superscript charge
+    and isotope glyphs. Keep their center as the annotation anchor, but reserve
+    space for *all* label outlines. Bond endpoints and molecular coordinates are
+    deliberately untouched. A bounded fallback also supports non-path fonts.
+    """
+    paths: dict[int, list[list[tuple[float, float]]]] = {}
+    for node in ET.fromstring(f'<svg>{drawing}</svg>'):
+        match = re.fullmatch(r"atom-(\d+)", node.get("class", ""))
+        data = node.get("d", "")
+        if node.tag != "path" or not match or not data:
+            continue
+        # RDKit emits absolute M/L/Q/C outlines. Control points conservatively
+        # bound the curves. Never interpret arc flags / relative paths as xy.
+        commands = re.findall(r"[A-DF-Za-df-z]", data)
+        if any(command not in {"M", "L", "Q", "C", "Z"} for command in commands):
+            continue
+        numbers = list(map(float, re.findall(r"[-+]?(?:\d*\.\d+|\d+\.?\d*)(?:[eE][-+]?\d+)?", data)))
+        if numbers and len(numbers) % 2 == 0:
+            paths.setdefault(int(match[1]), []).append(list(zip(numbers[::2], numbers[1::2])))
+    result = {}
+    for atom in molecule.GetAtoms():
+        index = atom.GetIdx()
+        glyphs = paths.get(index, [])
+        if glyphs:
+            element_glyphs = sorted(glyphs, key=lambda points:
+                                    max(y for _, y in points) - min(y for _, y in points),
+                                    reverse=True)[:len(atom.GetSymbol())]
+            base = [point for points in element_glyphs for point in points]
+            cx = (min(x for x, _ in base) + max(x for x, _ in base)) / 2
+            cy = (min(y for _, y in base) + max(y for _, y in base)) / 2
+            points = [point for glyph in glyphs for point in glyph]
+        else:
+            cx, cy = coordinates[index]
+            points = [(cx - 7 * len(atom.GetSymbol()), cy - 9),
+                      (cx + 7 * len(atom.GetSymbol()), cy + 9)]
+        rx = max(15., max(abs(x - cx) for x, _ in points) + 5)
+        ry = max(15., max(abs(y - cy) for _, y in points) + 5)
+        # Reserve clearance at corners as well as at the four axis extrema.
+        scale = max(1., max(sqrt(((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2)
+                             for x, y in points) / .85)
+        result[index] = {"cx": cx, "cy": cy, "rx": rx * scale, "ry": ry * scale,
+                         "bounds": (min(x for x, _ in points), min(y for _, y in points),
+                                    max(x for x, _ in points), max(y for _, y in points))}
+    return result
+
+
+def _electron_positions(atom: Chem.Atom, labels: dict[int, dict[str, Any]],
+                        bonds: list[tuple[tuple[float, float], tuple[float, float]]],
+                        placed: list[tuple[float, float]], width: int, height: int) -> list[tuple[float, float]]:
     count = _lone_pairs(atom)
     if not count:
-        return ""
-    x, y = coordinates[atom.GetIdx()]
-    occupied = [atan2(coordinates[neighbor.GetIdx()][1] - y,
-                     coordinates[neighbor.GetIdx()][0] - x) for neighbor in atom.GetNeighbors()]
-    choices = [index * pi / 4 for index in range(8)]
+        return []
+    label = labels[atom.GetIdx()]
+    x, y = label["cx"], label["cy"]
+    occupied = [atan2(labels[n.GetIdx()]["cy"] - y, labels[n.GetIdx()]["cx"] - x)
+                for n in atom.GetNeighbors()]
+    choices = [index * pi / 12 for index in range(24)]
     selected = []
+    dots: list[tuple[float, float]] = []
+
+    def segment_distance(point, segment):
+        (ax, ay), (bx, by) = segment
+        dx, dy = bx - ax, by - ay
+        t = max(0., min(1., ((point[0] - ax) * dx + (point[1] - ay) * dy) / (dx * dx + dy * dy))) if dx or dy else 0.
+        return hypot(point[0] - ax - t * dx, point[1] - ay - t * dy)
+
     for _ in range(count):
-        def clearance(angle: float) -> float:
-            return min((abs((angle - direction + pi) % (2 * pi) - pi)
-                        for direction in occupied + selected), default=pi)
-        angle = max(choices, key=clearance)
+        candidates = []
+        for extra in (0, 4, 8, 12):
+            for angle in choices:
+                px = x + (label["rx"] + 10 + extra) * cos(angle)
+                py = y + (label["ry"] + 10 + extra) * sin(angle)
+                pair = [(px - offset * sin(angle), py + offset * cos(angle)) for offset in (-3.2, 3.2)]
+                collisions = 0
+                for dx, dy in pair:
+                    collisions += int(not (4 <= dx <= width - 4 and 4 <= dy <= height - 4))
+                    for index, other in labels.items():
+                        if index == atom.GetIdx():
+                            continue
+                        collisions += int(((dx - other["cx"]) / (other["rx"] + 4)) ** 2
+                                          + ((dy - other["cy"]) / (other["ry"] + 4)) ** 2 < 1)
+                    collisions += sum(segment_distance((dx, dy), bond) < 4 for bond in bonds)
+                    collisions += sum(hypot(dx - ox, dy - oy) < 7.6 for ox, oy in placed + dots)
+                clearance = min((abs((angle - direction + pi) % (2 * pi) - pi)
+                                 for direction in occupied + selected), default=pi)
+                candidates.append(((collisions, extra, -clearance), angle, pair))
+            if any(candidate[0][0] == 0 for candidate in candidates):
+                break
+        _, angle, pair = min(candidates, key=lambda candidate: candidate[0])
         selected.append(angle)
         choices.remove(angle)
-    radius = 26 if len(atom.GetSymbol()) > 1 else 23
-    dots = []
-    for angle in selected:
-        center_x, center_y = x + radius * cos(angle), y + radius * sin(angle)
-        for offset in (-2.8, 2.8):
-            dot_x, dot_y = center_x - offset * sin(angle), center_y + offset * cos(angle)
-            dots.append(f'<circle class="lewis-electron" cx="{dot_x:.2f}" cy="{dot_y:.2f}" r="1.8" fill="#172c24"/>')
-    return "".join(dots)
+        dots.extend(pair)
+    return dots
 
 
 def _molecule_svg(item: dict[str, Any], changes: list[dict[str, Any]], side: str,
@@ -217,6 +292,27 @@ def _molecule_svg(item: dict[str, Any], changes: list[dict[str, Any]], side: str
     # Keep every H explicit. The same mapped graph also supplies the 3D
     # Molfile, so symmetric atoms never depend on a guessed element ordering.
     molecule = Chem.Mol(item["mol"])
+    fragment_indexes: list[tuple[int, ...]] = []
+    fragments = Chem.GetMolFrags(molecule, asMols=True, sanitizeFrags=False,
+                                 fragsMolAtomMapping=fragment_indexes)
+    if 1 < len(fragments) <= 4:
+        # Disconnected mechanism species must not share RDKit's tight packing:
+        # that packing knows about glyphs, but not our Lewis dots / halos.
+        # Keep RDKit's normal packing for larger assemblies rather than making
+        # an unbounded row with negative / unusably small cell widths.
+        gap = 24
+        cell = (width - gap * (len(fragments) - 1)) / len(fragments)
+        pieces = []
+        for number, (fragment, indexes) in enumerate(zip(fragments, fragment_indexes)):
+            fragment_item = {**item, "mol": fragment}
+            content = _molecule_svg(fragment_item, changes, side, species_index, product_maps,
+                                    max(1, int(cell)), height)
+            content = re.sub(r"\batom-(\d+)\b", lambda match: f"atom-{indexes[int(match[1])]}", content)
+            pieces.append(f'<g transform="translate({number * (cell + gap):.2f} 0)">{content}</g>')
+            if number:
+                pieces.append(f'<text x="{number * (cell + gap) - gap / 2:.2f}" y="{height / 2 + 5:.2f}" '
+                              'text-anchor="middle" fill="#50665c" font-size="18" font-family="sans-serif">+</text>')
+        return "".join(pieces)
     highlights = {}
     for change in changes:
         if side == "reactants" and change["kind"] == "formed" or side == "products" and change["kind"] == "broken":
@@ -255,20 +351,30 @@ def _molecule_svg(item: dict[str, Any], changes: list[dict[str, Any]], side: str
     drawer.FinishDrawing()
     svg = drawer.GetDrawingText()
     drawing = svg[svg.index(">", svg.index("<svg")) + 1:svg.rindex("</svg>")]
+    labels = _label_layout(drawing, molecule, coordinates)
+    bonds = [(coordinates[b.GetBeginAtomIdx()], coordinates[b.GetEndAtomIdx()]) for b in molecule.GetBonds()]
+    electrons = {}
+    placed: list[tuple[float, float]] = []
+    for atom in sorted(molecule.GetAtoms(), key=lambda atom: -(_lone_pairs(atom) or 0)):
+        positions = _electron_positions(atom, labels, bonds, placed, width, height)
+        electrons[atom.GetIdx()] = positions
+        placed.extend(positions)
     overlay = []
     metadata = _atom_metadata(item, side, species_index, product_maps)
     for atom, details in zip(molecule.GetAtoms(), metadata):
-        x, y = coordinates[atom.GetIdx()]
+        measured = labels[atom.GetIdx()]
+        x, y, rx, ry = (measured[key] for key in ("cx", "cy", "rx", "ry"))
         map_id = original_maps[atom.GetIdx()]
         label = f'{details["label"]}, {item["name"]}, {side}'
-        overlay.append(_electron_dots(atom, coordinates))
+        overlay.extend(f'<circle class="lewis-electron" cx="{dx:.2f}" cy="{dy:.2f}" r="1.8" fill="#172c24"/>'
+                       for dx, dy in electrons[atom.GetIdx()])
         if map_id in item.get("siteMaps", set()):
-            overlay.append(f'<circle class="reaction-site" cx="{x:.2f}" cy="{y:.2f}" r="21" '
+            overlay.append(f'<ellipse class="reaction-site" cx="{x:.2f}" cy="{y:.2f}" rx="{rx:.2f}" ry="{ry:.2f}" '
                            'fill="none" stroke="#b87916" stroke-width="2" stroke-dasharray="3 2" pointer-events="none"/>')
         overlay.append(f'<g class="atom-target" data-atom-map="{map_id}" data-element="{atom.GetSymbol()}" '
                        f'data-side="{side}" data-species-index="{species_index}" tabindex="0" role="button" '
                        f'aria-label="{escape(label, quote=True)}">'
-                       f'<circle class="atom-glow" cx="{x:.2f}" cy="{y:.2f}" r="18" '
+                       f'<ellipse class="atom-glow" cx="{x:.2f}" cy="{y:.2f}" rx="{rx:.2f}" ry="{ry:.2f}" '
                        'fill="#ffe5a0" fill-opacity="0.45" stroke="#b87916" stroke-width="2" '
                        'pointer-events="none" opacity="0"/>'
                        f'<circle class="atom-hit" cx="{x:.2f}" cy="{y:.2f}" r="17" '

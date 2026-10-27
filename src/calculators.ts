@@ -10,6 +10,11 @@ import { mountReactionAmounts } from './calculator-reactions';
 import { mountEquilibriumCalculator } from './equilibrium-calculator-panel';
 import { mountAcidBaseCalculator } from './acid-base-calculator-panel';
 import { mountSolubilityCalculator } from './solubility-calculator-panel';
+import './ui-system.css';
+import { mountWorkspaceShell } from './workspace-shell';
+import './workspace-shell.css';
+
+mountWorkspaceShell(document.querySelector<HTMLElement>('.calculator-shell')!);
 
 const topics = [
   { id: 'moles', name: 'Moles and particles', description: 'Convert mass, moles and counts of a specified entity.', model: 'Local arithmetic' },

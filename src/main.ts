@@ -7,8 +7,12 @@ import { BondMeasurements, type MeasurementAtom, type MeasurementViewer } from '
 import { SolutionCalculatorPanel } from './solution-calculator-panel';
 import { solutionCompoundFromMolecule } from './solution-compound';
 import { CALCULATOR_TRANSFER_KEY, calculatorCompoundFromMolecule, encodeCalculatorTransfer } from './calculator-compound';
+import { mountViewerControls, type CameraViewer } from './viewer-controls';
+import './ui-system.css';
+import { mountWorkspaceShell } from './workspace-shell';
+import './workspace-shell.css';
 
-type Viewer = MeasurementViewer & {
+type Viewer = MeasurementViewer & CameraViewer & {
   removeAllModels: () => void;
   removeAllSurfaces: () => void;
   removeAllLabels: () => void;
@@ -36,11 +40,12 @@ function mustElement<T extends Element>(selector: string): T {
 const app = mustElement<HTMLDivElement>('#app');
 
 app.innerHTML = `
-  <main class="shell">
+  <a class="skip-link" href="#main-content">Skip to workspace</a>
+  <main class="shell" id="main-content" tabindex="-1">
     <header class="hero">
       <div>
-        <p class="eyebrow">Chemistry, made tangible</p>
-        <h1>Molecule Playground</h1>
+        <p class="eyebrow">Molecule Playground · Explorer</p>
+        <h1>Explorer</h1>
         <p class="hero-copy">Search a compound. Explore its shape and properties.</p>
       </div>
       <div class="hero-mark" aria-hidden="true">
@@ -48,10 +53,10 @@ app.innerHTML = `
       </div>
       <nav class="hero-nav" aria-label="Project pages">
         <a class="builder-link" href="/">Home</a>
-        <a class="builder-link is-current" href="/explore.html" aria-current="page">Explore molecules</a>
-        <a class="builder-link" href="/builder.html">Build a molecule →</a>
-        <a class="builder-link" href="/reaction-lab.html">Reaction Lab →</a>
-        <a class="builder-link" href="/calculators.html">Calculators →</a>
+        <a class="builder-link is-current" href="/explore.html" aria-current="page">Explore</a>
+        <a class="builder-link" href="/builder.html">Builder</a>
+        <a class="builder-link" href="/reaction-lab.html">Reaction Lab</a>
+        <a class="builder-link" href="/calculators.html">Calculators</a>
       </nav>
     </header>
 
@@ -113,6 +118,8 @@ app.innerHTML = `
     </section>
   </main>
 `;
+
+mountWorkspaceShell(mustElement<HTMLElement>('.shell'));
 
 const moleculeList = mustElement<HTMLDivElement>('#molecule-list');
 const searchForm = mustElement<HTMLFormElement>('#molecule-search-form');
@@ -184,10 +191,11 @@ renderMoleculeCards(explorerSamples);
 const viewerHost = mustElement<HTMLDivElement>('#molecule-viewer');
 const viewerFactory = window.$3Dmol;
 const viewer = viewerFactory?.createViewer(viewerHost, {
-  backgroundColor: '#f5f3ee',
+  backgroundColor: '#f7fbff',
   antialias: true,
 });
 const measurements = new BondMeasurements(mustElement<HTMLElement>('#explorer-measurements'), viewer);
+const cameraControls = mountViewerControls(mustElement<HTMLElement>('.viewer-stage'), viewer);
 const solutionCalculator = new SolutionCalculatorPanel(mustElement<HTMLDetailsElement>('#explorer-solution-calculator'));
 
 let activeMoleculeId = '';
@@ -209,6 +217,7 @@ async function showMolecule(molecule: Molecule) {
 
   activeMoleculeId = molecule.id;
   modelReady = false;
+  cameraControls.setEnabled(false);
   const sequence = ++loadSequence;
   measurements.reset();
 
@@ -225,6 +234,7 @@ async function showMolecule(molecule: Molecule) {
   renderMoleculeInformation(moleculeInformation, molecule);
 
   const ionic = isIonicCompound(molecule);
+  cameraControls.setVisible(!ionic);
   viewerStage.hidden = ionic;
   ionicNotice.hidden = !ionic;
   ionicNotice.textContent = ionic ? 'Ionic compound — no 3D diagram in this viewer. Information is shown below.' : '';
@@ -273,6 +283,8 @@ async function showMolecule(molecule: Molecule) {
     measurements.setAtoms(model.selectedAtoms({}));
     viewer.render();
     modelReady = true;
+
+    cameraControls.setEnabled(true);
 
     if (sequence === loadSequence) {
       viewerStatus.textContent = `${molecule.name} ready`;

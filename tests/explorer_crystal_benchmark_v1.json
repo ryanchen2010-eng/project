@@ -1,0 +1,9 @@
+[
+  {"id":"rhcl3-anhydrous","cid":24872,"phase":"anhydrous monoclinic","supported":true,"reference":"COD 1534198"},
+  {"id":"rhcl3-hydrate","phase":"hydrated","supported":false},
+  {"id":"sodium-chloride-rocksalt","phase":"rocksalt","supported":false},
+  {"id":"calcium-carbonate-calcite","phase":"calcite","supported":false},
+  {"id":"zinc-sulfide-sphalerite","phase":"sphalerite","supported":false},
+  {"id":"carbon-diamond","phase":"diamond","supported":false},
+  {"id":"carbon-graphite","phase":"graphite","supported":false}
+]

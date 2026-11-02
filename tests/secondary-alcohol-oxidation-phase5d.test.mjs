@@ -62,7 +62,7 @@ test('existing medium control serializes an explicit namespaced profile, never a
  const source=await read('src/reaction-lab.ts'),start=source.indexOf('function currentConditions()');
  const fn=compile(source.slice(start,source.indexOf('\n}',start)+2));
  const names=['solventInput','temperatureInput','catalystInput','oxidationStageInput','additionStageInput','polymerUnitsInput','workupInput'];
- const run=new Function(...names,`${fn}; return currentConditions();`);
+ const run=new Function(...names,`const namedProfileSelection=null; ${fn}; return currentConditions();`);
  const values=['secondary-naocl-acetic','ambient','none','first','one','4',''];
  const result=run(...values.map(value=>({value})));
  assert.equal(result.solvent,'aqueous-protic');assert.equal(result.secondaryOxidationProfile,'naocl-acetic-ketone-v1');

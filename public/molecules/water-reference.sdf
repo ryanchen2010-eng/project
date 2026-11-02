@@ -1,0 +1,20 @@
+Water reference model
+  Playground          3D
+Reference-based geometry; not the original PubChem conformer
+  3  2  0     0  0  0  0  0  0999 V2000
+    0.0000    0.0000    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    0.7575    0.5865    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+   -0.7575    0.5865    0.0000 H   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  1  0  0  0  0
+  1  3  1  0  0  0  0
+M  END
+> <GEOMETRY_PROVENANCE>
+Reference-based water model constructed with H-O-H = 104.5 degrees and O-H approximately 0.958 angstrom. Coordinates rounded to four decimals. Not an experimental coordinate file or a computed PubChem conformer.
+
+> <ANGLE_REFERENCE>
+https://openstax.org/books/chemistry/pages/8-2-hybrid-atomic-orbitals
+
+> <BOND_LENGTH_REFERENCE>
+https://cccbdb.nist.gov/listgeomexpx.asp?casno=7732185&charge=0
+
+$$$$

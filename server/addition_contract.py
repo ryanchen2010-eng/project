@@ -39,6 +39,8 @@ def evidence(reaction, assessment, conditions):
         required = ["temperature"]
     if primary_oxidation:
         required = ["solvent", "oxidationStage"]
+    if assessment.get('productRelease'):
+        required = ['conditionProfileId', 'conditionProfileVersion', 'temperature', 'solvent', 'catalyst'] + (['workup'] if assessment['productRelease']['aqueousReleaseAssumed'] else [])
     missing = [key for key in assessment.get("missingSettings", []) if key in required]
     factors = deepcopy(assessment.get("factors", {}))
     unknown = [key for key, fact in factors.items() if fact["status"] in {"missing", "unevaluated", "reference-difference", "unsupported-pathway"}]
@@ -48,6 +50,8 @@ def evidence(reaction, assessment, conditions):
         label = assessment["confidenceLabel"] + ": " + ", ".join(dict.fromkeys(i["field"] for i in issues))
     elif missing:
         label = "Required model settings missing: " + ", ".join(missing)
+    elif assessment.get("cooling", {}).get("status") == "supported-model" and can_render:
+        label = assessment["confidenceLabel"]
     elif primary_oxidation or path in {"Aldehyde oxidation", "Alcohol substitution", "Alcohol dehydration", "Alkyne hydrogenation", "Alkyne halogenation", "Alkyne hydrohalogenation"}:
         label = assessment["confidenceLabel"]
     elif not can_render:
@@ -83,8 +87,12 @@ def evidence(reaction, assessment, conditions):
             "canPreview2D": True, "canGenerate3D": can_render,
             "renderingPolicy": "qualified-net-conformer" if can_render else "required-settings-or-compatibility-gate",
             "renderingNote": "3D permission is an output policy, not evidence of conversion, isolation or complete experimental conditions. " + ("Pathway-specific confidence gates apply." if alkyne or path in {"Aldehyde oxidation", "Alcohol substitution"} else "Pathway-specific gates are unchanged."),
+            **({"cooling": deepcopy(assessment["cooling"]),
+                "conditionIssues": deepcopy(issues),
+                "notApplicableSettings": assessment.get("notApplicableSettings", [])} if assessment.get("cooling") else {}),
             "workupRepresented": assessment.get("workupRepresented"),
-            "workupAssumptionConfirmed": assessment.get("workupAssumptionConfirmed")}
+            "workupAssumptionConfirmed": assessment.get("workupAssumptionConfirmed"),
+            **({'productRelease': deepcopy(assessment['productRelease'])} if assessment.get('productRelease') else {})}
 
 
 def calculation_context(reaction, assessment, conditions, notes):
@@ -132,7 +140,8 @@ def calculation_context(reaction, assessment, conditions, notes):
             "conditions": dict(conditions), "missingRequiredSettings": fact["missingRequiredSettings"],
             "unknownConditions": fact["unknownConditions"], "canGenerate3D": fact["canGenerate3D"],
             "assumptions": [assessment["note"], *notes],
-            "warning": warning}
+            "warning": warning,
+            **({"namedConditionProfile": assessment["namedConditionProfile"]} if "namedConditionProfile" in assessment else {})}
 
 
 def _site_aliases(option):

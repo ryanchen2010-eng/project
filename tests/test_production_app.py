@@ -43,6 +43,9 @@ def fake_backend() -> SimpleNamespace:
         reaction_catalog=Mock(return_value={"reactants": [{"id": "water"}], "reactions": []}),
         search_pubchem=Mock(return_value={"results": [{"cid": 962}], "limited": False}),
         get_pubchem_structure=Mock(return_value="source-sdf"),
+        resolve_pubchem_structure=Mock(return_value=("source-sdf", {"source": "pubchem", "kind": "calculated", "method": "PubChem3D", "convergence": "unknown"})),
+        resolve_coordination_reference=Mock(return_value="nist-sdf"),
+        resolve_nist_molecular_reference=Mock(return_value={"structure": "nist-sdf", "selectedStructure": "C[Al](C)C", "method": "B3LYP/6-31G*", "sourceUrl": "https://webbook.nist.gov/cgi/cbook.cgi?ID=C75241"}),
         get_pubchem_depiction=Mock(return_value=b"synthetic-png"),
         get_pubchem_smiles=Mock(return_value="O"),
         analyze_molfile=Mock(return_value={"representation": "3d", "molfile": "generated-sdf", "formula": "H2O"}),
@@ -290,18 +293,25 @@ class ProductionAppTests(unittest.TestCase):
 
     def test_structure_and_depiction_binary_formats_and_fallback(self):
         self.sign_in()
+        coordination = self.get('/api/reference/coordination?cid=26040')
+        self.assertEqual(coordination.data, b'nist-sdf')
+        self.assertEqual(coordination.headers['X-Structure-Source'], 'nist')
+        self.backend.resolve_coordination_reference.assert_called_once_with(26040)
+        molecular = self.get('/api/reference/molecular?cid=16682925')
+        self.assertEqual(molecular.json['method'], 'B3LYP/6-31G*')
+        self.backend.resolve_nist_molecular_reference.assert_called_once_with(16682925)
         response = self.get("/api/pubchem/structure?cid=962")
         self.assertEqual(response.data, b"source-sdf")
+        self.assertEqual(response.headers['X-Structure-Source'], 'pubchem')
         self.assertIn("chemical/x-mdl-sdfile", response.content_type)
         response = self.get("/api/pubchem/depiction?cid=962")
         self.assertEqual(response.data, b"synthetic-png")
         self.assertEqual(response.content_type, "image/png")
-        self.backend.get_pubchem_structure.return_value = None
+        self.backend.resolve_pubchem_structure.return_value = ("generated-sdf", {"source": "rdkit", "kind": "calculated", "method": "MMFF94", "convergence": "converged"})
         response = self.get("/api/pubchem/structure?cid=962")
         self.assertEqual(response.data, b"generated-sdf")
-        self.backend.Chem.MolFromSmiles.assert_called_once_with("O")
-        self.backend.analyze_molfile.assert_called_once_with("molfile")
-        self.backend.get_pubchem_smiles.return_value = None
+        self.assertEqual(response.headers['X-Structure-Source'], 'rdkit')
+        self.backend.resolve_pubchem_structure.return_value = (None, {})
         self.assertEqual(self.get("/api/pubchem/structure?cid=962").status_code, 404)
         self.backend.get_pubchem_depiction.return_value = None
         self.assertEqual(self.get("/api/pubchem/depiction?cid=962").status_code, 404)

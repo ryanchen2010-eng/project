@@ -17,9 +17,25 @@ const { outputText: compoundSource } = ts.transpileModule(await readFile(project
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext },
 });
 const { solutionCompoundFromMolecule } = await import(`data:text/javascript;base64,${Buffer.from(compoundSource).toString('base64')}`);
+const { outputText: resolverSource } = ts.transpileModule(await readFile(projectFile('src/explorer-structure-resolver.ts'), 'utf8'), {
+  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext },
+});
+const { resolveExplorerStructure } = await import(`data:text/javascript;base64,${Buffer.from(resolverSource).toString('base64')}`);
 
 const saltIds = ['sodium-chloride', 'sodium-hydroxide'];
 const ids = (items) => items.map(({ id }) => id);
+
+test('both sample and PubChem water selection use the reviewed reference geometry', () => {
+  const water = molecules.find(({ id }) => id === 'water');
+  assert.equal(water.structureFile, '/molecules/water-reference.sdf');
+  const searched = moleculeFromPubChem({
+    cid: 962, name: 'Water', iupacName: 'oxidane', formula: 'H2O',
+    molecularWeight: '18.015', structure: 'O',
+  });
+  assert.equal(searched.structureFile, water.structureFile);
+  assert.equal(searched.cid, water.cid);
+  assert.equal(searched.structureForm, 'O');
+});
 
 test('Explorer samples omit ionic compounds without removing their shared identities or information', () => {
   assert.equal(sharedCatalog.length, 20, 'Reaction Lab retains the complete shared collection');
@@ -160,7 +176,7 @@ test('ionic display classification accepts explicit assembly metadata without gu
 // No browser application or network requests are loaded by these lifecycle checks.
 const mainSource = await readFile(projectFile('src/main.ts'), 'utf8');
 const showStart = mainSource.indexOf('async function showMolecule(');
-const showEnd = mainSource.indexOf('transferButtons.forEach(', showStart);
+const showEnd = mainSource.indexOf("crystalInfo.addEventListener(", showStart);
 assert.ok(showStart >= 0 && showEnd > showStart, 'Explorer retains its molecule loading function');
 const { outputText: showMoleculeSource } = ts.transpileModule(mainSource.slice(showStart, showEnd), {
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext },
@@ -184,6 +200,8 @@ function element(initial = {}) {
     },
     setAttribute(name, value) { this[name] = value; },
     removeAttribute(name) { delete this[name]; },
+    replaceChildren(...children) { this.children = children; },
+    append(...children) { this.children = [...(this.children || []), ...children]; },
     ...initial,
   };
 }
@@ -206,11 +224,14 @@ function explorerHarness({ fetcher, viewerPresent = true, cleanupError = false }
     setStyle() {}, zoomTo() {}, render() { calls.lifecycle.push('render'); },
   };
   const state = {
+    cameraControls: { setEnabled() {}, setVisible() {} },
     activeMolecule: null, activeMoleculeId: '', modelReady: false, loadSequence: 0,
     depictionUrl: 'blob:previous-compound',
     buttons: new Map(explorerSamples.map((molecule) => [molecule.id, element()])),
     category: element(), moleculeTitle: element(), formula: element(), moleculeInformation: element(),
-    viewerStage: element(), ionicNotice: element({ hidden: true }),
+    viewerStage: element(), ionicNotice: element({ hidden: true }), structureProvenance: element({ hidden: true }),
+    crystalControls: element(), crystalInfo: element(), crystalView: element(),
+    document: { createTextNode: text => ({ textContent: text }), createElement: () => element() },
     viewerStatus: element(), fallbackView: element(), fallbackImage: element({ src: 'blob:previous-compound' }),
     viewerHint: element(), viewer: viewerPresent ? viewer : undefined,
     measurements: {
@@ -221,6 +242,7 @@ function explorerHarness({ fetcher, viewerPresent = true, cleanupError = false }
     solutionCompoundFromMolecule,
     isIonicCompound,
     renderMoleculeInformation: (_, molecule) => calls.information.push(molecule),
+    resolveExplorerStructure: molecule => resolveExplorerStructure(molecule, state.fetch),
     fetch: (url) => {
       calls.fetch.push(url);
       return fetcher ? fetcher(url) : Promise.reject(new Error('Unexpected structure request'));
@@ -300,6 +322,61 @@ test('returning from an ionic compound to a molecular sample restores the viewer
   assert.ok([...state.buttons.values()].every((button) => !button.disabled));
 });
 
+test('the exact zirconium record loads the labeled gas reference after a 404 and clears it on selection change', async () => {
+  const { show, state, calls, atoms } = explorerHarness({
+    fetcher: async url => url.includes('24817') ? { ok: false, status: 404 } : { ok: true, text: async () => 'reference SDF' },
+  });
+  const zirconium = moleculeFromPubChem({ cid: 24817, name: 'Zirconium chloride', formula: 'Cl4Zr', structure: 'Cl[Zr](Cl)(Cl)Cl', multiPart: false, hasFormalCharge: false, ionicAssembly: false });
+  await show(zirconium);
+  assert.equal(state.structureProvenance.hidden, false);
+  assert.match(state.structureProvenance.children[0].textContent, /idealized.*gas-phase.*solid/i);
+  assert.match(calls.fetch[1], /zirconium-tetrachloride-gas-reference\.sdf/);
+  assert.deepEqual(calls.measuredAtoms, [atoms]);
+  await show(molecules.find(({ id }) => id === 'water'));
+  assert.equal(state.structureProvenance.hidden, false);
+  assert.match(state.structureProvenance.children[0].textContent, /bundled water reference/i);
+});
+
+test('rhodium without a 3D record shows a specific explanation with its 2D depiction', async () => {
+  const { show, state } = explorerHarness({ fetcher: async url => url.includes('/depiction?')
+    ? { ok: true, blob: async () => '2D' } : { ok: false, status: 404 } });
+  const rhodium = moleculeFromPubChem({ cid: 24872, name: 'Rhodium chloride', formula: 'Cl3Rh', structure: 'Cl[Rh](Cl)Cl', multiPart: false, hasFormalCharge: false, ionicAssembly: false });
+  await show(rhodium);
+  assert.equal(state.fallbackView.hidden, false);
+  assert.match(state.viewerStatus.textContent, /rhodium chloride.*extended crystal.*no verified discrete/i);
+});
+
+test('SF6 exact record loads NIST molecular reference and enables atom measurements', async () => {
+  const { show, state, calls, atoms } = explorerHarness({ fetcher: async url => url.includes('/api/pubchem/structure')
+    ? { ok: false, status: 404 } : { ok: true, text: async () => 'NIST SF6 SDF' } });
+  const sf6 = moleculeFromPubChem({ cid: 17358, name: 'Sulfur hexafluoride', formula: 'F6S', structure: 'FS(F)(F)(F)(F)F', multiPart: false, hasFormalCharge: false, ionicAssembly: false });
+  await show(sf6);
+  assert.deepEqual(calls.models, [{ data: 'NIST SF6 SDF', format: 'sdf' }]);
+  assert.deepEqual(calls.measuredAtoms, [atoms]);
+  assert.match(state.structureProvenance.children[0].textContent, /experimental.*NIST.*gas-phase/i);
+  assert.equal(state.viewerStage.hidden, false);
+});
+
+test('AlCl3 reference passes through the existing viewer and measurement integration', async () => {
+  const { show, state, calls, atoms } = explorerHarness({ fetcher: async url => url.includes('/api/pubchem/structure')
+    ? { ok: false, status: 404 } : { ok: true, text: async () => 'NIST AlCl3 SDF' } });
+  const aluminum = moleculeFromPubChem({ cid: 24012, name: 'Aluminum Chloride', formula: 'AlCl3', structure: '[Cl][Al]([Cl])[Cl]', multiPart: false, hasFormalCharge: false, ionicAssembly: false });
+  await show(aluminum);
+  assert.deepEqual(calls.models, [{ data: 'NIST AlCl3 SDF', format: 'sdf' }]);
+  assert.deepEqual(calls.measuredAtoms, [atoms]);
+  assert.match(state.structureProvenance.children[0].textContent, /experimental.*NIST.*gas-phase monomer/i);
+});
+
+test('verified iron carbonyl reference uses the viewer and measurement atoms', async () => {
+  const { show, state, calls, atoms } = explorerHarness({ fetcher: async url => url.includes('/api/reference/coordination')
+    ? { ok: true, text: async () => 'NIST iron calculation' } : { ok: false, status: 404 } });
+  const iron = moleculeFromPubChem({ cid: 26040, name: 'Iron pentacarbonyl', formula: 'C5FeO5', structure: '[C]=O.[C]=O.[C]=O.[C]=O.[C]=O.[Fe]', multiPart: true, hasFormalCharge: false, ionicAssembly: false });
+  await show(iron);
+  assert.deepEqual(calls.models, [{ data: 'NIST iron calculation', format: 'sdf' }]);
+  assert.deepEqual(calls.measuredAtoms, [atoms]);
+  assert.match(state.structureProvenance.children[0].textContent, /calculated.*NIST.*not an exact graph match/i);
+});
+
 test('a pending older 3D response cannot replace an ionic information-only selection', async () => {
   const pending = deferred();
   const { show, state, calls } = explorerHarness({ fetcher: () => pending.promise });
@@ -315,7 +392,7 @@ test('a pending older 3D response cannot replace an ionic information-only selec
   assert.deepEqual(calls.models, []);
   assert.equal(calls.solutionCompounds.at(-1).id, salt.id, 'stale 3D responses cannot replace the current solution compound');
   assert.deepEqual(calls.measuredAtoms, [], 'stale models cannot revive the measurement panel');
-  assert.deepEqual(calls.fetch, ['/molecules/water.sdf']);
+  assert.deepEqual(calls.fetch, ['/molecules/water-reference.sdf']);
   assert.ok([...state.buttons.values()].every((button) => !button.disabled));
 });
 

@@ -1,0 +1,3689 @@
+{
+  "schemaVersion": 1,
+  "phase": "5H",
+  "date": "2026-10-18",
+  "regression": {
+    "baseline": 3674,
+    "python": 1873,
+    "javascript": 1881,
+    "total": 3754,
+    "newPython": 48,
+    "newJavaScript": 32,
+    "failures": 0,
+    "skipped": 0
+  },
+  "exactIssueReplaysBefore": [
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "aligned",
+      "status": null,
+      "canRun": null,
+      "issues": [],
+      "runStatus": 200,
+      "note": "Selected conditions align with this reviewed pathway; this does not predict yield or certainty.",
+      "calculatorWarning": null,
+      "mechanism": null
+    },
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further",
+        "catalyst": "radical"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "aligned",
+      "status": null,
+      "canRun": null,
+      "issues": [],
+      "runStatus": 200,
+      "note": "Selected conditions align with this reviewed pathway; this does not predict yield or certainty.",
+      "calculatorWarning": null,
+      "mechanism": null
+    },
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further",
+        "workup": "aqueous-release"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "aligned",
+      "status": null,
+      "canRun": null,
+      "issues": [],
+      "runStatus": 200,
+      "note": "Selected conditions align with this reviewed pathway; this does not predict yield or certainty.",
+      "calculatorWarning": null,
+      "mechanism": null
+    },
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further",
+        "pressure": "unknown"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "aligned",
+      "status": null,
+      "canRun": null,
+      "issues": [],
+      "runStatus": 200,
+      "note": "Selected conditions align with this reviewed pathway; this does not predict yield or certainty.",
+      "calculatorWarning": null,
+      "mechanism": null
+    },
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further",
+        "catalyst": "acid"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "incomplete",
+      "status": null,
+      "canRun": null,
+      "issues": [],
+      "runStatus": 200,
+      "note": "The required conditions align, but this additional catalyst is not evaluated for this pathway.",
+      "calculatorWarning": null,
+      "mechanism": null
+    },
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further",
+        "secondaryOxidationProfile": "naocl-acetic-ketone-v1"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "aligned",
+      "status": null,
+      "canRun": null,
+      "issues": [],
+      "runStatus": 200,
+      "note": "Selected conditions align with this reviewed pathway; this does not predict yield or certainty.",
+      "calculatorWarning": null,
+      "mechanism": null
+    }
+  ],
+  "exactIssueReplaysAfter": [
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "aligned",
+      "status": "model-match",
+      "canRun": true,
+      "issues": [],
+      "runStatus": 200,
+      "note": "Existing aldehyde-to-acid net reporting transformation. Neutral carboxylic acid reporting form only; pH, acid/carboxylate speciation and isolated acid work-up are not established. A carboxylate or an acidification step is not silently generated. No complete mapped oxidation mechanism is implemented. Theoretical reporting conformer only; conversion is not predicted.",
+      "calculatorWarning": "Conditional net amounts: complete conversion is assumed, not predicted. Do not sum alternative products; these are not experimental yields or a laboratory protocol. One aldehyde and one actual alkali hypochlorite formula unit give the neutral acid reporting graph and actual chloride salt. Full salt masses count. pH, acid/carboxylate speciation and isolated acid work-up are not established; these amounts are not isolated acid yields. Formal proton/oxygen mapping is not experimental isotope history.",
+      "mechanism": null
+    },
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further",
+        "catalyst": "radical"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "incomplete",
+      "status": "unsupported-pathway",
+      "canRun": false,
+      "issues": [
+        {
+          "explanation": "Radical activation is not the implemented aldehyde oxidation model.",
+          "field": "catalyst",
+          "kind": "unsupported"
+        }
+      ],
+      "runStatus": 422,
+      "note": "Existing aldehyde-to-acid net reporting transformation. Radical activation is not the implemented aldehyde oxidation model. Neutral carboxylic acid reporting form only; pH, acid/carboxylate speciation and isolated acid work-up are not established. A carboxylate or an acidification step is not silently generated. No complete mapped oxidation mechanism is implemented. Only conditional 2D reporting is available for these inputs.",
+      "calculatorWarning": "Conditional net amounts: complete conversion is assumed, not predicted. Do not sum alternative products; these are not experimental yields or a laboratory protocol. One aldehyde and one actual alkali hypochlorite formula unit give the neutral acid reporting graph and actual chloride salt. Full salt masses count. pH, acid/carboxylate speciation and isolated acid work-up are not established; these amounts are not isolated acid yields. Formal proton/oxygen mapping is not experimental isotope history. 3D is blocked for these condition/site inputs; arithmetic does not qualify them.",
+      "mechanism": null
+    },
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further",
+        "workup": "aqueous-release"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "incomplete",
+      "status": "unevaluated",
+      "canRun": false,
+      "issues": [
+        {
+          "explanation": "Aqueous diol release is not acidification or carboxylic-acid isolation. No acid work-up model is implemented.",
+          "field": "workup",
+          "kind": "conflicting"
+        }
+      ],
+      "runStatus": 422,
+      "note": "Existing aldehyde-to-acid net reporting transformation. Aqueous diol release is not acidification or carboxylic-acid isolation. No acid work-up model is implemented. Neutral carboxylic acid reporting form only; pH, acid/carboxylate speciation and isolated acid work-up are not established. A carboxylate or an acidification step is not silently generated. No complete mapped oxidation mechanism is implemented. Only conditional 2D reporting is available for these inputs.",
+      "calculatorWarning": "Conditional net amounts: complete conversion is assumed, not predicted. Do not sum alternative products; these are not experimental yields or a laboratory protocol. One aldehyde and one actual alkali hypochlorite formula unit give the neutral acid reporting graph and actual chloride salt. Full salt masses count. pH, acid/carboxylate speciation and isolated acid work-up are not established; these amounts are not isolated acid yields. Formal proton/oxygen mapping is not experimental isotope history. 3D is blocked for these condition/site inputs; arithmetic does not qualify them.",
+      "mechanism": null
+    },
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further",
+        "pressure": "unknown"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "incomplete",
+      "status": "unsupported-pathway",
+      "canRun": false,
+      "issues": [
+        {
+          "explanation": "Setting 'pressure' is not implemented for aldehyde oxidation; it cannot qualify this reporting product.",
+          "field": "pressure",
+          "kind": "unsupported"
+        }
+      ],
+      "runStatus": 422,
+      "note": "Existing aldehyde-to-acid net reporting transformation. Setting 'pressure' is not implemented for aldehyde oxidation; it cannot qualify this reporting product. Neutral carboxylic acid reporting form only; pH, acid/carboxylate speciation and isolated acid work-up are not established. A carboxylate or an acidification step is not silently generated. No complete mapped oxidation mechanism is implemented. Only conditional 2D reporting is available for these inputs.",
+      "calculatorWarning": "Conditional net amounts: complete conversion is assumed, not predicted. Do not sum alternative products; these are not experimental yields or a laboratory protocol. One aldehyde and one actual alkali hypochlorite formula unit give the neutral acid reporting graph and actual chloride salt. Full salt masses count. pH, acid/carboxylate speciation and isolated acid work-up are not established; these amounts are not isolated acid yields. Formal proton/oxygen mapping is not experimental isotope history. 3D is blocked for these condition/site inputs; arithmetic does not qualify them.",
+      "mechanism": null
+    },
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further",
+        "catalyst": "acid"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "incomplete",
+      "status": "unevaluated",
+      "canRun": false,
+      "issues": [
+        {
+          "explanation": "Added activation is unvalidated for this hypochlorite reporting model; it does not establish acid work-up.",
+          "field": "catalyst",
+          "kind": "unvalidated-alternative"
+        }
+      ],
+      "runStatus": 422,
+      "note": "Existing aldehyde-to-acid net reporting transformation. Added activation is unvalidated for this hypochlorite reporting model; it does not establish acid work-up. Neutral carboxylic acid reporting form only; pH, acid/carboxylate speciation and isolated acid work-up are not established. A carboxylate or an acidification step is not silently generated. No complete mapped oxidation mechanism is implemented. Only conditional 2D reporting is available for these inputs.",
+      "calculatorWarning": "Conditional net amounts: complete conversion is assumed, not predicted. Do not sum alternative products; these are not experimental yields or a laboratory protocol. One aldehyde and one actual alkali hypochlorite formula unit give the neutral acid reporting graph and actual chloride salt. Full salt masses count. pH, acid/carboxylate speciation and isolated acid work-up are not established; these amounts are not isolated acid yields. Formal proton/oxygen mapping is not experimental isotope history. 3D is blocked for these condition/site inputs; arithmetic does not qualify them.",
+      "mechanism": null
+    },
+    {
+      "conditions": {
+        "solvent": "aqueous-protic",
+        "oxidationStage": "further",
+        "secondaryOxidationProfile": "naocl-acetic-ketone-v1"
+      },
+      "product": "CCCCC(=O)O",
+      "state": "incomplete",
+      "status": "unsupported-pathway",
+      "canRun": false,
+      "issues": [
+        {
+          "explanation": "Setting 'secondaryOxidationProfile' is not implemented for aldehyde oxidation; it cannot qualify this reporting product.",
+          "field": "secondaryOxidationProfile",
+          "kind": "unsupported"
+        }
+      ],
+      "runStatus": 422,
+      "note": "Existing aldehyde-to-acid net reporting transformation. Setting 'secondaryOxidationProfile' is not implemented for aldehyde oxidation; it cannot qualify this reporting product. Neutral carboxylic acid reporting form only; pH, acid/carboxylate speciation and isolated acid work-up are not established. A carboxylate or an acidification step is not silently generated. No complete mapped oxidation mechanism is implemented. Only conditional 2D reporting is available for these inputs.",
+      "calculatorWarning": "Conditional net amounts: complete conversion is assumed, not predicted. Do not sum alternative products; these are not experimental yields or a laboratory protocol. One aldehyde and one actual alkali hypochlorite formula unit give the neutral acid reporting graph and actual chloride salt. Full salt masses count. pH, acid/carboxylate speciation and isolated acid work-up are not established; these amounts are not isolated acid yields. Formal proton/oxygen mapping is not experimental isotope history. 3D is blocked for these condition/site inputs; arithmetic does not qualify them.",
+      "mechanism": null
+    }
+  ],
+  "otherPublicProbes": {
+    "cases": 28,
+    "options": 24,
+    "runs": {
+      "200": 7,
+      "422": 17
+    },
+    "failures": []
+  },
+  "benchmark": {
+    "rowColumns": [
+      "id",
+      "pathIndex",
+      "beforeStatusIndex",
+      "afterStatusIndex",
+      "completeRowIdentical",
+      "hasStructuralMatch"
+    ],
+    "pathNames": [
+      "Hydrogenation",
+      "Bromination",
+      "Chlorination",
+      "Hydration",
+      "Hydrohalogenation",
+      "Epoxidation",
+      "SN2",
+      "SN1",
+      "E2",
+      "E1",
+      "Alcohol oxidation",
+      "Aldehyde oxidation",
+      "Carbonyl hydrogenation",
+      "Esterification",
+      "Ester hydrolysis",
+      "Alcohol dehydration",
+      "Alcohol substitution",
+      "Ester saponification",
+      "Alkyne hydrogenation",
+      "Alkyne partial hydrogenation",
+      "Alkyne halogenation",
+      "Alkyne hydrohalogenation",
+      "Alkene dihydroxylation",
+      "Polymerization model"
+    ],
+    "statusNames": [
+      "Fully supported",
+      "Unsupported",
+      "Correctly rejected",
+      "Partially supported",
+      "Incorrect result"
+    ],
+    "rows": [
+      [
+        "A001",
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A002",
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A003",
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A004",
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A005",
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A006",
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A007",
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A008",
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A009",
+        0,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A010",
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A011",
+        0,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A012",
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A013",
+        0,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A014",
+        0,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A015",
+        0,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A016",
+        1,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A017",
+        1,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A018",
+        1,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A019",
+        1,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A020",
+        1,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A021",
+        1,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A022",
+        1,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A023",
+        1,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A024",
+        1,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A025",
+        1,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A026",
+        1,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A027",
+        1,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A028",
+        1,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A029",
+        1,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A030",
+        1,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A031",
+        2,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A032",
+        2,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A033",
+        2,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A034",
+        2,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A035",
+        2,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A036",
+        2,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A037",
+        2,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A038",
+        2,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A039",
+        2,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A040",
+        2,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A041",
+        2,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A042",
+        2,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A043",
+        2,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A044",
+        2,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A045",
+        2,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A046",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A047",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A048",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A049",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A050",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A051",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A052",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A053",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A054",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A055",
+        4,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A056",
+        4,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A057",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A058",
+        4,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A059",
+        4,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A060",
+        4,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A061",
+        3,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A062",
+        3,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A063",
+        3,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A064",
+        3,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A065",
+        3,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A066",
+        3,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A067",
+        3,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A068",
+        3,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A069",
+        3,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A070",
+        3,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A071",
+        3,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A072",
+        3,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A073",
+        3,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A074",
+        3,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A075",
+        3,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A076",
+        0,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A077",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A078",
+        4,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A079",
+        1,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A080",
+        10,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A081",
+        10,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A082",
+        10,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A083",
+        10,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A084",
+        10,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A085",
+        10,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A086",
+        10,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A087",
+        10,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A088",
+        10,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A089",
+        10,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A090",
+        11,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A091",
+        11,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A092",
+        11,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A093",
+        11,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A094",
+        11,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A095",
+        11,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A096",
+        11,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A097",
+        11,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A098",
+        11,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A099",
+        11,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A100",
+        10,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A101",
+        10,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A102",
+        10,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A103",
+        10,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A104",
+        11,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A105",
+        11,
+        0,
+        3,
+        false,
+        true
+      ],
+      [
+        "A106",
+        11,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A107",
+        12,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A108",
+        12,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A109",
+        12,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A110",
+        12,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A111",
+        12,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A112",
+        12,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A113",
+        12,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A114",
+        12,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A115",
+        12,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A116",
+        12,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A117",
+        12,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A118",
+        12,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A119",
+        13,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A120",
+        13,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A121",
+        13,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A122",
+        13,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A123",
+        13,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A124",
+        13,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A125",
+        13,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A126",
+        13,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A127",
+        13,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A128",
+        13,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A129",
+        13,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A130",
+        14,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A131",
+        14,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A132",
+        14,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A133",
+        14,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A134",
+        14,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A135",
+        14,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A136",
+        14,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A137",
+        14,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A138",
+        14,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A139",
+        14,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A140",
+        14,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A141",
+        17,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A142",
+        17,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A143",
+        17,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A144",
+        17,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A145",
+        17,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A146",
+        17,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A147",
+        17,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A148",
+        17,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A149",
+        17,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A150",
+        17,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A151",
+        17,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A152",
+        17,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A153",
+        6,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A154",
+        6,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A155",
+        6,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A156",
+        6,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A157",
+        6,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A158",
+        6,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A159",
+        6,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A160",
+        6,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A161",
+        6,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A162",
+        6,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A163",
+        6,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A164",
+        6,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A165",
+        6,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A166",
+        6,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A167",
+        6,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A168",
+        6,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A169",
+        6,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A170",
+        6,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A171",
+        6,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A172",
+        7,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A173",
+        7,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A174",
+        7,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A175",
+        7,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A176",
+        7,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A177",
+        7,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A178",
+        7,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A179",
+        7,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A180",
+        7,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A181",
+        7,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A182",
+        7,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A183",
+        7,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A184",
+        8,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A185",
+        8,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A186",
+        8,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A187",
+        8,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A188",
+        8,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A189",
+        8,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A190",
+        8,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A191",
+        8,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A192",
+        8,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A193",
+        9,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A194",
+        9,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A195",
+        9,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A196",
+        9,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A197",
+        9,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A198",
+        9,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A199",
+        9,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A200",
+        9,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A201",
+        9,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A202",
+        8,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A203",
+        8,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A204",
+        8,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A205",
+        8,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A206",
+        8,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A207",
+        9,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A208",
+        15,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A209",
+        15,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A210",
+        15,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A211",
+        15,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A212",
+        15,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A213",
+        15,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A214",
+        15,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A215",
+        15,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A216",
+        16,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A217",
+        16,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A218",
+        16,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A219",
+        16,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A220",
+        16,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A221",
+        16,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A222",
+        16,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A223",
+        16,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A224",
+        16,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A225",
+        15,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A226",
+        15,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A227",
+        16,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A228",
+        16,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A229",
+        16,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A230",
+        16,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A231",
+        5,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A232",
+        5,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A233",
+        5,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A234",
+        5,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A235",
+        5,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A236",
+        5,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A237",
+        5,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A238",
+        5,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A239",
+        5,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A240",
+        5,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A241",
+        5,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A242",
+        22,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A243",
+        22,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A244",
+        22,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A245",
+        22,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A246",
+        22,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A247",
+        22,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A248",
+        22,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A249",
+        22,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A250",
+        22,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A251",
+        22,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A252",
+        22,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A253",
+        5,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A254",
+        5,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A255",
+        22,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A256",
+        18,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A257",
+        18,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A258",
+        18,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A259",
+        18,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A260",
+        18,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A261",
+        18,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A262",
+        18,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A263",
+        18,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A264",
+        18,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A265",
+        18,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A266",
+        18,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A267",
+        19,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A268",
+        19,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A269",
+        19,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A270",
+        19,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A271",
+        19,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A272",
+        19,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A273",
+        19,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A274",
+        19,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A275",
+        19,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A276",
+        19,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A277",
+        19,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A278",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A279",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A280",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A281",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A282",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A283",
+        20,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A284",
+        20,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A285",
+        20,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A286",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A287",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A288",
+        20,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A289",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A290",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A291",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A292",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A293",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A294",
+        20,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A295",
+        20,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A296",
+        20,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A297",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A298",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A299",
+        20,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A300",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A301",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A302",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A303",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A304",
+        21,
+        4,
+        4,
+        true,
+        true
+      ],
+      [
+        "A305",
+        21,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A306",
+        21,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A307",
+        21,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A308",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A309",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A310",
+        21,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A311",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A312",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A313",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A314",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A315",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A316",
+        21,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A317",
+        21,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A318",
+        21,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A319",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A320",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A321",
+        21,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A322",
+        20,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A323",
+        21,
+        3,
+        3,
+        true,
+        true
+      ],
+      [
+        "A324",
+        23,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A325",
+        23,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A326",
+        23,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A327",
+        23,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A328",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A329",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A330",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A331",
+        23,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A332",
+        23,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A333",
+        23,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A334",
+        23,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A335",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A336",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A337",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A338",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A339",
+        23,
+        2,
+        2,
+        true,
+        false
+      ],
+      [
+        "A340",
+        23,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A341",
+        23,
+        0,
+        0,
+        true,
+        true
+      ],
+      [
+        "A342",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A343",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A344",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A345",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A346",
+        23,
+        1,
+        1,
+        true,
+        false
+      ],
+      [
+        "A347",
+        23,
+        2,
+        2,
+        true,
+        false
+      ]
+    ],
+    "count": 347,
+    "before": {
+      "Fully supported": 156,
+      "Unsupported": 90,
+      "Correctly rejected": 38,
+      "Partially supported": 62,
+      "Incorrect result": 1
+    },
+    "after": {
+      "Fully supported": 155,
+      "Unsupported": 90,
+      "Correctly rejected": 38,
+      "Partially supported": 63,
+      "Incorrect result": 1
+    },
+    "aldehydeBefore": {
+      "fully_supported": 7,
+      "applicable": 11,
+      "score": 63.6,
+      "statuses": {
+        "Fully supported": 7,
+        "Unsupported": 4,
+        "Correctly rejected": 2
+      }
+    },
+    "aldehydeAfter": {
+      "fully_supported": 6,
+      "applicable": 11,
+      "score": 54.5,
+      "statuses": {
+        "Fully supported": 6,
+        "Unsupported": 4,
+        "Correctly rejected": 2,
+        "Partially supported": 1
+      }
+    },
+    "unrelatedRowsByteEquivalent": true,
+    "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+    "registryCount": 24
+  },
+  "diagnostics": {
+    "primary": {
+      "caseCount": 40,
+      "structuralMatching": 20,
+      "runCounts": {
+        "policy-blocked": 21
+      },
+      "failures": []
+    },
+    "secondary": {
+      "version": "secondary-naocl-acetic-net-diagnostic-1.0.0",
+      "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+      "caseCount": 41,
+      "structuralMatching": 25,
+      "casesWithQualifiedNet3D": 16,
+      "runCounts": {
+        "verified-qualified-net-3D": 16,
+        "policy-blocked": 10
+      },
+      "failures": []
+    },
+    "lindlar": {
+      "caseCount": 52,
+      "optionCount": 33,
+      "failures": []
+    }
+  },
+  "companion": {
+    "version": "1.0.0",
+    "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+    "failures": [],
+    "scope": {
+      "parentRows": 347,
+      "reviewedScopeRows": 58,
+      "positiveDenominator": 53,
+      "controls": 5,
+      "outOfReviewScope": 289
+    },
+    "metrics": {
+      "denominator": 53,
+      "structuralMatching": 40,
+      "conditionCompleteEligibility": 0,
+      "fullySupportedProductGeneration": 0,
+      "independentlyVerifiedChemistry": 0,
+      "diagnosticModelGenerationOnly": 0
+    }
+  },
+  "companionDiagnostic": {
+    "version": "1.0.0",
+    "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+    "failures": [],
+    "scope": {
+      "parentRows": 347,
+      "reviewedScopeRows": 58,
+      "positiveDenominator": 53,
+      "controls": 5,
+      "outOfReviewScope": 289
+    },
+    "metrics": {
+      "denominator": 53,
+      "structuralMatching": 40,
+      "conditionCompleteEligibility": 0,
+      "fullySupportedProductGeneration": 0,
+      "independentlyVerifiedChemistry": 0,
+      "diagnosticModelGenerationOnly": 33
+    }
+  },
+  "companionVersionComparison": {
+    "before": "1.0.0",
+    "after": "1.0.0",
+    "parentUnchanged": true,
+    "changedCases": [],
+    "changedProfiles": [],
+    "defectChanges": false
+  },
+  "verification": {
+    "typescript": "pass",
+    "build": "pass; existing large-chunk warning; 13.27s",
+    "whitespace": "pass"
+  },
+  "integrity": {
+    "protectedCount": 229,
+    "changed": [
+      "server/chemistry_server.py",
+      "server/reaction_conditions.py",
+      "server/reaction_condition_guidance.py",
+      "server/addition_contract.py",
+      "server/reaction_information.py",
+      "server/reaction_engine.py",
+      "src/reaction-calculator-panel.ts",
+      "src/reaction-lab.ts",
+      "src/reaction-conditions.ts"
+    ],
+    "added": [
+      "server/aldehyde_oxidation_conditions.py",
+      "tests/confidence-phase5h.test.mjs",
+      "tests/test_confidence_phase5h.py"
+    ],
+    "beforeSha256": {
+      "server/epoxidation_stereo.py": "11f47683513de79367ac019f0143a28a205bc794981d2c378cd1f586fb847e22",
+      "server/production_app.py": "b03ec820bd16558fb92072c59bbddbc243a383f466aa7b5b2d49d481b7049dc3",
+      "server/reaction_reasoning.py": "aadcf7d280512e8e4b052f3a6679eb6caee0074abe131a1e532ad46b44447532",
+      "server/alkyne_partial_hydrogenation_rule.py": "db6a79b64fcc613292e257daaadd86f97d5d4f6a7236e2678decf54b297cc2e9",
+      "server/sn2_rule.py": "abec4345c69bf6be332f0f0e1f1c4bdae3b9cf7530f48b6abf4d5adfa1051108",
+      "server/alcohol_dehydration_rule.py": "173886554adbcb0ca76819b0a1f153fd8baad186cd57abc7ab99356327a87114",
+      "server/hydrohalogenation_rule.py": "c231cd90bbf2e818cd9af117412ce22c8850c241ebb60dc1a41b8c15f492e882",
+      "server/hydrogenation_rule.py": "e2e4ed43cfe4b999f84e2c6e038ac26e71bafc03c35cf9c3fb159ddbfdea50cb",
+      "server/chemistry_server.py": "a44c7bf4688afdbbc09845c2b272f93f108719385e8486659f78c1e025189c4e",
+      "server/alcohol_substitution_rule.py": "2050d7834675800c4242de6f969f292fa42c0db0509a7bd8ebb3e2d6c6e3c24e",
+      "server/alkyne_complete_hydrogenation_rule.py": "f1ec3d16037bc428ff77eb25a1533ce6633247af749cba2695e2ec636c667b75",
+      "server/requirements.txt": "49e6bca42d1ba9442f7c6570cb4a2d4a4cb23c434471987912348074eafd0938",
+      "server/primary_alcohol_oxidation_rule.py": "5be8debc49822d7cb5bd07bea2f30305e8b6f33e7664c4f27f431f8ad8dc9252",
+      "server/reaction_conditions.py": "4283aa0a722592bd448527281d501cc240df27bb7120bfd6e53e2c5ec213d93a",
+      "server/hydration_rule.py": "53ad255dc3eaee0ee6e0bdc187bb9b1b4160be8e3a20fafce0555e9ae5b3b4be",
+      "server/alcohol_oxidation_rule.py": "d3455f9c010822f35e801433b018dcbdf10264243bd2993aa523ac3bf4ee78c2",
+      "server/halogen_addition_stereo.py": "a9b07d2b98fd9591e035241cf42e8c13bfd1f3cf926f7bccd6f572580fcc7a55",
+      "server/sn1_rule.py": "fc40852c5acae38e4e805ef778cf5df379465b083dd2c58db34fc51200984f52",
+      "server/alkyne_hydrohalogenation_rule.py": "88e500fc2ea79224bf4fcbab375018675dda2eea9eea9a74be68e19dca5c44f0",
+      "server/chlorination_rule.py": "95b25e3d240ffd4d4aee7b604e6991095265a765af04886ace804940406ecc91",
+      "server/reaction_mechanisms.py": "fd37c6d2e8c1a310c9e95e04d0da1dacf41f978535c9dc6839a0cb8c0d8b5943",
+      "server/epoxidation_mechanism.py": "f22c59401baf3526db492b7f4945bdb8163b32f065b430488b902e383347fcb4",
+      "server/pubchem_service.py": "fb45337bca36e47b24cb9071389fc49718baecc16b88b9c14638918a230b690e",
+      "server/carbonyl_hydrogenation_rule.py": "966a78167b12ce2d816659176abdbafab3a4d0fcf3b8a21135da4a961a684f3a",
+      "server/carbocation_compatibility.py": "f357009a8851f3e55a9896e2dd2da31917c172f24fb0e1ab04d9444e12dea657",
+      "server/e2_rule.py": "f2fcf20b9174667d6ca43983a6678c4ace8970cafdaa30ddd41a6896fed1eef3",
+      "server/requirements-production.txt": "b25af21144663662b456eb4e7bc9e7ae274ab0bdb4741199b2b20d49157ccf1f",
+      "server/dihydroxylation_rule.py": "ca71c3ae8b66a196c2378e64d04387ea58b4e5df6129e986adf3a312e9b4cdbe",
+      "server/bromination_rule.py": "05b824d330d56a4b184943dd833b41d8cd59f81526f1dfe1ccb4b03430541318",
+      "server/reaction_condition_guidance.py": "fc5ef5604ea99959c9598a56de60e8c042a2405887b7aa6754123ea9836ab167",
+      "server/gunicorn.conf.py": "291b77ffa8858af29f241183d5efc2dbb7058f5ab7a83f8f443d9c7d2856114a",
+      "server/stereochemistry.py": "7d5183aae9d7c0f56c5d594e18673bc0793d33dbc2c215d43d16fecdf5d353a3",
+      "server/addition_contract.py": "66fc9e45590f3aa4c6251a4c93ce0d98fa62fc6ff199300bec0b4593e344e8cf",
+      "server/molecular_graph.py": "f3b9c634eea84e92b041a369a6aa95fa313f6189f281fb5c35ed4f590b6f4387",
+      "server/reaction_information.py": "bd6d0dc255d5623860b764b29529fdd2981bca9f0fd68d4a794e409c3f1ff428",
+      "server/reaction_diagrams.py": "8e1561814d24e2fb01474716c861d24282670c384bbe0656b8b7becabdf205d9",
+      "server/reaction_compatibility.py": "fcc51fb765c71e64f3cdcaec022eaf2a3269be782b8bbaa7284a4e156273ea35",
+      "server/e1_rule.py": "a66480dd824370d6cf2b3509b7bd24f09eb036735f2b2bfc9b40e3be80404d5b",
+      "server/bromination_stereo.py": "e33c725194a47afc545678fc2550692d71d6fd0339171f483e6e8976737d0dd8",
+      "server/secondary_alcohol_oxidation_rule.py": "d23dd716d487a335e598219a9f109c3c263b204543affdbfb6788a557a83ddd9",
+      "server/ester_rules.py": "9d0a4893385454d4c10cd74cdcd5a422baafdb7a5eceaf2f40c90e541e63d53e",
+      "server/epoxidation_rule.py": "9baa6d18b2f0992491c5a9a3de461062cdd960a974f47171f535b1a417da99e6",
+      "server/extended_reaction_rules.py": "85886aaa148ccca67aa5d82c9a320ee97cd2fdecf87b533628584cfea08a038e",
+      "server/alkyne_halogenation_rule.py": "e3d3514c299445e0b9156a8a8f63218fd1bbc95a1309ea155b1f5a6f88efa887",
+      "server/reaction_engine.py": "caafbe3c298325ba4cee41fecf3ec8e95a9bb07ed4f0871dafea87a42b6e6320",
+      "server/functional_groups.py": "3f44005028664d11c2bb03ca8a47b3279ddcc060a4d1cb006bf26b02b9dc975e",
+      "src/reaction-calculator-panel.ts": "8fc5a6ef406efe94341595b8af190b0dddf47514ff6b6b6c6d192b4ad23b473e",
+      "src/solubility-calculator.ts": "f43d0ae1056cd23120da9a90d947f423ddeef9091bdbcea982c1668ee093b431",
+      "src/solubility-calculator-panel.ts": "d0eaa0df65ca4a285fffb45225fc91833f2ac916a47d363a606620939f871faa",
+      "src/acid-base-calculator.ts": "38cc84ac57c00ecd1c07a214e1534f4dea57f801991f98e12995edfc43a08b42",
+      "src/guided-reaction-conditions.ts": "c44281127573ac6b045415160dfbec988f8145b041a5b347847f7c1bad4fa41d",
+      "src/acid-base-calculator-panel.ts": "7454341cbe458aca721746edf7ce68ed7e0cf6345a74f4a2c6cce699b89c3462",
+      "src/solution-calculator-panel.ts": "452181e4cb2935e9fd1a90981c23b8b7914575f211d2539ce9c1d62f573a63b6",
+      "src/solution-calculator.ts": "3e00a273da1e4a1fa617d17890e52ec8453f83210583e68e84a439d34e2c98b4",
+      "src/calculators.css": "5ab46dc8d56878f4c6f3ab9e5ab6c215a1e7b1ce871074e45dfb806837f42a74",
+      "src/atom-inspector.ts": "853217018ea1c455f3dcf469c3b89da1bb99ca05367a79571061c0162e4e6008",
+      "src/builder.css": "70260289b436f2bb0d0cf32ae2704262df58897fe09dad08c5544ee7499e9c21",
+      "src/home.css": "fc5220c2917efb5ca9bfd935ff1de3cc98edb97f79bf6d7c2560a2c2361d8952",
+      "src/main.ts": "36395394afc0a531ae68a62cf6e3e78b49124006cd7039f1901ef98e92faf982",
+      "src/reactant-entry.ts": "4aba5bfe41c13f35959ec8410e088b3f78b2774be0e20f3d79c1244f275b547c",
+      "src/calculators.ts": "4fce83a96a6b199667ccb45b730fa2476b1d0cce80a2f762b8ca18eeeb78852e",
+      "src/styles.css": "c62afc9ebbccd1a9271e0e81d0f1e65c32e679194e55940000c28e83af0d7c9e",
+      "src/mole-calculator.ts": "31ad3507ad92774e9398920f8b72d8123458b45c2017c58fe1cc80edcb23fa73",
+      "src/molecules.ts": "eda9703dd097dce2fc6d04b7ba911078b0abe9a47b0ff9fc5f22045d674d6fb9",
+      "src/functional-group-panel.ts": "f647d1240fb04b6b8b493c502ee5d9c9ce4759f1031ae538bf729789fedd8bfd",
+      "src/bond-measurements.ts": "2a8c81a3572e0884699cb4cc3a8d6010c3490c66059b0845c18e3e3b7ed6425d",
+      "src/reaction-lab.ts": "e5c5ff2dca56b836ff8605d1c031faed11098b5c30cddd17d93013cb0ba7a9b7",
+      "src/calculator-compound.ts": "063d2da5485c5865b91b50287ec7992770bb49ad139574a92576e9b2faf5cd46",
+      "src/pathway-insights.ts": "b9776d08c8baa274893e92fbd4294e2c47f31e9f2e1b31a336ba7e907691528b",
+      "src/equilibrium-calculator-panel.ts": "796a482a464c0178e7f7bd114dec7b84c27e954c8673039e6163c70dd8873e54",
+      "src/builder.ts": "c3f54d75faa649c4037599716e0c21f738436225dfcb72bda3adf1194bf12a1b",
+      "src/bond-measurements.css": "d01c774725f9f4daa5cf7da02bbc837719eacccff2f2b12e48c038a7da054634",
+      "src/solution-compound.ts": "9a9b70ba023598d694ad4f1b7bd9bc79fbd4ea518de5dd05fe17d17ad112b8a8",
+      "src/calculator-reactions.ts": "57e774657695713c91335db2cf14b631b458a3f60bd5aca42516dc7368cd6159",
+      "src/equilibrium-calculator.ts": "866c5175e810a23caca7a8373be6bec0ef9f648e9277e8b5832cb03498e35101",
+      "src/reaction-calculator.css": "cc272b070ee8f2f815eba2e1e772ce6deb3054575e082f640b07a28467a1618d",
+      "src/chemical-property-guide.ts": "b3d26d532dba7ac43bc9311e33d225d292224fd1488a672fe0ed82405bc0be40",
+      "src/solution-calculator.css": "764c535591d4326b530db9d96f9646cfac1bc173179e0842cd02c44930333359",
+      "src/chemical-descriptions.ts": "13a17ea7950e6bf445bda94fd3dc339163c90bcb4d8350f650d748e4445b3e22",
+      "src/reaction-lab.css": "536bd34dee0cd2c3472926f221b44c6756badb48041b9c4618a01f62beec5ff9",
+      "src/reaction-calculator.ts": "153c6f5b15a93835b6fd9cf5c2074674e36089e7ad4c590829ed40abb0e79853",
+      "src/explorer-description.ts": "1cae05e60eab7cd3609de2f9d7f1c11b05c73cbf57aaa21aa77847773d5f1176",
+      "src/shared-molecules.json": "19aaa76111201c7f6932b71c1041f2e519410df7acf7bc126a8c85f2a9f394dd",
+      "src/reaction-information-panel.ts": "c70f81836b759b909ccd9d7efafa88cff9417ae8bf01e218f503a0bf04d38556",
+      "src/reaction-conditions.ts": "2956f682fd203acf8e74c1c06c3dc1da01f2008e0afd48d56aeadc3a1c303088",
+      "src/mole-calculator-panel.ts": "8e0d83eb8d550970ffd9b1ef19b061a53e2b31d63dcc375ea725dc423246d5d0",
+      "tests/test_chemistry.py": "4173d98853cbb659ec44550d10d6cc7ce14b9170ce391eb6eddefc15557c01c4",
+      "tests/test_alkyne_halogenation_public_api.py": "badc46eccf01267453ba53ce93eb301aa82f6ad93fc48242e2f4cebf0e79207c",
+      "tests/alcohol-oxidation-calculation.test.mjs": "3bcd27b460c431d83658d9966b54c19a0fd3fda2d10bda9dd19b46cc57a4ad0e",
+      "tests/guided-conditions-phase5e.test.mjs": "d68e1ee79096fd45d1518c78cae9694254f9155cd53aff2e4d1d4fd2e2785e91",
+      "tests/sn1-calculation.test.mjs": "9c62823f4b10850e23c328781f8803b7bc5464a9de0e2e4b208c92728860d941",
+      "tests/test_e2_compatibility.py": "0bb7006c1aed432fe19b38369e5a8b5e1bda07e9d5e332ac58a974cee4a6c85b",
+      "tests/equilibrium-calculator.test.mjs": "7d3aef778c4be27b32fa899455129cbc1460a9753e7dc791e283ef8ccda1928d",
+      "tests/equilibrium-solubility-panels.test.mjs": "8ff1004c0022ce0579fc0c51167cf2453220c53aa64f1ec0c6820135cf3ff2b1",
+      "tests/test_sn1_compatibility.py": "4b7c3ff728c1d08d8bee482056ddfab561bda2e33bed5b11e7f575e49f60aac3",
+      "tests/atom-inspector.test.mjs": "df99e1a14354aa310881824dbaea894d361e4b51e4c59a96f2b24eb518cd6e68",
+      "tests/explorer-description.test.mjs": "aa47c6019246e9a1bbdd39033d03ff12c5d53a4da3f39f78d67f953c44fae9bc",
+      "tests/bond-measurements.test.mjs": "aeb2cdb9e41fad8f4ebe4cc32f4647253dc2fb2e182b971e22bb60cf9edbceea",
+      "tests/alkyne-complete-calculation.test.mjs": "cc50e4baf88c3cd869ad8e294af7f7c4ca8f9944f23895ea04e4cc6f5dca8b6b",
+      "tests/reaction-pathway-settings.test.mjs": "3c595774d9740da9494ec62e046ee8f77b20246e562cb5cb61d3b1cf041d7d7c",
+      "tests/addition-consistency-phase3h.test.mjs": "f7b66314b6fbe9a0db5dc348c55209ab9a04fbad0f53bfff4afbda3c65f3c10a",
+      "tests/test_alkyne_partial_public_api.py": "ae6d1f11729501e0349e31d45bb1e3884fbd9215b17162e3f9f4b28ddf4b365f",
+      "tests/test_guided_conditions_phase5e.py": "9195862ab8e8c5f6f11c96dbed45920656b0504b56e80aac2dd29bb945714ec0",
+      "tests/test_chlorination_compatibility.py": "7571a6a23f38ebba4d221c5618b5c19aed46f1706ffdffc8f6a7fee3f39fd537",
+      "tests/test_alcohol_substitution_phase5b.py": "07a8eb36da6ceafc3b02e030248e127e80a45be8edde82d4f5d14022f1960a9f",
+      "tests/hydrogenation-calculation.test.mjs": "0dbae68a31b4adda343450b67293acc58c646ed4f5da3a3cb87b0815c773498f",
+      "tests/pathway-insights.test.mjs": "65398a9e121ae444f39ba7d896bd67ec37f8da577745ec8ed4f36aa5600cabbd",
+      "tests/epoxidation-calculation.test.mjs": "a649e704c11ecd87b80541cd817d0f866e2bc31709d4fbe37160770c677c3fd0",
+      "tests/reactant-entry.test.mjs": "46bf2bdadc5869ac231edb062c555fa55b397f233b90dd7ea4c6ed76eaadaf3d",
+      "tests/test_cross_page.py": "4d646bb85f93f26251beaae1f9a6aa4b167562c5a69f4ae9f1e9cdda2ffcd770",
+      "tests/bromination-calculation.test.mjs": "63b1b762593a720e68f7bfb16a3240a3e3bd207cd420eac2a05b2b00414c61c0",
+      "tests/explorer-ionic.test.mjs": "f4f264963be93a70d6de717b188d9a1b0416db3cedd50b98cf096cdeb7a7136d",
+      "tests/test_reaction_engine.py": "cc01c711ddedd6dbdfc17b8f5d3863e54a27e37610c462cb4dd5e54bb65eab0e",
+      "tests/dihydroxylation-calculation.test.mjs": "83a0ff563fa48c9e5b29280a395264a6446a0078b6daef6d377296179db4bf0f",
+      "tests/alcohol-dehydration-phase5a.test.mjs": "22862749c1b4415dd3df65d1f4668a7eb500eed555ddef1073b4b13b97ec4622",
+      "tests/test_reaction_preview_api.py": "893798da5c6ecca83b486d67b6b368f41d231f3819f5d5ef80df9aef7a07f388",
+      "tests/test_reaction_diagrams.py": "fe784d04fbb9165924aa73736a597cadac84644096346ca3cee56360211df520",
+      "tests/test_alkyne_complete_public_api.py": "8ee08da5c7d922b3808e0aff7f7dcbfd096983a96755b78bf5ce0f6f56ccd1fc",
+      "tests/carbonyl-calculation.test.mjs": "ac2dfdee34c65c0dd9f79837c793c0c373abde1af33bf7e26694e762a40e8b91",
+      "tests/equilibrium-independent-audit.test.mjs": "f3835e2677bde2db1c0534677c70d3af5461dd74799620ef32c80f2a3c39087c",
+      "tests/calculator-transfer.test.mjs": "8212a427a2df97cf9eaaac7c67d06ef438d68344f76422808f3f36752e905ff0",
+      "tests/chlorination-calculation.test.mjs": "033b55cbf0b192c4f564a58b765f1b84b81609095033066aa9ca08be65b510c9",
+      "tests/test_addition_consistency_phase3h.py": "0a1df0dff15f27c7de72785c2dc80fa86dc05b7a5d4b478d278b270e21d00519",
+      "tests/test_alkyne_partial_hydrogenation.py": "ec1549fd29970bb2b12412607506907180448aa441b67d1e693d2747a9012ea6",
+      "tests/acid-base-calculator-panel.test.mjs": "e3391e56e745786bd786e42c886bdbd1eaa89ca247b4b802a9504c1326ef41f4",
+      "tests/solubility-calculator.test.mjs": "e89650ca17cfffc182b10623786ed4c7c33b332a17720fbeeaceb76efa23d515",
+      "tests/test_alkyne_hydrohalogenation_public_api.py": "5f00e9ebda657cdbee14f84fd987f8b3939e30c437de984e950075aac6962942",
+      "tests/test_reaction_stoichiometry.py": "9a80efe8e83e51b0b166c9409208183859cbda52819a3d7587fc7a0eaacf772b",
+      "tests/reaction-calculator.test.mjs": "61d5f95545560862f54b72821843988e4e9495d17518e481ece2f124a2204e88",
+      "tests/e2-calculation.test.mjs": "dd628d60edc51e080f81a1c63acf6613c5db2d02e9997216c6050dea24923376",
+      "tests/test_primary_alcohol_oxidation_phase5c.py": "25dcfa5ad95fa7e1c5b54326bc9d8c6695f96edbda1efb30e865eb3a7a4ae561",
+      "tests/secondary-alcohol-oxidation-phase5d.test.mjs": "594aab5de566c0ac97fe3add07a5ce5a6e0efc4a5cba60458154fef7036790b3",
+      "tests/acid-base-calculator.test.mjs": "26ef377b36bec94292d2321cea0d5b6d58e1688598a4876e08e8155816616d61",
+      "tests/test_bromination_public_api.py": "c49d4b799dd2c6a9b014ad5f36ab18ea18908163c809386bae02b6a7122e95e9",
+      "tests/solution-integrations.test.mjs": "26047341bbd4342bf2a3f678742eaa3a1d190cc71d72aabb6c0d34a6c8ab47fb",
+      "tests/builder-measurements.test.mjs": "f4e9cebb75783b06b18acb3bb9361b6717dffd3cad3f2aa0e6d4edd705776f63",
+      "tests/test_pubchem.py": "a3c9fbee9cd42d0fbeff936583797b8387089ce4d9aa900e7412f06bc401b346",
+      "tests/solution-calculator.test.mjs": "4a5a27066977fc89fb78310e274a5b0d978927d1e77aad3463f76fa1a21d3ebb",
+      "tests/solution-calculator-panel.test.mjs": "50d4db62636d17cf33ed6a3bb063f44dbcb6c4af2900a647587791b36afad5a7",
+      "tests/test_alcohol_dehydration_phase5a.py": "21dd2297d64f51d6e3a695d4d84d6bd4b795cfebad00dbec62b87037999c6dce",
+      "tests/test_secondary_alcohol_oxidation_phase5d.py": "60b0b8a941b08f1710b055fc0cf7332f05e0c8039114524d4bae1e96a1a76864",
+      "tests/calculator-reactions.test.mjs": "d74f2ecd747e9a035710fc26faab9fefb2a585f11a72722172f7b2391f05a2a7",
+      "tests/test_alkyne_complete_hydrogenation.py": "6972ea761e8c0121399e6a42e0165dee8458e23c4833e1faa0f14cd583c0d192",
+      "tests/test_hydration_compatibility.py": "f21f13ebf404a790ed057c883a404fd9be2345a43d3dadd0dc8523b99e41d215",
+      "tests/test_hydrogenation_compatibility.py": "6740e5d872e5fe4f4048f14229c0b1bf084d6cba3927ea521ef473bc2eb068f3",
+      "tests/primary-alcohol-oxidation-phase5c.test.mjs": "470324372d1e1749d8318cd49e164baf65735ca363e4ebaa3cb8684ae3f86c33",
+      "tests/navigation.test.mjs": "21bf4d10091394cfef95eae11f2f771db1aaeb5e3503ffcf2cc7180a29d18737",
+      "tests/mole-calculator.test.mjs": "46aae4129cbc2afab76e892a37063b683350c45b688063c9de5c73b3ff01c39e",
+      "tests/e1-calculation.test.mjs": "dbf4898bd085cbee5b695fd570cbf2715dc6eb5a0df74692558d45ebca783bae",
+      "tests/alkyne-hydrohalogenation-calculation.test.mjs": "0cc46c6fe2d299c50f95559675e625697d806203f9e7a04eb8ba9c3a67b72ef2",
+      "tests/test_epoxidation_public_api.py": "3001ffd9ab8c6e7d58aa3deac8bbce28f7be04128609414ca79c42ed5a7ca7e0",
+      "tests/ester-calculation.test.mjs": "9a6564de0a379841899e34f5052296d39e3f5524adf417c9c0a5c9aae4e816bb",
+      "tests/reaction-calculator-panel.test.mjs": "b2142766ad2edc17340d660304f0356c9a977eecf613c92e946b56f436ef8059",
+      "tests/test_hydrohalogenation_public_api.py": "d81823195500c51eacad55db125e2d53ea6f2c2b17264755a0d466f114c9572a",
+      "tests/test_bromination_compatibility.py": "4e3a051cc6c35aea91d7b21203bfe8e5249b4b77d8521622b65b989e073c6df6",
+      "tests/test_chlorination_public_api.py": "c9e90af2f707e77f7cabac480bec6460d6dfedb951be77305d34e70ebd6cbb75",
+      "tests/baseline.test.mjs": "3d9c89406c2c0fab087595bf4b7e653ed2d38d91c22a5a795a70539647517d5f",
+      "tests/test_carbonyl_compatibility.py": "daf5d852e937b41a406b7f26a90f8d2918903567f01a5987b2e3b9fd7f2d85d5",
+      "tests/deployment-package.test.mjs": "26dd7ebb8f4dda3e465ac0faf55b15927ccf7e9c8d95f3a60f20dc81f3ef8122",
+      "tests/alkyne-partial-calculation.test.mjs": "56ef5538540b9bf5bae30b4fc9540950a46f3a0b33fee7d195ad6e44feb2454c",
+      "tests/alcohol-substitution-phase5b.test.mjs": "751207ab5701fe54121e1460a0c8e5817d4e42100fc922fed7371bb24a0d1a3e",
+      "tests/test_pathway_insights.py": "8deff6fed2321820bbb1040eb47b36d099ada799bda5f394e0a2c24339351414",
+      "tests/guided-conditions-phase5f.test.mjs": "7ebfa29aebe01c43f7e2796fd45f782d54c5e6a876b9e0c4dd359f8b506f2286",
+      "tests/mole-calculator-panel.test.mjs": "97648488ee787bcf3e4c86132a6079e7f0f8c73386c63fd23f3367604ae0e59c",
+      "tests/calculator-hub-audit.test.mjs": "3578b087952ae074e62174bb3d54197ab5482ef36402068aad6ebbdd5a11a0f3",
+      "tests/test_alkyne_consistency_phase4f.py": "b6d0ee8ef319a8fa6ddfc57b1413fbae0c9886add724db87314c48043a69abe7",
+      "tests/test_e1_compatibility.py": "18341d8e407c84dd1539c7a9aa23afbee493a96b1efd17b7f93e21a421845c16",
+      "tests/reaction-consistency-phase2h.test.mjs": "1d967803aaffbeddb138c3592f7db0dcf1b8da815398bc1028b63f9e7ca6e77b",
+      "tests/test_sn2_compatibility.py": "8e5cf112250120a8852b48dd4a4aff740437bc70abbcc7313d8daf62d3985bd1",
+      "tests/hydrohalogenation-calculation.test.mjs": "68c6749c19c4630bd5b99f424dbaad1340945b805dc456929cf1fb021c24f7ca",
+      "tests/test_guided_conditions_phase5f.py": "169eee3c82e08617e97d3662ca33983d60e00f74ae83f717c1f0dc9d53ce26ad",
+      "tests/test_alcohol_oxidation_compatibility.py": "b058d1e052813ca7944bf4684a0be8bc9bf83c4fda6b5229f9a573467b21b9aa",
+      "tests/test_dihydroxylation_compatibility.py": "f967276a03b6096257d3c57ff85cbc501e70ca2a8deb9abdcf301a0643ddd029",
+      "tests/test_alkyne_halogenation.py": "fb410538537f88eaf4a635ae13671d8e44499f7e5b2ffd1fabf93cf5334d7106",
+      "tests/test_hydrohalogenation_compatibility.py": "a52ff4014e751f02de976efa2c60704fecb560c45179e86fe55984dd2b156115",
+      "tests/test_epoxidation_compatibility.py": "f70a59feb652c49304287d27ba1fe639a13b685626fa2bf204d8e19aa83e1146",
+      "tests/alkyne-consistency-phase4f.test.mjs": "110bd2a77c7bbd81550babcb9df3203613825ed107ebb8b4c231e4c6812d4158",
+      "tests/test_reaction_expansion.py": "863435252aa55cbd45572bdc8ab1fe2ca6c959b1cbe64ad1b5dd11a761132fdb",
+      "tests/test_production_app.py": "7ab0e854ca6f6150d09e11feabc61ab8b133f48dfc09a6faf6ac84a3569479e8",
+      "tests/reaction-measurements.test.mjs": "974e070462060d025aba4a0049044fde0d3f33b5fcc9a3c5376832b1b1145361",
+      "tests/hydration-calculation.test.mjs": "9abf134bac6d4d339d17376f6dd9f3f08194634ff6dc82670b554e347ec22148",
+      "tests/test_dihydroxylation_public_api.py": "9555a01805410a7539e7a86e05de84630ea8bb6b08e95f58efd463c6eb9f365a",
+      "tests/test_hydration_public_api.py": "6f7dafd41e1f67a952dd1c835d5cbaf7ebb00bd407a44023dba88cffd754fade",
+      "tests/test_ester_phase1.py": "cca3dd7e8eddcb6f17d3be955811630abd6f72d229bc08a00b82ca98a41150a4",
+      "tests/test_alkyne_hydrohalogenation.py": "b3eaf2f970a4173f5ccae0dbf109401a172a7a4234d2aeed1c1cf81fec94df27",
+      "tests/reaction-expansion-panels.test.mjs": "fc50f605460ac22c7abefe9ee17ce61163f7b9fee90f068821c2a6dc2b4cbe43",
+      "tests/sn2-calculation.test.mjs": "7cf26e5d441149408b3a7740c57e8188bdb816b6892413cd3aa9c7037638bf66",
+      "tests/test_reaction_consistency_phase2h.py": "a59992132ed752b445ae63e25c40994e5d6ce4106712c0e281fef2218e4bab32",
+      "tests/test_chemistry_depth.py": "e2cd74388390ffa5d686079b0715e8ad62be7169d30c1c12c2161d2c97e14d79",
+      "tests/alkyne-halogenation-calculation.test.mjs": "0ee09ac6394348c24808664aaaa71ba6cc41fc2b80ad114ee1f01acfbe81cb7a",
+      "tests/fixtures/alcohol-dehydration-phase5a.json": "166c047fb1b539217987325d9895a28ed674bf19e24f6bc50a1a1dfcead1842d",
+      "tests/fixtures/reaction-baseline.json": "0c959bba93e88e3b45b367e953e329360bc11a37f9742ce625b748a26aa54e53",
+      "tests/fixtures/alcohol-substitution-phase5b.json": "edec8a88c2647b1a3cec1fee3bd3bf57f76a35bb16812fb7108abae9cc0ef74f",
+      "tests/fixtures/alkyne-partial-hydrogenation.json": "6df023a3b1d2df52f1e510b347b367333246fb59ccf19ef9ff6739b969b03228",
+      "tests/fixtures/primary-alcohol-oxidation-phase5c.json": "90c6453ee45f4b44169db0ec8ad894aab4e1185f9ea27185a401cd5ee9b7de57",
+      "tests/fixtures/alkyne-halogenation.json": "cbc9047cad6f5bb0c6d40a743fb8cda8044a3966174846afe1293cf49b0ef0de",
+      "tests/fixtures/alkyne-hydrohalogenation.json": "d16908da0d44079a1b9934f64f3aae1b92971ca7a0a71922041a9195e874e714",
+      "tests/fixtures/secondary-alcohol-oxidation-phase5d.json": "67c74e92c119ecd5b7b7a820ab1ea05777f4654cf0f0d6d60c406744328cdc88",
+      "tests/fixtures/alkyne-complete-hydrogenation.json": "c177713976a2d17a16380b4134eb7c314609dbdb6696e59292355129e50f9bbc",
+      "scripts/audit_alcohol_dehydration.py": "859dc8bdb77958ef495b9002ee433ee5e621c154673f49352bb0b4220d77ebd7",
+      "scripts/audit_addition_consistency.py": "1aecf9268e0282d83118731b7fcc451c6bbe38d54b58577394078fea4f2a426e",
+      "scripts/audit_alkyne_hydrohalogenation.py": "3b2120a96e83ee5e2f51e45fe09e7bab296ede226361d7f70c81fb68f8a0783b",
+      "scripts/audit_alkyne_partial_hydrogenation.py": "667430a2b694219363503a94c38e4a44203be0844706dd5f959b62329e66fd0c",
+      "scripts/audit_alkyne_complete_hydrogenation.py": "2d52f888be4afc5bee7e53219696e25a355899e539f126495e791f677779fea0",
+      "scripts/audit_reaction_lab.py": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+      "scripts/compress-dist.mjs": "84e8c39e56792d28688ac4c1b46b2b3aeb7e72bcdcaf1404a222084b81315533",
+      "scripts/audit_secondary_alcohol_oxidation.py": "090f3b0a3a3606c5594283fb42bd390a3dfa5f62fbb4987926d045f8bc45c00c",
+      "scripts/reaction_conditions_companion.py": "f021cbd4ef47413849ab0a3c54da12f7d69fb98e5b5e7b6ca2cf4ebe10bf77ef",
+      "scripts/audit_alcohol_substitution.py": "69a0f067bc0f3edc01b22b8bef52917b141b07247bef4750d65a193d96ac59da",
+      "scripts/audit_primary_alcohol_oxidation.py": "f37a2fb91e803633b3604c3a07f3783b574def2413cb96ebfed9683118b2ea59",
+      "scripts/audit_alkyne_halogenation.py": "c983fb95c43f2393e76ec30130c54d24c9bb2e16072673155dcd3869c234f0c6",
+      "benchmarks/reaction-conditions/README.md": "0311b22b5058aac2c95eb2b7893df2718e238db75fd7334175d022c94c097bc6",
+      "benchmarks/reaction-conditions/index.json": "1b365f7f31143a82536b1ab0570b1ecd00d1e77fbfde46ed145bf631ee7996a4",
+      "benchmarks/reaction-conditions/1.0.0.json": "35ce7ce6f3c3967a06fc354c8bc9fc8319a2247f3b3ac0c7cd246ec75ed8ca1e",
+      "reaction-lab.html": "f4ba8fb8e1ade7ffbbaef7a162f3ec4b7b92bd269fe12ea7d67d0f721e37793f",
+      "pnpm-lock.yaml": "2b4d205d1b26266c9fe79a3c16b16f6a8a80ac5bcaa059ec61ea4f22e01a9a05",
+      "start-local.command": "f10f207a7cec07b55c61625727ffed508e63e96cec3ead1576747f3abfa99a4d",
+      "index.html": "e114c98514310e34ab1078d55f085f80856e963b333ef5269c8b3a10cb41c17b",
+      "builder.html": "fe287e83b1f3bff9baa7dfe46ec2f03c50e969b6d65a0a42e56bb7ed1ee2e312",
+      "Dockerfile": "fc858572ae5afd395aaf64975ee7c830bd17e8d2ee2117ea94aee5fb15b5465e",
+      "README.md": "fd777a2a55fd2fe127bd592053f0b15254c1714873072f497f8507d82c50e8dd",
+      ".dockerignore": "90c4a78bfc58696e0ec2b0eef88cdb80e015d14db1b79bbd9be83f8b302554d1",
+      ".gitignore": "5a6ef4b2076e4e1cb49072b3232ead9f7f762398681b5aa150473b58d990c532",
+      "package.json": "b914c39801c6699213bce022fb99c3107d08cfce41c9c6159df75252851f9449",
+      "tsconfig.json": "79df716e1aecea2eabe4b34c64a57f4ad88a78d2dfeb7456b3348e9f3f9d9dfb",
+      "vite.config.ts": "0269d3790ebb60082b60d4759fe372d473a9ad4ab9277e857886496361c612d0",
+      "calculators.html": "6303d939b4cd5c693bb5dab908cf9d593525490996abf61717bf1e2f3392873d",
+      "explore.html": "26c08b21324ce6814ee34df2c2cd6bf7abe5716646abe43d2bc2972ee63233c5",
+      "pnpm-workspace.yaml": "ac02d96368617c760f093cfe61fdec64b6244007ab3553e0d6621f706f54a353"
+    },
+    "afterSha256": {
+      "server/epoxidation_stereo.py": "11f47683513de79367ac019f0143a28a205bc794981d2c378cd1f586fb847e22",
+      "server/production_app.py": "b03ec820bd16558fb92072c59bbddbc243a383f466aa7b5b2d49d481b7049dc3",
+      "server/reaction_reasoning.py": "aadcf7d280512e8e4b052f3a6679eb6caee0074abe131a1e532ad46b44447532",
+      "server/alkyne_partial_hydrogenation_rule.py": "db6a79b64fcc613292e257daaadd86f97d5d4f6a7236e2678decf54b297cc2e9",
+      "server/sn2_rule.py": "abec4345c69bf6be332f0f0e1f1c4bdae3b9cf7530f48b6abf4d5adfa1051108",
+      "server/alcohol_dehydration_rule.py": "173886554adbcb0ca76819b0a1f153fd8baad186cd57abc7ab99356327a87114",
+      "server/hydrohalogenation_rule.py": "c231cd90bbf2e818cd9af117412ce22c8850c241ebb60dc1a41b8c15f492e882",
+      "server/hydrogenation_rule.py": "e2e4ed43cfe4b999f84e2c6e038ac26e71bafc03c35cf9c3fb159ddbfdea50cb",
+      "server/chemistry_server.py": "bb5f86c47fc63e99910e2ffec3c246b37001dc531a903340849b918c82a9ccb6",
+      "server/alcohol_substitution_rule.py": "2050d7834675800c4242de6f969f292fa42c0db0509a7bd8ebb3e2d6c6e3c24e",
+      "server/alkyne_complete_hydrogenation_rule.py": "f1ec3d16037bc428ff77eb25a1533ce6633247af749cba2695e2ec636c667b75",
+      "server/requirements.txt": "49e6bca42d1ba9442f7c6570cb4a2d4a4cb23c434471987912348074eafd0938",
+      "server/primary_alcohol_oxidation_rule.py": "5be8debc49822d7cb5bd07bea2f30305e8b6f33e7664c4f27f431f8ad8dc9252",
+      "server/reaction_conditions.py": "a96b684856526697d3d59918713bada7524df9281b9ae6bf07435b8b7da8dd93",
+      "server/hydration_rule.py": "53ad255dc3eaee0ee6e0bdc187bb9b1b4160be8e3a20fafce0555e9ae5b3b4be",
+      "server/alcohol_oxidation_rule.py": "d3455f9c010822f35e801433b018dcbdf10264243bd2993aa523ac3bf4ee78c2",
+      "server/halogen_addition_stereo.py": "a9b07d2b98fd9591e035241cf42e8c13bfd1f3cf926f7bccd6f572580fcc7a55",
+      "server/sn1_rule.py": "fc40852c5acae38e4e805ef778cf5df379465b083dd2c58db34fc51200984f52",
+      "server/alkyne_hydrohalogenation_rule.py": "88e500fc2ea79224bf4fcbab375018675dda2eea9eea9a74be68e19dca5c44f0",
+      "server/chlorination_rule.py": "95b25e3d240ffd4d4aee7b604e6991095265a765af04886ace804940406ecc91",
+      "server/reaction_mechanisms.py": "fd37c6d2e8c1a310c9e95e04d0da1dacf41f978535c9dc6839a0cb8c0d8b5943",
+      "server/epoxidation_mechanism.py": "f22c59401baf3526db492b7f4945bdb8163b32f065b430488b902e383347fcb4",
+      "server/pubchem_service.py": "fb45337bca36e47b24cb9071389fc49718baecc16b88b9c14638918a230b690e",
+      "server/carbonyl_hydrogenation_rule.py": "966a78167b12ce2d816659176abdbafab3a4d0fcf3b8a21135da4a961a684f3a",
+      "server/carbocation_compatibility.py": "f357009a8851f3e55a9896e2dd2da31917c172f24fb0e1ab04d9444e12dea657",
+      "server/e2_rule.py": "f2fcf20b9174667d6ca43983a6678c4ace8970cafdaa30ddd41a6896fed1eef3",
+      "server/requirements-production.txt": "b25af21144663662b456eb4e7bc9e7ae274ab0bdb4741199b2b20d49157ccf1f",
+      "server/dihydroxylation_rule.py": "ca71c3ae8b66a196c2378e64d04387ea58b4e5df6129e986adf3a312e9b4cdbe",
+      "server/bromination_rule.py": "05b824d330d56a4b184943dd833b41d8cd59f81526f1dfe1ccb4b03430541318",
+      "server/aldehyde_oxidation_conditions.py": "c9769f13170f303f0be5d67f4ce487b5bd5f93806528178e7f8e24b0ead97ab7",
+      "server/reaction_condition_guidance.py": "48aeea80e0c22dd40a2d902233c502945ee641dc0f2617c31db3ed629e439747",
+      "server/gunicorn.conf.py": "291b77ffa8858af29f241183d5efc2dbb7058f5ab7a83f8f443d9c7d2856114a",
+      "server/stereochemistry.py": "7d5183aae9d7c0f56c5d594e18673bc0793d33dbc2c215d43d16fecdf5d353a3",
+      "server/addition_contract.py": "57d153315190b06efc0b6edec6cd2061591a8187f5fce08372577d2e4517e570",
+      "server/molecular_graph.py": "f3b9c634eea84e92b041a369a6aa95fa313f6189f281fb5c35ed4f590b6f4387",
+      "server/reaction_information.py": "94b04d8c703d8921754d1d0c818d5351a6e51de70154ebf81c8aa2f39607cf08",
+      "server/reaction_diagrams.py": "8e1561814d24e2fb01474716c861d24282670c384bbe0656b8b7becabdf205d9",
+      "server/reaction_compatibility.py": "fcc51fb765c71e64f3cdcaec022eaf2a3269be782b8bbaa7284a4e156273ea35",
+      "server/e1_rule.py": "a66480dd824370d6cf2b3509b7bd24f09eb036735f2b2bfc9b40e3be80404d5b",
+      "server/bromination_stereo.py": "e33c725194a47afc545678fc2550692d71d6fd0339171f483e6e8976737d0dd8",
+      "server/secondary_alcohol_oxidation_rule.py": "d23dd716d487a335e598219a9f109c3c263b204543affdbfb6788a557a83ddd9",
+      "server/ester_rules.py": "9d0a4893385454d4c10cd74cdcd5a422baafdb7a5eceaf2f40c90e541e63d53e",
+      "server/epoxidation_rule.py": "9baa6d18b2f0992491c5a9a3de461062cdd960a974f47171f535b1a417da99e6",
+      "server/extended_reaction_rules.py": "85886aaa148ccca67aa5d82c9a320ee97cd2fdecf87b533628584cfea08a038e",
+      "server/alkyne_halogenation_rule.py": "e3d3514c299445e0b9156a8a8f63218fd1bbc95a1309ea155b1f5a6f88efa887",
+      "server/reaction_engine.py": "ef1d767b52f73338b372baa16ba42d589127c816667cc1f1199cd30b537e4f73",
+      "server/functional_groups.py": "3f44005028664d11c2bb03ca8a47b3279ddcc060a4d1cb006bf26b02b9dc975e",
+      "src/reaction-calculator-panel.ts": "d48d73b92a199233b8718739ac97f22805e380f94da20841e0237d87d4461d52",
+      "src/solubility-calculator.ts": "f43d0ae1056cd23120da9a90d947f423ddeef9091bdbcea982c1668ee093b431",
+      "src/solubility-calculator-panel.ts": "d0eaa0df65ca4a285fffb45225fc91833f2ac916a47d363a606620939f871faa",
+      "src/acid-base-calculator.ts": "38cc84ac57c00ecd1c07a214e1534f4dea57f801991f98e12995edfc43a08b42",
+      "src/guided-reaction-conditions.ts": "c44281127573ac6b045415160dfbec988f8145b041a5b347847f7c1bad4fa41d",
+      "src/acid-base-calculator-panel.ts": "7454341cbe458aca721746edf7ce68ed7e0cf6345a74f4a2c6cce699b89c3462",
+      "src/solution-calculator-panel.ts": "452181e4cb2935e9fd1a90981c23b8b7914575f211d2539ce9c1d62f573a63b6",
+      "src/solution-calculator.ts": "3e00a273da1e4a1fa617d17890e52ec8453f83210583e68e84a439d34e2c98b4",
+      "src/calculators.css": "5ab46dc8d56878f4c6f3ab9e5ab6c215a1e7b1ce871074e45dfb806837f42a74",
+      "src/atom-inspector.ts": "853217018ea1c455f3dcf469c3b89da1bb99ca05367a79571061c0162e4e6008",
+      "src/builder.css": "70260289b436f2bb0d0cf32ae2704262df58897fe09dad08c5544ee7499e9c21",
+      "src/home.css": "fc5220c2917efb5ca9bfd935ff1de3cc98edb97f79bf6d7c2560a2c2361d8952",
+      "src/main.ts": "36395394afc0a531ae68a62cf6e3e78b49124006cd7039f1901ef98e92faf982",
+      "src/reactant-entry.ts": "4aba5bfe41c13f35959ec8410e088b3f78b2774be0e20f3d79c1244f275b547c",
+      "src/calculators.ts": "4fce83a96a6b199667ccb45b730fa2476b1d0cce80a2f762b8ca18eeeb78852e",
+      "src/styles.css": "c62afc9ebbccd1a9271e0e81d0f1e65c32e679194e55940000c28e83af0d7c9e",
+      "src/mole-calculator.ts": "31ad3507ad92774e9398920f8b72d8123458b45c2017c58fe1cc80edcb23fa73",
+      "src/molecules.ts": "eda9703dd097dce2fc6d04b7ba911078b0abe9a47b0ff9fc5f22045d674d6fb9",
+      "src/functional-group-panel.ts": "f647d1240fb04b6b8b493c502ee5d9c9ce4759f1031ae538bf729789fedd8bfd",
+      "src/bond-measurements.ts": "2a8c81a3572e0884699cb4cc3a8d6010c3490c66059b0845c18e3e3b7ed6425d",
+      "src/reaction-lab.ts": "ce334e3ce3b9ea98807e4ddb0a1eb3f969eb1f31337c13b743be38e050085100",
+      "src/calculator-compound.ts": "063d2da5485c5865b91b50287ec7992770bb49ad139574a92576e9b2faf5cd46",
+      "src/pathway-insights.ts": "b9776d08c8baa274893e92fbd4294e2c47f31e9f2e1b31a336ba7e907691528b",
+      "src/equilibrium-calculator-panel.ts": "796a482a464c0178e7f7bd114dec7b84c27e954c8673039e6163c70dd8873e54",
+      "src/builder.ts": "c3f54d75faa649c4037599716e0c21f738436225dfcb72bda3adf1194bf12a1b",
+      "src/bond-measurements.css": "d01c774725f9f4daa5cf7da02bbc837719eacccff2f2b12e48c038a7da054634",
+      "src/solution-compound.ts": "9a9b70ba023598d694ad4f1b7bd9bc79fbd4ea518de5dd05fe17d17ad112b8a8",
+      "src/calculator-reactions.ts": "57e774657695713c91335db2cf14b631b458a3f60bd5aca42516dc7368cd6159",
+      "src/equilibrium-calculator.ts": "866c5175e810a23caca7a8373be6bec0ef9f648e9277e8b5832cb03498e35101",
+      "src/reaction-calculator.css": "cc272b070ee8f2f815eba2e1e772ce6deb3054575e082f640b07a28467a1618d",
+      "src/chemical-property-guide.ts": "b3d26d532dba7ac43bc9311e33d225d292224fd1488a672fe0ed82405bc0be40",
+      "src/solution-calculator.css": "764c535591d4326b530db9d96f9646cfac1bc173179e0842cd02c44930333359",
+      "src/chemical-descriptions.ts": "13a17ea7950e6bf445bda94fd3dc339163c90bcb4d8350f650d748e4445b3e22",
+      "src/reaction-lab.css": "536bd34dee0cd2c3472926f221b44c6756badb48041b9c4618a01f62beec5ff9",
+      "src/reaction-calculator.ts": "153c6f5b15a93835b6fd9cf5c2074674e36089e7ad4c590829ed40abb0e79853",
+      "src/explorer-description.ts": "1cae05e60eab7cd3609de2f9d7f1c11b05c73cbf57aaa21aa77847773d5f1176",
+      "src/shared-molecules.json": "19aaa76111201c7f6932b71c1041f2e519410df7acf7bc126a8c85f2a9f394dd",
+      "src/reaction-information-panel.ts": "c70f81836b759b909ccd9d7efafa88cff9417ae8bf01e218f503a0bf04d38556",
+      "src/reaction-conditions.ts": "9631edbb12af804d07e93da0488566525a9211de5639f0aee34d5745cfd4842a",
+      "src/mole-calculator-panel.ts": "8e0d83eb8d550970ffd9b1ef19b061a53e2b31d63dcc375ea725dc423246d5d0",
+      "tests/test_chemistry.py": "4173d98853cbb659ec44550d10d6cc7ce14b9170ce391eb6eddefc15557c01c4",
+      "tests/test_alkyne_halogenation_public_api.py": "badc46eccf01267453ba53ce93eb301aa82f6ad93fc48242e2f4cebf0e79207c",
+      "tests/alcohol-oxidation-calculation.test.mjs": "3bcd27b460c431d83658d9966b54c19a0fd3fda2d10bda9dd19b46cc57a4ad0e",
+      "tests/guided-conditions-phase5e.test.mjs": "d68e1ee79096fd45d1518c78cae9694254f9155cd53aff2e4d1d4fd2e2785e91",
+      "tests/sn1-calculation.test.mjs": "9c62823f4b10850e23c328781f8803b7bc5464a9de0e2e4b208c92728860d941",
+      "tests/test_e2_compatibility.py": "0bb7006c1aed432fe19b38369e5a8b5e1bda07e9d5e332ac58a974cee4a6c85b",
+      "tests/equilibrium-calculator.test.mjs": "7d3aef778c4be27b32fa899455129cbc1460a9753e7dc791e283ef8ccda1928d",
+      "tests/equilibrium-solubility-panels.test.mjs": "8ff1004c0022ce0579fc0c51167cf2453220c53aa64f1ec0c6820135cf3ff2b1",
+      "tests/test_sn1_compatibility.py": "4b7c3ff728c1d08d8bee482056ddfab561bda2e33bed5b11e7f575e49f60aac3",
+      "tests/atom-inspector.test.mjs": "df99e1a14354aa310881824dbaea894d361e4b51e4c59a96f2b24eb518cd6e68",
+      "tests/explorer-description.test.mjs": "aa47c6019246e9a1bbdd39033d03ff12c5d53a4da3f39f78d67f953c44fae9bc",
+      "tests/bond-measurements.test.mjs": "aeb2cdb9e41fad8f4ebe4cc32f4647253dc2fb2e182b971e22bb60cf9edbceea",
+      "tests/confidence-phase5h.test.mjs": "b46af9daabc89f9e5f48515196226eac849cc63612a0bced8aaed5dc3a01da3e",
+      "tests/alkyne-complete-calculation.test.mjs": "cc50e4baf88c3cd869ad8e294af7f7c4ca8f9944f23895ea04e4cc6f5dca8b6b",
+      "tests/reaction-pathway-settings.test.mjs": "3c595774d9740da9494ec62e046ee8f77b20246e562cb5cb61d3b1cf041d7d7c",
+      "tests/addition-consistency-phase3h.test.mjs": "f7b66314b6fbe9a0db5dc348c55209ab9a04fbad0f53bfff4afbda3c65f3c10a",
+      "tests/test_alkyne_partial_public_api.py": "ae6d1f11729501e0349e31d45bb1e3884fbd9215b17162e3f9f4b28ddf4b365f",
+      "tests/test_guided_conditions_phase5e.py": "9195862ab8e8c5f6f11c96dbed45920656b0504b56e80aac2dd29bb945714ec0",
+      "tests/test_chlorination_compatibility.py": "7571a6a23f38ebba4d221c5618b5c19aed46f1706ffdffc8f6a7fee3f39fd537",
+      "tests/test_alcohol_substitution_phase5b.py": "07a8eb36da6ceafc3b02e030248e127e80a45be8edde82d4f5d14022f1960a9f",
+      "tests/hydrogenation-calculation.test.mjs": "0dbae68a31b4adda343450b67293acc58c646ed4f5da3a3cb87b0815c773498f",
+      "tests/pathway-insights.test.mjs": "65398a9e121ae444f39ba7d896bd67ec37f8da577745ec8ed4f36aa5600cabbd",
+      "tests/epoxidation-calculation.test.mjs": "a649e704c11ecd87b80541cd817d0f866e2bc31709d4fbe37160770c677c3fd0",
+      "tests/reactant-entry.test.mjs": "46bf2bdadc5869ac231edb062c555fa55b397f233b90dd7ea4c6ed76eaadaf3d",
+      "tests/test_cross_page.py": "4d646bb85f93f26251beaae1f9a6aa4b167562c5a69f4ae9f1e9cdda2ffcd770",
+      "tests/bromination-calculation.test.mjs": "63b1b762593a720e68f7bfb16a3240a3e3bd207cd420eac2a05b2b00414c61c0",
+      "tests/explorer-ionic.test.mjs": "f4f264963be93a70d6de717b188d9a1b0416db3cedd50b98cf096cdeb7a7136d",
+      "tests/test_reaction_engine.py": "cc01c711ddedd6dbdfc17b8f5d3863e54a27e37610c462cb4dd5e54bb65eab0e",
+      "tests/dihydroxylation-calculation.test.mjs": "83a0ff563fa48c9e5b29280a395264a6446a0078b6daef6d377296179db4bf0f",
+      "tests/alcohol-dehydration-phase5a.test.mjs": "22862749c1b4415dd3df65d1f4668a7eb500eed555ddef1073b4b13b97ec4622",
+      "tests/test_reaction_preview_api.py": "893798da5c6ecca83b486d67b6b368f41d231f3819f5d5ef80df9aef7a07f388",
+      "tests/test_reaction_diagrams.py": "fe784d04fbb9165924aa73736a597cadac84644096346ca3cee56360211df520",
+      "tests/test_alkyne_complete_public_api.py": "8ee08da5c7d922b3808e0aff7f7dcbfd096983a96755b78bf5ce0f6f56ccd1fc",
+      "tests/carbonyl-calculation.test.mjs": "ac2dfdee34c65c0dd9f79837c793c0c373abde1af33bf7e26694e762a40e8b91",
+      "tests/equilibrium-independent-audit.test.mjs": "f3835e2677bde2db1c0534677c70d3af5461dd74799620ef32c80f2a3c39087c",
+      "tests/calculator-transfer.test.mjs": "8212a427a2df97cf9eaaac7c67d06ef438d68344f76422808f3f36752e905ff0",
+      "tests/chlorination-calculation.test.mjs": "033b55cbf0b192c4f564a58b765f1b84b81609095033066aa9ca08be65b510c9",
+      "tests/test_addition_consistency_phase3h.py": "0a1df0dff15f27c7de72785c2dc80fa86dc05b7a5d4b478d278b270e21d00519",
+      "tests/test_alkyne_partial_hydrogenation.py": "ec1549fd29970bb2b12412607506907180448aa441b67d1e693d2747a9012ea6",
+      "tests/acid-base-calculator-panel.test.mjs": "e3391e56e745786bd786e42c886bdbd1eaa89ca247b4b802a9504c1326ef41f4",
+      "tests/solubility-calculator.test.mjs": "e89650ca17cfffc182b10623786ed4c7c33b332a17720fbeeaceb76efa23d515",
+      "tests/test_alkyne_hydrohalogenation_public_api.py": "5f00e9ebda657cdbee14f84fd987f8b3939e30c437de984e950075aac6962942",
+      "tests/test_reaction_stoichiometry.py": "9a80efe8e83e51b0b166c9409208183859cbda52819a3d7587fc7a0eaacf772b",
+      "tests/reaction-calculator.test.mjs": "61d5f95545560862f54b72821843988e4e9495d17518e481ece2f124a2204e88",
+      "tests/e2-calculation.test.mjs": "dd628d60edc51e080f81a1c63acf6613c5db2d02e9997216c6050dea24923376",
+      "tests/test_primary_alcohol_oxidation_phase5c.py": "25dcfa5ad95fa7e1c5b54326bc9d8c6695f96edbda1efb30e865eb3a7a4ae561",
+      "tests/secondary-alcohol-oxidation-phase5d.test.mjs": "594aab5de566c0ac97fe3add07a5ce5a6e0efc4a5cba60458154fef7036790b3",
+      "tests/acid-base-calculator.test.mjs": "26ef377b36bec94292d2321cea0d5b6d58e1688598a4876e08e8155816616d61",
+      "tests/test_bromination_public_api.py": "c49d4b799dd2c6a9b014ad5f36ab18ea18908163c809386bae02b6a7122e95e9",
+      "tests/solution-integrations.test.mjs": "26047341bbd4342bf2a3f678742eaa3a1d190cc71d72aabb6c0d34a6c8ab47fb",
+      "tests/test_confidence_phase5h.py": "5335f8c4851184dadeaf7d9b6173f0328a2e257c481cfd3652a05ab93555e76f",
+      "tests/builder-measurements.test.mjs": "f4e9cebb75783b06b18acb3bb9361b6717dffd3cad3f2aa0e6d4edd705776f63",
+      "tests/test_pubchem.py": "a3c9fbee9cd42d0fbeff936583797b8387089ce4d9aa900e7412f06bc401b346",
+      "tests/solution-calculator.test.mjs": "4a5a27066977fc89fb78310e274a5b0d978927d1e77aad3463f76fa1a21d3ebb",
+      "tests/solution-calculator-panel.test.mjs": "50d4db62636d17cf33ed6a3bb063f44dbcb6c4af2900a647587791b36afad5a7",
+      "tests/test_alcohol_dehydration_phase5a.py": "21dd2297d64f51d6e3a695d4d84d6bd4b795cfebad00dbec62b87037999c6dce",
+      "tests/test_secondary_alcohol_oxidation_phase5d.py": "60b0b8a941b08f1710b055fc0cf7332f05e0c8039114524d4bae1e96a1a76864",
+      "tests/calculator-reactions.test.mjs": "d74f2ecd747e9a035710fc26faab9fefb2a585f11a72722172f7b2391f05a2a7",
+      "tests/test_alkyne_complete_hydrogenation.py": "6972ea761e8c0121399e6a42e0165dee8458e23c4833e1faa0f14cd583c0d192",
+      "tests/test_hydration_compatibility.py": "f21f13ebf404a790ed057c883a404fd9be2345a43d3dadd0dc8523b99e41d215",
+      "tests/test_hydrogenation_compatibility.py": "6740e5d872e5fe4f4048f14229c0b1bf084d6cba3927ea521ef473bc2eb068f3",
+      "tests/primary-alcohol-oxidation-phase5c.test.mjs": "470324372d1e1749d8318cd49e164baf65735ca363e4ebaa3cb8684ae3f86c33",
+      "tests/navigation.test.mjs": "21bf4d10091394cfef95eae11f2f771db1aaeb5e3503ffcf2cc7180a29d18737",
+      "tests/mole-calculator.test.mjs": "46aae4129cbc2afab76e892a37063b683350c45b688063c9de5c73b3ff01c39e",
+      "tests/e1-calculation.test.mjs": "dbf4898bd085cbee5b695fd570cbf2715dc6eb5a0df74692558d45ebca783bae",
+      "tests/alkyne-hydrohalogenation-calculation.test.mjs": "0cc46c6fe2d299c50f95559675e625697d806203f9e7a04eb8ba9c3a67b72ef2",
+      "tests/test_epoxidation_public_api.py": "3001ffd9ab8c6e7d58aa3deac8bbce28f7be04128609414ca79c42ed5a7ca7e0",
+      "tests/ester-calculation.test.mjs": "9a6564de0a379841899e34f5052296d39e3f5524adf417c9c0a5c9aae4e816bb",
+      "tests/reaction-calculator-panel.test.mjs": "b2142766ad2edc17340d660304f0356c9a977eecf613c92e946b56f436ef8059",
+      "tests/test_hydrohalogenation_public_api.py": "d81823195500c51eacad55db125e2d53ea6f2c2b17264755a0d466f114c9572a",
+      "tests/test_bromination_compatibility.py": "4e3a051cc6c35aea91d7b21203bfe8e5249b4b77d8521622b65b989e073c6df6",
+      "tests/test_chlorination_public_api.py": "c9e90af2f707e77f7cabac480bec6460d6dfedb951be77305d34e70ebd6cbb75",
+      "tests/baseline.test.mjs": "3d9c89406c2c0fab087595bf4b7e653ed2d38d91c22a5a795a70539647517d5f",
+      "tests/test_carbonyl_compatibility.py": "daf5d852e937b41a406b7f26a90f8d2918903567f01a5987b2e3b9fd7f2d85d5",
+      "tests/deployment-package.test.mjs": "26dd7ebb8f4dda3e465ac0faf55b15927ccf7e9c8d95f3a60f20dc81f3ef8122",
+      "tests/alkyne-partial-calculation.test.mjs": "56ef5538540b9bf5bae30b4fc9540950a46f3a0b33fee7d195ad6e44feb2454c",
+      "tests/alcohol-substitution-phase5b.test.mjs": "751207ab5701fe54121e1460a0c8e5817d4e42100fc922fed7371bb24a0d1a3e",
+      "tests/test_pathway_insights.py": "8deff6fed2321820bbb1040eb47b36d099ada799bda5f394e0a2c24339351414",
+      "tests/guided-conditions-phase5f.test.mjs": "7ebfa29aebe01c43f7e2796fd45f782d54c5e6a876b9e0c4dd359f8b506f2286",
+      "tests/mole-calculator-panel.test.mjs": "97648488ee787bcf3e4c86132a6079e7f0f8c73386c63fd23f3367604ae0e59c",
+      "tests/calculator-hub-audit.test.mjs": "3578b087952ae074e62174bb3d54197ab5482ef36402068aad6ebbdd5a11a0f3",
+      "tests/test_alkyne_consistency_phase4f.py": "b6d0ee8ef319a8fa6ddfc57b1413fbae0c9886add724db87314c48043a69abe7",
+      "tests/test_e1_compatibility.py": "18341d8e407c84dd1539c7a9aa23afbee493a96b1efd17b7f93e21a421845c16",
+      "tests/reaction-consistency-phase2h.test.mjs": "1d967803aaffbeddb138c3592f7db0dcf1b8da815398bc1028b63f9e7ca6e77b",
+      "tests/test_sn2_compatibility.py": "8e5cf112250120a8852b48dd4a4aff740437bc70abbcc7313d8daf62d3985bd1",
+      "tests/hydrohalogenation-calculation.test.mjs": "68c6749c19c4630bd5b99f424dbaad1340945b805dc456929cf1fb021c24f7ca",
+      "tests/test_guided_conditions_phase5f.py": "169eee3c82e08617e97d3662ca33983d60e00f74ae83f717c1f0dc9d53ce26ad",
+      "tests/test_alcohol_oxidation_compatibility.py": "b058d1e052813ca7944bf4684a0be8bc9bf83c4fda6b5229f9a573467b21b9aa",
+      "tests/test_dihydroxylation_compatibility.py": "f967276a03b6096257d3c57ff85cbc501e70ca2a8deb9abdcf301a0643ddd029",
+      "tests/test_alkyne_halogenation.py": "fb410538537f88eaf4a635ae13671d8e44499f7e5b2ffd1fabf93cf5334d7106",
+      "tests/test_hydrohalogenation_compatibility.py": "a52ff4014e751f02de976efa2c60704fecb560c45179e86fe55984dd2b156115",
+      "tests/test_epoxidation_compatibility.py": "f70a59feb652c49304287d27ba1fe639a13b685626fa2bf204d8e19aa83e1146",
+      "tests/alkyne-consistency-phase4f.test.mjs": "110bd2a77c7bbd81550babcb9df3203613825ed107ebb8b4c231e4c6812d4158",
+      "tests/test_reaction_expansion.py": "863435252aa55cbd45572bdc8ab1fe2ca6c959b1cbe64ad1b5dd11a761132fdb",
+      "tests/test_production_app.py": "7ab0e854ca6f6150d09e11feabc61ab8b133f48dfc09a6faf6ac84a3569479e8",
+      "tests/reaction-measurements.test.mjs": "974e070462060d025aba4a0049044fde0d3f33b5fcc9a3c5376832b1b1145361",
+      "tests/hydration-calculation.test.mjs": "9abf134bac6d4d339d17376f6dd9f3f08194634ff6dc82670b554e347ec22148",
+      "tests/test_dihydroxylation_public_api.py": "9555a01805410a7539e7a86e05de84630ea8bb6b08e95f58efd463c6eb9f365a",
+      "tests/test_hydration_public_api.py": "6f7dafd41e1f67a952dd1c835d5cbaf7ebb00bd407a44023dba88cffd754fade",
+      "tests/test_ester_phase1.py": "cca3dd7e8eddcb6f17d3be955811630abd6f72d229bc08a00b82ca98a41150a4",
+      "tests/test_alkyne_hydrohalogenation.py": "b3eaf2f970a4173f5ccae0dbf109401a172a7a4234d2aeed1c1cf81fec94df27",
+      "tests/reaction-expansion-panels.test.mjs": "fc50f605460ac22c7abefe9ee17ce61163f7b9fee90f068821c2a6dc2b4cbe43",
+      "tests/sn2-calculation.test.mjs": "7cf26e5d441149408b3a7740c57e8188bdb816b6892413cd3aa9c7037638bf66",
+      "tests/test_reaction_consistency_phase2h.py": "a59992132ed752b445ae63e25c40994e5d6ce4106712c0e281fef2218e4bab32",
+      "tests/test_chemistry_depth.py": "e2cd74388390ffa5d686079b0715e8ad62be7169d30c1c12c2161d2c97e14d79",
+      "tests/alkyne-halogenation-calculation.test.mjs": "0ee09ac6394348c24808664aaaa71ba6cc41fc2b80ad114ee1f01acfbe81cb7a",
+      "tests/fixtures/alcohol-dehydration-phase5a.json": "166c047fb1b539217987325d9895a28ed674bf19e24f6bc50a1a1dfcead1842d",
+      "tests/fixtures/reaction-baseline.json": "0c959bba93e88e3b45b367e953e329360bc11a37f9742ce625b748a26aa54e53",
+      "tests/fixtures/alcohol-substitution-phase5b.json": "edec8a88c2647b1a3cec1fee3bd3bf57f76a35bb16812fb7108abae9cc0ef74f",
+      "tests/fixtures/alkyne-partial-hydrogenation.json": "6df023a3b1d2df52f1e510b347b367333246fb59ccf19ef9ff6739b969b03228",
+      "tests/fixtures/primary-alcohol-oxidation-phase5c.json": "90c6453ee45f4b44169db0ec8ad894aab4e1185f9ea27185a401cd5ee9b7de57",
+      "tests/fixtures/alkyne-halogenation.json": "cbc9047cad6f5bb0c6d40a743fb8cda8044a3966174846afe1293cf49b0ef0de",
+      "tests/fixtures/alkyne-hydrohalogenation.json": "d16908da0d44079a1b9934f64f3aae1b92971ca7a0a71922041a9195e874e714",
+      "tests/fixtures/secondary-alcohol-oxidation-phase5d.json": "67c74e92c119ecd5b7b7a820ab1ea05777f4654cf0f0d6d60c406744328cdc88",
+      "tests/fixtures/alkyne-complete-hydrogenation.json": "c177713976a2d17a16380b4134eb7c314609dbdb6696e59292355129e50f9bbc",
+      "scripts/audit_alcohol_dehydration.py": "859dc8bdb77958ef495b9002ee433ee5e621c154673f49352bb0b4220d77ebd7",
+      "scripts/audit_addition_consistency.py": "1aecf9268e0282d83118731b7fcc451c6bbe38d54b58577394078fea4f2a426e",
+      "scripts/audit_alkyne_hydrohalogenation.py": "3b2120a96e83ee5e2f51e45fe09e7bab296ede226361d7f70c81fb68f8a0783b",
+      "scripts/audit_alkyne_partial_hydrogenation.py": "667430a2b694219363503a94c38e4a44203be0844706dd5f959b62329e66fd0c",
+      "scripts/audit_alkyne_complete_hydrogenation.py": "2d52f888be4afc5bee7e53219696e25a355899e539f126495e791f677779fea0",
+      "scripts/audit_reaction_lab.py": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+      "scripts/compress-dist.mjs": "84e8c39e56792d28688ac4c1b46b2b3aeb7e72bcdcaf1404a222084b81315533",
+      "scripts/audit_secondary_alcohol_oxidation.py": "090f3b0a3a3606c5594283fb42bd390a3dfa5f62fbb4987926d045f8bc45c00c",
+      "scripts/reaction_conditions_companion.py": "f021cbd4ef47413849ab0a3c54da12f7d69fb98e5b5e7b6ca2cf4ebe10bf77ef",
+      "scripts/audit_alcohol_substitution.py": "69a0f067bc0f3edc01b22b8bef52917b141b07247bef4750d65a193d96ac59da",
+      "scripts/audit_primary_alcohol_oxidation.py": "f37a2fb91e803633b3604c3a07f3783b574def2413cb96ebfed9683118b2ea59",
+      "scripts/audit_alkyne_halogenation.py": "c983fb95c43f2393e76ec30130c54d24c9bb2e16072673155dcd3869c234f0c6",
+      "benchmarks/reaction-conditions/README.md": "0311b22b5058aac2c95eb2b7893df2718e238db75fd7334175d022c94c097bc6",
+      "benchmarks/reaction-conditions/index.json": "1b365f7f31143a82536b1ab0570b1ecd00d1e77fbfde46ed145bf631ee7996a4",
+      "benchmarks/reaction-conditions/1.0.0.json": "35ce7ce6f3c3967a06fc354c8bc9fc8319a2247f3b3ac0c7cd246ec75ed8ca1e",
+      "reaction-lab.html": "f4ba8fb8e1ade7ffbbaef7a162f3ec4b7b92bd269fe12ea7d67d0f721e37793f",
+      "pnpm-lock.yaml": "2b4d205d1b26266c9fe79a3c16b16f6a8a80ac5bcaa059ec61ea4f22e01a9a05",
+      "start-local.command": "f10f207a7cec07b55c61625727ffed508e63e96cec3ead1576747f3abfa99a4d",
+      "index.html": "e114c98514310e34ab1078d55f085f80856e963b333ef5269c8b3a10cb41c17b",
+      "builder.html": "fe287e83b1f3bff9baa7dfe46ec2f03c50e969b6d65a0a42e56bb7ed1ee2e312",
+      "Dockerfile": "fc858572ae5afd395aaf64975ee7c830bd17e8d2ee2117ea94aee5fb15b5465e",
+      "README.md": "fd777a2a55fd2fe127bd592053f0b15254c1714873072f497f8507d82c50e8dd",
+      ".dockerignore": "90c4a78bfc58696e0ec2b0eef88cdb80e015d14db1b79bbd9be83f8b302554d1",
+      ".gitignore": "5a6ef4b2076e4e1cb49072b3232ead9f7f762398681b5aa150473b58d990c532",
+      "package.json": "b914c39801c6699213bce022fb99c3107d08cfce41c9c6159df75252851f9449",
+      "tsconfig.json": "79df716e1aecea2eabe4b34c64a57f4ad88a78d2dfeb7456b3348e9f3f9d9dfb",
+      "vite.config.ts": "0269d3790ebb60082b60d4759fe372d473a9ad4ab9277e857886496361c612d0",
+      "calculators.html": "6303d939b4cd5c693bb5dab908cf9d593525490996abf61717bf1e2f3392873d",
+      "explore.html": "26c08b21324ce6814ee34df2c2cd6bf7abe5716646abe43d2bc2972ee63233c5",
+      "pnpm-workspace.yaml": "ac02d96368617c760f093cfe61fdec64b6244007ab3553e0d6621f706f54a353"
+    }
+  },
+  "scope": {
+    "newReactionFamilies": false,
+    "newReagents": false,
+    "newGuidanceProfiles": false,
+    "structuralExpansion": false,
+    "calculatorFormulaChanges": false,
+    "layoutChanges": false,
+    "benchmarkEdits": false,
+    "existingTestEdits": false,
+    "deployment": false
+  },
+  "browser": {
+    "secondary": "Explicit unchecked consent; same canonical profile; 2D first; separate Compare; medium withdrawal rematches selected option, clears 3D and blocks generation.",
+    "aldehyde": "Propanal searched using PubChem; existing further/water reporting graph displayed; separate Compare; radical activation clears 3D, retains conditional 2D and accurate 2D-only atom caption.",
+    "lindlar": "Existing complete example; select partial; explicit metal-to-Lindlar replacement; preserved unknown medium/temperature; separate Compare; Carbon 2 linked; changing activation retains freshly matched guide without 3D; reload restores settings not results; reagent replacement clears selections.",
+    "limits": "Browser observations plus regression/public tests, not a recruited student study. Distinct-site and forged-input cases verified through automated public APIs."
+  }
+}

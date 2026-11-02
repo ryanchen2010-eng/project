@@ -142,7 +142,8 @@ test('conditions preserve exact calculator links; only Explorer retains an embed
   const mainSource = await read('src/main.ts');
   assert.match(mainSource, /<details id="explorer-solution-calculator"><\/details>/);
   assert.ok(mainSource.indexOf('id="explorer-solution-calculator"') > mainSource.indexOf('id="molecule-information"'));
-  assert.ok(mainSource.indexOf('id="explorer-solution-calculator"') < mainSource.indexOf('class="explorer-transfer"'));
+  assert.ok(mainSource.indexOf('id="explorer-solution-calculator"') < mainSource.indexOf('class="explorer-transfer" aria-label="Use this compound in Calculators"'));
+  assert.match(mainSource, /id="crystal-controls" class="crystal-controls"/);
   assert.doesNotMatch(labSource, /lab-solution-calculator|solution-compound-source|new SolutionCalculatorPanel|solution-calculator\.css/);
   assert.match(labSource, /window\.location\.assign\('\/calculators\.html#solutions'\)/);
   assert.match(await read('src/calculators.ts'), /new SolutionCalculatorPanel\(solutionHost\)/);

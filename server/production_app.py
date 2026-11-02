@@ -337,6 +337,8 @@ def create_app(config: Mapping[str, Any] | None = None, *, chemistry_backend: An
 
     @app.get("/api/pubchem/structure")
     @app.get("/api/pubchem/depiction")
+    @app.get("/api/reference/coordination")
+    @app.get("/api/reference/molecular")
     def pubchem_structure() -> Any:
         raw_cid = request.args.get("cid", "")
         if not raw_cid.isdecimal() or len(raw_cid) > 10 or int(raw_cid) <= 0:
@@ -344,22 +346,28 @@ def create_app(config: Mapping[str, Any] | None = None, *, chemistry_backend: An
 
         def lookup() -> Response:
             cid = int(raw_cid)
+            if request.path == "/api/reference/molecular":
+                reference = chemistry_backend.resolve_nist_molecular_reference(cid)
+                return jsonify(reference) if reference else json_error("No exact validated molecular reference is available.", 404)
+            if request.path == "/api/reference/coordination":
+                structure = chemistry_backend.resolve_coordination_reference(cid)
+                if not structure:
+                    return json_error("The reviewed coordination reference is unavailable or does not match this record.", 404)
+                result = Response(structure, content_type="chemical/x-mdl-sdfile; charset=utf-8")
+                result.headers['X-Structure-Source'] = 'nist'
+                result.headers['X-Structure-Kind'] = 'calculated'
+                return result
             if request.path == "/api/pubchem/depiction":
                 data = chemistry_backend.get_pubchem_depiction(cid)
                 return Response(data, content_type="image/png") if data else json_error(
                     "A 2D depiction is not available for this PubChem compound.", 404)
-            structure = chemistry_backend.get_pubchem_structure(cid)
-            if structure is None:
-                smiles = chemistry_backend.get_pubchem_smiles(cid)
-                molecule = chemistry_backend.Chem.MolFromSmiles(smiles) if smiles else None
-                if molecule is not None:
-                    try:
-                        generated = chemistry_backend.analyze_molfile(chemistry_backend.Chem.MolToMolBlock(molecule))
-                        structure = generated.get("molfile") if generated["representation"] == "3d" else None
-                    except chemistry_backend.ChemistryError:
-                        pass
-            return Response(structure, content_type="chemical/x-mdl-sdfile; charset=utf-8") if structure else json_error(
-                "A 3D structure is not available for this PubChem compound.", 404)
+            structure, provenance = chemistry_backend.resolve_pubchem_structure(cid)
+            if not structure:
+                return json_error("A 3D structure is not available for this PubChem compound.", 404)
+            result = Response(structure, content_type="chemical/x-mdl-sdfile; charset=utf-8")
+            for key, value in provenance.items():
+                result.headers[f"X-Structure-{key.title()}"] = value
+            return result
 
         return run_job(lookup)
 

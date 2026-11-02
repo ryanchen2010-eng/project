@@ -1,0 +1,7 @@
+# Explorer metal reference models
+
+PubChem CID 24817 (zirconium chloride) and CID 24872 (rhodium chloride) report that PubChem conformer generation is disallowed because the element is unsupported by MMFF94s. Explorer's RDKit fallback also excludes Zr and Rh. The exact selected PubChem record matters: distinct ionic records, hydrates, complexes and solids are not interchangeable.
+
+For CID 24817 only, after a 404 from the normal 3D endpoint, Explorer offers an idealized gas-phase ZrCl4 model. Its coordinates are reconstructed as a regular tetrahedron with Zr–Cl = 2.32 Å from Kimura et al., gas electron diffraction, [DOI 10.1246/bcsj.29.95](https://doi.org/10.1246/bcsj.29.95). They are not coordinates deposited from a structure refinement. The four equivalent bonds and ideal tetrahedral angles follow the reported symmetry. The [solid crystal](https://www.sandia.gov/research/publications/details/zirconium-tetrachloride-revisited-2018-03-01/) consists of extended edge-sharing octahedral chains and is not represented by this model. The fallback is not used for other CIDs, ionic assemblies, or service errors.
+
+For CID 24872 no discrete molecular 3D coordinates have been validated for this viewer. NIMS associates anhydrous RhCl3 with [COD 1534198](https://matvoc.nims.go.jp/wiki/Item%3AQ1663), a crystal record, not a verified isolated RhCl3 conformer. Explorer reports the limitation rather than inventing a four-atom geometry or silently substituting a crystal fragment. Hydrates are not treated as anhydrous material.

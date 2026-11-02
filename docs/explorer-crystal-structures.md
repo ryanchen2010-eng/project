@@ -1,0 +1,9 @@
+# Explorer crystal structure pilot
+
+The crystal view is an explicit alternative to the compound information view; it does not classify a crystal as a discrete molecular conformer. The first reviewed case is anhydrous RhCl₃, PubChem CID 24872, represented by COD entry 1534198 (https://www.crystallography.net/cod/1534198.html), revision 176429. COD dedicates its data to the public domain under CC0; original authors must be acknowledged.
+
+Source: H. Bärnighausen and B. K. Handa, “Die Kristallstruktur von Rhodium(III)-chlorid,” Journal of the Less-Common Metals 6 (1964), 226–231, https://doi.org/10.1016/0022-5088(64)90103-1. The article describes a monoclinic layered structure and stacking disorder. This ideal periodic unit cell omits stacking defects and does not represent RhCl₃ hydrates or a discrete gas-phase molecule.
+
+The stored CIF contains the reviewed COD unit-cell parameters, three asymmetric sites and eight symmetry operations. A narrowly scoped expansion of those sites produces four Rh and twelve Cl positions, removes special-position duplicates, and requires exact reviewed site and cell values. 3Dmol displays these positions with a unit-cell outline; no distance-inferred bonds are asserted. Viewer distances and angles use displayed Cartesian positions only, without minimum-image periodic wrapping. Measurements are reference-model geometry, not measurements of an individual experimental sample.
+
+Crystal coverage is one reviewed phase, not arbitrary CIF upload, automatic formula-based selection, or universal crystal support. Other phases, hydrates, mixtures, disorder, symmetry variants and structures without independently verified identity remain unsupported. The existing molecular and ionic information-only paths are unchanged unless the user explicitly selects this crystal.

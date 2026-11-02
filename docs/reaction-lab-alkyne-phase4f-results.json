@@ -1,0 +1,2650 @@
+{
+  "phase": "4F",
+  "date": "2026-10-16",
+  "tests": {
+    "python": 1473,
+    "javascript": 1427,
+    "total": 2900,
+    "baselineCasesRetained": 2829,
+    "added": 71,
+    "newPython": 57,
+    "newJavaScript": 14,
+    "newAuthenticatedAPI": 42,
+    "newFramework": 15,
+    "targetedFrameworkFollowup": "57 passed after final history/oracle admission guards",
+    "typescript": "passed",
+    "productionBuild": "passed; pre-existing bundle-size warning",
+    "whitespace": "passed"
+  },
+  "frozen": {
+    "sha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+    "caseCount": 347,
+    "before": {
+      "Fully supported": 168,
+      "Unsupported": 93,
+      "Correctly rejected": 38,
+      "Partially supported": 47,
+      "Incorrect result": 1
+    },
+    "after": {
+      "Fully supported": 167,
+      "Unsupported": 93,
+      "Correctly rejected": 38,
+      "Partially supported": 48,
+      "Incorrect result": 1
+    },
+    "changedRows": [
+      {
+        "id": "A276",
+        "before": {
+          "id": "A276",
+          "path": "Alkyne partial hydrogenation",
+          "label": "two separated triple bonds: 1,7-octadiyne",
+          "substrate": "C#CCCCCC#C",
+          "reagent": "hydrogen",
+          "expected": [
+            "C=CCCCCC#C"
+          ],
+          "conditions": {
+            "catalyst": "lindlar"
+          },
+          "partial": "",
+          "minimum_sites": 2,
+          "coproducts": null,
+          "variant": "",
+          "actual": [
+            "C#CCCCCC=C"
+          ],
+          "options": 2,
+          "notes": [],
+          "preview": "verified",
+          "geometry": "3D; converged",
+          "mechanism_steps": [
+            0,
+            0
+          ],
+          "status": "Fully supported"
+        },
+        "after": {
+          "id": "A276",
+          "path": "Alkyne partial hydrogenation",
+          "label": "two separated triple bonds: 1,7-octadiyne",
+          "substrate": "C#CCCCCC#C",
+          "reagent": "hydrogen",
+          "expected": [
+            "C=CCCCCC#C"
+          ],
+          "conditions": {
+            "catalyst": "lindlar"
+          },
+          "partial": "",
+          "minimum_sites": 2,
+          "coproducts": null,
+          "variant": "",
+          "actual": [
+            "C#CCCCCC=C"
+          ],
+          "options": 2,
+          "notes": [
+            "Preview/run error: ChemistryError: More than one C≡C site may undergo Lindlar reduction. This theoretical single-site possibility preserves the other triple bond for 2D bookkeeping, not experimentally established selective conversion; single-site 3D is blocked. Inspect the conditional 2D net option; no 3D Lindlar alkene is inferred for these settings.",
+            "Preview/run error: ChemistryError: More than one C≡C site may undergo Lindlar reduction. This theoretical single-site possibility preserves the other triple bond for 2D bookkeeping, not experimentally established selective conversion; single-site 3D is blocked. Inspect the conditional 2D net option; no 3D Lindlar alkene is inferred for these settings."
+          ],
+          "preview": "failed",
+          "geometry": "not run",
+          "mechanism_steps": [
+            0,
+            0
+          ],
+          "status": "Partially supported"
+        }
+      }
+    ]
+  },
+  "companion": {
+    "engineSha256": "a86c5ce7b8a0598f2baaec1621f494ba45aa010c40bb705e58cd04155c2e33e0",
+    "frameworkSha256": "f021cbd4ef47413849ab0a3c54da12f7d69fb98e5b5e7b6ca2cf4ebe10bf77ef",
+    "manifestSha256": "35ce7ce6f3c3967a06fc354c8bc9fc8319a2247f3b3ac0c7cd246ec75ed8ca1e",
+    "chemistryStates": {
+      "A242": "unreviewed",
+      "A243": "unreviewed",
+      "A244": "unreviewed",
+      "A245": "unreviewed",
+      "A246": "unreviewed",
+      "A247": "unreviewed",
+      "A248": "unreviewed",
+      "A249": "unreviewed",
+      "A250": "unreviewed",
+      "A251": "unreviewed",
+      "A252": "unsupported-engine-model",
+      "A255": "unsupported-engine-model",
+      "A278": "unreviewed",
+      "A279": "unreviewed",
+      "A280": "unreviewed",
+      "A281": "unreviewed",
+      "A282": "unreviewed",
+      "A283": "unsupported-engine-model",
+      "A284": "unsupported-engine-model",
+      "A285": "unsupported-engine-model",
+      "A286": "unreviewed",
+      "A287": "unreviewed",
+      "A288": "unsupported-engine-model",
+      "A289": "unreviewed",
+      "A290": "unreviewed",
+      "A291": "unreviewed",
+      "A292": "unreviewed",
+      "A293": "unreviewed",
+      "A294": "unsupported-engine-model",
+      "A295": "unsupported-engine-model",
+      "A296": "unsupported-engine-model",
+      "A297": "unreviewed",
+      "A298": "unreviewed",
+      "A299": "unsupported-engine-model",
+      "A300": "unreviewed",
+      "A301": "unreviewed",
+      "A302": "unreviewed",
+      "A303": "unreviewed",
+      "A304": "frozen-oracle-defect",
+      "A305": "unsupported-engine-model",
+      "A306": "unsupported-engine-model",
+      "A307": "unsupported-engine-model",
+      "A308": "unreviewed",
+      "A309": "unreviewed",
+      "A310": "unsupported-engine-model",
+      "A311": "unreviewed",
+      "A312": "unreviewed",
+      "A313": "unreviewed",
+      "A314": "unreviewed",
+      "A315": "unreviewed",
+      "A316": "unsupported-engine-model",
+      "A317": "unsupported-engine-model",
+      "A318": "unsupported-engine-model",
+      "A319": "unreviewed",
+      "A320": "unreviewed",
+      "A321": "unsupported-engine-model",
+      "A322": "unreviewed",
+      "A323": "unreviewed"
+    },
+    "version": "1.0.0",
+    "scope": {
+      "parentRows": 347,
+      "reviewedScopeRows": 58,
+      "positiveDenominator": 53,
+      "controls": 5,
+      "outOfReviewScope": 289
+    },
+    "defaultMetrics": {
+      "denominator": 53,
+      "structuralMatching": 40,
+      "conditionCompleteEligibility": 0,
+      "fullySupportedProductGeneration": 0,
+      "independentlyVerifiedChemistry": 0,
+      "diagnosticModelGenerationOnly": 0
+    },
+    "diagnosticMetrics": {
+      "denominator": 53,
+      "structuralMatching": 40,
+      "conditionCompleteEligibility": 0,
+      "fullySupportedProductGeneration": 0,
+      "independentlyVerifiedChemistry": 0,
+      "diagnosticModelGenerationOnly": 33
+    },
+    "byPathway": {
+      "Alkene dihydroxylation": {
+        "denominator": 11,
+        "structuralMatching": 10,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 10
+      },
+      "Alkyne halogenation": {
+        "denominator": 21,
+        "structuralMatching": 15,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 12
+      },
+      "Alkyne hydrohalogenation": {
+        "denominator": 21,
+        "structuralMatching": 15,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 11
+      }
+    },
+    "profileBacklog": {
+      "evidence-gap": 52,
+      "unsupported-engine-model": 1
+    },
+    "controlsCorrectlyRejected": 5,
+    "failures": [],
+    "historicalDiagnostics": {
+      "Alkyne halogenation": {
+        "positiveDenominator": 21,
+        "frozenStrictFull": 0,
+        "diagnosticGeneration": 12,
+        "oldScorerDiagnosticFull": 6
+      },
+      "Alkyne hydrohalogenation": {
+        "positiveDenominator": 21,
+        "frozenStrictFull": 0,
+        "diagnosticGeneration": 11,
+        "oldScorerDiagnosticFull": 11
+      },
+      "Alkene dihydroxylation": {
+        "positiveDenominator": 11,
+        "frozenStrictFull": 0,
+        "diagnosticGeneration": 10,
+        "oldScorerDiagnosticFull": 9
+      }
+    },
+    "defects": {
+      "A304": {
+        "status": "frozen-oracle-defect",
+        "appliedToFrozen": false,
+        "erratumStatus": "proposed-not-applied",
+        "substrate": "CC#CCCC",
+        "originalExpected": [
+          "CC(Br)=CCCC",
+          "CCC(Br)=CCC"
+        ],
+        "proposedConnectivityOnly": [
+          "CC(Br)=CCCC",
+          "CC=C(Br)CCC"
+        ],
+        "rationale": "Both net orientations retain the original C2-C3 double-bond position after HBr addition to hex-2-yne. The second frozen expectation incorrectly moves it to C3-C4. E/Z is unassigned; no ratio, condition completeness or 3D permission follows from this graph correction.",
+        "evidenceLocation": "docs/reaction-lab-alkyne-phase4e-consistency-review.md, section on A304; independent mapped bond-edit reconstruction, not engine-product copying.",
+        "approval": null
+      }
+    },
+    "rows": [
+      {
+        "id": "A242",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site1",
+            "product": "CCCCCC[C@@H](O)CO",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          },
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site2",
+            "product": "CCCCCC[C@H](O)CO",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A243",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site1",
+            "product": "CCC[C@](C)(O)CO",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          },
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site2",
+            "product": "CCC[C@@](C)(O)CO",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A244",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkene-dihydroxylation-drawn-1",
+            "product": "CCC(O)C(O)CC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A245",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkene-dihydroxylation-drawn-1",
+            "product": "O[C@@H]1CCCCC[C@@H]1O",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A246",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site1",
+            "product": "OCCC[C@@H](O)CO",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          },
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site2",
+            "product": "OCCC[C@H](O)CO",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A247",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site1",
+            "product": "OC[C@H](O)c1ccccc1",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          },
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site2",
+            "product": "OC[C@@H](O)c1ccccc1",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A248",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site1",
+            "product": "CC[C@@H](O)[C@H](O)CC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          },
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site2",
+            "product": "CC[C@H](O)[C@@H](O)CC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A249",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkene-dihydroxylation-drawn-1",
+            "product": "CC[C@@H](O)[C@@H](O)CC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A250",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site1",
+            "product": "CC[C@@H](C)C[C@@H](O)CO",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          },
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site2",
+            "product": "CC[C@@H](C)C[C@H](O)CO",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A251",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site1",
+            "product": "C=CCCCC[C@@H](O)CO",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          },
+          {
+            "id": "alkene-dihydroxylation-drawn-1-site2",
+            "product": "C=CCCCC[C@H](O)CO",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A252",
+        "positive": false,
+        "profileStatus": "control",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A255",
+        "positive": true,
+        "profileStatus": "unsupported-engine-model",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "workup",
+            "before": "",
+            "after": "aqueous-release",
+            "profile": "diol-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A278",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-1eq",
+            "product": "CC/C(Br)=C\\Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A279",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-1eq",
+            "product": "CCCCCCCC/C(Br)=C\\Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A280",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-1eq",
+            "product": "CC(C)C/C(Br)=C\\Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A281",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-1eq",
+            "product": "CC/C(Br)=C(\\Br)CC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A282",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-1eq",
+            "product": "CCC/C(Br)=C(/C)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A283",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A284",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A285",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A286",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-1eq",
+            "product": "CC[C@@H](C)C/C(Br)=C\\Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A287",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-1eq-site1",
+            "product": "C#CCCCC/C(Br)=C\\Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "policy-blocked"
+          }
+        ]
+      },
+      {
+        "id": "A288",
+        "positive": false,
+        "profileStatus": "control",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A289",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-2eq",
+            "product": "CCC(Br)(Br)C(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A290",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-2eq",
+            "product": "CCCCCCCCC(Br)(Br)C(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A291",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-2eq",
+            "product": "CC(C)CC(Br)(Br)C(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A292",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-2eq",
+            "product": "CCC(Br)(Br)C(Br)(Br)CC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A293",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-2eq",
+            "product": "CCCC(Br)(Br)C(C)(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A294",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A295",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A296",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A297",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-2eq",
+            "product": "CC[C@@H](C)CC(Br)(Br)C(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A298",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-2eq-site1",
+            "product": "C#CCCCCC(Br)(Br)C(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "policy-blocked"
+          }
+        ]
+      },
+      {
+        "id": "A299",
+        "positive": false,
+        "profileStatus": "control",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A300",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-1eq",
+            "product": "C=C(Br)CC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A301",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-1eq",
+            "product": "C=C(Br)CCCCCCCC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A302",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-1eq",
+            "product": "C=C(Br)CC(C)C",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A303",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-1eq",
+            "product": "CCC=C(Br)CC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "policy-blocked"
+          }
+        ]
+      },
+      {
+        "id": "A304",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-1eq-site1",
+            "product": "CCCC=C(C)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "policy-blocked"
+          },
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-1eq-site2",
+            "product": "CC=C(Br)CCC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "policy-blocked"
+          }
+        ]
+      },
+      {
+        "id": "A305",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A306",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A307",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A308",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-1eq",
+            "product": "C=C(Br)C[C@H](C)CC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A309",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-1eq-site1",
+            "product": "C#CCCCCC(=C)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "policy-blocked"
+          }
+        ]
+      },
+      {
+        "id": "A310",
+        "positive": false,
+        "profileStatus": "control",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A311",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-2eq",
+            "product": "CCC(C)(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A312",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-2eq",
+            "product": "CCCCCCCCC(C)(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A313",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-2eq",
+            "product": "CC(C)CC(C)(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A314",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-2eq",
+            "product": "CCCC(Br)(Br)CC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A315",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-2eq-site1",
+            "product": "CCCCC(C)(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          },
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-2eq-site2",
+            "product": "CCCC(Br)(Br)CC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A316",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A317",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A318",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A319",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-2eq",
+            "product": "CC[C@@H](C)CC(C)(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      },
+      {
+        "id": "A320",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-2eq-site1",
+            "product": "C#CCCCCC(C)(Br)Br",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "policy-blocked"
+          }
+        ]
+      },
+      {
+        "id": "A321",
+        "positive": false,
+        "profileStatus": "control",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": false,
+        "options": []
+      },
+      {
+        "id": "A322",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "x2-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-halogenation-drawn-1-1eq",
+            "product": "CCCC(Cl)=CCl",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "policy-blocked"
+          }
+        ]
+      },
+      {
+        "id": "A323",
+        "positive": true,
+        "profileStatus": "evidence-gap",
+        "conditionComplete": false,
+        "transformations": [
+          {
+            "field": "solvent",
+            "before": "",
+            "after": "dry",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          },
+          {
+            "field": "temperature",
+            "before": "",
+            "after": "ambient",
+            "profile": "hx-draft",
+            "independentlyReviewed": false
+          }
+        ],
+        "matched": true,
+        "options": [
+          {
+            "id": "alkyne-hydrohalogenation-drawn-1-1eq",
+            "product": "C=C(I)CCC",
+            "diagram": true,
+            "mapping": true,
+            "balanced": true,
+            "run": "3d-passed"
+          }
+        ]
+      }
+    ]
+  },
+  "oldScorerReplay": {
+    "summaries": {
+      "Alkene dihydroxylation": {
+        "Fully supported": 9,
+        "Partially supported": 1,
+        "Correctly rejected": 1,
+        "Unsupported": 1
+      },
+      "Alkyne halogenation": {
+        "Partially supported": 9,
+        "Unsupported": 6,
+        "Correctly rejected": 2,
+        "Fully supported": 6
+      },
+      "Alkyne hydrohalogenation": {
+        "Fully supported": 11,
+        "Partially supported": 3,
+        "Incorrect result": 1,
+        "Unsupported": 6,
+        "Correctly rejected": 2
+      }
+    },
+    "results": [
+      {
+        "id": "A242",
+        "status": "Fully supported",
+        "actual": [
+          "CCCCCC[C@@H](O)CO",
+          "CCCCCC[C@H](O)CO"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A243",
+        "status": "Fully supported",
+        "actual": [
+          "CCC[C@@](C)(O)CO",
+          "CCC[C@](C)(O)CO"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A244",
+        "status": "Fully supported",
+        "actual": [
+          "CCC(O)C(O)CC"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A245",
+        "status": "Partially supported",
+        "actual": [
+          "O[C@@H]1CCCCC[C@@H]1O"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A246",
+        "status": "Fully supported",
+        "actual": [
+          "OCCC[C@@H](O)CO",
+          "OCCC[C@H](O)CO"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A247",
+        "status": "Fully supported",
+        "actual": [
+          "OC[C@@H](O)c1ccccc1",
+          "OC[C@H](O)c1ccccc1"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A248",
+        "status": "Fully supported",
+        "actual": [
+          "CC[C@@H](O)[C@H](O)CC",
+          "CC[C@H](O)[C@@H](O)CC"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A249",
+        "status": "Fully supported",
+        "actual": [
+          "CC[C@@H](O)[C@@H](O)CC"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A250",
+        "status": "Fully supported",
+        "actual": [
+          "CC[C@@H](C)C[C@@H](O)CO",
+          "CC[C@@H](C)C[C@H](O)CO"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A251",
+        "status": "Fully supported",
+        "actual": [
+          "C=CCCCC[C@@H](O)CO",
+          "C=CCCCC[C@H](O)CO"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A252",
+        "status": "Correctly rejected",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A255",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A278",
+        "status": "Partially supported",
+        "actual": [
+          "CC/C(Br)=C\\Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A279",
+        "status": "Partially supported",
+        "actual": [
+          "CCCCCCCC/C(Br)=C\\Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A280",
+        "status": "Partially supported",
+        "actual": [
+          "CC(C)C/C(Br)=C\\Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A281",
+        "status": "Partially supported",
+        "actual": [
+          "CC/C(Br)=C(\\Br)CC"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A282",
+        "status": "Partially supported",
+        "actual": [
+          "CCC/C(Br)=C(/C)Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A283",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A284",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A285",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A286",
+        "status": "Partially supported",
+        "actual": [
+          "CC[C@@H](C)C/C(Br)=C\\Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A287",
+        "status": "Partially supported",
+        "actual": [
+          "C#CCCCC/C(Br)=C\\Br"
+        ],
+        "preview": "failed",
+        "geometry": "not run"
+      },
+      {
+        "id": "A288",
+        "status": "Correctly rejected",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A289",
+        "status": "Fully supported",
+        "actual": [
+          "CCC(Br)(Br)C(Br)Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A290",
+        "status": "Fully supported",
+        "actual": [
+          "CCCCCCCCC(Br)(Br)C(Br)Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A291",
+        "status": "Fully supported",
+        "actual": [
+          "CC(C)CC(Br)(Br)C(Br)Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A292",
+        "status": "Fully supported",
+        "actual": [
+          "CCC(Br)(Br)C(Br)(Br)CC"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A293",
+        "status": "Fully supported",
+        "actual": [
+          "CCCC(Br)(Br)C(C)(Br)Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A294",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A295",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A296",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A297",
+        "status": "Fully supported",
+        "actual": [
+          "CC[C@@H](C)CC(Br)(Br)C(Br)Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A298",
+        "status": "Partially supported",
+        "actual": [
+          "C#CCCCCC(Br)(Br)C(Br)Br"
+        ],
+        "preview": "failed",
+        "geometry": "not run"
+      },
+      {
+        "id": "A299",
+        "status": "Correctly rejected",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A300",
+        "status": "Fully supported",
+        "actual": [
+          "C=C(Br)CC"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A301",
+        "status": "Fully supported",
+        "actual": [
+          "C=C(Br)CCCCCCCC"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A302",
+        "status": "Fully supported",
+        "actual": [
+          "C=C(Br)CC(C)C"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A303",
+        "status": "Partially supported",
+        "actual": [
+          "CCC=C(Br)CC"
+        ],
+        "preview": "failed",
+        "geometry": "not run"
+      },
+      {
+        "id": "A304",
+        "status": "Incorrect result",
+        "actual": [
+          "CC=C(Br)CCC",
+          "CCCC=C(C)Br"
+        ],
+        "preview": "failed",
+        "geometry": "not run"
+      },
+      {
+        "id": "A305",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A306",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A307",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A308",
+        "status": "Fully supported",
+        "actual": [
+          "C=C(Br)C[C@H](C)CC"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A309",
+        "status": "Partially supported",
+        "actual": [
+          "C#CCCCCC(=C)Br"
+        ],
+        "preview": "failed",
+        "geometry": "not run"
+      },
+      {
+        "id": "A310",
+        "status": "Correctly rejected",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A311",
+        "status": "Fully supported",
+        "actual": [
+          "CCC(C)(Br)Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A312",
+        "status": "Fully supported",
+        "actual": [
+          "CCCCCCCCC(C)(Br)Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A313",
+        "status": "Fully supported",
+        "actual": [
+          "CC(C)CC(C)(Br)Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A314",
+        "status": "Fully supported",
+        "actual": [
+          "CCCC(Br)(Br)CC"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A315",
+        "status": "Fully supported",
+        "actual": [
+          "CCCC(Br)(Br)CC",
+          "CCCCC(C)(Br)Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A316",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A317",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A318",
+        "status": "Unsupported",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A319",
+        "status": "Fully supported",
+        "actual": [
+          "CC[C@@H](C)CC(C)(Br)Br"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      },
+      {
+        "id": "A320",
+        "status": "Partially supported",
+        "actual": [
+          "C#CCCCCC(C)(Br)Br"
+        ],
+        "preview": "failed",
+        "geometry": "not run"
+      },
+      {
+        "id": "A321",
+        "status": "Correctly rejected",
+        "actual": [],
+        "preview": "not run",
+        "geometry": "not run"
+      },
+      {
+        "id": "A322",
+        "status": "Partially supported",
+        "actual": [
+          "CCCC(Cl)=CCl"
+        ],
+        "preview": "failed",
+        "geometry": "not run"
+      },
+      {
+        "id": "A323",
+        "status": "Fully supported",
+        "actual": [
+          "C=C(I)CCC"
+        ],
+        "preview": "verified",
+        "geometry": "3D; converged"
+      }
+    ]
+  },
+  "diagnostics": {
+    "partial": {
+      "cases": 52,
+      "options": 33,
+      "failures": [],
+      "resultsIdenticalTo4E": false,
+      "changedRunPermissions": [
+        {
+          "fixture": "two non-equivalent sites",
+          "options": [
+            {
+              "id": "alkyne-partial-hydrogenation-drawn-1-site1",
+              "before": "verified",
+              "after": "blocked"
+            },
+            {
+              "id": "alkyne-partial-hydrogenation-drawn-1-site2",
+              "before": "verified",
+              "after": "blocked"
+            }
+          ]
+        },
+        {
+          "fixture": "two equivalent terminal sites",
+          "options": [
+            {
+              "id": "alkyne-partial-hydrogenation-drawn-1-site1",
+              "before": "verified",
+              "after": "blocked"
+            }
+          ]
+        },
+        {
+          "fixture": "two equivalent internal sites",
+          "options": [
+            {
+              "id": "alkyne-partial-hydrogenation-drawn-1-site1",
+              "before": "verified",
+              "after": "blocked"
+            }
+          ]
+        }
+      ]
+    },
+    "complete": {
+      "cases": 52,
+      "options": 32,
+      "failures": [],
+      "resultsIdenticalTo4E": true,
+      "changedRunPermissions": []
+    },
+    "x2": {
+      "cases": 177,
+      "options": 85,
+      "failures": [],
+      "resultsIdenticalTo4E": true,
+      "changedRunPermissions": []
+    },
+    "hx": {
+      "cases": 291,
+      "options": 153,
+      "failures": [],
+      "resultsIdenticalTo4E": true,
+      "changedRunPermissions": []
+    }
+  },
+  "preservation": {
+    "inventoriedPreExisting": 307,
+    "changed": [
+      {
+        "path": "server/alkyne_partial_hydrogenation_rule.py",
+        "before": "16b5886292432c96856786d49583514849247e68fb3cbeb5b611cd9f45171263",
+        "after": "db6a79b64fcc613292e257daaadd86f97d5d4f6a7236e2678decf54b297cc2e9"
+      },
+      {
+        "path": "server/chemistry_server.py",
+        "before": "09981bc138d68bafeeaa43c97c7f54f5e295e62dc9272c559e9bf462d24d6602",
+        "after": "d58b23aaee28081b00236c45c0d40069761baa2bb3ecfdbc73e822425cca3017"
+      },
+      {
+        "path": "server/reaction_conditions.py",
+        "before": "b82cce3a2824e6914a9c219418407de0f4c72b1eaa95386984274f934419f83c",
+        "after": "cc7b398b8f84f8e9f6d26b573bdb7f46f2355d0f34cb3ffd6811580258927ed8"
+      },
+      {
+        "path": "server/addition_contract.py",
+        "before": "2893b3acedeb4bfd6175fe4c4d511aa439814e82e4bb11a49d5070a732b7dbb6",
+        "after": "d48cff2bfd5eeebf6df1737de83e2c38a30c9833d445dc8d3ecf03bcdf9db460"
+      },
+      {
+        "path": "src/reaction-lab.ts",
+        "before": "a5c0affa425bd1b86538476b09032ea5bc833506275094389cd7f24ce964c8cf",
+        "after": "d57003b4537a44be94e32d19a27bdf733963437de0b5a61a150555dacdc12d36"
+      },
+      {
+        "path": "src/reaction-conditions.ts",
+        "before": "838199437e14cbc0e5d63974d166c2f16e06c0d37e2cd0823444cbde707cecc9",
+        "after": "f4539f9b6ebdc89340f86758ddbd1085c4fc429e2b1d2a643076609ccc11ef26"
+      },
+      {
+        "path": "tests/test_alkyne_partial_public_api.py",
+        "before": "08ea98bd4be26cf30d400844db729ad93534b9e97d45678d86c78c6d50e0b173",
+        "after": "ae6d1f11729501e0349e31d45bb1e3884fbd9215b17162e3f9f4b28ddf4b365f"
+      },
+      {
+        "path": "tests/test_alkyne_partial_hydrogenation.py",
+        "before": "fd36deac98a366522cd803e0cb7cd29ab32e2403eeb50cc49560b72135021127",
+        "after": "ec1549fd29970bb2b12412607506907180448aa441b67d1e693d2747a9012ea6"
+      },
+      {
+        "path": "tests/alkyne-partial-calculation.test.mjs",
+        "before": "5bb6e01cc140467337ae0599af3a63ab54bcc67b44129f32a373a362cb600f24",
+        "after": "56ef5538540b9bf5bae30b4fc9540950a46f3a0b33fee7d195ad6e44feb2454c"
+      }
+    ],
+    "unchanged": 298,
+    "priorReportsUnchanged": true
+  },
+  "browser": {
+    "keyboardConditional2D": true,
+    "requiredSettingsEnableExistingHX3D": true,
+    "clearingSettingsRemovesOld3D": true,
+    "consoleErrors": [],
+    "screenshot": "reaction-lab-phase4f-conditional-preview.png"
+  }
+}

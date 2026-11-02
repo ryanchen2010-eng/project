@@ -462,7 +462,7 @@ h2 {
   padding: 24px 30px 30px;
 }
 
-.explorer-transfer {
+.explorer-transfer, .crystal-controls {
   display: flex;
   flex-wrap: wrap;
   align-content: start;
@@ -478,7 +478,7 @@ h2 {
   font-weight: 700;
 }
 
-.explorer-transfer button {
+.explorer-transfer button, .crystal-controls button {
   padding: 9px 12px;
   border: 1px solid #315c4b;
   border-radius: 9px;
@@ -489,8 +489,8 @@ h2 {
   font-weight: 750;
 }
 
-.explorer-transfer button:hover,
-.explorer-transfer button:focus-visible {
+.explorer-transfer button:hover, .crystal-controls button:hover,
+.explorer-transfer button:focus-visible, .crystal-controls button:focus-visible {
   color: #fff;
   background: #315c4b;
 }
@@ -541,6 +541,24 @@ h2 {
 @media (min-width: 901px) and (max-width: 1150px) {
   .molecule-information__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* Full compound identities stay readable, including long systematic names. */
+.library, .molecule-list, .molecule-card { min-width: 0; }
+.molecule-card__text strong, #molecule-title, #search-status {
+  overflow-wrap: anywhere;
+}
+.molecule-card__formula { height: auto; min-height: 52px; padding: 8px 4px; }
+.viewer-toolbar { flex-wrap: wrap; }
+.viewer-toolbar > div:first-child { flex: 1 1 300px; min-width: 0; }
+#molecule-title { max-width: 100%; line-height: 1.25; }
+.viewer-toolbar .formula {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+}
+.viewer-status { max-width: calc(100% - 32px); overflow-wrap: anywhere; }
 
 @media (max-width: 900px) {
   .shell {

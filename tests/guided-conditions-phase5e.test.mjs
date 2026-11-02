@@ -169,7 +169,7 @@ function application(currentSignature = 'current') {
   const choices = { solvent: ['', 'dry', 'aqueous-protic', 'secondary-naocl-acetic'], temperature: ['', 'ambient', 'heated'], catalyst: ['', 'none', 'acid'], oxidationStage: ['', 'first', 'further'], workup: ['', 'aqueous-release'] };
   const controls = Object.fromEntries(Object.entries(values).map(([key, value]) => [key, { value, options: choices[key].map(value => ({ value })) }]));
   const calls = [];
-  const run = new Function('guidanceSignature', 'guidedControlValues', 'solventInput', 'temperatureInput', 'catalystInput', 'oxidationStageInput', 'workupInput', 'saveDraft', 'updateMatches', `${extracted('applyGuidedConditions')};return applyGuidedConditions;`)(
+  const run = new Function('guidanceSignature', 'guidedControlValues', 'solventInput', 'temperatureInput', 'catalystInput', 'oxidationStageInput', 'workupInput', 'saveDraft', 'updateMatches', `let namedProfileSelection = null; const clearNamedProfile = {hidden:true}; ${extracted('applyGuidedConditions')};return applyGuidedConditions;`)(
     () => currentSignature, guidedControlValues, ...Object.values(controls), () => calls.push('saved'), async id => calls.push(['revalidate', id]));
   return { controls, calls, run };
 }

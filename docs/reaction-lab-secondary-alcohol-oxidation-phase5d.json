@@ -1,0 +1,4205 @@
+{
+  "schemaVersion": 1,
+  "version": "phase5d-verification-1.0.0",
+  "completed": "2026-10-17",
+  "scope": "Existing secondary alcohol oxidation only; no publication or Phase 5E",
+  "evidence": {
+    "primarySource": "https://pubs.acs.org/doi/10.1021/jo01298a066",
+    "fullText": "https://ursula.chem.yale.edu/~chem220/PROBSETS/PS13spr/PS9-S13-ans/Stevens1980JOC.pdf",
+    "directlyRepresentedExamples": [
+      "cyclohexanol",
+      "2-octanol"
+    ],
+    "boundedClassGeneralizationsAreNotCaseSpecificExperiments": true,
+    "independentlyEvidenceSupportedProfileCount": 1,
+    "newlyApprovedCompanionCases": 0
+  },
+  "conditionScope": "Explicit bounded NaOCl/acetic-acid net assumptions, not a complete laboratory procedure, isolated recovery or yield prediction",
+  "measurements": {
+    "frozenSecondaryStructural": {
+      "before": 2,
+      "after": 2,
+      "denominator": 2
+    },
+    "frozenSecondaryStrictFull": {
+      "before": 2,
+      "after": 0,
+      "denominator": 2
+    },
+    "separateDeclaredProfileFrozenReplay": {
+      "modelConditionEligible": 2,
+      "qualifiedTheoretical3D": 2,
+      "denominator": 2
+    },
+    "globalFrozenStatuses": {
+      "before": {
+        "Fully supported": 158,
+        "Unsupported": 90,
+        "Correctly rejected": 38,
+        "Partially supported": 60,
+        "Incorrect result": 1
+      },
+      "after": {
+        "Fully supported": 156,
+        "Unsupported": 90,
+        "Correctly rejected": 38,
+        "Partially supported": 62,
+        "Incorrect result": 1
+      }
+    },
+    "allProductSetsUnchanged": true,
+    "unrelatedRowsIdentical": 345,
+    "changedIDs": [
+      "A100",
+      "A101"
+    ]
+  },
+  "geometryLimitation": {
+    "substrate": "cyclohexanol",
+    "product": "cyclohexanone",
+    "convergedForceField": "MMFF94",
+    "approximateCarbonylOutOfPlaneDegrees": 4.74554,
+    "initialDiagnosticCutoff": {
+      "normalizedScalarTripleProduct": 0.05,
+      "independentlyValidated": false,
+      "productionSafeguard": false
+    },
+    "resolution": "Report numerical deviation rather than an unsupported accuracy cutoff; SP2/no-tetrahedral-tag validation remains. No coordinates projected, output permissions or production validation changed."
+  },
+  "verification": {
+    "baselineTestFunctions": 3380,
+    "newPythonTests": 73,
+    "newJavaScriptTests": 107,
+    "passingPython": 1773,
+    "passingJavaScript": 1787,
+    "totalPassing": 3560,
+    "baselineTestFunctionsRetained": true,
+    "legacySecondaryConditionExpectationsUpdated": true,
+    "typeScript": "pass with bundled Node runtime",
+    "productionBuild": "pass; existing chunk-size warning",
+    "whitespace": "pass",
+    "browserChecks": [
+      "conditional default settings",
+      "explicit profile qualified acetone 3D",
+      "original O mapping cross-view highlight",
+      "1 mmol theoretical 0.05808 g acetone",
+      "withdrawal clears stale product and calculation"
+    ]
+  },
+  "fileIntegrity": {
+    "frozenBenchmarkSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+    "changedExistingFiles": {
+      "server/addition_contract.py": {
+        "beforeSha256": "1110dbdad63447d79d4d980ea97d7127f8db9ce4631dedd4b964b98f86e04953",
+        "afterSha256": "66fc9e45590f3aa4c6251a4c93ce0d98fa62fc6ff199300bec0b4593e344e8cf"
+      },
+      "server/chemistry_server.py": {
+        "beforeSha256": "32c44b7de1f88299702c13483b8fe4ff33c95781cf2a30efeffa495eaf3a552f",
+        "afterSha256": "a7c6088818dce5c7643768a0dd50b39f6ad6083197f0416202ab1caadc917e70"
+      },
+      "server/reaction_engine.py": {
+        "beforeSha256": "c1657657dba36c8f58b957bd5ccc333e6c4f716cc8836522617ea9520f1f0cdf",
+        "afterSha256": "caafbe3c298325ba4cee41fecf3ec8e95a9bb07ed4f0871dafea87a42b6e6320"
+      },
+      "server/reaction_information.py": {
+        "beforeSha256": "3b09b188074bcb7055ac595b472e1dc7b08c03b85da48adc0996a37e8f89d562",
+        "afterSha256": "bd6d0dc255d5623860b764b29529fdd2981bca9f0fd68d4a794e409c3f1ff428"
+      },
+      "server/reaction_reasoning.py": {
+        "beforeSha256": "cef2dd2ddc3e0e19fb93dce6c8ca1fffd371f347ce00764e51cbc9db1c367dc4",
+        "afterSha256": "aadcf7d280512e8e4b052f3a6679eb6caee0074abe131a1e532ad46b44447532"
+      },
+      "src/reaction-conditions.ts": {
+        "beforeSha256": "f4539f9b6ebdc89340f86758ddbd1085c4fc429e2b1d2a643076609ccc11ef26",
+        "afterSha256": "2956f682fd203acf8e74c1c06c3dc1da01f2008e0afd48d56aeadc3a1c303088"
+      },
+      "src/reaction-lab.ts": {
+        "beforeSha256": "4e34eb8fbe3c755ae8a4dd8e5c2a1d17467391fd00748ca4ed6f54984b4b9afd",
+        "afterSha256": "da69c0df5b981ff2d374208f9d43d1c7c20d47a3a9f07127609186d895ad2904"
+      },
+      "tests/test_addition_consistency_phase3h.py": {
+        "beforeSha256": "af13a7106d92803ef4003b857a2f891658fc753a756dfccfc2c7e2c9667cc15b",
+        "afterSha256": "0a1df0dff15f27c7de72785c2dc80fa86dc05b7a5d4b478d278b270e21d00519"
+      },
+      "tests/test_alcohol_oxidation_compatibility.py": {
+        "beforeSha256": "cb6d13fed1168ccc52ad159687135960ded116cba40cdb33b0cb15c4375f97c9",
+        "afterSha256": "b058d1e052813ca7944bf4684a0be8bc9bf83c4fda6b5229f9a573467b21b9aa"
+      },
+      "tests/test_chemistry.py": {
+        "beforeSha256": "ff2837ed9eb1d329bc3d414b2187e13564685675a77ad2f30c5c29b96e72015d",
+        "afterSha256": "4173d98853cbb659ec44550d10d6cc7ce14b9170ce391eb6eddefc15557c01c4"
+      },
+      "tests/test_cross_page.py": {
+        "beforeSha256": "d6481189bd6e3a377da6b7b5f23180237c8bd2886b94eafcb647512ac78a2096",
+        "afterSha256": "4d646bb85f93f26251beaae1f9a6aa4b167562c5a69f4ae9f1e9cdda2ffcd770"
+      },
+      "tests/test_primary_alcohol_oxidation_phase5c.py": {
+        "beforeSha256": "fdf990ce000613a5ed6e8d60fb6d09cbc747ce1c3923909466af349c7a7fdac8",
+        "afterSha256": "25dcfa5ad95fa7e1c5b54326bc9d8c6695f96edbda1efb30e865eb3a7a4ae561"
+      },
+      "tests/test_reaction_engine.py": {
+        "beforeSha256": "7ac555b9dcdd2eaba82489c05a0538d1b34d7ea07ca297eeb0cc363444eff5c8",
+        "afterSha256": "cc01c711ddedd6dbdfc17b8f5d3863e54a27e37610c462cb4dd5e54bb65eab0e"
+      },
+      "tests/test_reaction_preview_api.py": {
+        "beforeSha256": "aa10b395dfad0f56809257cb85dcb7a4a2db9bc97427d9c4685d99304b120385",
+        "afterSha256": "893798da5c6ecca83b486d67b6b368f41d231f3819f5d5ef80df9aef7a07f388"
+      }
+    },
+    "newImplementationAndVerificationFiles": {
+      "server/secondary_alcohol_oxidation_rule.py": "fa4e3fcab92aee31774c27747f21a06f8f3938fcdf2ced29b87b682c4cfda4b9",
+      "tests/fixtures/secondary-alcohol-oxidation-phase5d.json": "67c74e92c119ecd5b7b7a820ab1ea05777f4654cf0f0d6d60c406744328cdc88",
+      "tests/test_secondary_alcohol_oxidation_phase5d.py": "60b0b8a941b08f1710b055fc0cf7332f05e0c8039114524d4bae1e96a1a76864",
+      "tests/secondary-alcohol-oxidation-phase5d.test.mjs": "594aab5de566c0ac97fe3add07a5ce5a6e0efc4a5cba60458154fef7036790b3",
+      "scripts/audit_secondary_alcohol_oxidation.py": "090f3b0a3a3606c5594283fb42bd390a3dfa5f62fbb4987926d045f8bc45c00c"
+    },
+    "unchangedPreexistingFiles": {
+      "benchmarks/reaction-conditions/1.0.0.json": "35ce7ce6f3c3967a06fc354c8bc9fc8319a2247f3b3ac0c7cd246ec75ed8ca1e",
+      "benchmarks/reaction-conditions/README.md": "0311b22b5058aac2c95eb2b7893df2718e238db75fd7334175d022c94c097bc6",
+      "benchmarks/reaction-conditions/index.json": "1b365f7f31143a82536b1ab0570b1ecd00d1e77fbfde46ed145bf631ee7996a4",
+      "builder.html": "fe287e83b1f3bff9baa7dfe46ec2f03c50e969b6d65a0a42e56bb7ed1ee2e312",
+      "calculators.html": "6303d939b4cd5c693bb5dab908cf9d593525490996abf61717bf1e2f3392873d",
+      "explore.html": "26c08b21324ce6814ee34df2c2cd6bf7abe5716646abe43d2bc2972ee63233c5",
+      "index.html": "e114c98514310e34ab1078d55f085f80856e963b333ef5269c8b3a10cb41c17b",
+      "reaction-lab.html": "f4ba8fb8e1ade7ffbbaef7a162f3ec4b7b92bd269fe12ea7d67d0f721e37793f",
+      "scripts/audit_addition_consistency.py": "1aecf9268e0282d83118731b7fcc451c6bbe38d54b58577394078fea4f2a426e",
+      "scripts/audit_alcohol_dehydration.py": "859dc8bdb77958ef495b9002ee433ee5e621c154673f49352bb0b4220d77ebd7",
+      "scripts/audit_alcohol_substitution.py": "69a0f067bc0f3edc01b22b8bef52917b141b07247bef4750d65a193d96ac59da",
+      "scripts/audit_alkyne_complete_hydrogenation.py": "2d52f888be4afc5bee7e53219696e25a355899e539f126495e791f677779fea0",
+      "scripts/audit_alkyne_halogenation.py": "c983fb95c43f2393e76ec30130c54d24c9bb2e16072673155dcd3869c234f0c6",
+      "scripts/audit_alkyne_hydrohalogenation.py": "3b2120a96e83ee5e2f51e45fe09e7bab296ede226361d7f70c81fb68f8a0783b",
+      "scripts/audit_alkyne_partial_hydrogenation.py": "667430a2b694219363503a94c38e4a44203be0844706dd5f959b62329e66fd0c",
+      "scripts/audit_primary_alcohol_oxidation.py": "f37a2fb91e803633b3604c3a07f3783b574def2413cb96ebfed9683118b2ea59",
+      "scripts/audit_reaction_lab.py": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+      "scripts/compress-dist.mjs": "84e8c39e56792d28688ac4c1b46b2b3aeb7e72bcdcaf1404a222084b81315533",
+      "scripts/reaction_conditions_companion.py": "f021cbd4ef47413849ab0a3c54da12f7d69fb98e5b5e7b6ca2cf4ebe10bf77ef",
+      "server/alcohol_dehydration_rule.py": "173886554adbcb0ca76819b0a1f153fd8baad186cd57abc7ab99356327a87114",
+      "server/alcohol_oxidation_rule.py": "d3455f9c010822f35e801433b018dcbdf10264243bd2993aa523ac3bf4ee78c2",
+      "server/alcohol_substitution_rule.py": "2050d7834675800c4242de6f969f292fa42c0db0509a7bd8ebb3e2d6c6e3c24e",
+      "server/alkyne_complete_hydrogenation_rule.py": "f1ec3d16037bc428ff77eb25a1533ce6633247af749cba2695e2ec636c667b75",
+      "server/alkyne_halogenation_rule.py": "e3d3514c299445e0b9156a8a8f63218fd1bbc95a1309ea155b1f5a6f88efa887",
+      "server/alkyne_hydrohalogenation_rule.py": "88e500fc2ea79224bf4fcbab375018675dda2eea9eea9a74be68e19dca5c44f0",
+      "server/alkyne_partial_hydrogenation_rule.py": "db6a79b64fcc613292e257daaadd86f97d5d4f6a7236e2678decf54b297cc2e9",
+      "server/bromination_rule.py": "05b824d330d56a4b184943dd833b41d8cd59f81526f1dfe1ccb4b03430541318",
+      "server/bromination_stereo.py": "e33c725194a47afc545678fc2550692d71d6fd0339171f483e6e8976737d0dd8",
+      "server/carbocation_compatibility.py": "f357009a8851f3e55a9896e2dd2da31917c172f24fb0e1ab04d9444e12dea657",
+      "server/carbonyl_hydrogenation_rule.py": "966a78167b12ce2d816659176abdbafab3a4d0fcf3b8a21135da4a961a684f3a",
+      "server/chlorination_rule.py": "95b25e3d240ffd4d4aee7b604e6991095265a765af04886ace804940406ecc91",
+      "server/dihydroxylation_rule.py": "ca71c3ae8b66a196c2378e64d04387ea58b4e5df6129e986adf3a312e9b4cdbe",
+      "server/e1_rule.py": "a66480dd824370d6cf2b3509b7bd24f09eb036735f2b2bfc9b40e3be80404d5b",
+      "server/e2_rule.py": "f2fcf20b9174667d6ca43983a6678c4ace8970cafdaa30ddd41a6896fed1eef3",
+      "server/epoxidation_mechanism.py": "f22c59401baf3526db492b7f4945bdb8163b32f065b430488b902e383347fcb4",
+      "server/epoxidation_rule.py": "9baa6d18b2f0992491c5a9a3de461062cdd960a974f47171f535b1a417da99e6",
+      "server/epoxidation_stereo.py": "11f47683513de79367ac019f0143a28a205bc794981d2c378cd1f586fb847e22",
+      "server/ester_rules.py": "9d0a4893385454d4c10cd74cdcd5a422baafdb7a5eceaf2f40c90e541e63d53e",
+      "server/extended_reaction_rules.py": "85886aaa148ccca67aa5d82c9a320ee97cd2fdecf87b533628584cfea08a038e",
+      "server/functional_groups.py": "3f44005028664d11c2bb03ca8a47b3279ddcc060a4d1cb006bf26b02b9dc975e",
+      "server/gunicorn.conf.py": "291b77ffa8858af29f241183d5efc2dbb7058f5ab7a83f8f443d9c7d2856114a",
+      "server/halogen_addition_stereo.py": "a9b07d2b98fd9591e035241cf42e8c13bfd1f3cf926f7bccd6f572580fcc7a55",
+      "server/hydration_rule.py": "53ad255dc3eaee0ee6e0bdc187bb9b1b4160be8e3a20fafce0555e9ae5b3b4be",
+      "server/hydrogenation_rule.py": "e2e4ed43cfe4b999f84e2c6e038ac26e71bafc03c35cf9c3fb159ddbfdea50cb",
+      "server/hydrohalogenation_rule.py": "c231cd90bbf2e818cd9af117412ce22c8850c241ebb60dc1a41b8c15f492e882",
+      "server/molecular_graph.py": "f3b9c634eea84e92b041a369a6aa95fa313f6189f281fb5c35ed4f590b6f4387",
+      "server/primary_alcohol_oxidation_rule.py": "5be8debc49822d7cb5bd07bea2f30305e8b6f33e7664c4f27f431f8ad8dc9252",
+      "server/production_app.py": "b03ec820bd16558fb92072c59bbddbc243a383f466aa7b5b2d49d481b7049dc3",
+      "server/pubchem_service.py": "fb45337bca36e47b24cb9071389fc49718baecc16b88b9c14638918a230b690e",
+      "server/reaction_compatibility.py": "fcc51fb765c71e64f3cdcaec022eaf2a3269be782b8bbaa7284a4e156273ea35",
+      "server/reaction_conditions.py": "4283aa0a722592bd448527281d501cc240df27bb7120bfd6e53e2c5ec213d93a",
+      "server/reaction_diagrams.py": "8e1561814d24e2fb01474716c861d24282670c384bbe0656b8b7becabdf205d9",
+      "server/reaction_mechanisms.py": "fd37c6d2e8c1a310c9e95e04d0da1dacf41f978535c9dc6839a0cb8c0d8b5943",
+      "server/sn1_rule.py": "fc40852c5acae38e4e805ef778cf5df379465b083dd2c58db34fc51200984f52",
+      "server/sn2_rule.py": "abec4345c69bf6be332f0f0e1f1c4bdae3b9cf7530f48b6abf4d5adfa1051108",
+      "server/stereochemistry.py": "7d5183aae9d7c0f56c5d594e18673bc0793d33dbc2c215d43d16fecdf5d353a3",
+      "src/acid-base-calculator-panel.ts": "7454341cbe458aca721746edf7ce68ed7e0cf6345a74f4a2c6cce699b89c3462",
+      "src/acid-base-calculator.ts": "38cc84ac57c00ecd1c07a214e1534f4dea57f801991f98e12995edfc43a08b42",
+      "src/atom-inspector.ts": "853217018ea1c455f3dcf469c3b89da1bb99ca05367a79571061c0162e4e6008",
+      "src/bond-measurements.css": "d01c774725f9f4daa5cf7da02bbc837719eacccff2f2b12e48c038a7da054634",
+      "src/bond-measurements.ts": "2a8c81a3572e0884699cb4cc3a8d6010c3490c66059b0845c18e3e3b7ed6425d",
+      "src/builder.css": "70260289b436f2bb0d0cf32ae2704262df58897fe09dad08c5544ee7499e9c21",
+      "src/builder.ts": "c3f54d75faa649c4037599716e0c21f738436225dfcb72bda3adf1194bf12a1b",
+      "src/calculator-compound.ts": "063d2da5485c5865b91b50287ec7992770bb49ad139574a92576e9b2faf5cd46",
+      "src/calculator-reactions.ts": "57e774657695713c91335db2cf14b631b458a3f60bd5aca42516dc7368cd6159",
+      "src/calculators.css": "5ab46dc8d56878f4c6f3ab9e5ab6c215a1e7b1ce871074e45dfb806837f42a74",
+      "src/calculators.ts": "4fce83a96a6b199667ccb45b730fa2476b1d0cce80a2f762b8ca18eeeb78852e",
+      "src/chemical-descriptions.ts": "13a17ea7950e6bf445bda94fd3dc339163c90bcb4d8350f650d748e4445b3e22",
+      "src/chemical-property-guide.ts": "b3d26d532dba7ac43bc9311e33d225d292224fd1488a672fe0ed82405bc0be40",
+      "src/equilibrium-calculator-panel.ts": "796a482a464c0178e7f7bd114dec7b84c27e954c8673039e6163c70dd8873e54",
+      "src/equilibrium-calculator.ts": "866c5175e810a23caca7a8373be6bec0ef9f648e9277e8b5832cb03498e35101",
+      "src/explorer-description.ts": "1cae05e60eab7cd3609de2f9d7f1c11b05c73cbf57aaa21aa77847773d5f1176",
+      "src/functional-group-panel.ts": "f647d1240fb04b6b8b493c502ee5d9c9ce4759f1031ae538bf729789fedd8bfd",
+      "src/home.css": "fc5220c2917efb5ca9bfd935ff1de3cc98edb97f79bf6d7c2560a2c2361d8952",
+      "src/main.ts": "36395394afc0a531ae68a62cf6e3e78b49124006cd7039f1901ef98e92faf982",
+      "src/mole-calculator-panel.ts": "8e0d83eb8d550970ffd9b1ef19b061a53e2b31d63dcc375ea725dc423246d5d0",
+      "src/mole-calculator.ts": "31ad3507ad92774e9398920f8b72d8123458b45c2017c58fe1cc80edcb23fa73",
+      "src/molecules.ts": "eda9703dd097dce2fc6d04b7ba911078b0abe9a47b0ff9fc5f22045d674d6fb9",
+      "src/pathway-insights.ts": "b9776d08c8baa274893e92fbd4294e2c47f31e9f2e1b31a336ba7e907691528b",
+      "src/reactant-entry.ts": "4aba5bfe41c13f35959ec8410e088b3f78b2774be0e20f3d79c1244f275b547c",
+      "src/reaction-calculator-panel.ts": "8fc5a6ef406efe94341595b8af190b0dddf47514ff6b6b6c6d192b4ad23b473e",
+      "src/reaction-calculator.css": "cc272b070ee8f2f815eba2e1e772ce6deb3054575e082f640b07a28467a1618d",
+      "src/reaction-calculator.ts": "153c6f5b15a93835b6fd9cf5c2074674e36089e7ad4c590829ed40abb0e79853",
+      "src/reaction-information-panel.ts": "c70f81836b759b909ccd9d7efafa88cff9417ae8bf01e218f503a0bf04d38556",
+      "src/reaction-lab.css": "b3a0033d1c9d19c3f7eb9278f519a8f2ed28664b3af02573607af51424a4ead5",
+      "src/shared-molecules.json": "19aaa76111201c7f6932b71c1041f2e519410df7acf7bc126a8c85f2a9f394dd",
+      "src/solubility-calculator-panel.ts": "d0eaa0df65ca4a285fffb45225fc91833f2ac916a47d363a606620939f871faa",
+      "src/solubility-calculator.ts": "f43d0ae1056cd23120da9a90d947f423ddeef9091bdbcea982c1668ee093b431",
+      "src/solution-calculator-panel.ts": "452181e4cb2935e9fd1a90981c23b8b7914575f211d2539ce9c1d62f573a63b6",
+      "src/solution-calculator.css": "764c535591d4326b530db9d96f9646cfac1bc173179e0842cd02c44930333359",
+      "src/solution-calculator.ts": "3e00a273da1e4a1fa617d17890e52ec8453f83210583e68e84a439d34e2c98b4",
+      "src/solution-compound.ts": "9a9b70ba023598d694ad4f1b7bd9bc79fbd4ea518de5dd05fe17d17ad112b8a8",
+      "src/styles.css": "c62afc9ebbccd1a9271e0e81d0f1e65c32e679194e55940000c28e83af0d7c9e",
+      "tests/acid-base-calculator-panel.test.mjs": "e3391e56e745786bd786e42c886bdbd1eaa89ca247b4b802a9504c1326ef41f4",
+      "tests/acid-base-calculator.test.mjs": "26ef377b36bec94292d2321cea0d5b6d58e1688598a4876e08e8155816616d61",
+      "tests/addition-consistency-phase3h.test.mjs": "f7b66314b6fbe9a0db5dc348c55209ab9a04fbad0f53bfff4afbda3c65f3c10a",
+      "tests/alcohol-dehydration-phase5a.test.mjs": "22862749c1b4415dd3df65d1f4668a7eb500eed555ddef1073b4b13b97ec4622",
+      "tests/alcohol-oxidation-calculation.test.mjs": "3bcd27b460c431d83658d9966b54c19a0fd3fda2d10bda9dd19b46cc57a4ad0e",
+      "tests/alcohol-substitution-phase5b.test.mjs": "751207ab5701fe54121e1460a0c8e5817d4e42100fc922fed7371bb24a0d1a3e",
+      "tests/alkyne-complete-calculation.test.mjs": "cc50e4baf88c3cd869ad8e294af7f7c4ca8f9944f23895ea04e4cc6f5dca8b6b",
+      "tests/alkyne-consistency-phase4f.test.mjs": "110bd2a77c7bbd81550babcb9df3203613825ed107ebb8b4c231e4c6812d4158",
+      "tests/alkyne-halogenation-calculation.test.mjs": "0ee09ac6394348c24808664aaaa71ba6cc41fc2b80ad114ee1f01acfbe81cb7a",
+      "tests/alkyne-hydrohalogenation-calculation.test.mjs": "0cc46c6fe2d299c50f95559675e625697d806203f9e7a04eb8ba9c3a67b72ef2",
+      "tests/alkyne-partial-calculation.test.mjs": "56ef5538540b9bf5bae30b4fc9540950a46f3a0b33fee7d195ad6e44feb2454c",
+      "tests/atom-inspector.test.mjs": "df99e1a14354aa310881824dbaea894d361e4b51e4c59a96f2b24eb518cd6e68",
+      "tests/baseline.test.mjs": "3d9c89406c2c0fab087595bf4b7e653ed2d38d91c22a5a795a70539647517d5f",
+      "tests/bond-measurements.test.mjs": "aeb2cdb9e41fad8f4ebe4cc32f4647253dc2fb2e182b971e22bb60cf9edbceea",
+      "tests/bromination-calculation.test.mjs": "63b1b762593a720e68f7bfb16a3240a3e3bd207cd420eac2a05b2b00414c61c0",
+      "tests/builder-measurements.test.mjs": "f4e9cebb75783b06b18acb3bb9361b6717dffd3cad3f2aa0e6d4edd705776f63",
+      "tests/calculator-hub-audit.test.mjs": "3578b087952ae074e62174bb3d54197ab5482ef36402068aad6ebbdd5a11a0f3",
+      "tests/calculator-reactions.test.mjs": "d74f2ecd747e9a035710fc26faab9fefb2a585f11a72722172f7b2391f05a2a7",
+      "tests/calculator-transfer.test.mjs": "8212a427a2df97cf9eaaac7c67d06ef438d68344f76422808f3f36752e905ff0",
+      "tests/carbonyl-calculation.test.mjs": "ac2dfdee34c65c0dd9f79837c793c0c373abde1af33bf7e26694e762a40e8b91",
+      "tests/chlorination-calculation.test.mjs": "033b55cbf0b192c4f564a58b765f1b84b81609095033066aa9ca08be65b510c9",
+      "tests/deployment-package.test.mjs": "26dd7ebb8f4dda3e465ac0faf55b15927ccf7e9c8d95f3a60f20dc81f3ef8122",
+      "tests/dihydroxylation-calculation.test.mjs": "83a0ff563fa48c9e5b29280a395264a6446a0078b6daef6d377296179db4bf0f",
+      "tests/e1-calculation.test.mjs": "dbf4898bd085cbee5b695fd570cbf2715dc6eb5a0df74692558d45ebca783bae",
+      "tests/e2-calculation.test.mjs": "dd628d60edc51e080f81a1c63acf6613c5db2d02e9997216c6050dea24923376",
+      "tests/epoxidation-calculation.test.mjs": "a649e704c11ecd87b80541cd817d0f866e2bc31709d4fbe37160770c677c3fd0",
+      "tests/equilibrium-calculator.test.mjs": "7d3aef778c4be27b32fa899455129cbc1460a9753e7dc791e283ef8ccda1928d",
+      "tests/equilibrium-independent-audit.test.mjs": "f3835e2677bde2db1c0534677c70d3af5461dd74799620ef32c80f2a3c39087c",
+      "tests/equilibrium-solubility-panels.test.mjs": "8ff1004c0022ce0579fc0c51167cf2453220c53aa64f1ec0c6820135cf3ff2b1",
+      "tests/ester-calculation.test.mjs": "9a6564de0a379841899e34f5052296d39e3f5524adf417c9c0a5c9aae4e816bb",
+      "tests/explorer-description.test.mjs": "aa47c6019246e9a1bbdd39033d03ff12c5d53a4da3f39f78d67f953c44fae9bc",
+      "tests/explorer-ionic.test.mjs": "f4f264963be93a70d6de717b188d9a1b0416db3cedd50b98cf096cdeb7a7136d",
+      "tests/fixtures/alcohol-dehydration-phase5a.json": "166c047fb1b539217987325d9895a28ed674bf19e24f6bc50a1a1dfcead1842d",
+      "tests/fixtures/alcohol-substitution-phase5b.json": "edec8a88c2647b1a3cec1fee3bd3bf57f76a35bb16812fb7108abae9cc0ef74f",
+      "tests/fixtures/alkyne-complete-hydrogenation.json": "c177713976a2d17a16380b4134eb7c314609dbdb6696e59292355129e50f9bbc",
+      "tests/fixtures/alkyne-halogenation.json": "cbc9047cad6f5bb0c6d40a743fb8cda8044a3966174846afe1293cf49b0ef0de",
+      "tests/fixtures/alkyne-hydrohalogenation.json": "d16908da0d44079a1b9934f64f3aae1b92971ca7a0a71922041a9195e874e714",
+      "tests/fixtures/alkyne-partial-hydrogenation.json": "6df023a3b1d2df52f1e510b347b367333246fb59ccf19ef9ff6739b969b03228",
+      "tests/fixtures/primary-alcohol-oxidation-phase5c.json": "90c6453ee45f4b44169db0ec8ad894aab4e1185f9ea27185a401cd5ee9b7de57",
+      "tests/fixtures/reaction-baseline.json": "0c959bba93e88e3b45b367e953e329360bc11a37f9742ce625b748a26aa54e53",
+      "tests/hydration-calculation.test.mjs": "9abf134bac6d4d339d17376f6dd9f3f08194634ff6dc82670b554e347ec22148",
+      "tests/hydrogenation-calculation.test.mjs": "0dbae68a31b4adda343450b67293acc58c646ed4f5da3a3cb87b0815c773498f",
+      "tests/hydrohalogenation-calculation.test.mjs": "68c6749c19c4630bd5b99f424dbaad1340945b805dc456929cf1fb021c24f7ca",
+      "tests/mole-calculator-panel.test.mjs": "97648488ee787bcf3e4c86132a6079e7f0f8c73386c63fd23f3367604ae0e59c",
+      "tests/mole-calculator.test.mjs": "46aae4129cbc2afab76e892a37063b683350c45b688063c9de5c73b3ff01c39e",
+      "tests/navigation.test.mjs": "21bf4d10091394cfef95eae11f2f771db1aaeb5e3503ffcf2cc7180a29d18737",
+      "tests/pathway-insights.test.mjs": "65398a9e121ae444f39ba7d896bd67ec37f8da577745ec8ed4f36aa5600cabbd",
+      "tests/primary-alcohol-oxidation-phase5c.test.mjs": "470324372d1e1749d8318cd49e164baf65735ca363e4ebaa3cb8684ae3f86c33",
+      "tests/reactant-entry.test.mjs": "46bf2bdadc5869ac231edb062c555fa55b397f233b90dd7ea4c6ed76eaadaf3d",
+      "tests/reaction-calculator-panel.test.mjs": "b2142766ad2edc17340d660304f0356c9a977eecf613c92e946b56f436ef8059",
+      "tests/reaction-calculator.test.mjs": "61d5f95545560862f54b72821843988e4e9495d17518e481ece2f124a2204e88",
+      "tests/reaction-consistency-phase2h.test.mjs": "1d967803aaffbeddb138c3592f7db0dcf1b8da815398bc1028b63f9e7ca6e77b",
+      "tests/reaction-expansion-panels.test.mjs": "fc50f605460ac22c7abefe9ee17ce61163f7b9fee90f068821c2a6dc2b4cbe43",
+      "tests/reaction-measurements.test.mjs": "974e070462060d025aba4a0049044fde0d3f33b5fcc9a3c5376832b1b1145361",
+      "tests/reaction-pathway-settings.test.mjs": "3c595774d9740da9494ec62e046ee8f77b20246e562cb5cb61d3b1cf041d7d7c",
+      "tests/sn1-calculation.test.mjs": "9c62823f4b10850e23c328781f8803b7bc5464a9de0e2e4b208c92728860d941",
+      "tests/sn2-calculation.test.mjs": "7cf26e5d441149408b3a7740c57e8188bdb816b6892413cd3aa9c7037638bf66",
+      "tests/solubility-calculator.test.mjs": "e89650ca17cfffc182b10623786ed4c7c33b332a17720fbeeaceb76efa23d515",
+      "tests/solution-calculator-panel.test.mjs": "50d4db62636d17cf33ed6a3bb063f44dbcb6c4af2900a647587791b36afad5a7",
+      "tests/solution-calculator.test.mjs": "4a5a27066977fc89fb78310e274a5b0d978927d1e77aad3463f76fa1a21d3ebb",
+      "tests/solution-integrations.test.mjs": "00037d37a5fac27547e90d2fdca63b40cc126dfd95b243e25863023415349cae",
+      "tests/test_alcohol_dehydration_phase5a.py": "21dd2297d64f51d6e3a695d4d84d6bd4b795cfebad00dbec62b87037999c6dce",
+      "tests/test_alcohol_substitution_phase5b.py": "07a8eb36da6ceafc3b02e030248e127e80a45be8edde82d4f5d14022f1960a9f",
+      "tests/test_alkyne_complete_hydrogenation.py": "6972ea761e8c0121399e6a42e0165dee8458e23c4833e1faa0f14cd583c0d192",
+      "tests/test_alkyne_complete_public_api.py": "8ee08da5c7d922b3808e0aff7f7dcbfd096983a96755b78bf5ce0f6f56ccd1fc",
+      "tests/test_alkyne_consistency_phase4f.py": "b6d0ee8ef319a8fa6ddfc57b1413fbae0c9886add724db87314c48043a69abe7",
+      "tests/test_alkyne_halogenation.py": "fb410538537f88eaf4a635ae13671d8e44499f7e5b2ffd1fabf93cf5334d7106",
+      "tests/test_alkyne_halogenation_public_api.py": "badc46eccf01267453ba53ce93eb301aa82f6ad93fc48242e2f4cebf0e79207c",
+      "tests/test_alkyne_hydrohalogenation.py": "b3eaf2f970a4173f5ccae0dbf109401a172a7a4234d2aeed1c1cf81fec94df27",
+      "tests/test_alkyne_hydrohalogenation_public_api.py": "5f00e9ebda657cdbee14f84fd987f8b3939e30c437de984e950075aac6962942",
+      "tests/test_alkyne_partial_hydrogenation.py": "ec1549fd29970bb2b12412607506907180448aa441b67d1e693d2747a9012ea6",
+      "tests/test_alkyne_partial_public_api.py": "ae6d1f11729501e0349e31d45bb1e3884fbd9215b17162e3f9f4b28ddf4b365f",
+      "tests/test_bromination_compatibility.py": "4e3a051cc6c35aea91d7b21203bfe8e5249b4b77d8521622b65b989e073c6df6",
+      "tests/test_bromination_public_api.py": "c49d4b799dd2c6a9b014ad5f36ab18ea18908163c809386bae02b6a7122e95e9",
+      "tests/test_carbonyl_compatibility.py": "daf5d852e937b41a406b7f26a90f8d2918903567f01a5987b2e3b9fd7f2d85d5",
+      "tests/test_chemistry_depth.py": "e2cd74388390ffa5d686079b0715e8ad62be7169d30c1c12c2161d2c97e14d79",
+      "tests/test_chlorination_compatibility.py": "7571a6a23f38ebba4d221c5618b5c19aed46f1706ffdffc8f6a7fee3f39fd537",
+      "tests/test_chlorination_public_api.py": "c9e90af2f707e77f7cabac480bec6460d6dfedb951be77305d34e70ebd6cbb75",
+      "tests/test_dihydroxylation_compatibility.py": "f967276a03b6096257d3c57ff85cbc501e70ca2a8deb9abdcf301a0643ddd029",
+      "tests/test_dihydroxylation_public_api.py": "9555a01805410a7539e7a86e05de84630ea8bb6b08e95f58efd463c6eb9f365a",
+      "tests/test_e1_compatibility.py": "18341d8e407c84dd1539c7a9aa23afbee493a96b1efd17b7f93e21a421845c16",
+      "tests/test_e2_compatibility.py": "0bb7006c1aed432fe19b38369e5a8b5e1bda07e9d5e332ac58a974cee4a6c85b",
+      "tests/test_epoxidation_compatibility.py": "f70a59feb652c49304287d27ba1fe639a13b685626fa2bf204d8e19aa83e1146",
+      "tests/test_epoxidation_public_api.py": "3001ffd9ab8c6e7d58aa3deac8bbce28f7be04128609414ca79c42ed5a7ca7e0",
+      "tests/test_ester_phase1.py": "cca3dd7e8eddcb6f17d3be955811630abd6f72d229bc08a00b82ca98a41150a4",
+      "tests/test_hydration_compatibility.py": "f21f13ebf404a790ed057c883a404fd9be2345a43d3dadd0dc8523b99e41d215",
+      "tests/test_hydration_public_api.py": "6f7dafd41e1f67a952dd1c835d5cbaf7ebb00bd407a44023dba88cffd754fade",
+      "tests/test_hydrogenation_compatibility.py": "6740e5d872e5fe4f4048f14229c0b1bf084d6cba3927ea521ef473bc2eb068f3",
+      "tests/test_hydrohalogenation_compatibility.py": "a52ff4014e751f02de976efa2c60704fecb560c45179e86fe55984dd2b156115",
+      "tests/test_hydrohalogenation_public_api.py": "d81823195500c51eacad55db125e2d53ea6f2c2b17264755a0d466f114c9572a",
+      "tests/test_pathway_insights.py": "8deff6fed2321820bbb1040eb47b36d099ada799bda5f394e0a2c24339351414",
+      "tests/test_production_app.py": "7ab0e854ca6f6150d09e11feabc61ab8b133f48dfc09a6faf6ac84a3569479e8",
+      "tests/test_pubchem.py": "a3c9fbee9cd42d0fbeff936583797b8387089ce4d9aa900e7412f06bc401b346",
+      "tests/test_reaction_consistency_phase2h.py": "a59992132ed752b445ae63e25c40994e5d6ce4106712c0e281fef2218e4bab32",
+      "tests/test_reaction_diagrams.py": "fe784d04fbb9165924aa73736a597cadac84644096346ca3cee56360211df520",
+      "tests/test_reaction_expansion.py": "863435252aa55cbd45572bdc8ab1fe2ca6c959b1cbe64ad1b5dd11a761132fdb",
+      "tests/test_reaction_stoichiometry.py": "9a80efe8e83e51b0b166c9409208183859cbda52819a3d7587fc7a0eaacf772b",
+      "tests/test_sn1_compatibility.py": "4b7c3ff728c1d08d8bee482056ddfab561bda2e33bed5b11e7f575e49f60aac3",
+      "tests/test_sn2_compatibility.py": "8e5cf112250120a8852b48dd4a4aff740437bc70abbcc7313d8daf62d3985bd1"
+    }
+  },
+  "all347Rows": {
+    "A001": {
+      "pathway": "Hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A002": {
+      "pathway": "Hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A003": {
+      "pathway": "Hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A004": {
+      "pathway": "Hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A005": {
+      "pathway": "Hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A006": {
+      "pathway": "Hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A007": {
+      "pathway": "Hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A008": {
+      "pathway": "Hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A009": {
+      "pathway": "Hydrogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A010": {
+      "pathway": "Hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A011": {
+      "pathway": "Hydrogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A012": {
+      "pathway": "Hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A013": {
+      "pathway": "Hydrogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A014": {
+      "pathway": "Hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A015": {
+      "pathway": "Hydrogenation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A016": {
+      "pathway": "Bromination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A017": {
+      "pathway": "Bromination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A018": {
+      "pathway": "Bromination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A019": {
+      "pathway": "Bromination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A020": {
+      "pathway": "Bromination",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A021": {
+      "pathway": "Bromination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A022": {
+      "pathway": "Bromination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A023": {
+      "pathway": "Bromination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A024": {
+      "pathway": "Bromination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A025": {
+      "pathway": "Bromination",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A026": {
+      "pathway": "Bromination",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A027": {
+      "pathway": "Bromination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A028": {
+      "pathway": "Bromination",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A029": {
+      "pathway": "Bromination",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A030": {
+      "pathway": "Bromination",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A031": {
+      "pathway": "Chlorination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A032": {
+      "pathway": "Chlorination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A033": {
+      "pathway": "Chlorination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A034": {
+      "pathway": "Chlorination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A035": {
+      "pathway": "Chlorination",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A036": {
+      "pathway": "Chlorination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A037": {
+      "pathway": "Chlorination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A038": {
+      "pathway": "Chlorination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A039": {
+      "pathway": "Chlorination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A040": {
+      "pathway": "Chlorination",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A041": {
+      "pathway": "Chlorination",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A042": {
+      "pathway": "Chlorination",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A043": {
+      "pathway": "Chlorination",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A044": {
+      "pathway": "Chlorination",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A045": {
+      "pathway": "Chlorination",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A046": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A047": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A048": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A049": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A050": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A051": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A052": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A053": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A054": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A055": {
+      "pathway": "Hydrohalogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A056": {
+      "pathway": "Hydrohalogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A057": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A058": {
+      "pathway": "Hydrohalogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A059": {
+      "pathway": "Hydrohalogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A060": {
+      "pathway": "Hydrohalogenation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A061": {
+      "pathway": "Hydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A062": {
+      "pathway": "Hydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A063": {
+      "pathway": "Hydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A064": {
+      "pathway": "Hydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A065": {
+      "pathway": "Hydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A066": {
+      "pathway": "Hydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A067": {
+      "pathway": "Hydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A068": {
+      "pathway": "Hydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A069": {
+      "pathway": "Hydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A070": {
+      "pathway": "Hydration",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A071": {
+      "pathway": "Hydration",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A072": {
+      "pathway": "Hydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A073": {
+      "pathway": "Hydration",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A074": {
+      "pathway": "Hydration",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A075": {
+      "pathway": "Hydration",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A076": {
+      "pathway": "Hydrogenation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A077": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A078": {
+      "pathway": "Hydrohalogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A079": {
+      "pathway": "Bromination",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A080": {
+      "pathway": "Alcohol oxidation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A081": {
+      "pathway": "Alcohol oxidation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A082": {
+      "pathway": "Alcohol oxidation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A083": {
+      "pathway": "Alcohol oxidation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A084": {
+      "pathway": "Alcohol oxidation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A085": {
+      "pathway": "Alcohol oxidation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A086": {
+      "pathway": "Alcohol oxidation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A087": {
+      "pathway": "Alcohol oxidation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A088": {
+      "pathway": "Alcohol oxidation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A089": {
+      "pathway": "Alcohol oxidation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A090": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A091": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A092": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A093": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A094": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A095": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A096": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A097": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A098": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A099": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A100": {
+      "pathway": "Alcohol oxidation",
+      "before": "Fully supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": false,
+      "productSetUnchanged": true
+    },
+    "A101": {
+      "pathway": "Alcohol oxidation",
+      "before": "Fully supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": false,
+      "productSetUnchanged": true
+    },
+    "A102": {
+      "pathway": "Alcohol oxidation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A103": {
+      "pathway": "Alcohol oxidation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A104": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A105": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A106": {
+      "pathway": "Aldehyde oxidation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A107": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A108": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A109": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A110": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A111": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A112": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A113": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A114": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A115": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A116": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A117": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A118": {
+      "pathway": "Carbonyl hydrogenation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A119": {
+      "pathway": "Esterification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A120": {
+      "pathway": "Esterification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A121": {
+      "pathway": "Esterification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A122": {
+      "pathway": "Esterification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A123": {
+      "pathway": "Esterification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A124": {
+      "pathway": "Esterification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A125": {
+      "pathway": "Esterification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A126": {
+      "pathway": "Esterification",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A127": {
+      "pathway": "Esterification",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A128": {
+      "pathway": "Esterification",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A129": {
+      "pathway": "Esterification",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A130": {
+      "pathway": "Ester hydrolysis",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A131": {
+      "pathway": "Ester hydrolysis",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A132": {
+      "pathway": "Ester hydrolysis",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A133": {
+      "pathway": "Ester hydrolysis",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A134": {
+      "pathway": "Ester hydrolysis",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A135": {
+      "pathway": "Ester hydrolysis",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A136": {
+      "pathway": "Ester hydrolysis",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A137": {
+      "pathway": "Ester hydrolysis",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A138": {
+      "pathway": "Ester hydrolysis",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A139": {
+      "pathway": "Ester hydrolysis",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A140": {
+      "pathway": "Ester hydrolysis",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A141": {
+      "pathway": "Ester saponification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A142": {
+      "pathway": "Ester saponification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A143": {
+      "pathway": "Ester saponification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A144": {
+      "pathway": "Ester saponification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A145": {
+      "pathway": "Ester saponification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A146": {
+      "pathway": "Ester saponification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A147": {
+      "pathway": "Ester saponification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A148": {
+      "pathway": "Ester saponification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A149": {
+      "pathway": "Ester saponification",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A150": {
+      "pathway": "Ester saponification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A151": {
+      "pathway": "Ester saponification",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A152": {
+      "pathway": "Ester saponification",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A153": {
+      "pathway": "SN2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A154": {
+      "pathway": "SN2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A155": {
+      "pathway": "SN2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A156": {
+      "pathway": "SN2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A157": {
+      "pathway": "SN2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A158": {
+      "pathway": "SN2",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A159": {
+      "pathway": "SN2",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A160": {
+      "pathway": "SN2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A161": {
+      "pathway": "SN2",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A162": {
+      "pathway": "SN2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A163": {
+      "pathway": "SN2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A164": {
+      "pathway": "SN2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A165": {
+      "pathway": "SN2",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A166": {
+      "pathway": "SN2",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A167": {
+      "pathway": "SN2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A168": {
+      "pathway": "SN2",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A169": {
+      "pathway": "SN2",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A170": {
+      "pathway": "SN2",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A171": {
+      "pathway": "SN2",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A172": {
+      "pathway": "SN1",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A173": {
+      "pathway": "SN1",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A174": {
+      "pathway": "SN1",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A175": {
+      "pathway": "SN1",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A176": {
+      "pathway": "SN1",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A177": {
+      "pathway": "SN1",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A178": {
+      "pathway": "SN1",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A179": {
+      "pathway": "SN1",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A180": {
+      "pathway": "SN1",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A181": {
+      "pathway": "SN1",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A182": {
+      "pathway": "SN1",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A183": {
+      "pathway": "SN1",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A184": {
+      "pathway": "E2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A185": {
+      "pathway": "E2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A186": {
+      "pathway": "E2",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A187": {
+      "pathway": "E2",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A188": {
+      "pathway": "E2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A189": {
+      "pathway": "E2",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A190": {
+      "pathway": "E2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A191": {
+      "pathway": "E2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A192": {
+      "pathway": "E2",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A193": {
+      "pathway": "E1",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A194": {
+      "pathway": "E1",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A195": {
+      "pathway": "E1",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A196": {
+      "pathway": "E1",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A197": {
+      "pathway": "E1",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A198": {
+      "pathway": "E1",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A199": {
+      "pathway": "E1",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A200": {
+      "pathway": "E1",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A201": {
+      "pathway": "E1",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A202": {
+      "pathway": "E2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A203": {
+      "pathway": "E2",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A204": {
+      "pathway": "E2",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A205": {
+      "pathway": "E2",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A206": {
+      "pathway": "E2",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A207": {
+      "pathway": "E1",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A208": {
+      "pathway": "Alcohol dehydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A209": {
+      "pathway": "Alcohol dehydration",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A210": {
+      "pathway": "Alcohol dehydration",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A211": {
+      "pathway": "Alcohol dehydration",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A212": {
+      "pathway": "Alcohol dehydration",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A213": {
+      "pathway": "Alcohol dehydration",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A214": {
+      "pathway": "Alcohol dehydration",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A215": {
+      "pathway": "Alcohol dehydration",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A216": {
+      "pathway": "Alcohol substitution",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A217": {
+      "pathway": "Alcohol substitution",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A218": {
+      "pathway": "Alcohol substitution",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A219": {
+      "pathway": "Alcohol substitution",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A220": {
+      "pathway": "Alcohol substitution",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A221": {
+      "pathway": "Alcohol substitution",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A222": {
+      "pathway": "Alcohol substitution",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A223": {
+      "pathway": "Alcohol substitution",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A224": {
+      "pathway": "Alcohol substitution",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A225": {
+      "pathway": "Alcohol dehydration",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A226": {
+      "pathway": "Alcohol dehydration",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A227": {
+      "pathway": "Alcohol substitution",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A228": {
+      "pathway": "Alcohol substitution",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A229": {
+      "pathway": "Alcohol substitution",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A230": {
+      "pathway": "Alcohol substitution",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A231": {
+      "pathway": "Epoxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A232": {
+      "pathway": "Epoxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A233": {
+      "pathway": "Epoxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A234": {
+      "pathway": "Epoxidation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A235": {
+      "pathway": "Epoxidation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A236": {
+      "pathway": "Epoxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A237": {
+      "pathway": "Epoxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A238": {
+      "pathway": "Epoxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A239": {
+      "pathway": "Epoxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A240": {
+      "pathway": "Epoxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A241": {
+      "pathway": "Epoxidation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A242": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A243": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A244": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A245": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A246": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A247": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A248": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A249": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A250": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A251": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A252": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A253": {
+      "pathway": "Epoxidation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A254": {
+      "pathway": "Epoxidation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A255": {
+      "pathway": "Alkene dihydroxylation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A256": {
+      "pathway": "Alkyne hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A257": {
+      "pathway": "Alkyne hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A258": {
+      "pathway": "Alkyne hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A259": {
+      "pathway": "Alkyne hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A260": {
+      "pathway": "Alkyne hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A261": {
+      "pathway": "Alkyne hydrogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A262": {
+      "pathway": "Alkyne hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A263": {
+      "pathway": "Alkyne hydrogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A264": {
+      "pathway": "Alkyne hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A265": {
+      "pathway": "Alkyne hydrogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A266": {
+      "pathway": "Alkyne hydrogenation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A267": {
+      "pathway": "Alkyne partial hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A268": {
+      "pathway": "Alkyne partial hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A269": {
+      "pathway": "Alkyne partial hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A270": {
+      "pathway": "Alkyne partial hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A271": {
+      "pathway": "Alkyne partial hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A272": {
+      "pathway": "Alkyne partial hydrogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A273": {
+      "pathway": "Alkyne partial hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A274": {
+      "pathway": "Alkyne partial hydrogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A275": {
+      "pathway": "Alkyne partial hydrogenation",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A276": {
+      "pathway": "Alkyne partial hydrogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A277": {
+      "pathway": "Alkyne partial hydrogenation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A278": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A279": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A280": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A281": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A282": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A283": {
+      "pathway": "Alkyne halogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A284": {
+      "pathway": "Alkyne halogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A285": {
+      "pathway": "Alkyne halogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A286": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A287": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A288": {
+      "pathway": "Alkyne halogenation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A289": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A290": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A291": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A292": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A293": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A294": {
+      "pathway": "Alkyne halogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A295": {
+      "pathway": "Alkyne halogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A296": {
+      "pathway": "Alkyne halogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A297": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A298": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A299": {
+      "pathway": "Alkyne halogenation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A300": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A301": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A302": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A303": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A304": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Incorrect result",
+      "after": "Incorrect result",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A305": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A306": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A307": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A308": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A309": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A310": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A311": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A312": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A313": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A314": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A315": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A316": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A317": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A318": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A319": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A320": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A321": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A322": {
+      "pathway": "Alkyne halogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A323": {
+      "pathway": "Alkyne hydrohalogenation",
+      "before": "Partially supported",
+      "after": "Partially supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A324": {
+      "pathway": "Polymerization model",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A325": {
+      "pathway": "Polymerization model",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A326": {
+      "pathway": "Polymerization model",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A327": {
+      "pathway": "Polymerization model",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A328": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A329": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A330": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A331": {
+      "pathway": "Polymerization model",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A332": {
+      "pathway": "Polymerization model",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A333": {
+      "pathway": "Polymerization model",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A334": {
+      "pathway": "Polymerization model",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A335": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A336": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A337": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A338": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A339": {
+      "pathway": "Polymerization model",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A340": {
+      "pathway": "Polymerization model",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A341": {
+      "pathway": "Polymerization model",
+      "before": "Fully supported",
+      "after": "Fully supported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A342": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A343": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A344": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A345": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A346": {
+      "pathway": "Polymerization model",
+      "before": "Unsupported",
+      "after": "Unsupported",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    },
+    "A347": {
+      "pathway": "Polymerization model",
+      "before": "Correctly rejected",
+      "after": "Correctly rejected",
+      "entireResultUnchanged": true,
+      "productSetUnchanged": true
+    }
+  },
+  "diagnostic": {
+    "schemaVersion": 1,
+    "version": "secondary-naocl-acetic-net-diagnostic-1.0.0",
+    "phase": "5D",
+    "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+    "profile": {
+      "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+      "solvent": "aqueous-protic",
+      "temperature": "ambient",
+      "catalyst": "none",
+      "oxidationStage": "first"
+    },
+    "assertionScope": "Explicit model-condition eligibility, literal net graphs and API invariants; no experimental yields or automatic companion admission",
+    "caseCount": 41,
+    "positiveDenominator": 25,
+    "structuralMatching": 25,
+    "conditionCompleteModelCases": 16,
+    "casesWithQualifiedNet3D": 16,
+    "independentlyEvidenceSupportedProfile": 1,
+    "independentlyApprovedCompanionCases": 0,
+    "runCounts": {
+      "verified-qualified-net-3D": 16,
+      "policy-blocked": 10
+    },
+    "geometryScope": "SP2 topology and loss of tetrahedral tags are asserted; numeric out-of-plane deviations are reported without inventing a physical accuracy cutoff.",
+    "failures": [],
+    "results": [
+      {
+        "substrate": "CC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-2-propanol",
+            "product": "CC(C)=O",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.00006007153663162931,
+            "carbonylOutOfPlaneDegrees": 0.0038536003186271945,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "2-propanol",
+        "positive": true
+      },
+      {
+        "substrate": "CCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CCC(C)=O",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.00007016439451497786,
+            "carbonylOutOfPlaneDegrees": 0.004477425929638863,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "2-butanol",
+        "positive": true
+      },
+      {
+        "substrate": "CCC(O)CC",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CCC(=O)CC",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.017344781217635174,
+            "carbonylOutOfPlaneDegrees": 1.1124004798665077,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "3-pentanol",
+        "positive": true
+      },
+      {
+        "substrate": "CCCCCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CCCCCCC(C)=O",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.017549203314194694,
+            "carbonylOutOfPlaneDegrees": 1.1320383529368372,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "2-octanol primary-reference substrate",
+        "positive": true
+      },
+      {
+        "substrate": "CCCC(O)CCC",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CCCC(=O)CCC",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.04021682696742013,
+            "carbonylOutOfPlaneDegrees": 2.5543964594410933,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "4-heptanol frozen substrate",
+        "positive": true
+      },
+      {
+        "substrate": "CC(C)CC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CC(=O)CC(C)C",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.02432810103040946,
+            "carbonylOutOfPlaneDegrees": 1.552271801470517,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "branched secondary",
+        "positive": true
+      },
+      {
+        "substrate": "CC(C)(C)C(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CC(=O)C(C)(C)C",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.014014711849770342,
+            "carbonylOutOfPlaneDegrees": 0.9135256208331464,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "hindered secondary",
+        "positive": true
+      },
+      {
+        "substrate": "OC1CCCC1",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "O=C1CCCC1",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.00003484808778962976,
+            "carbonylOutOfPlaneDegrees": 0.002156982671911048,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "cyclopentanol",
+        "positive": true
+      },
+      {
+        "substrate": "OC1CCCCC1",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "O=C1CCCCC1",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.07403190718126941,
+            "carbonylOutOfPlaneDegrees": 4.745540412085357,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "cyclohexanol primary-reference substrate",
+        "positive": true
+      },
+      {
+        "substrate": "OC1CCCCCC1",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "O=C1CCCCCC1",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.008564140722725115,
+            "carbonylOutOfPlaneDegrees": 0.5604153573275034,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "cycloheptanol frozen substrate",
+        "positive": true
+      },
+      {
+        "substrate": "CC1CCC(O)CC1",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CC1CCC(=O)CC1",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.0006906674512082404,
+            "carbonylOutOfPlaneDegrees": 0.04446902564929744,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "methylcyclohexanol",
+        "positive": true
+      },
+      {
+        "substrate": "C[C@H](O)CC",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CCC(C)=O",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.00007016439451497786,
+            "carbonylOutOfPlaneDegrees": 0.004477425929638863,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "reacting @ center consumed",
+        "positive": true
+      },
+      {
+        "substrate": "C[C@@H](O)CC",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CCC(C)=O",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.00007016439451497786,
+            "carbonylOutOfPlaneDegrees": 0.004477425929638863,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "reacting @@ center consumed",
+        "positive": true
+      },
+      {
+        "substrate": "CC[C@H](C)CCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CC[C@H](C)CCCC(C)=O",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.0075343030874423,
+            "carbonylOutOfPlaneDegrees": 0.480650837069301,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "distant @ center",
+        "positive": true
+      },
+      {
+        "substrate": "CC[C@@H](C)CCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CC[C@@H](C)CCCC(C)=O",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.020625383786788746,
+            "carbonylOutOfPlaneDegrees": 1.3160166096447545,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "distant @@ center",
+        "positive": true
+      },
+      {
+        "substrate": "CC[C@H](C)CCCC[C@@H](O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CC[C@H](C)CCCCC(C)=O",
+            "conditionCompleteEligibility": true,
+            "qualified3D": true,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "verified-qualified-net-3D",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net",
+            "normalizedCarbonylPlanarityDeviation": 0.020885942803720664,
+            "carbonylOutOfPlaneDegrees": 1.3326226094507807,
+            "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "reacting and distant centers",
+        "positive": true
+      },
+      {
+        "substrate": "COCCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "COCCCC(C)=O",
+            "conditionCompleteEligibility": false,
+            "qualified3D": false,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "policy-blocked",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net"
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "remote ether conditional",
+        "positive": true
+      },
+      {
+        "substrate": "CC(O)c1ccccc1",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CC(=O)c1ccccc1",
+            "conditionCompleteEligibility": false,
+            "qualified3D": false,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "policy-blocked",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net"
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "benzylic conditional",
+        "positive": true
+      },
+      {
+        "substrate": "OCCCCCCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1-site1",
+            "product": "CC(=O)CCCCCCCO",
+            "conditionCompleteEligibility": false,
+            "qualified3D": false,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "policy-blocked",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net"
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "remote primary competitor",
+        "positive": true
+      },
+      {
+        "substrate": "CC(O)CCCCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1-site1",
+            "product": "CC(=O)CCCCCC(C)O",
+            "conditionCompleteEligibility": false,
+            "qualified3D": false,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "policy-blocked",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net"
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "equivalent secondary sites",
+        "positive": true
+      },
+      {
+        "substrate": "CCC(O)CCCCCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1-site1",
+            "product": "CCC(=O)CCCCCCC(C)O",
+            "conditionCompleteEligibility": false,
+            "qualified3D": false,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "policy-blocked",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net"
+          },
+          {
+            "id": "oxidation-drawn-1-site2",
+            "product": "CCC(O)CCCCCCC(C)=O",
+            "conditionCompleteEligibility": false,
+            "qualified3D": false,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "policy-blocked",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net"
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "distinct secondary sites",
+        "positive": true
+      },
+      {
+        "substrate": "CC(O)(C)CCCCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CC(=O)CCCCCC(C)(C)O",
+            "conditionCompleteEligibility": false,
+            "qualified3D": false,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "policy-blocked",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net"
+          }
+        ],
+        "failures": [],
+        "reasons": [
+          "Tertiary alcohols lack the carbon-bound H required by ordinary alcohol-to-carbonyl oxidation; no C–C cleavage is invented."
+        ],
+        "label": "tertiary OH spectator conditional",
+        "positive": true
+      },
+      {
+        "substrate": "CC(O)CCC1CCCO1",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "CC(=O)CCC1CCCO1",
+            "conditionCompleteEligibility": false,
+            "qualified3D": false,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "policy-blocked",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net"
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "cyclic ether conditional",
+        "positive": true
+      },
+      {
+        "substrate": "C[C@H](CCOC)CC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "COCC[C@@H](C)CC(C)=O",
+            "conditionCompleteEligibility": false,
+            "qualified3D": false,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "policy-blocked",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net"
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "remote stereo ether @ conditional",
+        "positive": true
+      },
+      {
+        "substrate": "C[C@@H](CCOC)CC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [
+          {
+            "id": "oxidation-drawn-1",
+            "product": "COCC[C@H](C)CC(C)=O",
+            "conditionCompleteEligibility": false,
+            "qualified3D": false,
+            "profileId": "naocl-acetic-ketone-v1",
+            "run": "policy-blocked",
+            "independentlyApprovedCompanionCase": false,
+            "diagram": "verified-conditional-net"
+          }
+        ],
+        "failures": [],
+        "reasons": [],
+        "label": "remote stereo ether @@ conditional",
+        "positive": true
+      },
+      {
+        "substrate": "CO",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [],
+        "label": "methanol not secondary",
+        "positive": false
+      },
+      {
+        "substrate": "CCO",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [],
+        "label": "primary not secondary",
+        "positive": false
+      },
+      {
+        "substrate": "CC(O)(C)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "Tertiary alcohols lack the carbon-bound H required by ordinary alcohol-to-carbonyl oxidation; no C–C cleavage is invented."
+        ],
+        "label": "tertiary",
+        "positive": false
+      },
+      {
+        "substrate": "COCCC",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "No neutral saturated alcohol C–OH oxidation site was found; phenols, ethers, acids and ketones are not primary/secondary alcohol sites in this pathway."
+        ],
+        "label": "ether",
+        "positive": false
+      },
+      {
+        "substrate": "Oc1ccccc1",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "No neutral saturated alcohol C–OH oxidation site was found; phenols, ethers, acids and ketones are not primary/secondary alcohol sites in this pathway."
+        ],
+        "label": "phenol",
+        "positive": false
+      },
+      {
+        "substrate": "CCC(=O)O",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "No neutral saturated alcohol C–OH oxidation site was found; phenols, ethers, acids and ketones are not primary/secondary alcohol sites in this pathway."
+        ],
+        "label": "acid",
+        "positive": false
+      },
+      {
+        "substrate": "CC(=O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "No neutral saturated alcohol C–OH oxidation site was found; phenols, ethers, acids and ketones are not primary/secondary alcohol sites in this pathway."
+        ],
+        "label": "ketone not further oxidized",
+        "positive": false
+      },
+      {
+        "substrate": "C=CC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "An additional alkene can undergo oxidant addition/side reactions; selective alcohol oxidation with its geometry preserved is not validated."
+        ],
+        "label": "allylic competition",
+        "positive": false
+      },
+      {
+        "substrate": "C#CC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "An additional alkyne can undergo oxidant addition/side reactions; selective alcohol oxidation with its geometry preserved is not validated."
+        ],
+        "label": "propargylic competition",
+        "positive": false
+      },
+      {
+        "substrate": "CC(O)C(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "Vicinal/geminal alcohol sites can involve oxidative cleavage or coupled chemistry; this hypochlorite one-site model does not validate that environment."
+        ],
+        "label": "vicinal diol",
+        "positive": false
+      },
+      {
+        "substrate": "OCCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "Oxidation can give a hydroxy carbonyl with a potential 5-membered hemiacetal/hemiketal closure and further oxidation; cyclization/lactonization is not modeled."
+        ],
+        "label": "five-membered capture",
+        "positive": false
+      },
+      {
+        "substrate": "CC[C@H](C)C(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "Specified center at substrate atom 3 is adjacent to the new carbonyl; possible epimerization is not covered by distant-center retention."
+        ],
+        "label": "alpha-carbonyl epimerization",
+        "positive": false
+      },
+      {
+        "substrate": "CC(O)C1CC1",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "The 3-membered ring at atoms 4, 5, 6 needs strain/ring-opening compatibility validation."
+        ],
+        "label": "strained ring",
+        "positive": false
+      },
+      {
+        "substrate": "CC(=O)CCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "Additional carbonyl halogenation/cleavage or coupled hydroxy-carbonyl chemistry is not validated by this alcohol oxidation policy."
+        ],
+        "label": "pre-existing ketone",
+        "positive": false
+      },
+      {
+        "substrate": "NCCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "N at substrate atom 7 is outside the validated alcohol/hypochlorite oxidation spectator set.",
+          "The additional amine group has no validated compatibility policy for alcohol oxidation; unsupported does not mean chemically incapable of oxidation."
+        ],
+        "label": "amine competition",
+        "positive": false
+      },
+      {
+        "substrate": "FCCCC(O)C",
+        "reagent": "sodium-hypochlorite",
+        "conditions": {
+          "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+          "solvent": "aqueous-protic",
+          "temperature": "ambient",
+          "catalyst": "none",
+          "oxidationStage": "first"
+        },
+        "options": [],
+        "failures": [],
+        "reasons": [
+          "F at substrate atom 7 is outside the validated alcohol/hypochlorite oxidation spectator set.",
+          "The additional haloalkane group has no validated compatibility policy for alcohol oxidation; unsupported does not mean chemically incapable of oxidation."
+        ],
+        "label": "fluorine outside scope",
+        "positive": false
+      }
+    ],
+    "frozenCaseReplays": [
+      {
+        "caseId": "A100",
+        "frozenInputProbe": {
+          "substrate": "CCCC(O)CCC",
+          "reagent": "sodium-hypochlorite",
+          "conditions": {
+            "solvent": "aqueous-protic"
+          },
+          "options": [
+            {
+              "id": "oxidation-drawn-1",
+              "product": "CCCC(=O)CCC",
+              "conditionCompleteEligibility": false,
+              "qualified3D": false,
+              "profileId": "naocl-acetic-ketone-v1",
+              "run": "policy-blocked",
+              "independentlyApprovedCompanionCase": false,
+              "diagram": "verified-conditional-net"
+            }
+          ],
+          "failures": [],
+          "reasons": []
+        },
+        "declaredProfileReplay": {
+          "substrate": "CCCC(O)CCC",
+          "reagent": "sodium-hypochlorite",
+          "conditions": {
+            "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+            "solvent": "aqueous-protic",
+            "temperature": "ambient",
+            "catalyst": "none",
+            "oxidationStage": "first"
+          },
+          "options": [
+            {
+              "id": "oxidation-drawn-1",
+              "product": "CCCC(=O)CCC",
+              "conditionCompleteEligibility": true,
+              "qualified3D": true,
+              "profileId": "naocl-acetic-ketone-v1",
+              "run": "verified-qualified-net-3D",
+              "independentlyApprovedCompanionCase": false,
+              "diagram": "verified-conditional-net",
+              "normalizedCarbonylPlanarityDeviation": 0.04021682696742013,
+              "carbonylOutOfPlaneDegrees": 2.5543964594410933,
+              "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+            }
+          ],
+          "failures": [],
+          "reasons": []
+        },
+        "measurementClass": "condition-aware net diagnostic, not approved experimental benchmark"
+      },
+      {
+        "caseId": "A101",
+        "frozenInputProbe": {
+          "substrate": "OC1CCCCCC1",
+          "reagent": "sodium-hypochlorite",
+          "conditions": {
+            "solvent": "aqueous-protic"
+          },
+          "options": [
+            {
+              "id": "oxidation-drawn-1",
+              "product": "O=C1CCCCCC1",
+              "conditionCompleteEligibility": false,
+              "qualified3D": false,
+              "profileId": "naocl-acetic-ketone-v1",
+              "run": "policy-blocked",
+              "independentlyApprovedCompanionCase": false,
+              "diagram": "verified-conditional-net"
+            }
+          ],
+          "failures": [],
+          "reasons": []
+        },
+        "declaredProfileReplay": {
+          "substrate": "OC1CCCCCC1",
+          "reagent": "sodium-hypochlorite",
+          "conditions": {
+            "secondaryOxidationProfile": "naocl-acetic-ketone-v1",
+            "solvent": "aqueous-protic",
+            "temperature": "ambient",
+            "catalyst": "none",
+            "oxidationStage": "first"
+          },
+          "options": [
+            {
+              "id": "oxidation-drawn-1",
+              "product": "O=C1CCCCCC1",
+              "conditionCompleteEligibility": true,
+              "qualified3D": true,
+              "profileId": "naocl-acetic-ketone-v1",
+              "run": "verified-qualified-net-3D",
+              "independentlyApprovedCompanionCase": false,
+              "diagram": "verified-conditional-net",
+              "normalizedCarbonylPlanarityDeviation": 0.008564140722725115,
+              "carbonylOutOfPlaneDegrees": 0.5604153573275034,
+              "geometryInterpretation": "Descriptive force-field conformer metric, not an independently validated accuracy tolerance or an experimental geometry."
+            }
+          ],
+          "failures": [],
+          "reasons": []
+        },
+        "measurementClass": "condition-aware net diagnostic, not approved experimental benchmark"
+      }
+    ]
+  },
+  "companionChecks": {
+    "companion-final": {
+      "schemaVersion": 1,
+      "version": "1.0.0",
+      "engineSha256": "340da725ba3ed1994801d6721523804f71d43083e3b0c5f486cf581b00423696",
+      "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+      "failures": [],
+      "mode": "evidence-gated-companion",
+      "scope": {
+        "parentRows": 347,
+        "reviewedScopeRows": 58,
+        "positiveDenominator": 53,
+        "controls": 5,
+        "outOfReviewScope": 289
+      },
+      "metrics": {
+        "denominator": 53,
+        "structuralMatching": 40,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 0
+      },
+      "byPathway": {
+        "Alkene dihydroxylation": {
+          "denominator": 11,
+          "structuralMatching": 10,
+          "conditionCompleteEligibility": 0,
+          "fullySupportedProductGeneration": 0,
+          "independentlyVerifiedChemistry": 0,
+          "diagnosticModelGenerationOnly": 0
+        },
+        "Alkyne halogenation": {
+          "denominator": 21,
+          "structuralMatching": 15,
+          "conditionCompleteEligibility": 0,
+          "fullySupportedProductGeneration": 0,
+          "independentlyVerifiedChemistry": 0,
+          "diagnosticModelGenerationOnly": 0
+        },
+        "Alkyne hydrohalogenation": {
+          "denominator": 21,
+          "structuralMatching": 15,
+          "conditionCompleteEligibility": 0,
+          "fullySupportedProductGeneration": 0,
+          "independentlyVerifiedChemistry": 0,
+          "diagnosticModelGenerationOnly": 0
+        }
+      },
+      "controlsCorrectlyRejected": 5,
+      "profileBacklog": {
+        "evidence-gap": 52,
+        "unsupported-engine-model": 1
+      },
+      "historicalDiagnostics": {
+        "Alkyne halogenation": {
+          "positiveDenominator": 21,
+          "frozenStrictFull": 0,
+          "diagnosticGeneration": 12,
+          "oldScorerDiagnosticFull": 6
+        },
+        "Alkyne hydrohalogenation": {
+          "positiveDenominator": 21,
+          "frozenStrictFull": 0,
+          "diagnosticGeneration": 11,
+          "oldScorerDiagnosticFull": 11
+        },
+        "Alkene dihydroxylation": {
+          "positiveDenominator": 11,
+          "frozenStrictFull": 0,
+          "diagnosticGeneration": 10,
+          "oldScorerDiagnosticFull": 9
+        }
+      },
+      "defects": {
+        "A304": {
+          "status": "frozen-oracle-defect",
+          "appliedToFrozen": false,
+          "erratumStatus": "proposed-not-applied",
+          "substrate": "CC#CCCC",
+          "originalExpected": [
+            "CC(Br)=CCCC",
+            "CCC(Br)=CCC"
+          ],
+          "proposedConnectivityOnly": [
+            "CC(Br)=CCCC",
+            "CC=C(Br)CCC"
+          ],
+          "rationale": "Both net orientations retain the original C2-C3 double-bond position after HBr addition to hex-2-yne. The second frozen expectation incorrectly moves it to C3-C4. E/Z is unassigned; no ratio, condition completeness or 3D permission follows from this graph correction.",
+          "evidenceLocation": "docs/reaction-lab-alkyne-phase4e-consistency-review.md, section on A304; independent mapped bond-edit reconstruction, not engine-product copying.",
+          "approval": null
+        }
+      }
+    },
+    "companion-diagnostic-final": {
+      "schemaVersion": 1,
+      "version": "1.0.0",
+      "engineSha256": "340da725ba3ed1994801d6721523804f71d43083e3b0c5f486cf581b00423696",
+      "parentSha256": "1304ec753e0c7986ade09e324cc1f420572e46c8e5ecc8ef3979bdd669c75b55",
+      "failures": [],
+      "mode": "unvalidated-diagnostic-overlay",
+      "scope": {
+        "parentRows": 347,
+        "reviewedScopeRows": 58,
+        "positiveDenominator": 53,
+        "controls": 5,
+        "outOfReviewScope": 289
+      },
+      "metrics": {
+        "denominator": 53,
+        "structuralMatching": 40,
+        "conditionCompleteEligibility": 0,
+        "fullySupportedProductGeneration": 0,
+        "independentlyVerifiedChemistry": 0,
+        "diagnosticModelGenerationOnly": 33
+      },
+      "byPathway": {
+        "Alkene dihydroxylation": {
+          "denominator": 11,
+          "structuralMatching": 10,
+          "conditionCompleteEligibility": 0,
+          "fullySupportedProductGeneration": 0,
+          "independentlyVerifiedChemistry": 0,
+          "diagnosticModelGenerationOnly": 10
+        },
+        "Alkyne halogenation": {
+          "denominator": 21,
+          "structuralMatching": 15,
+          "conditionCompleteEligibility": 0,
+          "fullySupportedProductGeneration": 0,
+          "independentlyVerifiedChemistry": 0,
+          "diagnosticModelGenerationOnly": 12
+        },
+        "Alkyne hydrohalogenation": {
+          "denominator": 21,
+          "structuralMatching": 15,
+          "conditionCompleteEligibility": 0,
+          "fullySupportedProductGeneration": 0,
+          "independentlyVerifiedChemistry": 0,
+          "diagnosticModelGenerationOnly": 11
+        }
+      },
+      "controlsCorrectlyRejected": 5,
+      "profileBacklog": {
+        "evidence-gap": 52,
+        "unsupported-engine-model": 1
+      },
+      "historicalDiagnostics": {
+        "Alkyne halogenation": {
+          "positiveDenominator": 21,
+          "frozenStrictFull": 0,
+          "diagnosticGeneration": 12,
+          "oldScorerDiagnosticFull": 6
+        },
+        "Alkyne hydrohalogenation": {
+          "positiveDenominator": 21,
+          "frozenStrictFull": 0,
+          "diagnosticGeneration": 11,
+          "oldScorerDiagnosticFull": 11
+        },
+        "Alkene dihydroxylation": {
+          "positiveDenominator": 11,
+          "frozenStrictFull": 0,
+          "diagnosticGeneration": 10,
+          "oldScorerDiagnosticFull": 9
+        }
+      },
+      "defects": {
+        "A304": {
+          "status": "frozen-oracle-defect",
+          "appliedToFrozen": false,
+          "erratumStatus": "proposed-not-applied",
+          "substrate": "CC#CCCC",
+          "originalExpected": [
+            "CC(Br)=CCCC",
+            "CCC(Br)=CCC"
+          ],
+          "proposedConnectivityOnly": [
+            "CC(Br)=CCCC",
+            "CC=C(Br)CCC"
+          ],
+          "rationale": "Both net orientations retain the original C2-C3 double-bond position after HBr addition to hex-2-yne. The second frozen expectation incorrectly moves it to C3-C4. E/Z is unassigned; no ratio, condition completeness or 3D permission follows from this graph correction.",
+          "evidenceLocation": "docs/reaction-lab-alkyne-phase4e-consistency-review.md, section on A304; independent mapped bond-edit reconstruction, not engine-product copying.",
+          "approval": null
+        }
+      }
+    }
+  },
+  "companionComparison": {
+    "before": "1.0.0",
+    "after": "1.0.0",
+    "parentUnchanged": true,
+    "changedCases": [],
+    "changedProfiles": [],
+    "defectChanges": false
+  },
+  "protectedCases": {
+    "A276": {
+      "id": "A276",
+      "path": "Alkyne partial hydrogenation",
+      "label": "two separated triple bonds: 1,7-octadiyne",
+      "substrate": "C#CCCCCC#C",
+      "reagent": "hydrogen",
+      "expected": [
+        "C=CCCCCC#C"
+      ],
+      "conditions": {
+        "catalyst": "lindlar"
+      },
+      "partial": "",
+      "minimum_sites": 2,
+      "coproducts": null,
+      "variant": "",
+      "actual": [
+        "C#CCCCCC=C"
+      ],
+      "options": 2,
+      "notes": [
+        "Preview/run error: ChemistryError: More than one C≡C site may undergo Lindlar reduction. This theoretical single-site possibility preserves the other triple bond for 2D bookkeeping, not experimentally established selective conversion; single-site 3D is blocked. Inspect the conditional 2D net option; no 3D Lindlar alkene is inferred for these settings.",
+        "Preview/run error: ChemistryError: More than one C≡C site may undergo Lindlar reduction. This theoretical single-site possibility preserves the other triple bond for 2D bookkeeping, not experimentally established selective conversion; single-site 3D is blocked. Inspect the conditional 2D net option; no 3D Lindlar alkene is inferred for these settings."
+      ],
+      "preview": "failed",
+      "geometry": "not run",
+      "mechanism_steps": [
+        0,
+        0
+      ],
+      "status": "Partially supported"
+    },
+    "A304": {
+      "id": "A304",
+      "path": "Alkyne hydrohalogenation",
+      "label": "asymmetric internal: 2-hexyne",
+      "substrate": "CC#CCCC",
+      "reagent": "hydrogen-bromide",
+      "expected": [
+        "CC(Br)=CCCC",
+        "CCC(Br)=CCC"
+      ],
+      "conditions": {
+        "additionStage": "one"
+      },
+      "partial": "Vinyl-halide E/Z outcomes are unassigned.",
+      "minimum_sites": 1,
+      "coproducts": null,
+      "variant": "1 equivalent(s)",
+      "actual": [
+        "CC=C(Br)CCC",
+        "CCCC=C(C)Br"
+      ],
+      "options": 2,
+      "notes": [
+        "Unexpected product connectivity relative to independent expectation.",
+        "Preview/run error: ChemistryError: Internal first-stage E/Z remains unassigned; generic ionic HX is not automatically anti/trans. No single 3D stereochemical outcome is asserted. Inspect the conditional 2D HX net equation; no selected 3D hydrohalogenation outcome is asserted for these settings.",
+        "Preview/run error: ChemistryError: Internal first-stage E/Z remains unassigned; generic ionic HX is not automatically anti/trans. No single 3D stereochemical outcome is asserted. Inspect the conditional 2D HX net equation; no selected 3D hydrohalogenation outcome is asserted for these settings."
+      ],
+      "preview": "failed",
+      "geometry": "not run",
+      "mechanism_steps": [
+        0,
+        0
+      ],
+      "status": "Incorrect result"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {"id":"ethanol","category":"organic","smiles":"CCO"},
+  {"id":"benzene","category":"organic","smiles":"c1ccccc1"},
+  {"id":"acetone","category":"organic","smiles":"CC(=O)C"},
+  {"id":"chiral-butanol","category":"organic","smiles":"C[C@H](O)CC"},
+  {"id":"water","category":"inorganic","smiles":"O"},
+  {"id":"carbon-dioxide","category":"inorganic","smiles":"O=C=O"},
+  {"id":"ammonia","category":"inorganic","smiles":"N"},
+  {"id":"sulfur-hexafluoride","category":"inorganic","smiles":"FS(F)(F)(F)(F)F"},
+  {"id":"zirconium-tetrachloride","category":"metal","cid":24817,"smiles":"Cl[Zr](Cl)(Cl)Cl"},
+  {"id":"rhodium-trichloride","category":"metal","cid":24872,"smiles":"Cl[Rh](Cl)Cl"},
+  {"id":"iron-pentacarbonyl","category":"metal","smiles":"[Fe](C#O)(C#O)(C#O)(C#O)C#O"},
+  {"id":"ammonium","category":"charged","smiles":"[NH4+]"},
+  {"id":"glycine-zwitterion","category":"charged","smiles":"[NH3+]CC(=O)[O-]"},
+  {"id":"sodium-chloride","category":"ionic-assembly","smiles":"[Na+].[Cl-]"},
+  {"id":"sodium-hydroxide","category":"ionic-assembly","smiles":"[Na+].[OH-]"},
+  {"id":"methyl-radical","category":"radical","smiles":"[CH3]"}
+]

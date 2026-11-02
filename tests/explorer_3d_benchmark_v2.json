@@ -1,0 +1,18 @@
+[
+  {"id":"aspirin","category":"organic","smiles":"CC(=O)Oc1ccccc1C(=O)O"},
+  {"id":"cyclohexane","category":"organic","smiles":"C1CCCCC1"},
+  {"id":"trans-2-butene","category":"organic","smiles":"C/C=C/C"},
+  {"id":"ethene","category":"organic","smiles":"C=C"},
+  {"id":"phosphorus-trichloride","category":"inorganic","smiles":"P(Cl)(Cl)Cl"},
+  {"id":"silane","category":"inorganic","smiles":"[SiH4]"},
+  {"id":"aluminum-trichloride","category":"metal","smiles":"Cl[Al](Cl)Cl"},
+  {"id":"trimethylaluminum","category":"metal","smiles":"C[Al](C)C"},
+  {"id":"tetraethyllead","category":"metal","smiles":"CC[Pb](CC)(CC)CC"},
+  {"id":"nickel-carbonyl-pubchem","category":"coordination","smiles":"[C-]#[O+].[C-]#[O+].[C-]#[O+].[C-]#[O+].[Ni]"},
+  {"id":"ferrocene-fragments","category":"coordination","smiles":"[Fe+2].[cH-]1cccc1.[cH-]1cccc1"},
+  {"id":"tetramethylammonium","category":"charged","smiles":"C[N+](C)(C)C"},
+  {"id":"acetate","category":"charged","smiles":"CC(=O)[O-]"},
+  {"id":"calcium-chloride","category":"ionic-assembly","smiles":"[Ca+2].[Cl-].[Cl-]"},
+  {"id":"chloromethyl-radical","category":"radical","smiles":"[CH2]Cl"},
+  {"id":"invalid-smiles-control","category":"invalid","smiles":"C1CC"}
+]

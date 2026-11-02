@@ -79,7 +79,7 @@ class AlkyneConfidencePublicTests(unittest.TestCase):
 
     def test_condition_schema_names_stay_synchronized(self):
         from server.reaction_conditions import CONDITION_FIELDS
-        self.assertEqual(set(service.CONDITION_VALUES), CONDITION_FIELDS)
+        self.assertEqual(set(service.CONDITION_VALUES) | {'conditionProfileId', 'conditionProfileVersion'}, CONDITION_FIELDS)
 
     def test_conflicting_activation_is_not_mistaken_for_missing_input(self):
         r, _ = self.workflow("partial", {"catalyst": "metal"})

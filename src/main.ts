@@ -7,13 +7,20 @@ import { BondMeasurements, type MeasurementAtom, type MeasurementViewer } from '
 import { SolutionCalculatorPanel } from './solution-calculator-panel';
 import { solutionCompoundFromMolecule } from './solution-compound';
 import { CALCULATOR_TRANSFER_KEY, calculatorCompoundFromMolecule, encodeCalculatorTransfer } from './calculator-compound';
+import { mountViewerControls, type CameraViewer } from './viewer-controls';
+import './ui-system.css';
+import { mountWorkspaceShell } from './workspace-shell';
+import { resolveExplorerStructure } from './explorer-structure-resolver';
+import { rhodiumUnitCell } from './crystal-unit-cell';
+import './workspace-shell.css';
 
-type Viewer = MeasurementViewer & {
+type Viewer = MeasurementViewer & CameraViewer & {
   removeAllModels: () => void;
   removeAllSurfaces: () => void;
   removeAllLabels: () => void;
   removeAllShapes: () => void;
-  addModel: (data: string, format: string) => { selectedAtoms: (selection: Record<string, never>) => MeasurementAtom[] };
+  addModel: (data: string, format: string, options?: Record<string, unknown>) => { selectedAtoms: (selection: Record<string, never>) => MeasurementAtom[] };
+  addUnitCell: (model: unknown) => unknown;
   setStyle: (selection: Record<string, never>, style: Record<string, unknown>) => void;
   zoomTo: () => void;
   render: () => void;
@@ -36,11 +43,12 @@ function mustElement<T extends Element>(selector: string): T {
 const app = mustElement<HTMLDivElement>('#app');
 
 app.innerHTML = `
-  <main class="shell">
+  <a class="skip-link" href="#main-content">Skip to workspace</a>
+  <main class="shell" id="main-content" tabindex="-1">
     <header class="hero">
       <div>
-        <p class="eyebrow">Chemistry, made tangible</p>
-        <h1>Molecule Playground</h1>
+        <p class="eyebrow">Molecule Playground · Explorer</p>
+        <h1>Explorer</h1>
         <p class="hero-copy">Search a compound. Explore its shape and properties.</p>
       </div>
       <div class="hero-mark" aria-hidden="true">
@@ -48,10 +56,10 @@ app.innerHTML = `
       </div>
       <nav class="hero-nav" aria-label="Project pages">
         <a class="builder-link" href="/">Home</a>
-        <a class="builder-link is-current" href="/explore.html" aria-current="page">Explore molecules</a>
-        <a class="builder-link" href="/builder.html">Build a molecule →</a>
-        <a class="builder-link" href="/reaction-lab.html">Reaction Lab →</a>
-        <a class="builder-link" href="/calculators.html">Calculators →</a>
+        <a class="builder-link is-current" href="/explore.html" aria-current="page">Explore</a>
+        <a class="builder-link" href="/builder.html">Builder</a>
+        <a class="builder-link" href="/reaction-lab.html">Reaction Lab</a>
+        <a class="builder-link" href="/calculators.html">Calculators</a>
       </nav>
     </header>
 
@@ -70,6 +78,7 @@ app.innerHTML = `
           <p id="search-status" role="status">${explorerSamples.length} sample molecules. Search PubChem for more.</p>
           <details class="search-help"><summary>Search tips</summary><p>Use a full name or correctly capitalized formula. Brackets distinguish structures with the same formula. Searches use PubChem. Ionic compounds show information only; some other compounds have a 2D view.</p></details>
         </form>
+        <p class="molecule-list-hint">Scroll the list to see more results.</p>
         <div id="molecule-list" class="molecule-list"></div>
       </aside>
 
@@ -83,6 +92,11 @@ app.innerHTML = `
         </div>
 
         <p id="ionic-notice" class="ionic-notice" role="status" hidden></p>
+        <div id="crystal-controls" class="crystal-controls" hidden aria-label="Structure view">
+          <button type="button" id="crystal-info" aria-pressed="true">Compound information</button>
+          <button type="button" id="crystal-view" aria-pressed="false">View crystal unit cell</button>
+        </div>
+        <p id="structure-provenance" class="ionic-notice" hidden></p>
         <div class="viewer-stage">
           <div id="molecule-viewer" aria-label="Interactive 3D molecule viewer"></div>
           <div id="molecule-fallback" class="molecule-fallback" hidden>
@@ -103,16 +117,19 @@ app.innerHTML = `
             <button type="button" id="open-in-calculators">Open in Calculators →</button>
             <span id="calculator-transfer-status" role="status"></span>
           </div>
-          <div class="explorer-transfer" aria-label="Use this compound in Reaction Lab">
-            <span>Use in Reaction Lab</span>
-            <button type="button" data-reaction-slot="0">Use as molecule 1</button>
-            <button type="button" data-reaction-slot="1">Use as molecule 2</button>
-          </div>
+          <details class="explorer-transfer-options"><summary>Use in Reaction Lab</summary>
+            <div class="explorer-transfer" aria-label="Use this compound in Reaction Lab">
+              <button type="button" data-reaction-slot="0">Use as molecule 1</button>
+              <button type="button" data-reaction-slot="1">Use as molecule 2</button>
+            </div>
+          </details>
         </div>
       </section>
     </section>
   </main>
 `;
+
+mountWorkspaceShell(mustElement<HTMLElement>('.shell'));
 
 const moleculeList = mustElement<HTMLDivElement>('#molecule-list');
 const searchForm = mustElement<HTMLFormElement>('#molecule-search-form');
@@ -124,6 +141,10 @@ const formula = mustElement<HTMLDivElement>('#formula');
 const moleculeInformation = mustElement<HTMLElement>('#molecule-information');
 const viewerStage = mustElement<HTMLDivElement>('.viewer-stage');
 const ionicNotice = mustElement<HTMLParagraphElement>('#ionic-notice');
+const crystalControls = mustElement<HTMLDivElement>('#crystal-controls');
+const crystalInfo = mustElement<HTMLButtonElement>('#crystal-info');
+const crystalView = mustElement<HTMLButtonElement>('#crystal-view');
+const structureProvenance = mustElement<HTMLParagraphElement>('#structure-provenance');
 const viewerStatus = mustElement<HTMLDivElement>('#viewer-status');
 const fallbackView = mustElement<HTMLDivElement>('#molecule-fallback');
 const fallbackImage = mustElement<HTMLImageElement>('#molecule-fallback-image');
@@ -184,10 +205,11 @@ renderMoleculeCards(explorerSamples);
 const viewerHost = mustElement<HTMLDivElement>('#molecule-viewer');
 const viewerFactory = window.$3Dmol;
 const viewer = viewerFactory?.createViewer(viewerHost, {
-  backgroundColor: '#f5f3ee',
+  backgroundColor: '#f7fbff',
   antialias: true,
 });
 const measurements = new BondMeasurements(mustElement<HTMLElement>('#explorer-measurements'), viewer);
+const cameraControls = mountViewerControls(mustElement<HTMLElement>('.viewer-stage'), viewer);
 const solutionCalculator = new SolutionCalculatorPanel(mustElement<HTMLDetailsElement>('#explorer-solution-calculator'));
 
 let activeMoleculeId = '';
@@ -209,6 +231,7 @@ async function showMolecule(molecule: Molecule) {
 
   activeMoleculeId = molecule.id;
   modelReady = false;
+  cameraControls.setEnabled(false);
   const sequence = ++loadSequence;
   measurements.reset();
 
@@ -225,9 +248,18 @@ async function showMolecule(molecule: Molecule) {
   renderMoleculeInformation(moleculeInformation, molecule);
 
   const ionic = isIonicCompound(molecule);
+  const hasCrystal = molecule.origin === 'pubchem' && molecule.cid === 24872;
+  crystalControls.hidden = !hasCrystal;
+  crystalInfo.setAttribute('aria-pressed', 'true');
+  crystalView.setAttribute('aria-pressed', 'false');
+  cameraControls.setVisible(!ionic);
   viewerStage.hidden = ionic;
   ionicNotice.hidden = !ionic;
-  ionicNotice.textContent = ionic ? 'Ionic compound — no 3D diagram in this viewer. Information is shown below.' : '';
+  ionicNotice.textContent = ionic ? (molecule.cid === 24872
+    ? 'This rhodium chloride record contains separate charged fragments. No verified discrete molecular 3D model is available; you can separately view a referenced anhydrous RhCl₃ crystal unit cell.'
+    : 'Ionic compound — no 3D diagram in this viewer. Information is shown below.') : '';
+  structureProvenance.hidden = true;
+  structureProvenance.replaceChildren();
 
   viewerStatus.textContent = `Loading ${molecule.name}…`;
   viewerStatus.classList.remove('is-hidden', 'is-error');
@@ -258,9 +290,7 @@ async function showMolecule(molecule: Molecule) {
     viewer?.removeAllShapes();
     viewer?.render();
     if (!viewer) throw new Error('3Dmol.js did not load. Check the network connection.');
-    const response = await fetch(molecule.structureFile);
-    if (!response.ok) throw new Error('A 3D structure is not available for this compound.');
-    const structure = await response.text();
+    const { structure, provenance } = await resolveExplorerStructure(molecule);
 
     if (sequence !== loadSequence) return;
 
@@ -273,6 +303,15 @@ async function showMolecule(molecule: Molecule) {
     measurements.setAtoms(model.selectedAtoms({}));
     viewer.render();
     modelReady = true;
+
+    structureProvenance.append(document.createTextNode(`${provenance.kind.toUpperCase()} · ${provenance.source} · ${provenance.physicalForm}. Method: ${provenance.method}; convergence: ${provenance.convergence}. ${provenance.limitations} `));
+    if (provenance.sourceUrl) {
+      const source = document.createElement('a'); source.href = provenance.sourceUrl; source.target = '_blank'; source.rel = 'noopener noreferrer'; source.textContent = 'Source reference';
+      structureProvenance.append(source);
+    }
+    structureProvenance.hidden = false;
+
+    cameraControls.setEnabled(true);
 
     if (sequence === loadSequence) {
       viewerStatus.textContent = `${molecule.name} ready`;
@@ -294,7 +333,11 @@ async function showMolecule(molecule: Molecule) {
         fallbackImage.alt = `PubChem 2D depiction of ${molecule.name}`;
         fallbackView.hidden = false;
         viewerHint.textContent = '2D reference · rotation is unavailable';
-        viewerStatus.textContent = '3D model unavailable here; showing PubChem’s 2D depiction.';
+        viewerStatus.textContent = molecule.cid === 24872
+          ? 'Rhodium chloride: PubChem has no supported 3D conformer, and its solid is an extended crystal. No verified discrete molecular 3D model is available here; showing the 2D record.'
+          : molecule.cid === 26040
+            ? 'Iron pentacarbonyl: a NIST molecular calculation exists, but the selected PubChem record has a different connectivity representation. No automatic substitution is made; showing the PubChem 2D record.'
+            : '3D model unavailable here; showing PubChem’s 2D depiction.';
         modelReady = true;
         return;
       } catch (fallbackError) {
@@ -312,6 +355,59 @@ async function showMolecule(molecule: Molecule) {
     }
   }
 }
+
+crystalInfo.addEventListener('click', () => {
+  if (!activeMolecule || crystalInfo.getAttribute('aria-pressed') === 'true') return;
+  modelReady = false;
+  void showMolecule(activeMolecule);
+});
+
+crystalView.addEventListener('click', async () => {
+  if (!activeMolecule || activeMolecule.origin !== 'pubchem' || activeMolecule.cid !== 24872) return;
+  const sequence = ++loadSequence;
+  modelReady = false;
+  measurements.reset();
+  crystalInfo.setAttribute('aria-pressed', 'false');
+  crystalView.setAttribute('aria-pressed', 'true');
+  viewerStage.hidden = false;
+  ionicNotice.hidden = true;
+  structureProvenance.hidden = true;
+  fallbackView.hidden = true;
+  cameraControls.setVisible(true);
+  cameraControls.setEnabled(false);
+  viewerStatus.classList.remove('is-hidden', 'is-error');
+  viewerStatus.textContent = 'Loading the crystal unit cell…';
+  try {
+    if (!viewer) throw new Error('3D viewer unavailable.');
+    const response = await fetch('/crystals/rhodium-trichloride-cod-1534198.cif');
+    if (!response.ok) throw new Error('Crystal reference is unavailable.');
+    const cif = await response.text();
+    if (sequence !== loadSequence) return;
+    viewer.removeAllModels(); viewer.removeAllSurfaces(); viewer.removeAllLabels(); viewer.removeAllShapes();
+    const model = viewer.addModel(rhodiumUnitCell(cif), 'cif', { assignBonds: false });
+    const atoms = model.selectedAtoms({});
+    if (atoms.length !== 16 || atoms.filter(atom => atom.elem === 'Rh').length !== 4 || atoms.some(atom => ![atom.x, atom.y, atom.z].every(Number.isFinite))) throw new Error('Crystal symmetry could not be displayed reliably.');
+    viewer.setStyle({}, { sphere: { colorscheme: 'Jmol', scale: 0.28 } });
+    viewer.addUnitCell(model);
+    viewer.zoomTo();
+    measurements.setAtoms(atoms);
+    viewer.render();
+    modelReady = true;
+    structureProvenance.textContent = 'CRYSTAL · Anhydrous RhCl₃, monoclinic C 2/m. COD 1534198; Bärnighausen and Handa (1964), X-ray structure. Unit-cell atoms are symmetry-generated; this is an extended solid, not a discrete molecule or hydrated sample. Measurements use the displayed coordinates and do not apply minimum-image periodic distances. Layer stacking disorder is not represented. ';
+    const source = document.createElement('a'); source.href = 'https://www.crystallography.net/cod/1534198.html'; source.target = '_blank'; source.rel = 'noopener noreferrer'; source.textContent = 'Crystal source';
+    structureProvenance.append(source); structureProvenance.hidden = false;
+    viewerHint.textContent = 'Crystal unit cell · drag to rotate · scroll to zoom';
+    viewerStatus.textContent = 'Crystal unit cell ready';
+    cameraControls.setEnabled(true);
+    window.setTimeout(() => { if (sequence === loadSequence) viewerStatus.classList.add('is-hidden'); }, 700);
+  } catch (error) {
+    if (sequence !== loadSequence) return;
+    viewer?.removeAllModels(); viewer?.removeAllShapes(); viewer?.render();
+    measurements.reset();
+    viewerStatus.textContent = error instanceof Error ? error.message : 'Crystal view unavailable.';
+    viewerStatus.classList.add('is-error');
+  }
+});
 
 transferButtons.forEach((button) => button.addEventListener('click', () => {
   const molecule = activeMolecule;

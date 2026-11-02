@@ -17,6 +17,13 @@ from rdkit import Chem
 from rdkit.Chem import AllChem, Descriptors, rdMolDescriptors
 
 if __package__:
+    from . import named_condition_profiles as named_profiles, reaction_temperature_profiles as thermal_profiles
+    from . import explorer_rdkit_geometry, coordination_reference, nist_molecular_reference, pubchem_service
+else:
+    import named_condition_profiles as named_profiles, reaction_temperature_profiles as thermal_profiles
+    import explorer_rdkit_geometry, coordination_reference, nist_molecular_reference, pubchem_service
+
+if __package__:
     from .reaction_condition_guidance import guidance as guided_condition_metadata
 else:
     from reaction_condition_guidance import guidance as guided_condition_metadata
@@ -26,7 +33,7 @@ if __package__:
     from .reaction_diagrams import build_reaction_diagram, mapped_product_molecule
     from .reaction_engine import generate_pair, reagent_role
     from .reaction_reasoning import explain_pathway, compare_pathways
-    from .reaction_conditions import assess_conditions, REVIEWED
+    from .reaction_conditions import assess_conditions, cooling_confidence, REVIEWED
     from .reaction_mechanisms import build_mechanism
     from .reaction_information import reaction_information
     from .functional_groups import inspect_structure
@@ -37,7 +44,7 @@ else:  # Also support the documented ``python server/chemistry_server.py`` comma
     from reaction_diagrams import build_reaction_diagram, mapped_product_molecule
     from reaction_engine import generate_pair, reagent_role
     from reaction_reasoning import explain_pathway, compare_pathways
-    from reaction_conditions import assess_conditions, REVIEWED
+    from reaction_conditions import assess_conditions, cooling_confidence, REVIEWED
     from reaction_mechanisms import build_mechanism
     from reaction_information import reaction_information
     from functional_groups import inspect_structure
@@ -75,6 +82,7 @@ REACTANTS = {
     "chloromethane": {"name": "Chloromethane", "smiles": "CCl", "aliases": ["methyl chloride"]},
     "bromoethane": {"name": "Bromoethane", "smiles": "CCBr", "aliases": ["ethyl bromide"]},
     "2-bromopropane": {"name": "2-Bromopropane", "smiles": "CC(C)Br", "aliases": ["isopropyl bromide"]},
+    "tert-butyl-bromide": {"name": "2-Bromo-2-methylpropane", "smiles": "CC(C)(C)Br", "aliases": ["tert-butyl bromide"]},
     "tert-butyl-chloride": {"name": "2-Chloro-2-methylpropane", "smiles": "CC(C)(C)Cl", "aliases": ["tert-butyl chloride"]},
     "hydroxide": {"name": "Hydroxide ion", "smiles": "[OH-]", "formula": "OH⁻", "aliases": ["hydroxide", "OH-", "HO-"]},
     "sodium-hypochlorite": {"name": "Sodium hypochlorite", "smiles": "[Na+].[O-]Cl", "formula": "NaClO", "aliases": ["sodium oxychloride", "NaClO"]},
@@ -171,8 +179,8 @@ REACTIONS = {
 # Non-aligned pathways remain visible because mechanisms may compete.
 CONDITION_VALUES = {
     "solvent": {"", "polar-aprotic", "aqueous-protic", "ethanolic-protic", "dry"},
-    "temperature": {"", "ambient", "heated"},
-    "catalyst": {"", "none", "acid", "metal", "lindlar", "osmium", "radical"},
+    "temperature": {"", "cooled", "ambient", "heated"},
+    "catalyst": {"", "none", "acid", "base", "metal", "lindlar", "osmium", "radical"},
     "oxidationStage": {"", "first", "further"},
     "additionStage": {"", "one", "two"},
     "polymerUnits": {"", "2", "4", "6"},
@@ -458,12 +466,18 @@ def _conditions(raw: dict[str, str] | None) -> dict[str, str]:
     # Namespaced declaration is consumed ONLY by secondary oxidation. Keep it
     # unknown to other pathways, preserving their existing input assessment.
     result.secondary_oxidation_profile = getattr(raw,'secondary_oxidation_profile',raw.get(secondary_alcohol_oxidation_rule.PROFILE_KEY,''))
-    result.unsupported_fields = tuple(sorted(str(k)[:120] for k in raw if k not in CONDITION_VALUES))
+    result.unsupported_fields = tuple(sorted(str(k)[:120] for k in raw if k not in CONDITION_VALUES and k not in named_profiles.SELECTION_FIELDS))
     for key, allowed in CONDITION_VALUES.items():
         value = raw.get(key, "")
         if not isinstance(value, str) or value not in allowed:
             raise ChemistryError(f"Unsupported condition value for '{key}'; choose from the available options. No new condition model is inferred.")
         result[key] = value
+    if any(key in raw for key in named_profiles.SELECTION_FIELDS):
+        identifier, version = raw.get("conditionProfileId"), raw.get("conditionProfileVersion")
+        if (not isinstance(identifier, str) or not re.fullmatch(r"[a-z][a-z0-9-]{0,127}", identifier)
+                or not isinstance(version, str) or not re.fullmatch(r"[1-9][0-9]{0,5}", version)):
+            raise ChemistryError("A named condition profile requires an exact ID and string version; no arbitrary profile facts are accepted.")
+        result.update(conditionProfileId=identifier, conditionProfileVersion=version)
     return result
 
 
@@ -472,6 +486,59 @@ def _profile(reaction: dict[str, object]) -> dict[str, str]:
 
 
 def _assessment(reaction: dict[str, object], conditions: dict[str, str]) -> dict[str, object]:
+    selection_issue = named_profiles.selection_issue(thermal_profiles.selected_profile(conditions), reaction, conditions)
+    if selection_issue:
+        return named_profiles.reject_selection({"state": "incomplete", "note": ""}, conditions, selection_issue)
+    assessment = _base_assessment(reaction, conditions)
+    if conditions.get("catalyst") == "base":
+        pathway = reaction["mechanism"]
+        if pathway in {"SN2", "E2", "Ester saponification"}:
+            role = ("nucleophile" if pathway == "SN2" else "base that accepts a proton" if pathway == "E2" else "consumed hydroxide reagent")
+            assessment["note"] = (f"Basic conditions identify the actual hydroxide reactant as the {role}; "
+                                  "they do not add another reagent or represent a separate base catalyst. "
+                                  "The selected solvent is a separate setting. " + assessment.get("note", ""))
+        else:
+            note = ("Base / Basic Conditions is not validated for this pathway. Select the actual required reactants "
+                    "and a supported condition model; this selection does not supply a reagent or predict competing chemistry.")
+            assessment.update(state="incomplete", status="unevaluated", label="Basic conditions not validated", canRun=False,
+                              note=note + " " + assessment.get("note", ""))
+            assessment.setdefault("conditionIssues", []).append({"field": "catalyst", "kind": "unvalidated-alternative", "explanation": note})
+            assessment.setdefault("factors", {})["catalyst"] = {"status": "unevaluated", "effect": "unknown", "explanation": note}
+            if isinstance(assessment.get("evidence"), dict):
+                assessment["evidence"].update(canGenerate3D=False, label="Basic conditions not validated · conditional 2D only")
+    if conditions.get("temperature") != "cooled":
+        return assessment
+    original_assessment = assessment
+    assessment = cooling_confidence(assessment, conditions, reaction)
+    if reaction.get("primaryOxidationModel"):
+        # Cooling cannot turn an unvalidated aldehyde stopping point into a
+        # merely correctable temperature choice. Retain that stronger reason.
+        assessment["label"] = original_assessment["label"]
+        assessment["confidenceLabel"] = original_assessment["confidenceLabel"] + " · cooled conditions unvalidated"
+    if reaction["mechanism"] in addition_contract.NET_PATHWAYS or reaction.get("primaryOxidationModel") or reaction.get("secondaryOxidationModel"):
+        # Regenerate confidence from the overlaid gate, not the pre-cooling
+        # permission. Calculators and diagrams consume this same evidence.
+        assessment["evidence"] = addition_contract.evidence(reaction, assessment, conditions)
+    else:
+        # Older pathways did not have a versioned addition confidence payload.
+        # Supply an explicit cooled-only presentation contract without turning
+        # their reference-example profiles into new chemistry requirements.
+        assessment["evidence"] = {
+            "version": 1, "structuralEligibility": "eligible", "reagentIdentity": "validated",
+            "assertionLevel": "conditional-net", "experimentalOutcome": "not-predicted",
+            "label": assessment["confidenceLabel"], "requiredSettings": [], "missingRequiredSettings": [],
+            "requirementsState": "not-evaluated", "conditionCompleteness": "not-evaluated",
+            "unknownConditions": [key for key, factor in assessment["factors"].items()
+                                  if factor["status"] != "model-match"],
+            "evaluatedFactors": assessment["factors"], "canPreview2D": True, "canGenerate3D": False,
+            "renderingPolicy": "unvalidated-low-temperature-gate", "renderingNote": assessment["note"]}
+        if assessment.get("cooling", {}).get("canGenerate3D") is True and assessment.get("canRun") is True:
+            assessment["evidence"].update(canGenerate3D=True, requirementsState="assumptions-satisfied",
+                conditionCompleteness="model-assumptions-only", renderingPolicy="named-theoretical-product-conformer")
+    return thermal_profiles.attach_named_profile(assessment, conditions)
+
+
+def _base_assessment(reaction: dict[str, object], conditions: dict[str, str]) -> dict[str, object]:
     if reaction.get("secondaryOxidationModel"):
         assessment=secondary_alcohol_oxidation_rule.assess_conditions(reaction,conditions)
         assessment["evidence"]=addition_contract.evidence(reaction,assessment,conditions)
@@ -633,10 +700,16 @@ def _serialize_reaction(reaction_id: str, reaction: dict[str, object], condition
     }
     if conditions is not None:
         payload["assessment"] = _assessment(reaction, conditions)
+        if conditions.get("temperature") == "cooled":
+            payload["reasoning"]["label"] = payload["assessment"]["label"]
+            for factor in payload["reasoning"]["factors"]:
+                if factor["factor"] == "temperature":
+                    factor.update(value="Cooled / Low Temperature", effect=payload["assessment"]["factors"]["temperature"]["effect"],
+                                  explanation=payload["assessment"]["factors"]["temperature"]["explanation"])
         guidance = guided_condition_metadata(reaction_id, reaction, payload["assessment"], conditions)
         if guidance is not None:
             payload["guidedConditions"] = guidance
-    if reaction["mechanism"] in addition_contract.NET_PATHWAYS or reaction.get("primaryOxidationModel") or reaction.get("secondaryOxidationModel"):
+    if reaction["mechanism"] in addition_contract.NET_PATHWAYS or reaction.get("primaryOxidationModel") or reaction.get("secondaryOxidationModel") or (conditions is not None and conditions.get("temperature") == "cooled"):
         context = _conditions(conditions)
         assessment = payload.get("assessment") or _assessment(reaction, context)
         payload["stoichiometry"]["context"] = addition_contract.calculation_context(
@@ -685,7 +758,7 @@ def match_reactions(reactant_a: str | dict[str, str], reactant_b: str | dict[str
             "optionCounts": addition_contract.option_counts(options),
             "interpretationNotes": interpretation_notes, "unsupportedReasons": unsupported,
             "structuralEligibility": "eligible" if matches else "unsupported",
-            "supportState": "Conditional" if conditional else "Supported" if matches else "Unsupported",
+            "supportState": "Conditional" if matches and (conditional or context.get("temperature") == "cooled") else "Supported" if matches else "Unsupported",
             "comparison": comparison}
 
 
@@ -764,6 +837,11 @@ def reaction_diagram(reaction_id: str, reactant_a: str | dict[str, str], reactan
         assessment = _assessment(reaction, context)
         diagram["assessment"] = assessment
         diagram["note"] = "Conditional ionic HX net option. " + assessment["note"] + " " + diagram["note"]
+    if context.get("temperature") == "cooled" or named_profiles.reference(context) or context.get("catalyst") == "base":
+        # The same confidence contract also covers older non-addition diagrams.
+        diagram["assessment"] = _assessment(reaction, context)
+        if diagram["assessment"]["note"] not in diagram["note"]:
+            diagram["note"] = diagram["assessment"]["note"] + " " + diagram["note"]
     return {**diagram,
             "mechanism": build_mechanism(reaction, {**REACTANTS, **custom}),
             "interpretationNotes": interpretation_notes}
@@ -775,6 +853,14 @@ def run_curated_reaction(reaction_id: str, reactant_a: str | dict[str, str], rea
     reaction = _reactions_for_pair(*pair_ids, {**REACTANTS, **custom}, context)[0].get(reaction_id)
     if not reaction or sorted(reaction["reactants"]) != sorted(pair_ids):
         raise ChemistryError("Choose a reaction that matches both selected molecules.")
+
+    if context.get("catalyst") == "base" and reaction["mechanism"] not in {"SN2", "E2", "Ester saponification"}:
+        raise ChemistryError(_assessment(reaction, context)["note"])
+
+    if context.get("temperature") == "cooled" or named_profiles.reference(context):
+        cooling_assessment = _assessment(reaction, context)
+        if not cooling_assessment.get("canRun", False):
+            raise ChemistryError(cooling_assessment["note"])
 
     if reaction["mechanism"] == "Aldehyde oxidation":
         assessment = _assessment(reaction, context)
@@ -861,6 +947,41 @@ def _unmapped_smiles(molecule: Chem.Mol) -> str:
     for atom in copy.GetAtoms():
         atom.SetAtomMapNum(0)
     return Chem.MolToSmiles(Chem.RemoveHs(copy), canonical=True, isomericSmiles=True)
+
+
+def resolve_pubchem_structure(cid: int) -> tuple[str | None, dict[str, str]]:
+    """Resolve the existing PubChem/RDKit paths with honest provenance."""
+    structure = get_pubchem_structure(cid)
+    if structure:
+        return structure, {"source": "pubchem", "kind": "calculated", "method": "PubChem3D", "convergence": "unknown"}
+    smiles = get_pubchem_smiles(cid)
+    molecule = Chem.MolFromSmiles(smiles) if smiles else None
+    if molecule is not None:
+        generated = explorer_rdkit_geometry.generate_fallback(molecule, BUILDER_3D_ELEMENTS)
+        if generated:
+            return generated["molfile"], {"source": "rdkit", "kind": "calculated", "method": str(generated["forceField"]), "convergence": "converged"}
+    return None, {}
+
+
+def resolve_coordination_reference(cid: int) -> str | None:
+    if cid not in coordination_reference.CARBONYL_PROFILES or not coordination_reference.matches_reviewed_fragments(cid, get_pubchem_smiles(cid)):
+        return None
+    return coordination_reference.fetch_nist_reference() if cid == 26040 else coordination_reference.fetch_nist_reference(cid)
+
+
+def resolve_nist_molecular_reference(cid: int) -> dict[str, str] | None:
+    payload = pubchem_service._request_json(f'/compound/cid/{cid}/property/SMILES,InChI,InChIKey/JSON')
+    records = payload.get('PropertyTable', {}).get('Properties', []) if payload else []
+    if len(records) != 1 or records[0].get('CID') != cid:
+        return None
+    record = records[0]
+    mol = Chem.MolFromSmiles(record.get('SMILES', ''))
+    if mol is None:
+        return None
+    result = nist_molecular_reference.lookup(record.get('SMILES'), record.get('InChI'), record.get('InChIKey'))
+    if result:
+        result['selectedStructure'] = Chem.MolToSmiles(mol, canonical=True, isomericSmiles=True)
+    return result
 
 
 def analyze_molfile(molfile: str) -> dict[str, object]:
@@ -961,11 +1082,13 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
 
-    def _send_structure(self, structure: str) -> None:
+    def _send_structure(self, structure: str, provenance: dict[str, str] | None = None) -> None:
         data = structure.encode("utf-8")
         self.send_response(200)
         self.send_header("Content-Type", "chemical/x-mdl-sdfile; charset=utf-8")
         self.send_header("Cache-Control", "public, max-age=3600")
+        for key, value in (provenance or {}).items():
+            self.send_header(f"X-Structure-{key.title()}", value)
         self.send_header("Content-Length", str(len(data)))
         self.end_headers()
         self.wfile.write(data)
@@ -990,13 +1113,24 @@ class Handler(BaseHTTPRequestHandler):
             except PubChemError as exc:
                 self._send_json({"error": str(exc)}, 503)
             return
-        if parsed.path in ("/api/pubchem/structure", "/api/pubchem/depiction"):
+        if parsed.path in ("/api/pubchem/structure", "/api/pubchem/depiction", "/api/reference/coordination", "/api/reference/molecular"):
             raw_cid = parse_qs(parsed.query).get("cid", [""])[0]
             if not raw_cid.isdecimal() or len(raw_cid) > 10 or int(raw_cid) <= 0:
                 self._send_json({"error": "Choose a valid PubChem compound."}, 422)
                 return
             try:
                 cid = int(raw_cid)
+                if parsed.path == "/api/reference/molecular":
+                    result = resolve_nist_molecular_reference(cid)
+                    self._send_json(result if result else {"error": "No exact validated molecular reference is available."}, 200 if result else 404)
+                    return
+                if parsed.path == "/api/reference/coordination":
+                    reference = resolve_coordination_reference(cid)
+                    if reference:
+                        self._send_structure(reference, {"source": "nist", "kind": "calculated"})
+                    else:
+                        self._send_json({"error": "The reviewed coordination reference is unavailable or does not match this record."}, 404)
+                    return
                 if parsed.path == "/api/pubchem/depiction":
                     depiction = get_pubchem_depiction(cid)
                     if depiction:
@@ -1004,18 +1138,9 @@ class Handler(BaseHTTPRequestHandler):
                     else:
                         self._send_json({"error": "A 2D depiction is not available for this PubChem compound."}, 404)
                     return
-                structure = get_pubchem_structure(cid)
-                if structure is None:
-                    smiles = get_pubchem_smiles(cid)
-                    molecule = Chem.MolFromSmiles(smiles) if smiles else None
-                    if molecule is not None:
-                        try:
-                            generated = analyze_molfile(Chem.MolToMolBlock(molecule))
-                            structure = generated.get("molfile") if generated["representation"] == "3d" else None
-                        except ChemistryError:
-                            pass
+                structure, provenance = resolve_pubchem_structure(cid)
                 if structure:
-                    self._send_structure(structure)
+                    self._send_structure(structure, provenance)
                 else:
                     self._send_json({"error": "A 3D structure is not available for this PubChem compound."}, 404)
             except PubChemError as exc:

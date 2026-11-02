@@ -92,7 +92,7 @@ export class ReactionCalculatorPanel {
       if (data.context) {
         const context = data.context;
         this.notes.append(textElement('p', `${context.label}. ${context.warning}`, 'calculator-context-warning'));
-        const conditionNames: Record<string, string> = { oxidationStage: 'oxidation stage', catalyst: 'catalyst / activation', workup: 'product release / work-up', secondaryOxidationProfile: 'secondary oxidation medium profile', additionStage: 'equivalents', polymerUnits: 'chain length' };
+        const conditionNames: Record<string, string> = { oxidationStage: 'oxidation stage', catalyst: 'additional catalyst / activation', workup: 'product release / work-up', secondaryOxidationProfile: 'secondary oxidation medium profile', additionStage: 'equivalents', polymerUnits: 'chain length' };
         if (context.unknownConditions.length) this.notes.append(textElement('p', `Not established: ${context.unknownConditions.map(key => conditionNames[key] ?? key).join(', ')}.`));
         for (const assumption of context.assumptions) this.methodNotes.append(textElement('p', assumption));
       }

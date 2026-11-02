@@ -1,0 +1,38 @@
+{
+  "repository": "ryanchen2010-eng/project",
+  "origin": "git@github.com:ryanchen2010-eng/project.git",
+  "branch": "codex/molecule-playground-beta-v1",
+  "commit": "e3fb8a3c9e91690bfc4c9df64a3e323f5b46b367",
+  "tree": "3d9a3889fb7b70bf6dc544044626f0d219cc4244",
+  "mainUnchanged": "a6142c67563978111ea672b93059ca395c8c3cb3",
+  "runtimeSnapshotFiles": 107,
+  "runtimeMismatches": [],
+  "snapshotOverwritten": false,
+  "originalArchiveSha256": "52ee21388501a6a317480797b27edbc961616e9cb7e54c69723f632ffabfbcbb",
+  "sourcePublished": true,
+  "appDeployed": false,
+  "liveUrl": null,
+  "renderForm": {
+    "url": "https://dashboard.render.com/web/new?onboarding=active",
+    "name": "molecule-playground-beta-v1",
+    "source": "https://github.com/ryanchen2010-eng/project",
+    "branch": "codex/molecule-playground-beta-v1",
+    "runtime": "Docker",
+    "region": "Ohio (US East)",
+    "plan": "Free ($0/month, 0.1 CPU, 512 MB)",
+    "autoDeploy": "Off",
+    "healthCheckPath": "/healthz",
+    "dockerContext": ".",
+    "dockerfile": "./Dockerfile",
+    "newCredentialsEntered": false
+  },
+  "requiredUserAction": "Enter CAPSTONE_TRIAL_PASSWORD and a random hexadecimal CAPSTONE_SESSION_SECRET directly in Render, then submit Deploy web service. Do not use Render's base64 Generate for the hex secret.",
+  "preserved": {
+    "workingBranch": "codex/step-3-reaction-lab",
+    "workingHead": "fa00ac9acc75b82e0df4e57148755a904dc80cec",
+    "indexSha256": "2c75388cd6edf8bab2ad85639ead733ade239f5b06e01cdfef875418108cbdde",
+    "main": true,
+    "originalSnapshot": true
+  },
+  "note": "Dedicated branch published with explicit user approval. Original snapshot and user work retained; Render service creation/hosted verification await private credential entry."
+}

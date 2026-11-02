@@ -32,6 +32,7 @@ function harness({ fetcher, failModel = false } = {}) {
   const calls = [];
   let available = false;
   const state = {
+    cameraControls: { setEnabled() {}, setVisible() {} },
     reactionSiteShapes: [],
     revision: 1, selectedReaction: { id: 'sn2', productEquationFormula: 'CH3OH', explanation: 'Substitution', conditions: 'Example', sourceUrl: 'https://example.com' },
     productReady: false, previewMode: '2d', runController: null, diagramController: null,

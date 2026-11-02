@@ -1,0 +1,20 @@
+const assert=require('node:assert/strict');
+const {chromium}=require('playwright');
+const QA_URL=process.env.QA_URL;
+if (!QA_URL || !/^http:\/\/127\.0\.0\.1:\d+$/.test(QA_URL)) throw Error('QA_URL must be a localhost-only QA server.');
+(async()=>{const browser=await chromium.launch({channel:'chrome',headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ try{for(const width of [1440,320]){
+  const context=await browser.newContext({viewport:{width,height:1000}});
+  await context.addInitScript(()=>{const a={id:'drawn-1',name:'Drawn structure · C4H8',formula:'C4H8',smiles:'C=C(C)C',aliases:[]};const c={temperature:'cooled',solvent:'dry',catalyst:'none',conditionProfileId:'cooled-isobutylene-hcl-v1',conditionProfileVersion:'1'};sessionStorage.setItem('molecule-playground.reaction-draft.v1',JSON.stringify({values:[a.name,'Hydrogen chloride'],selectedIds:['drawn-1','hydrogen-chloride'],drawnInputs:[a,null],conditions:c}));});
+  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(QA_URL+'/reaction-lab.html',{waitUntil:'domcontentloaded'});
+  const old=page.locator('.reaction-option').filter({has:page.locator('strong',{hasText:/^Hydrohalogenation ·/})}).first();await old.waitFor({timeout:30000});let d=page.waitForResponse(r=>r.url().endsWith('/api/reactions/diagram')&&r.status()===200);await old.click();let payload=await(await d).json();assert.equal(payload.assessment.canRun,true);assert.equal(payload.assessment.cooling.modelId,'cooled-isobutylene-hcl-v1');
+  let release,start;const held=new Promise(r=>release=r),started=new Promise(r=>start=r);await page.route('**/api/reactions/run',async route=>{const response=await route.fetch();start();await held;try{await route.fulfill({response});}catch{}});
+  await page.locator('#view-compare').click();await started;
+  if(!await page.locator('#reactant-b').isVisible())await page.getByRole('button',{name:'Edit conditions',exact:true}).click();
+  await page.locator('#reactant-b').fill('Hydrogen peroxide');
+  const next=page.locator('.reaction-option').filter({has:page.locator('strong',{hasText:/^Alkene dihydroxylation ·/})}).first();await next.waitFor({timeout:30000});d=page.waitForResponse(r=>r.url().endsWith('/api/reactions/diagram')&&r.status()===200);await next.click();payload=await(await d).json();assert.equal(payload.assessment.canRun,false);
+  if(!await page.locator('#reaction-temperature').isVisible())await page.getByRole('button',{name:'Edit conditions',exact:true}).click();
+  const host=page.locator('#guided-conditions');await host.locator('> details > summary').click();await host.getByRole('checkbox').check();const applied=page.waitForResponse(r=>r.url().endsWith('/api/reactions/diagram')&&r.status()===200);await host.getByRole('button',{name:'Apply supported settings',exact:true}).click();payload=await(await applied).json();assert.equal(payload.assessment.canRun,true);assert.equal(payload.assessment.cooling.modelId,'cooled-isobutylene-os-peroxide-v1');
+  release();await page.waitForTimeout(900);assert.equal(await page.locator('#result-details').evaluate(e=>e.hidden),true);assert.equal(await page.locator('#product-measurements').evaluate(e=>e.hidden),true);assert.equal(await page.locator('#reaction-calculator .calculator-output').evaluate(e=>e.hidden),true);
+  await page.unroute('**/api/reactions/run');const run=page.waitForResponse(r=>r.url().endsWith('/api/reactions/run')&&r.status()===200);await page.locator('#view-compare').click();const product=(await(await run).json()).product;assert.equal(product.smiles,'CC(C)(O)CO');await page.waitForFunction(()=>document.querySelector('#result-placeholder').hidden);assert.deepEqual(errors,[]);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));console.log(JSON.stringify({width,old:'HCl',new:'Os/H2O2',stale:'discarded',newProduct:product.smiles}));await context.close();
+ }}finally{await browser.close()}})().catch(e=>{console.error(e);process.exitCode=1});

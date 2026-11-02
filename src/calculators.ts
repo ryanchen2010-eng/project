@@ -10,6 +10,12 @@ import { mountReactionAmounts } from './calculator-reactions';
 import { mountEquilibriumCalculator } from './equilibrium-calculator-panel';
 import { mountAcidBaseCalculator } from './acid-base-calculator-panel';
 import { mountSolubilityCalculator } from './solubility-calculator-panel';
+import { mountThermochemistry } from './thermochemistry-panel';
+import './ui-system.css';
+import { mountWorkspaceShell } from './workspace-shell';
+import './workspace-shell.css';
+
+mountWorkspaceShell(document.querySelector<HTMLElement>('.calculator-shell')!);
 
 const topics = [
   { id: 'moles', name: 'Moles and particles', description: 'Convert mass, moles and counts of a specified entity.', model: 'Local arithmetic' },
@@ -18,6 +24,7 @@ const topics = [
   { id: 'equilibrium', name: 'Equilibrium', description: 'K/Q or final concentrations for one balanced reversible reaction.', model: 'Defined model · entered constants' },
   { id: 'acid-base', name: 'Acids, bases and buffers', description: 'pH and species concentrations for one acid/base family, including water.', model: 'Defined model · entered constants' },
   { id: 'solubility', name: 'Solubility', description: 'Saturation and Qsp for one salt producing two ion types.', model: 'Defined model · entered constants' },
+  { id: 'thermochemistry', name: 'Thermochemistry', description: 'Heat, reaction enthalpy, entropy and Gibbs free energy.', model: 'User-entered thermodynamic data' },
 ] as const;
 type TopicId = typeof topics[number]['id'];
 function element<T extends Element>(id: string) {
@@ -57,6 +64,7 @@ initializers.set('reactions', () => mountReactionAmounts(sections.get('reactions
 initializers.set('equilibrium', () => mountEquilibriumCalculator(sections.get('equilibrium')!));
 initializers.set('acid-base', () => mountAcidBaseCalculator(sections.get('acid-base')!));
 initializers.set('solubility', () => mountSolubilityCalculator(sections.get('solubility')!));
+initializers.set('thermochemistry', () => mountThermochemistry(sections.get('thermochemistry')!));
 
 function setCompound(compound?: CalculatorCompound) {
   molePanel.setCompound(compound); solutionPanel.setCompound(compound);

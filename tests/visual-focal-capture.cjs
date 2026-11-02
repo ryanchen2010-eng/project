@@ -1,0 +1,21 @@
+const {chromium} = require('playwright');
+const fs = require('node:fs');
+const path = require('node:path');
+const base = process.env.QA_URL;
+const stage = process.env.CAPTURE_STAGE;
+if (!/^http:\/\/127\.0\.0\.1:\d+$/.test(base || '') || !['before','after'].includes(stage)) throw Error('Local QA_URL and before/after CAPTURE_STAGE required');
+const out = path.resolve('history/visual-progress-upload-part-2');
+const pages = [['home','/'],['explorer','/explore.html'],['builder','/builder.html'],['reaction-lab','/reaction-lab.html'],['calculators','/calculators.html']];
+(async()=>{const browser = await chromium.launch({channel:'chrome',headless:true,args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+try {for(const [size,width,height] of [['desktop',1440,900],['mobile',390,844]]) for(const [name,url] of pages) {
+  const file = path.join(out, `2026-10-30-focal-${stage}-${name}-${size}.png`);
+  if (fs.existsSync(file)) throw Error(`Will not overwrite ${file}`);
+  const page = await browser.newPage({viewport:{width,height}});
+  await page.goto(base+url,{waitUntil:'domcontentloaded'});
+  if(name==='builder') await page.locator('#ketcher-editor').waitFor({state:'visible',timeout:30000});
+  if(name==='explorer') await page.locator('#molecule-title').waitFor({state:'visible',timeout:30000});
+  if(name==='reaction-lab') await page.locator('#reactant-a').waitFor({state:'visible',timeout:30000});
+  if(name==='calculators') await page.locator('#calculator-title').waitFor({state:'visible',timeout:30000});
+  await page.screenshot({path:file,fullPage:true});
+  console.log(`${stage} ${name} ${size}: ${file}`); await page.close();
+} } finally {await browser.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

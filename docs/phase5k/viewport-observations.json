@@ -1,0 +1,120 @@
+{
+  "currentPages": [
+    {
+      "name": "home",
+      "size": "desktop",
+      "height": 1000,
+      "overflow": false,
+      "pageHeight": 1407,
+      "width": 1440
+    },
+    {
+      "name": "explorer",
+      "size": "desktop",
+      "height": 1000,
+      "overflow": false,
+      "pageHeight": 1961,
+      "width": 1440
+    },
+    {
+      "name": "builder",
+      "size": "desktop",
+      "height": 1000,
+      "overflow": false,
+      "pageHeight": 1204,
+      "width": 1440
+    },
+    {
+      "name": "calculators",
+      "size": "desktop",
+      "height": 1000,
+      "overflow": false,
+      "pageHeight": 1057,
+      "width": 1440
+    },
+    {
+      "name": "reaction",
+      "size": "desktop",
+      "height": 1000,
+      "overflow": false,
+      "pageHeight": 1827,
+      "width": 1440
+    },
+    {
+      "name": "home",
+      "size": "mobile",
+      "height": 844,
+      "overflow": false,
+      "pageHeight": 2820,
+      "width": 390
+    },
+    {
+      "name": "explorer",
+      "size": "mobile",
+      "height": 844,
+      "overflow": false,
+      "pageHeight": 3429,
+      "width": 390
+    },
+    {
+      "name": "builder",
+      "size": "mobile",
+      "height": 844,
+      "overflow": false,
+      "pageHeight": 2192,
+      "width": 390
+    },
+    {
+      "name": "calculators",
+      "size": "mobile",
+      "height": 844,
+      "overflow": false,
+      "pageHeight": 1346,
+      "width": 390
+    },
+    {
+      "name": "reaction",
+      "size": "mobile",
+      "height": 844,
+      "overflow": false,
+      "pageHeight": 3247,
+      "width": 390
+    }
+  ],
+  "settledReactionMobile": {
+    "width": 390,
+    "height": 844,
+    "pageHeight": 3391,
+    "exampleHeadingTop": 1593,
+    "pathwayOptionsTop": 2268,
+    "diagramTop": 2950
+  },
+  "proposalsAt320": [
+    {
+      "concept": "workbench",
+      "height": 844,
+      "overflow": false,
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "concept": "studio",
+      "height": 844,
+      "overflow": false,
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "concept": "research",
+      "height": 844,
+      "overflow": false,
+      "scrollWidth": 320,
+      "width": 320
+    }
+  ],
+  "notes": [
+    "CSS dimensions measured from visible DOM; existing site zoom preserved.",
+    "Page heights are observations, not usability scores. Initial catalog loading may change page height.",
+    "SN2 keyboard selection and Guided Conditions confirmation checked in isolated proposal, not production implementation."
+  ]
+}

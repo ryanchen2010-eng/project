@@ -13,3 +13,4 @@ pnpm-debug.log*
 *.key
 server/.secrets/
 releases/
+.xtb-pilot/

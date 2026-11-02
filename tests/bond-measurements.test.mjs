@@ -34,6 +34,31 @@ test('angle is centered on the second atom and supports 0, 90, and 180 degrees',
   close(measureGeometry('angle', [point(1, 1, 0), center, point(0, 1, 0)]).value, 45);
 });
 
+test('bundled water reference coordinates measure 104.5 degrees, not a forced VSEPR angle', async () => {
+  const sdf = await readFile(new URL('../public/molecules/water-reference.sdf', import.meta.url), 'utf8');
+  const lines = sdf.split('\n');
+  assert.equal(Number(lines[3].slice(0, 3)), 3);
+  assert.equal(Number(lines[3].slice(3, 6)), 2);
+  const atoms = lines.slice(4, 7).map((line) => ({
+    x: Number(line.slice(0, 10)), y: Number(line.slice(10, 20)), z: Number(line.slice(20, 30)),
+    elem: line.slice(31, 34).trim(),
+  }));
+  assert.deepEqual(atoms.map(({ elem }) => elem), ['O', 'H', 'H']);
+  assert.equal(measureGeometry('angle', [atoms[1], atoms[0], atoms[2]]).value.toFixed(1), '104.5');
+  for (const hydrogen of atoms.slice(1)) close(measureGeometry('distance', [atoms[0], hydrogen]).value, .958, .0001);
+  assert.deepEqual(lines.slice(7, 9).map((line) => line.trim().split(/\s+/).slice(0, 3)), [['1', '2', '1'], ['1', '3', '1']]);
+  assert.match(sdf, /GEOMETRY_PROVENANCE/);
+  assert.doesNotMatch(sdf, /<PUBCHEM_CONFORMER_ID>|<PUBCHEM_MMFF94_ENERGY>/);
+
+  // The retained original is a different conformer. Measurement must report
+  // its actual angle rather than silently snapping water to a reference value.
+  const original = (await readFile(new URL('../public/molecules/water.sdf', import.meta.url), 'utf8'))
+    .split('\n').slice(4, 7).map((line) => ({
+      x: Number(line.slice(0, 10)), y: Number(line.slice(10, 20)), z: Number(line.slice(20, 30)),
+    }));
+  assert.equal(measureGeometry('angle', [original[1], original[0], original[2]]).value.toFixed(1), '104.0');
+});
+
 const planar = [point(0, 1, 0), point(0, 0, 0), point(1, 0, 0), point(1, 1, 0)];
 const orthogonal = [point(0, 1, 0), point(0, 0, 0), point(1, 0, 0), point(1, 0, 1)];
 
